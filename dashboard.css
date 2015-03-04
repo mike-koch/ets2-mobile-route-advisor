@@ -28,7 +28,10 @@
 @import url(bootstrap.min.css);
 
 body {
-    background-color: #FFF;
+    background-color: #000;
+}
+.row {
+    margin-left: 0;
 }
 .hidden {
   visibility: hidden;
@@ -97,4 +100,23 @@ body {
     background: -ms-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #888e96 0%,#5e656b 36%,#28343b 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#888e96', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
+}
+._hasJobHeader {
+    background-color: #888;
+}
+
+._hasJobHeader p {
+    color: #FB9912;
+    padding-left: 40px;
+}
+._hasJob {
+    color: #FFF;
+    font-size: 5em;
+}
+._cargoInfo {
+    padding-left: 40px;
+}
+._cargoRightSide {
+    text-align: right;
+    padding-right: 125px;
 }
