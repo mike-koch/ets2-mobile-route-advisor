@@ -26,6 +26,8 @@
       so you will never forget which classes are dynamic and which are static.
 */
 @import url(bootstrap.min.css);
+@import url(css/fonts.css);
+@import url(css/animation.css);
 
 body {
     background-color: #000;
@@ -101,6 +103,17 @@ body {
     background: linear-gradient(to bottom,  #888e96 0%,#5e656b 36%,#28343b 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#888e96', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
 }
+._footerRow {
+    color: #FFF;
+    background: #888e96; /* Old browsers */
+    background: -moz-linear-gradient(top,  #888e96 0%, #5e656b 36%, #28343b 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#888e96), color-stop(36%,#5e656b), color-stop(100%,#28343b)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #888e96 0%,#5e656b 36%,#28343b 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#888e96', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
+}
 ._hasJobHeader {
     background-color: #888;
 }
@@ -119,4 +132,8 @@ body {
 ._cargoRightSide {
     text-align: right;
     padding-right: 125px;
+}
+._footerSelected {
+    border-bottom: solid 4px orange;
+    background-color: #222;
 }
