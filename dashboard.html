@@ -7,91 +7,159 @@
             <span class="gear"></span>
         </div>
         <div class="col-xs-2 _headerItem">
-            <i class="icon-fuel"></i>
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="icon-fuel"></i>
+                </div>
+                <div class="col-xs-9">
+                    <div class="progress" style="margin-top: 40px">
+                        <div class="progress-bar _fuelBarColor" id="fuelLine"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-xs-2 _headerItem">
-            <i class="icon-truck"></i>
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="icon-truck"></i>
+                </div>
+                <div class="col-xs-8">
+                    <div class="progress" style="margin-top: 40px">
+                        <div class="progress-bar _damageBarColor" id="damageLine">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-xs-4 _headerItem text-center _headerEnd">
             <span class="gameTime"></span>
         </div>
     </div>
-    <div class="_hasJob hasJob">
-        <div id="cargo">
-            <div class="row _hasJobHeader">
-                <div class="col-xs-12">
-                    <p>Current Job</p>
+    <div class="_container">
+        <div class="_hasJob">
+            <div id="map" style="display: none">
+                <div class="row _hasJobHeader">
+                    <div class="col-xs-12">
+                        <p>Navigation</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row _cargoInfo">
-                <div class="col-xs-4">
-                    <p>Cargo name</p>
-                </div>
-                <div class="col-xs-8 _cargoRightSide">
-                    <div class="trailer">
-                        <span class="trailerName"></span> (<span class="trailerMass"></span>)
+                <div class="row _cargoInfo">
+                    <div class="col-xs-12">
+                        <p>Map functionality is currently unavailable. Sorry! :'(</p>
                     </div>
                 </div>
             </div>
-            <div class="row _cargoInfo">
-                <div class="col-xs-4">
-                    <p>Source</p>
+            <div id="cargo">
+                <div class="row _hasJobHeader">
+                    <div class="col-xs-12">
+                        <p>Current Job</p>
+                    </div>
                 </div>
-                <div class="col-xs-8 _cargoRightSide">
-                    <div class="source">
-                        <span class="hasJob _jobSource"><span class="sourceCity"></span> - <span class="sourceCompany"></span></span>
+                <div class="hasJob">
+                    <div class="noJob">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-2 text-center">
+                                <p>You currently have no job.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yesJob">
+                        <div class="row _cargoInfo">
+                            <div class="col-xs-4">
+                                <p>Cargo name</p>
+                            </div>
+                            <div class="col-xs-8 _cargoRightSide">
+                                <div class="trailer">
+                                    <span class="trailerName"></span> (<span class="trailerMass"></span>)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row _cargoInfo">
+                            <div class="col-xs-4">
+                                <p>Source</p>
+                            </div>
+                            <div class="col-xs-8 _cargoRightSide">
+                                <div class="source">
+                                    <span class="_jobSource"><span class="sourceCity"></span> - <span class="sourceCompany"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row _cargoInfo">
+                            <div class="col-xs-4">
+                                <p>Destination</p>
+                            </div>
+                            <div class="col-xs-8 _cargoRightSide">
+                                <div class="destination">
+                                    <span class="_jobDestionation"><span class="destinationCity"></span> - <span class="destinationCompany"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row _cargoInfo">
+                            <div class="col-xs-4">
+                                <p>Deadline</p>
+                            </div>
+                            <div class="col-xs-8 _cargoRightSide">
+                                <div class="jobDeadlineTime"></div>
+                            </div>
+                        </div>
+                        <div class="row _cargoInfo">
+                            <div class="col-xs-4">
+                                <p>Reward</p>
+                            </div>
+                            <div class="col-xs-8 _cargoRightSide">
+                                <span>&euro;&nbsp;</span><span class="jobIncome"></span>
+                            </div>
+                        </div>
+                        <div class="row _cargoInfo">
+                            <div class="col-xs-4">
+                                <p>Time Remaining</p>
+                            </div>
+                            <div class="col-xs-8 _cargoRightSide">
+                                <div class="jobRemainingTime"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row _cargoInfo">
-                <div class="col-xs-4">
-                    <p>Destination</p>
+            <div id="damage" style="display: none">
+                <div class="row _hasJobHeader">
+                    <div class="col-xs-12">
+                        <p>Damage</p>
+                    </div>
                 </div>
-                <div class="col-xs-8 _cargoRightSide">
-                    <div class="destination">
-                        <span class="hasJob _jobDestionation"><span class="destinationCity"></span> - <span class="destinationCompany"></span></span>
+                <div class="row _cargoInfo">
+                    <div class="col-xs-12">
+                        <p>Damage will eventually be here</p>
                     </div>
                 </div>
             </div>
-            <div class="row _cargoInfo">
-                <div class="col-xs-4">
-                    <p>Deadline</p>
+            <div id="about" style="display: none">
+                <div class="row _hasJobHeader">
+                    <div class="col-xs-12">
+                        <p>About</p>
+                    </div>
                 </div>
-                <div class="col-xs-8 _cargoRightSide">
-                    <div class="jobDeadlineTime"></div>
-                </div>
-            </div>
-            <div class="row _cargoInfo">
-                <div class="col-xs-4">
-                    <p>Reward</p>
-                </div>
-                <div class="col-xs-8 _cargoRightSide">
-                    <span>&euro;&nbsp;</span><span class="jobIncome"></span>
-                </div>
-            </div>
-            <div class="row _cargoInfo">
-                <div class="col-xs-4">
-                    <p>Time Remaining</p>
-                </div>
-                <div class="col-xs-8 _cargoRightSide">
-                    <div class="jobRemainingTime"></div>
+                <div class="row _cargoInfo">
+                    <div class="col-xs-12">
+                        <p>About information will eventually go here</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="_footer">
         <div class="row _hasJob _footerRow text-center">
-            <div class="col-xs-1" style="margin-left: 20.833%">
-                <i class="icon-compass"></i>
+            <div class="col-xs-1" style="margin-left: 20.833%" id="mapFooter">
+                <a href="javascript:void(0)" onclick="showTab('map')"><i class="icon-compass" style="font-size: 1.3em;"></i></a>
             </div>
-            <div class="col-xs-1 col-xs-offset-1 _footerSelected">
-                <i class="icon-truck"></i>
+            <div class="col-xs-1 col-xs-offset-1 _footerSelected" id="cargoFooter">
+                <a href="javascript:void(0)" onclick="showTab('cargo')"><i class="icon-truck" style="font-size: 1.3em;"></i></a>
             </div>
-            <div class="col-xs-1 col-xs-offset-1">
-                <i class="icon-phone-squared"></i>
+            <div class="col-xs-1 col-xs-offset-1" id="damageFooter">
+                <a href="javascript:void(0)" onclick="showTab('damage')"><i class="icon-phone-squared" style="font-size: 1.3em;"></i></a>
             </div>
-            <div class="col-xs-1 col-xs-offset-1">
-                <i class="icon-help-circled"></i>
+            <div class="col-xs-1 col-xs-offset-1" id="aboutFooter">
+                <a href="javascript:void(0)" onclick="showTab('about')"><i class="icon-help-circled" style="font-size: 1.3em;"></i></a>
             </div>
         </div>
         <div class="row">

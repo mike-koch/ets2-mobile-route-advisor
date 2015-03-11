@@ -42,37 +42,29 @@ body {
   visibility: visible;
 }
 .dashboard {
-  /*background-image: url("images/bg-off.png");*/
   position: absolute;
   left: 0px;
   top: 1px;
   width: 2048px;
   height: 1152px;
 }
-.dashboard.connected.yes {
-  /*background-image: url("images/bg-on.png");*/
+.noJob {
+    display: none;
 }
-.gear,
-.truckOdometer,
-.truckSpeedRounded,
-.trailerMass,
-.trailerName,
-.jobRemainingTime,
-._jobSource,
-._jobDestionation {
-  visibility: hidden;
+
+.hasJob[data-value="false"] > .noJob {
+    display: block;
 }
-.dashboard.connected.yes .gear,
-.dashboard.connected.yes .truckOdometer,
-.dashboard.connected.yes .truckSpeedRounded {
-  visibility: visible;
+
+.noJob > .row {
+    margin-top: 270px;
 }
-.hasJob.yes .trailerMass,
-.hasJob.yes .trailerName,
-.hasJob.yes .jobRemainingTime,
-.hasJob.yes ._jobSource,
-.hasJob.yes ._jobDestionation {
-  visibility: visible;
+.yesJob {
+    visibility: hidden;
+}
+
+.hasJob.yes > .yesJob {
+    visibility: visible;
 }
 ._header > ._row,
 ._footer > ._row {
@@ -114,6 +106,10 @@ body {
     background: linear-gradient(to bottom,  #888e96 0%,#5e656b 36%,#28343b 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#888e96', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
 }
+._container {
+    min-height: 770px;
+    max-height: 770px;
+}
 ._hasJobHeader {
     background-color: #888;
 }
@@ -136,4 +132,21 @@ body {
 ._footerSelected {
     border-bottom: solid 4px orange;
     background-color: #222;
+}
+a, a:hover, a:visited, a:active, a:focus {
+    color: inherit;
+    text-decoration: none;
+}
+._fuelBar {
+    max-width: 20px;
+    
+}
+._fuelBarColor {
+    background-color: #F3C24C;
+}
+._damageBarColor {
+    background-color: #930002;
+}
+.progress {
+    background-color: #888;
 }

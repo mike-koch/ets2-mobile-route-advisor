@@ -1,4 +1,4 @@
-﻿/*
+/*
     ======================================
     Custom dashboard telemetry data filter
     ======================================    
@@ -23,6 +23,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.gear = data.gear > 0 ? 'D' + data.gear : (data.gear < 0 ? 'R' : 'N');
     // convert rpm to rpm * 100
     data.engineRpm = data.engineRpm / 100;
+    data.currentFuelPercentage = (data.fuel / data.fuelCapacity) * 100;
     // return changed data to the core for rendering
     return data;
 };
@@ -31,10 +32,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     //
     // data - same data object as in the filter function
     //
-
-    // we don't have anything custom to render in this skin,
-    // but you may use jQuery here to update any element
-    // with any custom animation, logic or style
+    $('#fuelLine').css('width', data.currentFuelPercentage + '%');
+    $('#damageLine').css('width', getDamagePercentage(data) + '%');
+    
 }
 
 Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
@@ -43,4 +43,32 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     //
     // this function is called before everything else, 
     // so you may perform any DOM or resource initializations here
+}
+
+function getDamagePercentage(data) {
+    // Return the max value of all damage percentages.
+    return Math.max(data.wearEngine, 
+                    data.wearTransmission, 
+                    data.wearCabin, 
+                    data.wearChassis, 
+                    data.wearWheels, 
+                    data.wearTrailer);
+}
+
+function showTab(tabName) {
+    // Hide all tabs (map, cargo, damage, about)
+    $('#map').hide();
+    $('#cargo').hide();
+    $('#damage').hide();
+    $('#about').hide();
+    
+    // Remove the "_footerSelected" class from all items.
+    $('#mapFooter').removeClass('_footerSelected');
+    $('#cargoFooter').removeClass('_footerSelected');
+    $('#damageFooter').removeClass('_footerSelected');
+    $('#aboutFooter').removeClass('_footerSelected');
+    
+    // Show the ID requested
+    $('#' + tabName).show();
+    $('#' + tabName + 'Footer').addClass('_footerSelected');
 }
