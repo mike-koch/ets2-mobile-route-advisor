@@ -12,11 +12,9 @@
 
 Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     // round truck speed
-    data.truckSpeedRounded = Math.round(data.truckSpeed);
+    data.truckSpeedRounded = Math.abs(Math.floor(data.truckSpeed));
     // convert kilometers per hour to miles per hour (just an example)
     data.truckSpeedMph = data.truckSpeed * 0.621371;
-    // convert kg to t
-    data.trailerMass = (data.trailerMass / 1000.0) + 't';
     // format odometer data as: 00000.0
     data.truckOdometer = (Math.round(data.truckOdometer * 10) / 10).toFixed(1);
     // convert gear to readable format
@@ -27,8 +25,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     
     // scsTruckDamage is the value SCS uses in the route advisor
     data.scsTruckDamage = getDamagePercentage(data);
-    data.scsTruckDamageRounded = Math.round(data.scsTruckDamage);
-    data.wearTrailerRounded = Math.round(data.wearTrailer * 100);
+    data.scsTruckDamageRounded = Math.floor(data.scsTruckDamage);
+    data.wearTrailerRounded = Math.floor(data.wearTrailer * 100);
     data.digitGroupedReward = getDigitGroupedReward(data.jobIncome);
     // return changed data to the core for rendering
     return data;
@@ -68,6 +66,7 @@ function getDamagePercentage(data) {
 
 function getDamageFillForTruck(damagePercentage) {
     // damagePercentage: The value returned from getDamagePercentage
+	damagePercentage = Math.floor(damagePercentage);
     if (damagePercentage < 0.5) {
         return 80;
     }
@@ -81,6 +80,7 @@ function getDamageFillForTruck(damagePercentage) {
 
 function getDamageFillForTrailer(damagePercentage) {
     // damagePercentage: the same as data.wearTrailer
+	damagePercentage = Math.floor(damagePercentage);
     if (damagePercentage < .5) {
         return 65;
     }
