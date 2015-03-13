@@ -150,3 +150,18 @@ a, a:hover, a:visited, a:active, a:focus {
 .progress {
     background-color: #888;
 }
+._max400 {
+    max-height: 400px;
+    overflow: hidden;
+}
+._filler {
+    position: relative;
+    color: #FF0000;
+}
+/* CSS Rule to apply the "damage" effect as seen in ETS2 */
+._filler span {
+    height: 49%;
+    position: absolute;
+    color: #FFF;
+    overflow: hidden;
+}

@@ -24,6 +24,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     // convert rpm to rpm * 100
     data.engineRpm = data.engineRpm / 100;
     data.currentFuelPercentage = (data.fuel / data.fuelCapacity) * 100;
+    
+    // scsTruckDamage is the value SCS uses in the route advisor
+    data.scsTruckDamage = getDamagePercentage(data);
+    data.scsTruckDamageRounded = Math.round(data.scsTruckDamage);
+    data.wearTrailerRounded = Math.round(data.wearTrailer);
     // return changed data to the core for rendering
     return data;
 };
@@ -33,7 +38,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     // data - same data object as in the filter function
     //
     $('#fuelLine').css('width', data.currentFuelPercentage + '%');
-    $('#damageLine').css('width', getDamagePercentage(data) + '%');
+    $('#damageLine').css('width', data.scsTruckDamage + '%');
+    $('#truckDamageIcon').css('height', getDamageFillForTruck(data.scsTruckDamage) + '%');
+    $('#trailerDamageIcon').css('height', getDamageFillForTrailer(data.wearTrailer) + '%');
     
 }
 
@@ -51,8 +58,33 @@ function getDamagePercentage(data) {
                     data.wearTransmission, 
                     data.wearCabin, 
                     data.wearChassis, 
-                    data.wearWheels, 
-                    data.wearTrailer);
+                    data.wearWheels);
+}
+
+function getDamageFillForTruck(damagePercentage) {
+    // damagePercentage: The value returned from getDamagePercentage
+    if (damagePercentage < 0.5) {
+        return 80;
+    }
+    if (damagePercentage > 99.4) {
+        return 25;
+    }
+    
+    // This is the closest linear fit found from 3 eyeballed data points.
+    return (475/6) - (.55 * damagePercentage);
+}
+
+function getDamageFillForTrailer(damagePercentage) {
+    // damagePercentage: the same as data.wearTrailer
+    if (damagePercentage < .5) {
+        return 65;
+    }
+    if (damagePercentage > 99.4) {
+        return 34;
+    }
+    
+    // This is the closest linear fit found from 3 eyeballed data points.
+    return (389/6) - (0.31 * damagePercentage);
 }
 
 function showTab(tabName) {
