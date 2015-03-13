@@ -28,7 +28,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     // scsTruckDamage is the value SCS uses in the route advisor
     data.scsTruckDamage = getDamagePercentage(data);
     data.scsTruckDamageRounded = Math.round(data.scsTruckDamage);
-    data.wearTrailerRounded = Math.round(data.wearTrailer);
+    data.wearTrailerRounded = Math.round(data.wearTrailer * 100);
+    data.digitGroupedReward = getDigitGroupedReward(data.jobIncome);
     // return changed data to the core for rendering
     return data;
 };
@@ -40,7 +41,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     $('#fuelLine').css('width', data.currentFuelPercentage + '%');
     $('#damageLine').css('width', data.scsTruckDamage + '%');
     $('#truckDamageIcon').css('height', getDamageFillForTruck(data.scsTruckDamage) + '%');
-    $('#trailerDamageIcon').css('height', getDamageFillForTrailer(data.wearTrailer) + '%');
+    $('#trailerDamageIcon').css('height', getDamageFillForTrailer(data.wearTrailer * 100) + '%');
     
 }
 
@@ -52,13 +53,17 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // so you may perform any DOM or resource initializations here
 }
 
+function getDigitGroupedReward(income) {
+    
+}
+
 function getDamagePercentage(data) {
     // Return the max value of all damage percentages.
     return Math.max(data.wearEngine, 
                     data.wearTransmission, 
                     data.wearCabin, 
                     data.wearChassis, 
-                    data.wearWheels);
+                    data.wearWheels) * 100;
 }
 
 function getDamageFillForTruck(damagePercentage) {
