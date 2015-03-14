@@ -34,6 +34,7 @@ body {
 }
 .row {
     margin-left: 0;
+    margin-right: 0;
 }
 .hidden {
   visibility: hidden;
@@ -109,6 +110,7 @@ body {
 ._container {
     min-height: 770px;
     max-height: 770px;
+    background-image: url("img/bg.png");
 }
 ._hasJobHeader {
     background-color: #888;
@@ -163,4 +165,8 @@ a, a:hover, a:visited, a:active, a:focus {
     position: absolute;
     color: #FFF;
     overflow: hidden;
+}
+
+.yesJob > .row:nth-child(odd) {
+    background-color: rgba(100,100,100,0.5);
 }
