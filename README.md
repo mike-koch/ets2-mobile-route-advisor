@@ -12,6 +12,9 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
     - Payout
     - Time remaining
  - Truck damage / load damage
+ - Support for translations
+ - km/h or mph for speed
+ - 12-hour or 24-hour time format
 
 ## Screenshots
 ![Cargo Information](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/screenshots/cargo.PNG)
