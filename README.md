@@ -1,4 +1,4 @@
-# ETS2 Mobile Route Advisor
+# ETS2 Mobile Route Advisor [![Current Release](https://img.shields.io/github/release/mkoch227/ets2-mobile-route-advisor.svg)](https://github.com/mkoch227/ets2-mobile-route-advisor/releases) [![Licensed under the MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/LICENSE)
 Euro Truck Simulator 2's Route Advisor, for mobile devices.
 
 ## Features
