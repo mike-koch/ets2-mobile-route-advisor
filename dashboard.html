@@ -1,7 +1,7 @@
 <div class="dashboard connected">
     <div class="row _headerRow">
         <div class="col-xs-3 _headerItem text-center _headerEnd">
-            <span class="truckSpeedRounded"></span> km/h
+            <span class="truckSpeedRoundedKmhMph"></span> <span id="speedUnits"></span>
         </div>
         <div class="col-xs-1 _headerItem">
             <span class="gear"></span>
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-xs-4 _headerItem text-center _headerEnd">
-            <span class="gameTime"></span>
+            <span class="gameTime" id="headerTime"></span>
         </div>
     </div>
     <div class="_container">
@@ -40,12 +40,12 @@
             <div id="map" style="display: none">
                 <div class="row _hasJobHeader">
                     <div class="col-xs-12">
-                        <p>Navigation</p>
+                        <p class="lNavigation"></p>
                     </div>
                 </div>
                 <div class="row" style="position: relative; max-height: 660px; max-width: 2048px; overflow: hidden;">
                     <div class="_overlay">
-                        <p class="text-center">The Navigation tab has not been implemented at this time. Sorry!</p>
+                        <p class="text-center lNavigationUnavailable"></p>
                     </div>
                     <div class="_images">
                         <!-- The image sources below look completely wrong, however it is correct due to the way the server works -->
@@ -57,21 +57,21 @@
             <div id="cargo">
                 <div class="row _hasJobHeader">
                     <div class="col-xs-12">
-                        <p>Current Job</p>
+                        <p class="lCurrentJob"></p>
                     </div>
                 </div>
                 <div class="hasJob">
                     <div class="noJob">
                         <div class="row">
                             <div class="col-xs-8 col-xs-offset-2 text-center">
-                                <p>You currently have no job.</p>
+                                <p class="lNoJob"></p>
                             </div>
                         </div>
                     </div>
                     <div class="yesJob">
                         <div class="row _cargoInfo">
                             <div class="col-xs-4">
-                                <p>Cargo name</p>
+                                <p class="lCargoName"></p>
                             </div>
                             <div class="col-xs-8 _cargoRightSide">
                                 <div class="trailer">
@@ -91,7 +91,7 @@
                         </div>
                         <div class="row _cargoInfo">
                             <div class="col-xs-4">
-                                <p>Destination</p>
+                                <p class="lDestination"></p>
                             </div>
                             <div class="col-xs-8 _cargoRightSide">
                                 <div class="destination">
@@ -101,7 +101,7 @@
                         </div>
                         <div class="row _cargoInfo">
                             <div class="col-xs-4">
-                                <p>Deadline</p>
+                                <p class="lDeadline"></p>
                             </div>
                             <div class="col-xs-8 _cargoRightSide">
                                 <div class="jobDeadlineTime"></div>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="row _cargoInfo">
                             <div class="col-xs-4">
-                                <p>Reward</p>
+                                <p class="lReward"></p>
                             </div>
                             <div class="col-xs-8 _cargoRightSide">
                                 <span>&euro;&nbsp;</span><span class="jobIncome"></span>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="row _cargoInfo">
                             <div class="col-xs-4">
-                                <p>Time Remaining</p>
+                                <p class="lTimeRemaining"></p>
                             </div>
                             <div class="col-xs-8 _cargoRightSide">
                                 <div class="jobRemainingTime"></div>
@@ -129,7 +129,7 @@
             <div id="damage" style="display: none">
                 <div class="row _hasJobHeader">
                     <div class="col-xs-12">
-                        <p>Damage</p>
+                        <p class="lDamage"></p>
                     </div>
                 </div>
                 <div class="row _cargoInfo _max400">
@@ -144,17 +144,17 @@
                 </div>
                 <div class="row _cargoInfo">
                     <div class="col-xs-4 col-xs-offset-1 text-center">
-                        <p>Truck: <span class="scsTruckDamageRounded"></span>%</p>
+                        <p><span class="lTruck"></span>: <span class="scsTruckDamageRounded"></span>%</p>
                     </div>
                     <div class="col-xs-5 col-xs-offset-1 text-center">
-                        <p>Trailer: <span class="wearTrailerRounded"></span>%</p>
+                        <p><span class="lTrailer"></span>: <span class="wearTrailerRounded"></span>%</p>
                     </div>
                 </div>
             </div>
             <div id="about" style="display: none">
                 <div class="row _hasJobHeader">
                     <div class="col-xs-12">
-                        <p>About</p>
+                        <p class="lAbout"></p>
                     </div>
                 </div>
                 <div class="row _cargoInfo">
@@ -192,7 +192,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12 text-center _hasJob">
-                <p>Mobile Route Advisor</p>
+                <p class="lMobileRouteAdvisor"></p>
             </div>
         </div>
     </div>

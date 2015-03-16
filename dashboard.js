@@ -15,6 +15,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.truckSpeedRounded = Math.abs(Math.floor(data.truckSpeed));
     // convert kilometers per hour to miles per hour (just an example)
     data.truckSpeedMph = data.truckSpeed * 0.621371;
+    data.truckSpeedMphRounded = Math.abs(Math.floor(data.truckSpeedMph));
     // format odometer data as: 00000.0
     data.truckOdometer = (Math.round(data.truckOdometer * 10) / 10).toFixed(1);
     // convert gear to readable format
@@ -28,6 +29,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.scsTruckDamageRounded = Math.floor(data.scsTruckDamage);
     data.wearTrailerRounded = Math.floor(data.wearTrailer * 100);
     data.digitGroupedReward = getDigitGroupedReward(data.jobIncome);
+    
+    data.gameTime12h = getTimeInTwelveHourFormat(data.gameTime);
     // return changed data to the core for rendering
     return data;
 };
@@ -40,7 +43,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     $('#damageLine').css('width', data.scsTruckDamage + '%');
     $('#truckDamageIcon').css('height', getDamageFillForTruck(data.scsTruckDamage) + '%');
     $('#trailerDamageIcon').css('height', getDamageFillForTrailer(data.wearTrailer * 100) + '%');
-    
 }
 
 Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
@@ -49,6 +51,80 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     //
     // this function is called before everything else, 
     // so you may perform any DOM or resource initializations here
+    
+    // Process Speed Units
+    var speedUnits = skinConfig.speedUnits;
+    if (speedUnits === 'kmh') {
+        $('#speedUnits').text('km/h');
+        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedRounded').removeClass('truckSpeedRoundedKmhMph');
+    } else if (speedUnits === 'mph') {
+        $('#speedUnits').text('mph');
+        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedMphRounded').removeClass('truckSpeedRoundedKmhMph');
+    }
+    
+    // Process 12 vs 24 hr time
+    var timeFormat = skinConfig.timeFormat;
+    if (timeFormat === '12h') {
+        $('.gameTime').addClass('gameTime12h').removeClass('gameTime');
+    }
+    
+    // Process language JSON
+    $.getJSON('skins/mobile-route-advisor/language/'+skinConfig.language, function(json) {
+        $.each(json, function(key, value) {
+            updateLanguage(key, value);
+        });
+    });
+}
+    
+function getTimeInTwelveHourFormat(gameTime) {
+    var currentTime = new Date(gameTime);
+    var currentPeriod = ' AM';
+    var currentHours = currentTime.getUTCHours();
+    var currentMinutes = currentTime.getUTCMinutes();
+    var formattedMinutes = currentMinutes < 10 ? '0'+currentMinutes : currentMinutes;
+    var currentDay = '';
+    
+    switch (currentTime.getUTCDay()) {
+        case 0:
+            currentDay = "Sunday";
+            break;
+        case 1:
+            currentDay = "Monday";
+            break;
+        case 2:
+            currentDay = "Tuesday";
+            break;
+        case 3:
+            currentDay = "Wednesday";
+            break;
+        case 4:
+            currentDay = "Thursday";
+            break;
+        case 5:
+            currentDay = "Friday";
+            break;
+        case 6:
+            currentDay = "Saturday";
+            break;
+    }
+    
+    if (currentHours > 12) {
+        currentHours -= 12;
+        currentPeriod = ' PM';
+    }
+    var formattedHours = currentHours < 10 ? '0'+currentHours : currentHours;
+    
+    if (currentDay == 'Wednesday') {
+        $('#headerTime').css('font-size','.9em');
+    } else {
+        $('#headerTime').css('font-size','1em');
+    }
+    
+    return currentDay + ' ' + formattedHours + ':' + formattedMinutes + currentPeriod;
+}
+
+function updateLanguage(key, value) {
+    $('.l' + key).text(value);
 }
 
 function getDigitGroupedReward(income) {

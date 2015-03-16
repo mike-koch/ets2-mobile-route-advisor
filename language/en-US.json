@@ -1,0 +1,16 @@
+{
+    "Navigation": "Navigation",
+    "NavigationUnavailable": "The Navigation tab has not been implemented at this time. Sorry!",
+    "CurrentJob": "Current Job",
+    "NoJob": "You currently have no job.",
+    "CargoName": "Cargo name",
+    "Destination": "Destination",
+    "Deadline": "Deadline",
+    "Reward": "Reward",
+    "TimeRemaining": "Time Remaining",
+    "Damage": "Damage",
+    "Truck": "Truck",
+    "Trailer": "Trailer",
+    "About": "About",
+    "MobileRouteAdvisor": "Mobile Route Advisor"
+}
