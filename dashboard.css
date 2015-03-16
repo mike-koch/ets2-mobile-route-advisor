@@ -170,3 +170,24 @@ a, a:hover, a:visited, a:active, a:focus {
 .yesJob > .row:nth-child(odd) {
     background-color: rgba(100,100,100,0.5);
 }
+
+._navArrow {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    left: 1008px;
+    top: 335px;
+    z-index: 0;
+}
+
+._overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .8);
+    min-height: 660px;
+    max-height: 660px;
+    min-width: 2048px;
+    max-width: 2048px;
+    z-index: 1;
+}
