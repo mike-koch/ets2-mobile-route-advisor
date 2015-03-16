@@ -13,5 +13,6 @@
     "Trailer": "Trailer",
     "About": "About",
     "MobileRouteAdvisor": "Mobile Route Advisor",
-    "WaitingForConnection": "Waiting for connection"
+    "WaitingForConnection": "Waiting for connection",
+	"Source": "Source"
 }
