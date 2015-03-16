@@ -1,198 +1,203 @@
 <div class="dashboard connected">
-    <div class="row _headerRow">
-        <div class="col-xs-3 _headerItem text-center _headerEnd">
-            <span class="truckSpeedRoundedKmhMph"></span> <span id="speedUnits"></span>
-        </div>
-        <div class="col-xs-1 _headerItem">
-            <span class="gear"></span>
-        </div>
-        <div class="col-xs-2 _headerItem">
-            <div class="row">
-                <div class="col-xs-3">
-                    <i class="icon-fuel"></i>
-                </div>
-                <div class="col-xs-9" style="padding-left: 30px">
-                    <div class="progress" style="margin-top: 40px">
-                        <div class="progress-bar _fuelBarColor" id="fuelLine"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-2 _headerItem">
-            <div class="row">
-                <div class="col-xs-4">
-                    <i class="icon-truck"></i>
-                </div>
-                <div class="col-xs-8">
-                    <div class="progress" style="margin-top: 40px">
-                        <div class="progress-bar _damageBarColor" id="damageLine">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-4 _headerItem text-center _headerEnd">
-            <span class="gameTime" id="headerTime"></span>
-        </div>
+    <div class="row no-connection _hasJob">
+        <span class="lWaitingForConnection"></span><span>...</span>
     </div>
-    <div class="_container">
-        <div class="_hasJob">
-            <div id="map" style="display: none">
-                <div class="row _hasJobHeader">
-                    <div class="col-xs-12">
-                        <p class="lNavigation"></p>
+    <div class="has-connection">
+        <div class="row _headerRow">
+            <div class="col-xs-3 _headerItem text-center _headerEnd">
+                <span class="truckSpeedRoundedKmhMph"></span> <span id="speedUnits"></span>
+            </div>
+            <div class="col-xs-1 _headerItem">
+                <span class="gear"></span>
+            </div>
+            <div class="col-xs-2 _headerItem">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="icon-fuel"></i>
                     </div>
-                </div>
-                <div class="row" style="position: relative; max-height: 660px; max-width: 2048px; overflow: hidden;">
-                    <div class="_overlay">
-                        <p class="text-center lNavigationUnavailable"></p>
-                    </div>
-                    <div class="_images">
-                        <!-- The image sources below look completely wrong, however it is correct due to the way the server works -->
-                        <img src="skins/mobile-route-advisor/img/map.png">
-                        <img src="skins/mobile-route-advisor/img/nav-arrow.png" class="_navArrow" alt="GPS Navigation Arrow">
+                    <div class="col-xs-9" style="padding-left: 30px">
+                        <div class="progress" style="margin-top: 40px">
+                            <div class="progress-bar _fuelBarColor" id="fuelLine"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="cargo">
-                <div class="row _hasJobHeader">
-                    <div class="col-xs-12">
-                        <p class="lCurrentJob"></p>
+            <div class="col-xs-2 _headerItem">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="icon-truck"></i>
                     </div>
-                </div>
-                <div class="hasJob">
-                    <div class="noJob">
-                        <div class="row">
-                            <div class="col-xs-8 col-xs-offset-2 text-center">
-                                <p class="lNoJob"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="yesJob">
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lCargoName"></p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="trailer">
-                                    <span class="trailerName"></span> (<span class="trailerMass"></span> kg)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p>Source</p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="source">
-                                    <span class="_jobSource"><span class="sourceCity"></span> - <span class="sourceCompany"></span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lDestination"></p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="destination">
-                                    <span class="_jobDestionation"><span class="destinationCity"></span> - <span class="destinationCompany"></span></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lDeadline"></p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="jobDeadlineTime"></div>
-                            </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lReward"></p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <span>&euro;&nbsp;</span><span class="jobIncome"></span>
-                            </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lTimeRemaining"></p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="jobRemainingTime"></div>
+                    <div class="col-xs-8">
+                        <div class="progress" style="margin-top: 40px">
+                            <div class="progress-bar _damageBarColor" id="damageLine">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="damage" style="display: none">
-                <div class="row _hasJobHeader">
-                    <div class="col-xs-12">
-                        <p class="lDamage"></p>
-                    </div>
-                </div>
-                <div class="row _cargoInfo _max400">
-                    <div class="col-xs-4 col-xs-offset-1 text-center _filler">
-                        <span id="truckDamageIcon"><i class="icon-truck" style="font-size: 4em;"></i></span>
-                        <i class="icon-truck" style="font-size: 4em;"></i>
-                    </div>
-                    <div class="col-xs-5 col-xs-offset-1 text-center _filler" style="margin-top: -80px">
-                        <span id="trailerDamageIcon"><i class="icon-trailer" style="font-size: 6em;"></i></span>
-                        <i class="icon-trailer" style="font-size: 6em"></i>
-                    </div>
-                </div>
-                <div class="row _cargoInfo">
-                    <div class="col-xs-4 col-xs-offset-1 text-center">
-                        <p><span class="lTruck"></span>: <span class="scsTruckDamageRounded"></span>%</p>
-                    </div>
-                    <div class="col-xs-5 col-xs-offset-1 text-center">
-                        <p><span class="lTrailer"></span>: <span class="wearTrailerRounded"></span>%</p>
-                    </div>
-                </div>
+            <div class="col-xs-4 _headerItem text-center _headerEnd">
+                <span class="gameTime" id="headerTime"></span>
             </div>
-            <div id="about" style="display: none">
-                <div class="row _hasJobHeader">
-                    <div class="col-xs-12">
-                        <p class="lAbout"></p>
+        </div>
+        <div class="_container">
+            <div class="_hasJob">
+                <div id="map" style="display: none">
+                    <div class="row _hasJobHeader">
+                        <div class="col-xs-12">
+                            <p class="lNavigation"></p>
+                        </div>
+                    </div>
+                    <div class="row" style="position: relative; max-height: 660px; max-width: 2048px; overflow: hidden;">
+                        <div class="_overlay">
+                            <p class="text-center lNavigationUnavailable"></p>
+                        </div>
+                        <div class="_images">
+                            <!-- The image sources below look completely wrong, however it is correct due to the way the server works -->
+                            <img src="skins/mobile-route-advisor/img/map.png">
+                            <img src="skins/mobile-route-advisor/img/nav-arrow.png" class="_navArrow" alt="GPS Navigation Arrow">
+                        </div>
                     </div>
                 </div>
-                <div class="row _cargoInfo">
-                    <div class="col-xs-12 text-center">
-                        <p>Mobile Route Advisor - v1.0.0</p>
+                <div id="cargo">
+                    <div class="row _hasJobHeader">
+                        <div class="col-xs-12">
+                            <p class="lCurrentJob"></p>
+                        </div>
+                    </div>
+                    <div class="hasJob">
+                        <div class="noJob">
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2 text-center">
+                                    <p class="lNoJob"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yesJob">
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lCargoName"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="trailer">
+                                        <span class="trailerName"></span> (<span class="trailerMass"></span> kg)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p>Source</p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="source">
+                                        <span class="_jobSource"><span class="sourceCity"></span> - <span class="sourceCompany"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lDestination"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="destination">
+                                        <span class="_jobDestionation"><span class="destinationCity"></span> - <span class="destinationCompany"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lDeadline"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="jobDeadlineTime"></div>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lReward"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span>&euro;&nbsp;</span><span class="jobIncome"></span>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lTimeRemaining"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="jobRemainingTime"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row _cargoInfo">
-                    <div class="col-xs-12 text-center">
-                        <p>Developed and designed by @mkoch227</p>
+                <div id="damage" style="display: none">
+                    <div class="row _hasJobHeader">
+                        <div class="col-xs-12">
+                            <p class="lDamage"></p>
+                        </div>
+                    </div>
+                    <div class="row _cargoInfo _max400">
+                        <div class="col-xs-4 col-xs-offset-1 text-center _filler">
+                            <span id="truckDamageIcon"><i class="icon-truck" style="font-size: 4em;"></i></span>
+                            <i class="icon-truck" style="font-size: 4em;"></i>
+                        </div>
+                        <div class="col-xs-5 col-xs-offset-1 text-center _filler" style="margin-top: -80px">
+                            <span id="trailerDamageIcon"><i class="icon-trailer" style="font-size: 6em;"></i></span>
+                            <i class="icon-trailer" style="font-size: 6em"></i>
+                        </div>
+                    </div>
+                    <div class="row _cargoInfo">
+                        <div class="col-xs-4 col-xs-offset-1 text-center">
+                            <p><span class="lTruck"></span>: <span class="scsTruckDamageRounded"></span>%</p>
+                        </div>
+                        <div class="col-xs-5 col-xs-offset-1 text-center">
+                            <p><span class="lTrailer"></span>: <span class="wearTrailerRounded"></span>%</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row _cargoInfo">
-                    <div class="col-xs-12 text-center">
-                        <a href="http://www.github.com/mkoch227/ets2-mobile-route-advisor" target="_blank">http://www.github.com/mkoch227/ets2-mobile-route-advisor</a>
+                <div id="about" style="display: none">
+                    <div class="row _hasJobHeader">
+                        <div class="col-xs-12">
+                            <p class="lAbout"></p>
+                        </div>
+                    </div>
+                    <div class="row _cargoInfo">
+                        <div class="col-xs-12 text-center">
+                            <p>Mobile Route Advisor - v1.0.0</p>
+                        </div>
+                    </div>
+                    <div class="row _cargoInfo">
+                        <div class="col-xs-12 text-center">
+                            <p>Developed and designed by @mkoch227</p>
+                        </div>
+                    </div>
+                    <div class="row _cargoInfo">
+                        <div class="col-xs-12 text-center">
+                            <a href="http://www.github.com/mkoch227/ets2-mobile-route-advisor" target="_blank">http://www.github.com/mkoch227/ets2-mobile-route-advisor</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="_footer">
-        <div class="row _hasJob _footerRow text-center">
-            <div class="col-xs-1" style="margin-left: 20.833%" id="mapFooter">
-                <a href="javascript:void(0)" onclick="showTab('map')"><i class="icon-compass" style="font-size: 1.3em;"></i></a>
+        <div class="_footer">
+            <div class="row _hasJob _footerRow text-center">
+                <div class="col-xs-1" style="margin-left: 20.833%" id="mapFooter">
+                    <a href="javascript:void(0)" onclick="showTab('map')"><i class="icon-compass" style="font-size: 1.3em;"></i></a>
+                </div>
+                <div class="col-xs-1 col-xs-offset-1 _footerSelected" id="cargoFooter">
+                    <a href="javascript:void(0)" onclick="showTab('cargo')"><i class="icon-truck" style="font-size: 1.3em;"></i></a>
+                </div>
+                <div class="col-xs-1 col-xs-offset-1" id="damageFooter">
+                    <a href="javascript:void(0)" onclick="showTab('damage')"><i class="icon-phone-squared" style="font-size: 1.3em;"></i></a>
+                </div>
+                <div class="col-xs-1 col-xs-offset-1" id="aboutFooter">
+                    <a href="javascript:void(0)" onclick="showTab('about')"><i class="icon-help-circled" style="font-size: 1.3em;"></i></a>
+                </div>
             </div>
-            <div class="col-xs-1 col-xs-offset-1 _footerSelected" id="cargoFooter">
-                <a href="javascript:void(0)" onclick="showTab('cargo')"><i class="icon-truck" style="font-size: 1.3em;"></i></a>
-            </div>
-            <div class="col-xs-1 col-xs-offset-1" id="damageFooter">
-                <a href="javascript:void(0)" onclick="showTab('damage')"><i class="icon-phone-squared" style="font-size: 1.3em;"></i></a>
-            </div>
-            <div class="col-xs-1 col-xs-offset-1" id="aboutFooter">
-                <a href="javascript:void(0)" onclick="showTab('about')"><i class="icon-help-circled" style="font-size: 1.3em;"></i></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 text-center _hasJob">
-                <p class="lMobileRouteAdvisor"></p>
+            <div class="row">
+                <div class="col-xs-12 text-center _hasJob">
+                    <p class="lMobileRouteAdvisor"></p>
+                </div>
             </div>
         </div>
     </div>

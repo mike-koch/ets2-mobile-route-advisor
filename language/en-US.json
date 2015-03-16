@@ -12,5 +12,6 @@
     "Truck": "Truck",
     "Trailer": "Trailer",
     "About": "About",
-    "MobileRouteAdvisor": "Mobile Route Advisor"
+    "MobileRouteAdvisor": "Mobile Route Advisor",
+    "WaitingForConnection": "Waiting for connection"
 }

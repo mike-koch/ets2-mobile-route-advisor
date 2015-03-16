@@ -1,30 +1,3 @@
-/* 
-    Default ETS2 dashboard skin.
-
-    *** DO NOT CHANGE THIS STYLESHEET *** 
-
-    If you want to create your own dashboard skin (or tweak something)
-    create a copy of the "/skins/default" directory and rename it
-    to something like: "/skins/your_skin_name".
-    Edit "/config.json" file and add a new object to the skins array.
-    Please note that the "name" property must be equal to "your_skin_name" defined above.
-    Refresh your application/browser to see the new skin.
-
-    CSS naming convention:
-
-    - Dashboard core script maps all telemetry data properties to respective class names,
-      so truck's speed will be .truckSpeed and current gear is .gear (see JSON).
-    - All boolean telemetry properties will have a special ".yes" class added 
-      when the value is true (will be removed if value is false).
-    - When dashboard core script updates DOM it will always add 
-      data-value attribute containing current value, so you 
-      can use it to have custom css selectors based on the actual data 
-      (for example, this skin uses .gear[data-value="N"] to define
-      different style for neutral or reverse gear, see below).
-    - If you need to define your own style related classes.
-      I stronly recommend to use underscore prefix ("._job" for example) to distinguish names,
-      so you will never forget which classes are dynamic and which are static.
-*/
 @import url(bootstrap.min.css);
 @import url(css/fonts.css);
 @import url(css/animation.css);
@@ -190,4 +163,19 @@ a, a:hover, a:visited, a:active, a:focus {
     min-width: 2048px;
     max-width: 2048px;
     z-index: 1;
+}
+.dashboard.connected .has-connection {
+    display: none;
+}
+
+.dashboard.connected .no-connection {
+    display: block;
+}
+
+.dashboard.connected.yes .has-connection {
+    display: block;
+}
+
+.dashboard.connected.yes .no-connection {
+    display: none;
 }
