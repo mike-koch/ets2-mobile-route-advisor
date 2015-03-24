@@ -24,6 +24,7 @@
         "language": "en-US.json",      // Filename of the translation you wish to load. All translations must be in the "language" folder.
         "speedUnits": "kmh",           // "kmh": Displays speed in kilometers per hour  | "mph": Displays speed in miles per hour
         "timeFormat": "24h",           // "24h": Display time in 24-hour format         | "12h": Display time in 12 hour (AM/PM) format -5
+        "weightUnits": "kg",           // "kg": Display trailer mass in kilograms       | "t": Display trailer mass in tons
     }    
 
 }

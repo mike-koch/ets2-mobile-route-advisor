@@ -33,6 +33,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.digitGroupedReward = getDigitGroupedReward(data.jobIncome);
     
     data.gameTime12h = getTimeInTwelveHourFormat(data.gameTime);
+    data.trailerMassTons = data.hasJob ? ((data.trailerMass / 1000.0) + ' t') : '';
+    data.trailerMassKg = data.hasJob ? data.trailerMass + ' kg' : '';
+    
     // return changed data to the core for rendering
     return data;
 };
@@ -62,6 +65,14 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     } else if (speedUnits === 'mph') {
         $('#speedUnits').text('mph');
         $('.truckSpeedRoundedKmhMph').addClass('truckSpeedMphRounded').removeClass('truckSpeedRoundedKmhMph');
+    }
+    
+    // Process kg vs tons
+    var weightUnits = skinConfig.weightUnits;
+    if (weightUnits === 'kg') {
+        $('.trailerMassKgOrT').addClass('trailerMassKg').removeClass('trailerMassKgOrT');
+    } else if (weightUnits === 't') {
+        $('.trailerMassKgOrT').addClass('trailerMassTons').removeClass('trailerMassKgOrT');
     }
     
     // Process 12 vs 24 hr time
