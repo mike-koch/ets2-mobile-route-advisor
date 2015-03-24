@@ -1,0 +1,18 @@
+{
+    "Navigation": "Nawigacja",
+    "NavigationUnavailable": "The Navigation tab has not been implemented at this time. Sorry!",
+    "CurrentJob": "Aktualne zlecenie",
+    "NoJob": "Aktualnie nie masz zlecenia",
+    "CargoName": "Nazwa ładunku:",
+    "Destination": "Cel:",
+    "Deadline": "Dostawa do:",
+    "Reward": "Wynagrodzenie:",
+    "TimeRemaining": "Pozostały czas:",
+    "Damage": "Uszkodzenia",
+    "Truck": "Ciężarówka",
+    "Trailer": "Naczepa",
+    "About": "O skinie",
+    "MobileRouteAdvisor": "Mobilny Nawigator",
+    "WaitingForConnection": "Czekam na połączenie",
+	"Source": "Źródło:"
+}
