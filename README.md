@@ -1,9 +1,6 @@
 # ETS2 Mobile Route Advisor [![Current Release](https://img.shields.io/github/release/mkoch227/ets2-mobile-route-advisor.svg)](https://github.com/mkoch227/ets2-mobile-route-advisor/releases) [![Licensed under the MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/LICENSE)
 Euro Truck Simulator 2's Route Advisor, for mobile devices. This is a skin for funbit's [ETS2 Telemetry Web Server](https://github.com/Funbit/ets2-telemetry-server).
 
-## Localization
-To assist in the localization efforts, please visit [http://oswltdw.oneskyapp.com/collaboration/project/24652](http://oswltdw.oneskyapp.com/collaboration/project/24652), or submit a pull request containing your translated JSON file.
-
 ## Features
 The mobile Route Advisor is planned to include all features that Euro Truck Simulator 2's Route Advisor currently has. These features are:
  - Mini-map
