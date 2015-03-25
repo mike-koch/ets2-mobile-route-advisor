@@ -16,6 +16,9 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
  - km/h or mph for speed
  - 12-hour or 24-hour time format
 
+## Languages
+Currently, two languages are supported (English (en-US) and Polish (pl-PL)). If you would like to submit a translation, you can do so by submitting a pull request.
+
 ## Screenshots
 ![Cargo Information](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/screenshots/cargo.PNG)
 ![Damage Information](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/screenshots/damage.PNG)
