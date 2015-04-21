@@ -1,0 +1,18 @@
+{
+    "Navigation": "Navegação",
+    "NavigationUnavailable": "A aba de navegação ainda não foi implementada. Desculpe!",
+    "CurrentJob": "Trabalho atual",
+    "NoJob": "Você não tem trabalho atual.",
+    "CargoName": "Nome da Carga",
+    "Destination": "Destino",
+    "Deadline": "Linha Final",
+    "Reward": "Recompensa",
+    "TimeRemaining": "Tempo Restante",
+    "Damage": "Danos",
+    "Truck": "Caminhão",
+    "Trailer": "Carga",
+    "About": "Sobre",
+    "MobileRouteAdvisor": "Mobile Route Advisor",
+    "WaitingForConnection": "Esperando pela conexão",
+	"Source": "Fonte"
+}
