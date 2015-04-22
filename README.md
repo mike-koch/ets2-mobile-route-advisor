@@ -17,7 +17,11 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
  - 12-hour or 24-hour time format
 
 ## Languages
-Currently, two languages are supported (English (en-US) and Polish (pl-PL)). If you would like to submit a translation, you can do so by submitting a pull request.
+Below are the supported languages. If you would like to submit a translation, you can do so by submitting a pull request.
+ - English US (en-US)
+ - Polish (pl-PL)
+ - Portuguese (Brazil) (pt-BR)
+ - French (Canada) (fr-CA)
 
 ## Screenshots
 ![Cargo Information](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/screenshots/cargo.PNG)
