@@ -30,11 +30,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.scsTruckDamage = getDamagePercentage(data);
     data.scsTruckDamageRounded = Math.floor(data.scsTruckDamage);
     data.wearTrailerRounded = Math.floor(data.wearTrailer * 100);
-    data.digitGroupedReward = getDigitGroupedReward(data.jobIncome);
     
     data.gameTime12h = getTimeInTwelveHourFormat(data.gameTime);
     data.trailerMassTons = data.hasJob ? ((data.trailerMass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.hasJob ? data.trailerMass + ' kg' : '';
+    data.jobIncome = getJobIncome(data.jobIncome);
     
     // return changed data to the core for rendering
     return data;
@@ -80,6 +80,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     if (timeFormat === '12h') {
         $('.gameTime').addClass('gameTime12h').removeClass('gameTime');
     }
+    
+    // Process currency code
+    $('.currencyCode').text(skinConfig.currencyCode);
     
     // Process language JSON
     $.getJSON('skins/mobile-route-advisor/language/'+skinConfig.language, function(json) {
@@ -140,8 +143,36 @@ function updateLanguage(key, value) {
     $('.l' + key).text(value);
 }
 
-function getDigitGroupedReward(income) {
-    
+function getJobIncome(income) {
+    /*
+        Looking at an economy_data.sii file found, the conversion rates are:
+        EUR: 1
+        CHF: 1.2
+        CZK: 25
+        GBP: 0.8
+        PLN: 4.2
+        HUF: 293
+    */
+    var currencyCode = $('.currencyCode').text();
+    if (currencyCode == 'EUR') {
+        income = '&euro;&nbsp;' + income;
+    } else if (currencyCode == 'GBP') {
+        income *= 0.8;
+        income = '&pound;&nbsp;' + income;
+    } else if (currencyCode == 'CHF') {
+        income *= 1.2;
+        income += '.&nbsp;-&nbsp;CHF';
+    } else if (currencyCode == 'CZK') {
+        income *= 25;
+        income += '.&nbsp;-&nbsp;K&#x10D;';
+    } else if (currencyCode == 'PLN') {
+        income *= 4.2;
+        income += '.&nbsp;-&nbsp;z&#0322;';
+    } else if (currencyCode == 'HUF') {
+        income *= 293;
+        income += '.&nbsp;-&nbsp;Ft';
+    }
+    return income;
 }
 
 function getDamagePercentage(data) {
