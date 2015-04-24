@@ -20,7 +20,7 @@
         "width": 2048,
         "height": 1152,
         
-        /* Skin-specific settings */
+        /* Skin-specific settings. See https://github.com/mkoch227/ets2-mobile-route-advisor/wiki for descriptions and possible values */
         "language": "en-US.json",
         "speedUnits": "kmh",
         "timeFormat": "24h",
