@@ -1,0 +1,18 @@
+{
+    "Navigation": "Navigatore",
+    "NavigationUnavailable": "La scheda di navigazione è ancora in sviluppo.",
+    "CurrentJob": "Lavoro attuale",
+    "NoJob": "Attualmente hai nessun lavoro.",
+    "CargoName": "Tipo di carico",
+    "Destination": "Destinazlone",
+    "Deadline": "Consegna prevista",
+    "Reward": "Guadagno",
+    "TimeRemaining": "Tempo rimanente",
+    "Damage": "Danno",
+    "Truck": "Camion",
+    "Trailer": "Trailer",
+    "About": "Circa",
+    "MobileRouteAdvisor": "Cellulare Route Advisor",
+    "WaitingForConnection": "In attesa di connessione",
+	"Source": "Inizio"
+}

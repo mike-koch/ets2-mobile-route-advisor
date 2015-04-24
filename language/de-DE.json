@@ -1,0 +1,18 @@
+{
+    "Navigation": "Navigation",
+    "NavigationUnavailable": "Die Navigation funktioniert derzeit noch nicht.",
+    "CurrentJob": "Aktueller Auftrag",
+    "NoJob": "Du hast im Moment keinen Auftrag.",
+    "CargoName": "Art der Fracht",
+    "Destination": "Bestimmungsort",
+    "Deadline": "Erwartet",
+    "Reward": "Auftragsvergütung",
+    "TimeRemaining": "verbleibende Zeit",
+    "Damage": "Schaden",
+    "Truck": "Lkw",
+    "Trailer": "Auflieger",
+    "About": "Über",
+    "MobileRouteAdvisor": "Mobile Route Advisor",
+    "WaitingForConnection": "Wartet auf Verbindung",
+	"Source": "Start"
+}
