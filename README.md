@@ -18,10 +18,12 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
 
 ## Languages
 Below are the supported languages. If you would like to submit a translation, you can do so by submitting a pull request.
- - English US (en-US)
- - Polish (pl-PL)
+ - English (United States) (en-US)
+ - Polish (Poland) (pl-PL)
  - Portuguese (Brazil) (pt-BR)
  - French (Canada) (fr-CA)
+ - German (Germany) (de-DE)
+ - Italian (Italy) (it-IT)
 
 ## Screenshots
 ![Cargo Information](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/screenshots/cargo.PNG)
