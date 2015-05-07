@@ -32,6 +32,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.wearTrailerRounded = Math.floor(data.wearTrailer * 100);
     
     data.gameTime12h = getTimeInTwelveHourFormat(data.gameTime);
+    data.jobDeadlineTime12h = getTimeInTwelveHourFormat(data.jobDeadlineTime);
     data.trailerMassTons = data.hasJob ? ((data.trailerMass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.hasJob ? data.trailerMass + ' kg' : '';
     data.jobIncome = getJobIncome(data.jobIncome);
@@ -79,6 +80,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     var timeFormat = skinConfig.timeFormat;
     if (timeFormat === '12h') {
         $('.gameTime').addClass('gameTime12h').removeClass('gameTime');
+        $('.jobDeadlineTime').addClass('jobDeadlineTime12h').removeClass('jobDeadlineTime');
     }
     
     // Process currency code
