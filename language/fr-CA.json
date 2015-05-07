@@ -14,5 +14,7 @@
     "About": "À propos",
     "MobileRouteAdvisor": "Mobile Route Advisor",
     "WaitingForConnection": "En attente de la connexion",
-    "Source": "Origine"
+    "Source": "Origine",
+    "SpeedLimit": "Speed limit",
+    "DistanceRemaining": "Distance remaining"
 }

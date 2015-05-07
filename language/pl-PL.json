@@ -14,5 +14,7 @@
     "About": "O skinie",
     "MobileRouteAdvisor": "Doradca drogowy",
     "WaitingForConnection": "Czekam na połączenie",
-    "Source": "Źródło:"
+    "Source": "Źródło:",
+    "SpeedLimit": "Speed limit",
+    "DistanceRemaining": "Distance remaining"
 }

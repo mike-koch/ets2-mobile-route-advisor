@@ -14,5 +14,7 @@
     "About": "Circa",
     "MobileRouteAdvisor": "Cellulare Route Advisor",
     "WaitingForConnection": "In attesa di connessione",
-	"Source": "Inizio"
+	"Source": "Inizio",
+    "SpeedLimit": "Speed limit",
+    "DistanceRemaining": "Distance remaining"
 }
