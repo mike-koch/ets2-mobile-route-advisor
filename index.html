@@ -3,6 +3,8 @@
         <title>ETS2 Mobile Route Advisor</title>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+        <link rel="stylesheet" href="css/site.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
@@ -23,24 +25,57 @@
                 <h3>ETS2 Mobile Route Advisor</h3>
                 <h5>A skin for the ETS2 Telemetry Web Server</h5>
                 <img src="img/combined.png" alt="Image of three devices showing the mobile route advisor">
+                <a id="top-download-link" class="waves-effect waves-light btn yellow darken-3" href="https://github.com/mkoch227/ets2-mobile-route-advisor/releases/download/v1.0.5/v1.0.5.zip">
+                    <i class="mdi-action-get-app left"></i>
+                    Download Latest Version (1.0.5)
+                </a>
             </div>
         </div>
         <section id="about" class="grey lighten-3 center-align">
             <div class="container">
                 <h4>About</h4>
-                <p>Some information about the mobile route advisor. More info to be placed here later.</p>
+                <p>If you've played Euro Truck Simulator 2 (ETS2) before, you are probably aware of the "Route Advisor", the little dashboard that appears on the left or right-hand side of the screen that shows you your GPS, along with cargo and truck information.  The Mobile Route Advisor is a skin for Funbit's <a href="https://www.github.com/funbit/ets2-telemetry-server" target="_blank">ETS2 telemetry web server</a>, which will allow you to view most of this information on any device that has a web browser installed.</p>
+                <p>Currently, there is no GPS feature included in the Mobile Route Advisor, as the required information is not available through SCS Software's Telemetry SDK at this time.</p>
             </div>
         </section>
         <section id="features" class="grey lighten-2 center-align">
             <div class="container">
                 <h4>Features</h4>
-                <p>Some information about the features that the ETS2 Mobile Route Advisor supports.</p>
+                <p>The following features are currently supported:</p>
+                <ul>
+                    <li>Current Speed (kmh or mph)</li>
+                    <li><span style="text-decoration: line-through">Speed Limit</span> <b>(coming soon in 1.1.0)</b></li>
+                    <li><span style="text-decoration: line-through">Remaining Distance</span> <b>(coming soon in 1.1.0)</b></li>
+                    <li>Current gear</li>
+                    <li>Remaining fuel</li>
+                    <li>In-Game Time</li>
+                    <li>Cargo Name and Weight (tons or kilograms)</li>
+                    <li>Source</li>
+                    <li>Destination</li>
+                    <li>Deadline</li>
+                    <li>Reward / Job Income</li>
+                    <li>Time Remaining</li>
+                    <li>Truck Damage</li>
+                    <li>Trailer Damage</li>
+                </ul>
+                <br>
+                <p>Additionally, <a href="https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters" target="_blank">various configuration options are available</a> to display relevant information to the user how they want it to be displayed:</p>
+                <ul>
+                    <li>Language (currently 6 languages are supported)</li>
+                    <li>Time Format (12-hour vs 24-hour)</li>
+                    <li>Speed Units (kmh vs mph)</li>
+                    <li>Weight Units (kilograms vs tons)</li>
+                    <li>Currenty Code (EUR, CHF, CZK, GBP, PLN, HUF)</li>
+                </ul>
             </div>
         </section>
         <section id="download" class="grey lighten-3 center-align">
             <div class="container">
                 <h4>Download</h4>
-                <p>Download buttons here</p>
+                <a class="waves-effect waves-light btn yellow darken-3" href="https://github.com/mkoch227/ets2-mobile-route-advisor/releases/download/v1.0.5/v1.0.5.zip">
+                    <i class="mdi-action-get-app left"></i>
+                    Download Latest Version (1.0.5)
+                </a>
             </div>
         </section>
         <footer class="page-footer grey darken-2">
@@ -48,22 +83,42 @@
                 <div class="row">
                     <div class="col l6 s12">
                         <h5 class="white-text">ETS2 Mobile Route Advisor</h5>
-                        <p class="grey-text text-lighten-4">Created and designed by <a href="http://mikekoch.me">Mike Koch</a></p>
+                        <p class="grey-text text-lighten-4">Created and designed by <a href="http://mikekoch.me" target="_blank">Mike Koch</a></p>
                     </div>
                     <div class="col l4 offset-l2 s12">
                         <h5 class="white-text">Links</h5>
                         <ul>
-                            <li><a class="grey-text text-lighten-3" href="#!">GitHub Repository</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Official Topic on SCS Software Forums</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Follow me on GitHub</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Follow me on Twitter</a></li>
+                            <li>
+                                <a class="grey-text text-lighten-3" 
+                                   href="https://www.github.com/mkoch227/ets2-mobile-route-advisor" 
+                                   target="_blank">
+                                    <i class="fa fa-github"></i> GitHub Repository
+                                </a>
+                            </li>
+                            <li>
+                                <a class="grey-text text-lighten-3" 
+                                   href="http://forum.scssoft.com/viewtopic.php?f=34&t=178742"
+                                   target="_blank">
+                                    <i class="fa fa-globe"></i> Official Topic on SCS Software Forums
+                                </a>
+                            </li>
+                            <li>
+                                <a class="grey-text text-lighten-3" href="https://www.github.com/mkoch227" target="_blank">
+                                    <i class="fa fa-github"></i> Follow me on GitHub
+                                </a>
+                            </li>
+                            <li>
+                                <a class="grey-text text-lighten-3" href="https://www.twitter.com/mkoch227" target="_blank">
+                                    <i class="fa fa-twitter"></i> Follow me on Twitter
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    &copy; 2015 Mike Koch
+                    &copy; 2015 <a href="http://www.mikekoch.me" target="_blank">Mike Koch</a>
                 </div>
             </div>
         </footer>
