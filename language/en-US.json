@@ -6,8 +6,8 @@
     "CargoName": "Cargo name",
     "Destination": "Destination",
     "Deadline": "Deadline",
-    "Reward": "Reward",
-    "TimeRemaining": "Time Remaining",
+    "Reward": "Job income",
+    "TimeRemaining": "Time remaining",
     "Damage": "Damage",
     "Truck": "Truck",
     "Trailer": "Trailer",
@@ -16,5 +16,12 @@
     "WaitingForConnection": "Waiting for connection",
     "Source": "Source",
     "SpeedLimit": "Speed limit",
-    "DistanceRemaining": "Distance remaining"
+    "DistanceRemaining": "Distance remaining",
+    "NextRestStopIn": "Next rest stop in",
+    "XHours": "{0} hours",
+    "XHour": "{0} hour",
+    "XMinutes": "{0} minutes",
+    "XMinute": "{0} minute",
+    "ETA": "ETA",
+    "TimeToDestination": "Time to destination"
 }
