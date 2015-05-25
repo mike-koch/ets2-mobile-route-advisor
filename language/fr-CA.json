@@ -1,6 +1,5 @@
 {
     "Navigation": "Navigation",
-    "NavigationUnavailable": "La navigation n'est pas encore fonctionnelle actuellement. Désolé!",
     "CurrentJob": "Livraison actuelle",
     "NoJob": "Vous n'avez pas de livraison en cours.",
     "CargoName": "Cargaison",
@@ -14,5 +13,14 @@
     "About": "À propos",
     "MobileRouteAdvisor": "Mobile Route Advisor",
     "WaitingForConnection": "En attente de la connexion",
-    "Source": "Origine"
+    "Source": "Origine",
+    "SpeedLimit": "Speed limit",
+    "DistanceRemaining": "Distance remaining",
+    "NextRestStopIn": "Next rest stop in",
+    "XHours": "{0} hours",
+    "XHour": "{0} hour",
+    "XMinutes": "{0} minutes",
+    "XMinute": "{0} minute",
+    "ETA": "ETA",
+    "TimeToDestination": "Time to destination"
 }

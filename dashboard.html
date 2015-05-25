@@ -1,3 +1,7 @@
+<p style="display: none" class="lXHours"></p>
+<p style="display: none" class="lXHour"></p>
+<p style="display: none" class="lXMinutes"></p>
+<p style="display: none" class="lXMinute"></p>
 <div class="dashboard connected">
     <div class="row no-connection _font-color-and-size">
         <span class="lWaitingForConnection"></span><span>...</span>
@@ -5,91 +9,144 @@
     <div class="has-connection">
         <div class="row _headerRow">
             <div class="col-xs-3 _headerItem text-center _headerEnd">
-                <span class="truckSpeedRoundedKmhMph"></span> <span id="speedUnits"></span>
+                <span class="truckSpeedRoundedKmhMph"></span> <span class="speedUnits"></span>
             </div>
             <div class="col-xs-1 _headerItem">
                 <span class="gear"></span>
             </div>
-            <div class="col-xs-2 _headerItem">
+            <div class="col-xs-4 _headerItem">
                 <div class="row">
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                         <i class="icon-fuel"></i>
                     </div>
-                    <div class="col-xs-9" style="padding-left: 30px">
+                    <div class="col-xs-2" style="margin-left: -25px">
                         <div class="progress" style="margin-top: 40px">
                             <div class="progress-bar _fuelBarColor" id="fuelLine"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-xs-2 _headerItem">
-                <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-2" style="margin-left: -25px">
                         <i class="icon-truck"></i>
                     </div>
-                    <div class="col-xs-8">
-                        <div class="progress" style="margin-top: 40px">
+                    <div class="col-xs-2">
+                        <div class="progress" style="margin-top: 40px; margin-left: -15px">
                             <div class="progress-bar _damageBarColor" id="damageLine">
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2" style="margin-left: -10px">
+                        <i class="fa fa-bed"></i>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="progress" style="margin-left: -15px; margin-top: 40px">
+                            <div class="progress-bar _restBarColor" id="restLine"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-4 _headerItem text-center _headerEnd">
-                <span class="gameTime" id="headerTime"></span>
+                <span class="game-time" id="headerTime"></span>
             </div>
         </div>
         <div class="_container">
             <div class="_font-color-and-size">
                 <div id="map" style="display: none">
                     <div class="row _hasJobHeader">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
                             <p class="lNavigation"></p>
                         </div>
-                    </div>
-                    <div class="row" style="position: relative; max-height: 660px; max-width: 2048px; overflow: hidden;">
-                        <div class="_overlay">
-                            <p class="text-center lNavigationUnavailable"></p>
+                        <div class="col-xs-6 _cargoRightSide">
+                            <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
                         </div>
-                        <div class="_images">
-                            <!-- The image sources below look completely wrong, however it is correct due to the way the server works -->
-                            <img src="skins/mobile-route-advisor/img/map.png">
-                            <img src="skins/mobile-route-advisor/img/nav-arrow.png" class="_navArrow" alt="GPS Navigation Arrow">
+                    </div>
+                    <div class="alternateRowBackground">
+                        <div class="noJob">
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lSpeedLimit"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hasJob">
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lSpeedLimit"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lDistanceRemaining"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="navigationEstimatedDistanceKmMi"></span> <span class="distanceUnits"></span>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lETA"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="navigation-estimatedTime"></span>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lTimeToDestination"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="navigation-timeToDestination"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div id="cargo">
                     <div class="row _hasJobHeader">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
                             <p class="lCurrentJob"></p>
                         </div>
+                        <div class="col-xs-6 _cargoRightSide">
+                            <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
+                        </div>
                     </div>
-                    <div class="hasJob">
+                    <div class="alternateRowBackground">
                         <div class="noJob">
+                            <div class="row">
+                                <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">&nbsp;</div>
+                            </div>
                             <div class="row">
                                 <div class="col-xs-8 col-xs-offset-2 text-center">
                                     <p class="lNoJob"></p>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lNextRestStopIn"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="game-nextRestStopTime _yellow-color"></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="yesJob">
+                        <div class="hasJob">
                             <div class="row _cargoInfo">
                                 <div class="col-xs-4">
                                     <p class="lCargoName"></p>
                                 </div>
                                 <div class="col-xs-8 _cargoRightSide">
                                     <div class="trailer">
-                                        <span class="trailerName"></span> (<span class="trailerMassKgOrT"></span>)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row _cargoInfo">
-                                <div class="col-xs-4">
-                                    <p class="lSource"></p>
-                                </div>
-                                <div class="col-xs-8 _cargoRightSide">
-                                    <div class="source">
-                                        <span class="_jobSource"><span class="sourceCity"></span> - <span class="sourceCompany"></span></span>
+                                        <span class="trailer-name"></span> (<span class="trailerMassKgOrT"></span>)
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +156,7 @@
                                 </div>
                                 <div class="col-xs-8 _cargoRightSide">
                                     <div class="destination">
-                                        <span class="_jobDestionation"><span class="destinationCity"></span> - <span class="destinationCompany"></span></span>
+                                        <span class="_jobDestionation"><span class="job-destinationCity"></span> - <span class="job-destinationCompany"></span></span>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +165,7 @@
                                     <p class="lDeadline"></p>
                                 </div>
                                 <div class="col-xs-8 _cargoRightSide">
-                                    <div class="jobDeadlineTime"></div>
+                                    <div class="job-deadlineTime"></div>
                                 </div>
                             </div>
                             <div class="row _cargoInfo">
@@ -125,7 +182,15 @@
                                     <p class="lTimeRemaining"></p>
                                 </div>
                                 <div class="col-xs-8 _cargoRightSide">
-                                    <div class="jobRemainingTime"></div>
+                                    <div class="job-remainingTime"></div>
+                                </div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lNextRestStopIn"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="game-nextRestStopTime _yellow-color"></span>
                                 </div>
                             </div>
                         </div>
@@ -133,8 +198,11 @@
                 </div>
                 <div id="damage" style="display: none">
                     <div class="row _hasJobHeader">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
                             <p class="lDamage"></p>
+                        </div>
+                        <div class="col-xs-6 _cargoRightSide">
+                            <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
                         </div>
                     </div>
                     <div class="row _cargoInfo _max400">
@@ -158,13 +226,16 @@
                 </div>
                 <div id="about" style="display: none">
                     <div class="row _hasJobHeader">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
                             <p class="lAbout"></p>
+                        </div>
+                        <div class="col-xs-6 _cargoRightSide">
+                            <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
                         </div>
                     </div>
                     <div class="row _cargoInfo">
                         <div class="col-xs-12 text-center">
-                            <p>Mobile Route Advisor - v1.0.5</p>
+                            <p>Mobile Route Advisor - v2.0.0</p>
                         </div>
                     </div>
                     <div class="row _cargoInfo">

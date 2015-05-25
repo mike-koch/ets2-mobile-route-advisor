@@ -1,6 +1,7 @@
 @import url(bootstrap.min.css);
 @import url(css/fonts.css);
 @import url(css/animation.css);
+@import url(css/font-awesome.min.css);
 
 body {
     background-color: #000;
@@ -21,24 +22,6 @@ body {
   top: 1px;
   width: 2048px;
   height: 1152px;
-}
-.noJob {
-    display: none;
-}
-
-.hasJob[data-value="false"] > .noJob {
-    display: block;
-}
-
-.noJob > .row {
-    margin-top: 270px;
-}
-.yesJob {
-    visibility: hidden;
-}
-
-.hasJob.yes > .yesJob {
-    visibility: visible;
 }
 ._header > ._row,
 ._footer > ._row {
@@ -89,6 +72,10 @@ body {
     background-color: #888;
 }
 
+._yellow-color {
+    color: #FB9912;
+}
+
 ._hasJobHeader p {
     color: #FB9912;
     padding-left: 40px;
@@ -122,6 +109,9 @@ a, a:hover, a:visited, a:active, a:focus {
 ._damageBarColor {
     background-color: #930002;
 }
+._restBarColor {
+    background-color: #1e88e5;
+}
 .progress {
     background-color: #888;
 }
@@ -140,7 +130,7 @@ a, a:hover, a:visited, a:active, a:focus {
     overflow: hidden;
 }
 
-.yesJob > .row:nth-child(odd) {
+.alternateRowBackground .row:nth-child(odd) {
     background-color: rgba(100,100,100,0.5);
 }
 
@@ -164,18 +154,14 @@ a, a:hover, a:visited, a:active, a:focus {
     max-width: 2048px;
     z-index: 1;
 }
-.dashboard.connected .has-connection {
-    display: none;
+
+._speedHeaderText {
+    color: #000;
 }
 
-.dashboard.connected .no-connection {
-    display: block;
-}
-
-.dashboard.connected.yes .has-connection {
-    display: block;
-}
-
-.dashboard.connected.yes .no-connection {
-    display: none;
+._speedLimit {
+    background: transparent url(img/speed-limit-sign.png) no-repeat center center;
+    width: 100px;
+    height: 100px;
+    color: #000;
 }

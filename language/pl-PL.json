@@ -1,6 +1,5 @@
 {
     "Navigation": "Nawigacja",
-    "NavigationUnavailable": "Nawigacja nie jest w tej chwili dostępna - przepraszamy!",
     "CurrentJob": "Aktualne zlecenie",
     "NoJob": "Aktualnie nie masz zlecenia",
     "CargoName": "Ładunek:",
@@ -14,5 +13,14 @@
     "About": "O skinie",
     "MobileRouteAdvisor": "Doradca drogowy",
     "WaitingForConnection": "Czekam na połączenie",
-    "Source": "Źródło:"
+    "Source": "Źródło:",
+    "SpeedLimit": "Speed limit",
+    "DistanceRemaining": "Distance remaining",
+    "NextRestStopIn": "Next rest stop in",
+    "XHours": "{0} hours",
+    "XHour": "{0} hour",
+    "XMinutes": "{0} minutes",
+    "XMinute": "{0} minute",
+    "ETA": "ETA",
+    "TimeToDestination": "Time to destination"
 }
