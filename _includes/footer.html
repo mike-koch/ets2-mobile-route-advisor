@@ -1,0 +1,25 @@
+<footer class="page-footer grey darken-2">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">ETS2 Mobile Route Advisor</h5>
+                <p class="grey-text text-lighten-4">Created and designed by <a href="http://mikekoch.me" target="_blank">Mike Koch</a></p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    {% for link in site.links %}
+                    <li>
+                        <a class="grey-text text-lighten-3" href="{{ link.link }}" target="_blank"><i class="fa fa-{{ link.icon }}"></i> {{ link.title }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            &copy; {{ site.copyright.year }} <a href="{{ site.copyright.link }}" target="_blank">{{ site.copyright.name }}</a>
+        </div>
+    </div>
+</footer>

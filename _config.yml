@@ -1,0 +1,74 @@
+name: "ETS2 Mobile Route Advisor"
+description: "A skin for the ETS2 Telemetry Web Server"
+email: "mkoch227@gmail.com"
+
+url: "http://mikekoch.me/ets2-mobile-route-advisor"
+latest-version: "2.0.0"
+
+tabs:
+  - title: About
+    id: about
+  - title: Features
+    id: features
+  - title: Download
+    id: download
+
+features:
+  - title: Current Speed (kmh or mph)
+    new: false
+  - title: Speed Limit
+    new: true
+    version: "2.0.0"
+  - title: Remaining Distance
+    new: true
+    version: "2.0.0"
+  - title: ETA
+    new: true
+    version: "2.0.0"
+  - title: Current gear
+    new: false
+  - title: In-Game Time
+    new: false
+  - title: Cargo Name and Weight (tons or kilograms)
+    new: false
+  - title: Destination
+    new: false
+  - title: Deadline
+    new: false
+  - title: Reward / Job Income
+    new: false
+  - title: Time Remaining
+    new: false
+  - title: Time Until Next Rest Stop
+    new: true
+    version: "2.0.0"
+  - title: Truck Damage
+    new: false
+  - title: Trailer Damage
+    new: false
+    
+config-options:
+  - Language (currently 6 languages are supported)
+  - Time Format (12-hour vs 24-hour)
+  - Distance Units (km vs mi), which also control km/h vs mph
+  - Weight Units (kilograms vs tons)
+  - Currenty Code (EUR, CHF, CZK, GBP, PLN, HUF)
+  
+links:
+  - title: GitHub Repository
+    icon: github
+    link: https://www.github.com/mkoch227/ets2-mobile-route-advisor
+  - title: Official Topic on SCS Software Forums
+    icon: globe
+    link: http://forum.scssoft.com/viewtopic.php?f=34&t=178742
+  - title: Follow me on GitHub
+    icon: github
+    link: https://www.github.com/mkoch227
+  - title: Follow me on Twitter
+    icon: twitter
+    link: https://www.twitter.com/mkoch227
+    
+copyright:
+  year: 2015
+  name: Mike Koch
+  url: http://mikekoch.me

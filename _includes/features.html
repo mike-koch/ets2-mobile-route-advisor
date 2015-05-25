@@ -1,0 +1,23 @@
+<section id="features" class="grey lighten-2 center-align">
+    <div class="container">
+        <h4>Features</h4>
+        <p>The following features are currently supported:</p>
+        <ul>
+            {% for feature in site.features %}
+            <li>
+                {{ feature.title }} 
+                {% if feature.new %}
+                <span class="new badge no-suffix aligned yellow darken-3">new in {{ feature.version }}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <br>
+        <p>Additionally, <a href="https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters" target="_blank">various configuration options are available</a> to display relevant information to the user how they want it to be displayed:</p>
+        <ul>
+            {% for config in site.config-options %}
+            <li>{{ config }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
