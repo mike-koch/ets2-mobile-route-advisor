@@ -59,12 +59,12 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // so you may perform any DOM or resource initializations here
     
     // Process Speed Units
-    var speedUnits = skinConfig.speedUnits;
-    if (speedUnits === 'kmh') {
-        $('#speedUnits').text('km/h');
+    var distanceUnits = skinConfig.distanceUnits;
+    if (distanceUnits === 'km') {
+        $('.speedUnits').text('km/h');
         $('.truckSpeedRoundedKmhMph').addClass('truckSpeedRounded').removeClass('truckSpeedRoundedKmhMph');
-    } else if (speedUnits === 'mph') {
-        $('#speedUnits').text('mph');
+    } else if (distanceUnits === 'mi') {
+        $('.speedUnits').text('mph');
         $('.truckSpeedRoundedKmhMph').addClass('truckSpeedMphRounded').removeClass('truckSpeedRoundedKmhMph');
     }
     
