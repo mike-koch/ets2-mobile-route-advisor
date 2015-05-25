@@ -32,7 +32,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.trailerMassTons = data.trailer.attached ? ((data.trailer.mass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.trailer.attached ? data.trailer.mass + ' kg' : '';
     data.jobIncome = getJobIncome(data.job.income);
-    data.game.nextRestStopTimeArray = getHoursAndMinutes(data.game.nextRestStopTime);
+    data.game.nextRestStopTimeArray = getHoursMinutesAndSeconds(data.game.nextRestStopTime);
     data.game.nextRestStopTime = processTimeDifferenceArray(data.game.nextRestStopTimeArray);
     data.navigation.speedLimitMph = data.navigation.speedLimit * .621371;
     data.navigation.speedLimitMphRounded = Math.round(data.navigation.speedLimitMph);
@@ -41,8 +41,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedDistanceKmRounded = Math.floor(data.navigation.estimatedDistanceKm);
     data.navigation.estimatedDistanceMiRounded = Math.floor(data.navigation.estimatedDistanceMi);
     var originalEstimatedTime = data.navigation.estimatedTime;
-    var timeToDestinationArray = getHoursAndMinutes(originalEstimatedTime);
-    data.navigation.estimatedTime = addHoursAndMinutes(data.game.time, timeToDestinationArray[0], timeToDestinationArray[1]);
+    var timeToDestinationArray = getHoursMinutesAndSeconds(originalEstimatedTime);
+    data.navigation.estimatedTime = addTime(data.game.time, timeToDestinationArray[0], timeToDestinationArray[1], timeToDestinationArray[2]);
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24, false);
     data.navigation.estimatedTime12h = getTime(originalEstimatedTime, 12, false);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
@@ -65,6 +65,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     if (data.game.connected) {
         $('.has-connection').show();
         $('.no-connection').hide();
+    } else {
+        $('.has-connection').hide();
+        $('.no-connection').show();
     }
     
     // Process DOM for job
@@ -127,18 +130,19 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     });
 }
 
-function getHoursAndMinutes(time) {
+function getHoursMinutesAndSeconds(time) {
     var dateTime = new Date(time);
-    // ETS2's times are stored in ISO 8601 or YYYY-MM-DDTHH:MM:SSZ. To get hours, grab string positions 11 and 12. For minutes, use 14 and 15.
     var hour = dateTime.getUTCHours();
     var minute = dateTime.getUTCMinutes();
-    return [hour, minute];
+    var second = dateTime.getUTCSeconds();
+    return [hour, minute, second];
 }
 
-function addHoursAndMinutes(time, hours, minutes) {
+function addTime(time, hours, minutes, seconds) {
     var dateTime = new Date(time);
     dateTime = dateTime.addHours(hours);
     dateTime = dateTime.addMinutes(minutes);
+    dateTime = dateTime.addSeconds(seconds);
     
     return dateTime;
 }
@@ -340,5 +344,10 @@ Date.prototype.addHours = function(h) {
 
 Date.prototype.addMinutes = function(m) {
     this.setTime(this.getTime() + (m*60*1000));
+    return this;
+}
+
+Date.prototype.addSeconds = function(s) {
+    this.setTime(this.getTime() + (s*1000));
     return this;
 }
