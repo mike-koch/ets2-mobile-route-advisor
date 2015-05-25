@@ -41,9 +41,10 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedDistanceKmRounded = Math.floor(data.navigation.estimatedDistanceKm);
     data.navigation.estimatedDistanceMiRounded = Math.floor(data.navigation.estimatedDistanceMi);
     var originalEstimatedTime = data.navigation.estimatedTime;
+    var timeToDestinationArray = getHoursAndMinutes(originalEstimatedTime);
+    data.navigation.estimatedTime = addHoursAndMinutes(data.game.time, timeToDestinationArray[0], timeToDestinationArray[1]);
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24, false);
     data.navigation.estimatedTime12h = getTime(originalEstimatedTime, 12, false);
-    var timeToDestinationArray = getTimeDifference(data.game.time, originalEstimatedTime);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
     
     // return changed data to the core for rendering
@@ -132,6 +133,14 @@ function getHoursAndMinutes(time) {
     var hour = dateTime.getUTCHours();
     var minute = dateTime.getUTCMinutes();
     return [hour, minute];
+}
+
+function addHoursAndMinutes(time, hours, minutes) {
+    var dateTime = new Date(time);
+    dateTime = dateTime.addHours(hours);
+    dateTime = dateTime.addMinutes(minutes);
+    
+    return dateTime;
 }
 
 function getFatiguePercentage(hoursUntilRest, minutesUntilRest) {
@@ -322,4 +331,14 @@ function getTimeDifference(begin, end) {
     var hours = Math.floor((endDate - beginDate) % MILLISECONDS_IN_DAY / MILLISECONDS_IN_HOUR) // number of hours
     var minutes = Math.floor((endDate - beginDate) % MILLISECONDS_IN_DAY % MILLISECONDS_IN_HOUR / MILLISECONDS_IN_MINUTE) // number of minutes
     return [hours, minutes];
+}
+
+Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+
+Date.prototype.addMinutes = function(m) {
+    this.setTime(this.getTime() + (m*60*1000));
+    return this;
 }
