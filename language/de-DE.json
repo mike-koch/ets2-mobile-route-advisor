@@ -1,6 +1,5 @@
 {
     "Navigation": "Navigation",
-    "NavigationUnavailable": "Die Navigation funktioniert derzeit noch nicht.",
     "CurrentJob": "Aktueller Auftrag",
     "NoJob": "Du hast im Moment keinen Auftrag.",
     "CargoName": "Art der Fracht",
@@ -16,5 +15,12 @@
     "WaitingForConnection": "Wartet auf Verbindung",
     "Source": "Start",
     "SpeedLimit": "Speed limit",
-    "DistanceRemaining": "Distance remaining"
+    "DistanceRemaining": "Distance remaining",
+    "NextRestStopIn": "Next rest stop in",
+    "XHours": "{0} hours",
+    "XHour": "{0} hour",
+    "XMinutes": "{0} minutes",
+    "XMinute": "{0} minute",
+    "ETA": "ETA",
+    "TimeToDestination": "Time to destination"
 }

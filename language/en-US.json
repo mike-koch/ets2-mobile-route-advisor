@@ -1,6 +1,5 @@
 {
     "Navigation": "Navigation",
-    "NavigationUnavailable": "The Navigation tab has not been implemented at this time. Sorry!",
     "CurrentJob": "Current Job",
     "NoJob": "Currently you have no delivery job.",
     "CargoName": "Cargo name",
