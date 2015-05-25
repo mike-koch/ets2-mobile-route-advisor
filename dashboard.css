@@ -130,7 +130,7 @@ a, a:hover, a:visited, a:active, a:focus {
     overflow: hidden;
 }
 
-.alternateRowBackground > .row:nth-child(odd) {
+.alternateRowBackground .row:nth-child(odd) {
     background-color: rgba(100,100,100,0.5);
 }
 
@@ -153,4 +153,15 @@ a, a:hover, a:visited, a:active, a:focus {
     min-width: 2048px;
     max-width: 2048px;
     z-index: 1;
+}
+
+._speedHeaderText {
+    color: #000;
+}
+
+._speedLimit {
+    background: transparent url(img/speed-limit-sign.png) no-repeat center center;
+    width: 100px;
+    height: 100px;
+    color: #000;
 }

@@ -32,10 +32,10 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.trailerMassTons = data.trailer.attached ? ((data.trailer.mass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.trailer.attached ? data.trailer.mass + ' kg' : '';
     data.jobIncome = getJobIncome(data.job.income);
-    data.game.nextRestStopTimeArray = getTimeDifference(data.game.time, data.game.nextRestStopTime);
+    data.game.nextRestStopTimeArray = getHoursAndMinutes(data.game.nextRestStopTime);
     data.game.nextRestStopTime = processTimeDifferenceArray(data.game.nextRestStopTimeArray);
     data.navigation.speedLimitMph = data.navigation.speedLimit * .621371;
-    data.navigation.speedLimitMphRounded = Math.floor(data.navigation.speedLimitMph);
+    data.navigation.speedLimitMphRounded = Math.round(data.navigation.speedLimitMph);
     data.navigation.estimatedDistanceKm = data.navigation.estimatedDistance / 1000;
     data.navigation.estimatedDistanceMi = data.navigation.estimatedDistanceKm * .621371;
     data.navigation.estimatedDistanceKmRounded = Math.floor(data.navigation.estimatedDistanceKm);
@@ -124,6 +124,14 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
             updateLanguage(key, value);
         });
     });
+}
+
+function getHoursAndMinutes(time) {
+    var dateTime = new Date(time);
+    // ETS2's times are stored in ISO 8601 or YYYY-MM-DDTHH:MM:SSZ. To get hours, grab string positions 11 and 12. For minutes, use 14 and 15.
+    var hour = dateTime.getUTCHours();
+    var minute = dateTime.getUTCMinutes();
+    return [hour, minute];
 }
 
 function getFatiguePercentage(hoursUntilRest, minutesUntilRest) {

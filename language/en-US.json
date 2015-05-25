@@ -2,7 +2,7 @@
     "Navigation": "Navigation",
     "NavigationUnavailable": "The Navigation tab has not been implemented at this time. Sorry!",
     "CurrentJob": "Current Job",
-    "NoJob": "You currently have no job.",
+    "NoJob": "Currently you have no delivery job.",
     "CargoName": "Cargo name",
     "Destination": "Destination",
     "Deadline": "Deadline",

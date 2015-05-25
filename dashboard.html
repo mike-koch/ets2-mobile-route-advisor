@@ -51,12 +51,25 @@
             <div class="_font-color-and-size">
                 <div id="map" style="display: none">
                     <div class="row _hasJobHeader">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
                             <p class="lNavigation"></p>
                         </div>
+                        <div class="col-xs-6 _cargoRightSide">
+                            <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
+                        </div>
                     </div>
-                    <div class="hasJob">
-                        <div class="alternateRowBackground">
+                    <div class="alternateRowBackground">
+                        <div class="noJob">
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lSpeedLimit"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hasJob">
                             <div class="row _cargoInfo">
                                 <div class="col-xs-4">
                                     <p class="lSpeedLimit"></p>
@@ -94,77 +107,102 @@
                 </div>
                 <div id="cargo">
                     <div class="row _hasJobHeader">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
                             <p class="lCurrentJob"></p>
                         </div>
-                    </div>
-                    <div class="noJob">
-                        <div class="row">
-                            <div class="col-xs-8 col-xs-offset-2 text-center">
-                                <p class="lNoJob"></p>
-                            </div>
+                        <div class="col-xs-6 _cargoRightSide">
+                            <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
                         </div>
                     </div>
-                    <div class="hasJob alternateRowBackground">
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lCargoName"></p>
+                    <div class="alternateRowBackground">
+                        <div class="noJob">
+                            <div class="row">
+                                <div class="col-xs-12">&nbsp;</div>
                             </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="trailer">
-                                    <span class="trailer-name"></span> (<span class="trailerMassKgOrT"></span>)
+                            <div class="row">
+                                <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2 text-center">
+                                    <p class="lNoJob"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">&nbsp;</div>
+                            </div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lNextRestStopIn"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="game-nextRestStopTime _yellow-color"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lDestination"></p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="destination">
-                                    <span class="_jobDestionation"><span class="job-destinationCity"></span> - <span class="job-destinationCompany"></span></span>
+                        <div class="hasJob">
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lCargoName"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="trailer">
+                                        <span class="trailer-name"></span> (<span class="trailerMassKgOrT"></span>)
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lDeadline"></p>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lDestination"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="destination">
+                                        <span class="_jobDestionation"><span class="job-destinationCity"></span> - <span class="job-destinationCompany"></span></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="job-deadlineTime"></div>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lDeadline"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="job-deadlineTime"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lReward"></p>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lReward"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="currencyCode" style="display: none"></span>
+                                    <span class="jobIncome"></span>
+                                </div>
                             </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <span class="currencyCode" style="display: none"></span>
-                                <span class="jobIncome"></span>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lTimeRemaining"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <div class="job-remainingTime"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lTimeRemaining"></p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <div class="job-remainingTime"></div>
-                            </div>
-                        </div>
-                        <div class="row _cargoInfo">
-                            <div class="col-xs-4">
-                                <p class="lNextRestStopIn"></p>
-                            </div>
-                            <div class="col-xs-8 _cargoRightSide">
-                                <span class="game-nextRestStopTime _yellow-color"></span>
+                            <div class="row _cargoInfo">
+                                <div class="col-xs-4">
+                                    <p class="lNextRestStopIn"></p>
+                                </div>
+                                <div class="col-xs-8 _cargoRightSide">
+                                    <span class="game-nextRestStopTime _yellow-color"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="damage" style="display: none">
                     <div class="row _hasJobHeader">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
                             <p class="lDamage"></p>
+                        </div>
+                        <div class="col-xs-6 _cargoRightSide">
+                            <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
                         </div>
                     </div>
                     <div class="row _cargoInfo _max400">
@@ -188,8 +226,11 @@
                 </div>
                 <div id="about" style="display: none">
                     <div class="row _hasJobHeader">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
                             <p class="lAbout"></p>
+                        </div>
+                        <div class="col-xs-6 _cargoRightSide">
+                            <span class="speedLimitRoundedKmhMph"></span> <span class="speedUnits"></span>
                         </div>
                     </div>
                     <div class="row _cargoInfo">
