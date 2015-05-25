@@ -29,7 +29,8 @@ Below are the supported languages. If you would like to submit a translation, yo
  - Italian (Italy) (it-IT)
 
 ## Screenshots
-![Cargo Information](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/screenshots/cargo.PNG)
-![Damage Information](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/screenshots/damage.PNG)
+![Navigation Information](http://i.imgur.com/FkA5hrum.png)
+![Cargo Information](http://i.imgur.com/9Pd6d9Hm.png)
+![Damage Information](http://i.imgur.com/SFXD4ogm.png)
 
 Some additional features may be added to the mobile Route Advisor. These will be added to the README as they are incorporated into the utility.
