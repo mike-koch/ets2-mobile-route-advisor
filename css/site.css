@@ -13,3 +13,11 @@ img {
 footer {
     margin-top: 0 !important;
 }
+
+.no-suffix:after {
+    content: none !important;
+}
+
+.aligned {
+    position: static !important;
+}
