@@ -47,7 +47,7 @@ features:
     new: false
     
 config-options:
-  - Language (currently 6 languages are supported)
+  - Language (currently 7 languages are supported)
   - Time Format (12-hour vs 24-hour)
   - Distance Units (km vs mi), which also control km/h vs mph
   - Weight Units (kilograms vs tons)
