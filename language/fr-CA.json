@@ -14,13 +14,13 @@
     "MobileRouteAdvisor": "Mobile Route Advisor",
     "WaitingForConnection": "En attente de la connexion",
     "Source": "Origine",
-    "SpeedLimit": "Speed limit",
-    "DistanceRemaining": "Distance remaining",
-    "NextRestStopIn": "Next rest stop in",
-    "XHours": "{0} hours",
-    "XHour": "{0} hour",
+    "SpeedLimit": "Limite de vitesse",
+    "DistanceRemaining": "Distance restante",
+    "NextRestStopIn": "Prochain arrêt dans",
+    "XHours": "{0} heures",
+    "XHour": "{0} heure",
     "XMinutes": "{0} minutes",
     "XMinute": "{0} minute",
-    "ETA": "ETA",
-    "TimeToDestination": "Time to destination"
+    "ETA": "HPA",
+    "TimeToDestination": "Temps avant la destination"
 }
