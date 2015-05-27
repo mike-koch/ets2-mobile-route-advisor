@@ -14,13 +14,13 @@
     "MobileRouteAdvisor": "Doradca drogowy",
     "WaitingForConnection": "Czekam na połączenie",
     "Source": "Źródło:",
-    "SpeedLimit": "Speed limit",
-    "DistanceRemaining": "Distance remaining",
-    "NextRestStopIn": "Next rest stop in",
-    "XHours": "{0} hours",
-    "XHour": "{0} hour",
-    "XMinutes": "{0} minutes",
-    "XMinute": "{0} minute",
-    "ETA": "ETA",
-    "TimeToDestination": "Time to destination"
+    "SpeedLimit": "Ograniczenie prędkości:",
+    "DistanceRemaining": "Pozostały dystans:",
+    "NextRestStopIn": "Odpoczynek za:",
+    "XHours": "{0} godz.",
+    "XHour": "{0} godz.",
+    "XMinutes": "{0} min.",
+    "XMinute": "{0} min.",
+    "ETA": "Szacowany czas przybycia:",
+    "TimeToDestination": "Czas do przyjazdu:"
 }
