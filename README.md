@@ -23,10 +23,12 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
 Below are the supported languages. If you would like to submit a translation, you can do so by submitting a pull request.
  - English (United States) (en-US)
  - Polish (Poland) (pl-PL)
- - Portuguese (Brazil) (pt-BR)
+ - Portuguese (Brazil) (pt-BR)*
  - French (Canada) (fr-CA)
- - German (Germany) (de-DE)
- - Italian (Italy) (it-IT)
+ - German (Germany) (de-DE)*
+ - Italian (Italy) (it-IT)*
+ - Spanish (Spain) (es-ES)
+* : need to be updated
 
 ## Screenshots
 ![Navigation Information](http://i.imgur.com/FkA5hrum.png)
