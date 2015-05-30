@@ -28,6 +28,7 @@ Below are the supported languages. If you would like to submit a translation, yo
  - *German (Germany) (de-DE)*
  - *Italian (Italy) (it-IT)*
  - Spanish (Spain) (es-ES)
+ - *Polish (Poland) (po-PO)*
 
 *Italics indicate that the language file has not been updated to 2.0.0, and therefore some text may be a mixture of the translated language and English (US).*
 
