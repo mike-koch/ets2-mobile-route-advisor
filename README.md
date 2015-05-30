@@ -20,14 +20,7 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
  - [Various configuration options](https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters)
 
 ## Languages
-Below are the supported languages. If you would like to submit a translation, you can do so by submitting a pull request.
- - English (United States) (en-US)
- - Polish (Poland) (pl-PL)
- - *Portuguese (Brazil) (pt-BR)*
- - French (Canada) (fr-CA)
- - *German (Germany) (de-DE)*
- - *Italian (Italy) (it-IT)*
- - Spanish (Spain) (es-ES)
+A list of supported languages are available on the [repository's wiki](https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters). If you would like to submit a translation, please submit a pull request.
 
 *Italics indicate that the language file has not been updated to 2.0.0, and therefore some text may be a mixture of the translated language and English (US).*
 
