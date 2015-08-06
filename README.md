@@ -18,6 +18,9 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
  - Truck damage / load damage
  - Localization support
  - [Various configuration options](https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters)
+ 
+## Support
+If you require any type of support, please looking at the [contributing guidelines](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/CONTRIBUTING.md) to see where you should post your request. **Please do not contact me directly via e-mail, as your e-mail will be ignored.**
 
 ## Languages
 A list of supported languages are available on the [repository's wiki](https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters). If you would like to submit a translation, please submit a pull request.
