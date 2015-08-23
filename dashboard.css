@@ -2,6 +2,7 @@
 @import url(css/fonts.css);
 @import url(css/animation.css);
 @import url(css/font-awesome.min.css);
+@import url(css/openlayers.css);
 
 body {
     background-color: #000;
@@ -164,4 +165,11 @@ a, a:hover, a:visited, a:active, a:focus {
     width: 100px;
     height: 100px;
     color: #000;
+}
+
+.map-container {
+    position: absolute;
+    width: 2048px;
+    height: 770px;
+    overflow: hidden;
 }

@@ -11,6 +11,7 @@
 // defined in dashboard-core.ts (or see JSON response in the server's API).
 
 Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
+    
     // round truck speed
     data.truckSpeedRounded = Math.abs(data.truck.speed > 0
         ? Math.floor(data.truck.speed)
@@ -87,6 +88,15 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // this function is called before everything else, 
     // so you may perform any DOM or resource initializations here
     
+    // Initialize JavaScript
+    /*
+    
+<script type="text/javascript" src="skins/mobile-route-advisor/js/ol-debug.js"></script>
+<script type="text/javascript" src="skins/mobile-route-advisor/js/map.js"></script>
+    */
+    $.getScript('skins/'+skinConfig.name+'/js/ol-debug.js');
+    $.getScript('skins/'+skinConfig.name+'/js/map.js');
+    
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
     if (distanceUnits === 'km') {
@@ -123,7 +133,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     $('.currencyCode').text(skinConfig.currencyCode);
     
     // Process language JSON
-    $.getJSON('skins/mobile-route-advisor/language/'+skinConfig.language, function(json) {
+    $.getJSON('skins/'+skinConfig.name+'/language/'+skinConfig.language, function(json) {
         $.each(json, function(key, value) {
             updateLanguage(key, value);
         });
@@ -350,4 +360,10 @@ Date.prototype.addMinutes = function(m) {
 Date.prototype.addSeconds = function(s) {
     this.setTime(this.getTime() + (s*1000));
     return this;
+}
+
+function goToMap() {
+    showTab('map');
+    buildMap();
+    $('.ol-zoom-in').click();
 }

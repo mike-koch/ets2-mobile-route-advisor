@@ -50,7 +50,17 @@
         <div class="_container">
             <div class="_font-color-and-size">
                 <div id="map" style="display: none">
-                    <div class="row _hasJobHeader">
+                    <div class="map-container">
+                        <div id="rendered-map"></div>
+                    </div>
+                    <!--<div class="row" style="position: relative; max-height: 660px; max-width: 2048px; overflow: hidden;">
+                        <div class="_images" id="map-imgs">
+                             The image sources below look completely wrong, however it is correct due to the way the server works 
+                            <img id="map-img">
+                            <img src="skins/mobile-route-advisor/img/nav-arrow.png" class="_navArrow" alt="GPS Navigation Arrow">
+                        </div>
+                    </div>-->
+                    <!--<div class="row _hasJobHeader">
                         <div class="col-xs-6">
                             <p class="lNavigation"></p>
                         </div>
@@ -103,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div id="cargo">
                     <div class="row _hasJobHeader">
@@ -254,7 +264,7 @@
         <div class="_footer">
             <div class="row _font-color-and-size _footerRow text-center">
                 <div class="col-xs-1" style="margin-left: 20.833%" id="mapFooter">
-                    <a href="javascript:void(0)" onclick="showTab('map')"><i class="icon-compass" style="font-size: 1.3em;"></i></a>
+                    <a href="javascript:void(0)" onclick="goToMap()"><i class="icon-compass" style="font-size: 1.3em;"></i></a>
                 </div>
                 <div class="col-xs-1 col-xs-offset-1 _footerSelected" id="cargoFooter">
                     <a href="javascript:void(0)" onclick="showTab('cargo')"><i class="icon-truck" style="font-size: 1.3em;"></i></a>
