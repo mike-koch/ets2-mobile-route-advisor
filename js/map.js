@@ -46,33 +46,37 @@ function buildMap(){
     var markers = [
         new ol.Feature({
             geometry: new ol.geom.Point([0, 0]),
-            name: 'Origin',
         }),
         new ol.Feature({
             geometry: new ol.geom.Point([256, 256]),
-            name: 'First Tile',
         }),
         new ol.Feature({
             geometry: new ol.geom.Point([256, MAX_Y - 256]),
-            name: 'Other First Tile',
         }),
         new ol.Feature({
             geometry: new ol.geom.Point([MAX_X, MAX_Y]),
-            name: 'End',
         }),
         new ol.Feature({
             geometry: new ol.geom.Point(game_coord_to_pixels(41744.53, 17305.5156)),
-            name: 'Debrecen',
         }),
         new ol.Feature({
             geometry: new ol.geom.Point(game_coord_to_pixels(-49770.64, -48417.68)),
-            name: 'Glasgow',
         }),
     ];
 
     var feature_source = new ol.source.Vector({
         features: markers,
         wrapX: false
+    });
+    
+    var iconStyle = new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 46],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            opacity: 1,
+            src: 'skins/mobile-route-advisor/img/marker.png'
+        }))
     });
 
     var custom_tilegrid = new ol.tilegrid.TileGrid({
@@ -134,8 +138,8 @@ function buildMap(){
             // 	})
             // }),
             new ol.layer.Vector({
-                source: feature_source
-                //style: ...
+                source: feature_source,
+                style: iconStyle
             })
         ],
         view: new ol.View({
