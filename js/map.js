@@ -44,24 +44,6 @@ function buildMap(){
 
     // The "name" attribute is unused.
     var markers = [
-        new ol.Feature({
-            geometry: new ol.geom.Point([0, 0]),
-        }),
-        new ol.Feature({
-            geometry: new ol.geom.Point([256, 256]),
-        }),
-        new ol.Feature({
-            geometry: new ol.geom.Point([256, MAX_Y - 256]),
-        }),
-        new ol.Feature({
-            geometry: new ol.geom.Point([MAX_X, MAX_Y]),
-        }),
-        new ol.Feature({
-            geometry: new ol.geom.Point(game_coord_to_pixels(41744.53, 17305.5156)),
-        }),
-        new ol.Feature({
-            geometry: new ol.geom.Point(game_coord_to_pixels(-49770.64, -48417.68)),
-        }),
     ];
 
     var feature_source = new ol.source.Vector({
@@ -137,10 +119,7 @@ function buildMap(){
             // 		wrapX: false
             // 	})
             // }),
-            new ol.layer.Vector({
-                source: feature_source,
-                style: iconStyle
-            })
+            getVector(feature_source, iconStyle)
         ],
         view: new ol.View({
             projection: projection,
@@ -157,4 +136,32 @@ function buildMap(){
         var coordinate = evt.coordinate;
         console.log(coordinate);
     });
+}
+
+var vector = undefined;
+
+function getVector(featureSource, iconStyle) {
+    if (vector === undefined) {
+        if (featureSource === undefined && iconStyle === undefined) {
+            return;
+        }
+        vector = new ol.layer.Vector({
+            source: featureSource,
+            style: iconStyle
+        });
+    }
+    return vector;
+}
+
+function updateCoordinate(x, y) {
+    // Clear all vectors
+    var theVector = getVector(undefined, undefined);
+    theVector.getSource().clear(true);
+    
+    // Add a new vector for the current position
+    var newFeature = new ol.Feature({
+        geometry: new ol.geom.Point(game_coord_to_pixels(x, y))
+        //geometry: new ol.geom.Point(game_coord_to_pixels(41744.53, 17305.5156))
+    });
+    theVector.getSource().addFeature(newFeature);
 }

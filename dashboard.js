@@ -79,6 +79,13 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
         $('.hasJob').hide();
         $('.noJob').show();
     }
+    
+    // Process map location only if the map has been rendered
+    if (!($('.ol-zoom-in').length === 0)) {
+        console.log('X: ' + data.truck.placement.x + ', Y: ' + data.truck.placement.y);
+       // updateCoordinate(data.truck.placement.x, data.truck.placement.y);
+        updateCoordinate(data.truck.placement.x, data.truck.placement.y);
+    }
 }
 
 Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
