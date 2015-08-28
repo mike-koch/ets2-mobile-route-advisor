@@ -50,7 +50,7 @@ function buildMap(path_prefix){
         features: markers,
         wrapX: false
     });
-    
+
     var iconStyle = new ol.style.Style({
         image: new ol.style.Icon(({
             anchor: [0.5, 46],
@@ -157,7 +157,7 @@ function updateCoordinate(x, y) {
     // Clear all vectors
     var theVector = getVector(undefined, undefined);
     theVector.getSource().clear(true);
-    
+
     // Add a new vector for the current position
     var newFeature = new ol.Feature({
         geometry: new ol.geom.Point(game_coord_to_pixels(x, y))
