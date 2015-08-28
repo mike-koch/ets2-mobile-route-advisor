@@ -35,7 +35,7 @@ function game_coord_to_pixels(x, y) {
     return r;
 }
 
-function buildMap(path_prefix){
+function buildMap(){
     var projection = new ol.proj.Projection({
         // Any name here. I chose "Funbit" because we are using funbit's image coordinates.
         code: 'Funbit',
