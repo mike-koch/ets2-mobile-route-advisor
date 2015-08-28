@@ -32,7 +32,7 @@ function game_coord_to_pixels(x, y) {
     return r;
 }
 
-function buildMap(){
+function buildMap(path_prefix){
     var projection = new ol.proj.Projection({
         // Any name here. I chose "Funbit" because we are using funbit's image coordinates.
         code: 'Funbit',
@@ -57,7 +57,7 @@ function buildMap(){
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
             opacity: 1,
-            src: 'skins/mobile-route-advisor/img/marker.png'
+            src: gPathPrefix + '/img/marker.png'
         }))
     });
 
@@ -85,7 +85,7 @@ function buildMap(){
                 extent: [0, 0, MAX_X, MAX_Y],
                 source: new ol.source.XYZ({
                     projection: projection,
-                    url: 'skins/mobile-route-advisor/tiles/{z}/{y}/{x}.png',
+                    url: gPathPrefix + '/tiles/{z}/{y}/{x}.png',
                     tileSize: [256, 256],
                     // Using createXYZ() makes the vector layer (with the features) unaligned.
                     // It also tries loading non-existent tiles.

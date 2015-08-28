@@ -96,13 +96,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // so you may perform any DOM or resource initializations here
     
     // Initialize JavaScript
-    /*
-    
-<script type="text/javascript" src="skins/mobile-route-advisor/js/ol-debug.js"></script>
-<script type="text/javascript" src="skins/mobile-route-advisor/js/map.js"></script>
-    */
-    $.getScript('skins/'+skinConfig.name+'/js/ol-debug.js');
-    $.getScript('skins/'+skinConfig.name+'/js/map.js');
+	gPathPrefix = 'skins/' + skinConfig.name;
+    $.getScript(gPathPrefix + '/js/ol-debug.js');
+    $.getScript(gPathPrefix + '/js/map.js');
     
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
@@ -374,3 +370,6 @@ function goToMap() {
     buildMap();
     $('.ol-zoom-in').click();
 }
+
+// Gets updated to the actual path in initialize function.
+var gPathPrefix;
