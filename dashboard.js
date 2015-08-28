@@ -99,7 +99,17 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     gPathPrefix = 'skins/' + skinConfig.name;
     $.getScript(gPathPrefix + '/js/ol-debug.js');
     $.getScript(gPathPrefix + '/js/map.js');
-    
+
+    // Undoing the auto-scaling of the skin. Using CSS transformations mess up
+    // with mouse coordinates and the map drag-and-drop.
+    // TODO: Ask Funbit for way to disable the auto-scaling.
+    // TODO: Rewrite the layout of this skin to be responsive.
+    var $body = $('body');
+    $body.css('transform', '');
+    $body.css('-moz-transform', '');
+    $body.css('-ms-transform', '');
+    $body.css('-webkit-transform', '');
+
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
     if (distanceUnits === 'km') {
