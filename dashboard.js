@@ -79,12 +79,12 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
         $('.hasJob').hide();
         $('.noJob').show();
     }
-    
+
     // Process map location only if the map has been rendered
     if (!($('.ol-zoom-in').length === 0)) {
-        console.log('X: ' + data.truck.placement.x + ', Y: ' + data.truck.placement.y);
-       // updateCoordinate(data.truck.placement.x, data.truck.placement.y);
-        updateCoordinate(data.truck.placement.x, data.truck.placement.y);
+        // X is longitude-ish, Y is altitude-ish, Z is latitude-ish.
+        // http://forum.scssoft.com/viewtopic.php?p=422083#p422083
+        updateCoordinate(data.truck.placement.x, data.truck.placement.z);
     }
 }
 

@@ -1,8 +1,11 @@
-
-    var MAX_X = 19200;
-    var MAX_Y = 18688;
-
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
+
+// Image size used in the map.
+var MAX_X = 19200;
+var MAX_Y = 18688;
+// How the image was extracted from the game:
+// http://forum.scssoft.com/viewtopic.php?p=405122#p405122
+
 // Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
 function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     return [
@@ -19,15 +22,15 @@ function calculatePixelCoordinateUk(x, y) {
 
 
 function game_coord_to_pixels(x, y) {
-    // I suppose either x,y are both positive, or they are both negative.
+    // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
     var r = null;
-    if (x < 0) {
+    if (x < -31812 && y < -5618) {
         r = calculatePixelCoordinateUk(x, y);
     } else {
         r = calculatePixelCoordinateEu(x, y);
     }
 
-    // Inverting Y axis.
+    // Inverting Y axis, because of OpenLayers coordinates.
     r[1] = MAX_Y - r[1];
     return r;
 }
@@ -157,6 +160,10 @@ function updateCoordinate(x, y) {
     // Clear all vectors
     var theVector = getVector(undefined, undefined);
     theVector.getSource().clear(true);
+
+    // Debugging.
+    var pixels = game_coord_to_pixels(x, y);
+    document.querySelector('._footer .lMobileRouteAdvisor').textContent = x + ', ' + y + ' -> ' + pixels[0] + ', ' + pixels[1] + ' (or ' + (MAX_Y - pixels[1]) + ')';
 
     // Add a new vector for the current position
     var newFeature = new ol.Feature({
