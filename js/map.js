@@ -1,8 +1,11 @@
-
-    var MAX_X = 19200;
-    var MAX_Y = 18688;
-
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
+
+// Image size used in the map.
+var MAX_X = 19200;
+var MAX_Y = 18688;
+// How the image was extracted from the game:
+// http://forum.scssoft.com/viewtopic.php?p=405122#p405122
+
 // Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
 function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     return [
@@ -19,15 +22,15 @@ function calculatePixelCoordinateUk(x, y) {
 
 
 function game_coord_to_pixels(x, y) {
-    // I suppose either x,y are both positive, or they are both negative.
+    // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
     var r = null;
-    if (x < 0) {
+    if (x < -31812 && y < -5618) {
         r = calculatePixelCoordinateUk(x, y);
     } else {
         r = calculatePixelCoordinateEu(x, y);
     }
 
-    // Inverting Y axis.
+    // Inverting Y axis, because of OpenLayers coordinates.
     r[1] = MAX_Y - r[1];
     return r;
 }
@@ -42,23 +45,26 @@ function buildMap(){
     });
     ol.proj.addProjection(projection);
 
-    // The "name" attribute is unused.
-    var markers = [
-    ];
+    truckMarker = new ol.Feature({});
 
-    var feature_source = new ol.source.Vector({
-        features: markers,
+    var featureSource = new ol.source.Vector({
+        features: [truckMarker],
         wrapX: false
     });
-    
+
     var iconStyle = new ol.style.Style({
         image: new ol.style.Icon(({
             anchor: [0.5, 46],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
             opacity: 1,
-            src: 'skins/mobile-route-advisor/img/marker.png'
+            src: gPathPrefix + '/img/marker.png'
         }))
+    });
+
+    vectorLayer = new ol.layer.Vector({
+        source: featureSource,
+        style: iconStyle
     });
 
     var custom_tilegrid = new ol.tilegrid.TileGrid({
@@ -75,7 +81,7 @@ function buildMap(){
         })()
     });
 
-    var map = new ol.Map({
+    map = new ol.Map({
         target: 'rendered-map',
         interactions: ol.interaction.defaults().extend([
             new ol.interaction.DragRotateAndZoom()
@@ -85,7 +91,7 @@ function buildMap(){
                 extent: [0, 0, MAX_X, MAX_Y],
                 source: new ol.source.XYZ({
                     projection: projection,
-                    url: 'skins/mobile-route-advisor/tiles/{z}/{y}/{x}.png',
+                    url: gPathPrefix + '/tiles/{z}/{y}/{x}.png',
                     tileSize: [256, 256],
                     // Using createXYZ() makes the vector layer (with the features) unaligned.
                     // It also tries loading non-existent tiles.
@@ -119,7 +125,7 @@ function buildMap(){
             // 		wrapX: false
             // 	})
             // }),
-            getVector(feature_source, iconStyle)
+            vectorLayer
         ],
         view: new ol.View({
             projection: projection,
@@ -127,41 +133,38 @@ function buildMap(){
             //center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
             center: [MAX_X/2, MAX_Y/2],
             minZoom: 0,
-            maxZoom: 7,
-            zoom: 2
+            maxZoom: 9,
+            zoom: 7
         })
     });
 
+    // Debugging.
     map.on('singleclick', function(evt) {
         var coordinate = evt.coordinate;
         console.log(coordinate);
     });
 }
 
-var vector = undefined;
+var map;
+var vectorLayer;
+var truckMarker;
 
-function getVector(featureSource, iconStyle) {
-    if (vector === undefined) {
-        if (featureSource === undefined && iconStyle === undefined) {
-            return;
-        }
-        vector = new ol.layer.Vector({
-            source: featureSource,
-            style: iconStyle
-        });
-    }
-    return vector;
+function updateMarker(x, y) {
+    // Debugging.
+    var pixels = game_coord_to_pixels(x, y);
+    truckMarker.setGeometry(new ol.geom.Point(pixels));
 }
 
-function updateCoordinate(x, y) {
-    // Clear all vectors
-    var theVector = getVector(undefined, undefined);
-    theVector.getSource().clear(true);
-    
-    // Add a new vector for the current position
-    var newFeature = new ol.Feature({
-        geometry: new ol.geom.Point(game_coord_to_pixels(x, y))
-        //geometry: new ol.geom.Point(game_coord_to_pixels(41744.53, 17305.5156))
-    });
-    theVector.getSource().addFeature(newFeature);
+function updateCenter(x, y, heading) {
+    var pixels = game_coord_to_pixels(x, y);
+    var view = map.getView();
+    // TODO: Center the view somewhere ahead of the truck marker, maybe based on the speed.
+    // Maybe even zoom in/out based on speed (but I don't think it helps, the map is not high-res enough).
+    view.setCenter(pixels);
+}
+
+function updateRotation(heading) {
+    document.querySelector('._footer .lMobileRouteAdvisor').textContent = heading.toFixed(8);
+    var view = map.getView();
+    view.setRotation(heading * Math.PI * 2);
 }
