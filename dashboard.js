@@ -382,7 +382,6 @@ Date.prototype.addSeconds = function(s) {
 function goToMap() {
     showTab('map');
     buildMap();
-    $('.ol-zoom-in').click();
 }
 
 // Gets updated to the actual path in initialize function.
