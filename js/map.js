@@ -133,7 +133,7 @@ function buildMap(){
             //center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
             center: [MAX_X/2, MAX_Y/2],
             minZoom: 0,
-            maxZoom: 7,
+            maxZoom: 9,
             zoom: 7
         })
     });
