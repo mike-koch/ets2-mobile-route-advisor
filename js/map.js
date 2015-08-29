@@ -45,12 +45,10 @@ function buildMap(){
     });
     ol.proj.addProjection(projection);
 
-    // The "name" attribute is unused.
-    var markers = [
-    ];
+    truckMarker = new ol.Feature({});
 
-    var feature_source = new ol.source.Vector({
-        features: markers,
+    var featureSource = new ol.source.Vector({
+        features: [truckMarker],
         wrapX: false
     });
 
@@ -62,6 +60,11 @@ function buildMap(){
             opacity: 1,
             src: gPathPrefix + '/img/marker.png'
         }))
+    });
+
+    vectorLayer = new ol.layer.Vector({
+        source: featureSource,
+        style: iconStyle
     });
 
     var custom_tilegrid = new ol.tilegrid.TileGrid({
@@ -78,7 +81,7 @@ function buildMap(){
         })()
     });
 
-    var map = new ol.Map({
+    map = new ol.Map({
         target: 'rendered-map',
         interactions: ol.interaction.defaults().extend([
             new ol.interaction.DragRotateAndZoom()
@@ -122,7 +125,7 @@ function buildMap(){
             // 		wrapX: false
             // 	})
             // }),
-            getVector(feature_source, iconStyle)
+            vectorLayer
         ],
         view: new ol.View({
             projection: projection,
@@ -131,44 +134,37 @@ function buildMap(){
             center: [MAX_X/2, MAX_Y/2],
             minZoom: 0,
             maxZoom: 7,
-            zoom: 2
+            zoom: 7
         })
     });
 
+    // Debugging.
     map.on('singleclick', function(evt) {
         var coordinate = evt.coordinate;
         console.log(coordinate);
     });
 }
 
-var vector = undefined;
+var map;
+var vectorLayer;
+var truckMarker;
 
-function getVector(featureSource, iconStyle) {
-    if (vector === undefined) {
-        if (featureSource === undefined && iconStyle === undefined) {
-            return;
-        }
-        vector = new ol.layer.Vector({
-            source: featureSource,
-            style: iconStyle
-        });
-    }
-    return vector;
-}
-
-function updateCoordinate(x, y) {
-    // Clear all vectors
-    var theVector = getVector(undefined, undefined);
-    theVector.getSource().clear(true);
-
+function updateMarker(x, y) {
     // Debugging.
     var pixels = game_coord_to_pixels(x, y);
-    document.querySelector('._footer .lMobileRouteAdvisor').textContent = x + ', ' + y + ' -> ' + pixels[0] + ', ' + pixels[1] + ' (or ' + (MAX_Y - pixels[1]) + ')';
+    truckMarker.setGeometry(new ol.geom.Point(pixels));
+}
 
-    // Add a new vector for the current position
-    var newFeature = new ol.Feature({
-        geometry: new ol.geom.Point(game_coord_to_pixels(x, y))
-        //geometry: new ol.geom.Point(game_coord_to_pixels(41744.53, 17305.5156))
-    });
-    theVector.getSource().addFeature(newFeature);
+function updateCenter(x, y, heading) {
+    var pixels = game_coord_to_pixels(x, y);
+    var view = map.getView();
+    // TODO: Center the view somewhere ahead of the truck marker, maybe based on the speed.
+    // Maybe even zoom in/out based on speed (but I don't think it helps, the map is not high-res enough).
+    view.setCenter(pixels);
+}
+
+function updateRotation(heading) {
+    document.querySelector('._footer .lMobileRouteAdvisor').textContent = heading.toFixed(8);
+    var view = map.getView();
+    view.setRotation(heading * Math.PI * 2);
 }

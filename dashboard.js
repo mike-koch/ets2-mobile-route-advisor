@@ -84,7 +84,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     if (!($('.ol-zoom-in').length === 0)) {
         // X is longitude-ish, Y is altitude-ish, Z is latitude-ish.
         // http://forum.scssoft.com/viewtopic.php?p=422083#p422083
-        updateCoordinate(data.truck.placement.x, data.truck.placement.z);
+        updateMarker(data.truck.placement.x, data.truck.placement.z);
+        updateCenter(data.truck.placement.x, data.truck.placement.z, data.truck.placement.heading);
+        updateRotation(data.truck.placement.heading);
     }
 }
 
@@ -104,11 +106,13 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // with mouse coordinates and the map drag-and-drop.
     // TODO: Ask Funbit for way to disable the auto-scaling.
     // TODO: Rewrite the layout of this skin to be responsive.
+    /*
     var $body = $('body');
     $body.css('transform', '');
     $body.css('-moz-transform', '');
     $body.css('-ms-transform', '');
     $body.css('-webkit-transform', '');
+    */
 
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
