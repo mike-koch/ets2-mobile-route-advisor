@@ -17,8 +17,8 @@
         "name": "mobile-route-advisor",
         "title": "Mobile Route Advisor",
         "author": "mkoch227",
-        "width": 2048,
-        "height": 1152,
+        "width": -1,
+        "height": -1,
         
         /* Skin-specific settings. See https://github.com/mkoch227/ets2-mobile-route-advisor/wiki for descriptions and possible values */
         "language": "en-US.json",
