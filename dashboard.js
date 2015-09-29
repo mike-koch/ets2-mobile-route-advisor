@@ -53,22 +53,18 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
 };
 
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
-    //
     // data - same data object as in the filter function
-    //
-    $('#fuelLine').css('width', data.currentFuelPercentage + '%');
-    $('#damageLine').css('width', data.scsTruckDamage + '%');
-    $('#truckDamageIcon').css('height', getDamageFillForTruck(data.scsTruckDamage) + '%');
-    $('#trailerDamageIcon').css('height', getDamageFillForTrailer(data.trailer.wear * 100) + '%');
-    $('#restLine').css('width', getFatiguePercentage(data.game.nextRestStopTimeArray[0], data.game.nextRestStopTimeArray[1]) + '%');
+    $('.fillingIcon.truckDamage .top').css('height', (100 - data.scsTruckDamage) + '%');
+    $('.fillingIcon.trailerDamage .top').css('height', (100 - data.trailer.wear * 100) + '%');
+    $('.fillingIcon.fuel .top').css('height', (100 - data.currentFuelPercentage) + '%');
+    $('.fillingIcon.rest .top').css('height', (100 - getFatiguePercentage(data.game.nextRestStopTimeArray[0], data.game.nextRestStopTimeArray[1])) + '%');
+
 
     // Process DOM for connection
     if (data.game.connected) {
-        $('.has-connection').show();
-        $('.no-connection').hide();
+        $('.statusMessage').hide();
     } else {
-        $('.has-connection').hide();
-        $('.no-connection').show();
+        $('.statusMessage').show();
     }
 
     // Process DOM for job
@@ -81,7 +77,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     }
 
     // Process map location only if the map has been rendered
-    if (!($('.ol-zoom-in').length === 0)) {
+    if (map) {
         // X is longitude-ish, Y is altitude-ish, Z is latitude-ish.
         // http://forum.scssoft.com/viewtopic.php?p=422083#p422083
         updateMarker(data.truck.placement.x, data.truck.placement.z);
@@ -150,11 +146,13 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     $('.currencyCode').text(skinConfig.currencyCode);
 
     // Process language JSON
-    $.getJSON('skins/'+skinConfig.name+'/language/'+skinConfig.language, function(json) {
+    $.getJSON(gPathPrefix+'/language/'+skinConfig.language, function(json) {
         $.each(json, function(key, value) {
             updateLanguage(key, value);
         });
     });
+
+	showTab('_cargo');
 }
 
 function getHoursMinutesAndSeconds(time) {
@@ -251,12 +249,6 @@ function getTime(gameTime, timeUnits, isHeader) {
     }
     var formattedHours = currentHours < 10 ? '0'+currentHours : currentHours;
 
-    if (currentDay == 'Wednesday' && isHeader) {
-        $('#headerTime').css('font-size','.9em');
-    } else {
-        $('#headerTime').css('font-size','1em');
-    }
-
     return currentDay + ' ' + formattedHours + ':' + formattedMinutes + currentPeriod;
 }
 
@@ -305,50 +297,12 @@ function getDamagePercentage(data) {
                     data.truck.wearWheels) * 100;
 }
 
-function getDamageFillForTruck(damagePercentage) {
-    // damagePercentage: The value returned from getDamagePercentage
-    damagePercentage = Math.floor(damagePercentage);
-    if (damagePercentage < 0.5) {
-        return 80;
-    }
-    if (damagePercentage > 99.4) {
-        return 25;
-    }
-
-    // This is the closest linear fit found from 3 eyeballed data points.
-    return (475/6) - (.55 * damagePercentage);
-}
-
-function getDamageFillForTrailer(damagePercentage) {
-    // damagePercentage: the same as data.wearTrailer
-    damagePercentage = Math.floor(damagePercentage);
-    if (damagePercentage < .5) {
-        return 65;
-    }
-    if (damagePercentage > 99.4) {
-        return 34;
-    }
-
-    // This is the closest linear fit found from 3 eyeballed data points.
-    return (389/6) - (0.31 * damagePercentage);
-}
-
 function showTab(tabName) {
-    // Hide all tabs (map, cargo, damage, about)
-    $('#map').hide();
-    $('#cargo').hide();
-    $('#damage').hide();
-    $('#about').hide();
+    $('._active_tab').removeClass('_active_tab');
+    $('#' + tabName).addClass('_active_tab');
 
-    // Remove the "_footerSelected" class from all items.
-    $('#mapFooter').removeClass('_footerSelected');
-    $('#cargoFooter').removeClass('_footerSelected');
-    $('#damageFooter').removeClass('_footerSelected');
-    $('#aboutFooter').removeClass('_footerSelected');
-
-    // Show the ID requested
-    $('#' + tabName).show();
-    $('#' + tabName + 'Footer').addClass('_footerSelected');
+    $('._active_tab_button').removeClass('_active_tab_button');
+    $('#' + tabName + '_button').addClass('_active_tab_button');
 }
 
 /** Returns the difference between two dates in ISO 8601 format in an [hour, minutes] array */
@@ -380,8 +334,11 @@ Date.prototype.addSeconds = function(s) {
 }
 
 function goToMap() {
-    showTab('map');
-    buildMap();
+    showTab('_map');
+	// "map" variable is defined in js/map.js.
+	if (!map) {
+		buildMap('_map');
+	}
 }
 
 // Gets updated to the actual path in initialize function.

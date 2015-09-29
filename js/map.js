@@ -35,7 +35,7 @@ function game_coord_to_pixels(x, y) {
     return r;
 }
 
-function buildMap(){
+function buildMap(target_element_id){
     var projection = new ol.proj.Projection({
         // Any name here. I chose "Funbit" because we are using funbit's image coordinates.
         code: 'Funbit',
@@ -82,7 +82,7 @@ function buildMap(){
     });
 
     map = new ol.Map({
-        target: 'rendered-map',
+        target: target_element_id,
         interactions: ol.interaction.defaults().extend([
             new ol.interaction.DragRotateAndZoom()
         ]),
@@ -164,7 +164,7 @@ function updateCenter(x, y, heading) {
 }
 
 function updateRotation(heading) {
-    document.querySelector('._footer .lMobileRouteAdvisor').textContent = heading.toFixed(8);
+    // document.querySelector('.lMobileRouteAdvisor').textContent = heading.toFixed(8);  // DEBUG
     var view = map.getView();
     view.setRotation(heading * Math.PI * 2);
 }

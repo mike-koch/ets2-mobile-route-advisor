@@ -1,175 +1,242 @@
-@import url(bootstrap.min.css);
-@import url(css/fonts.css);
-@import url(css/animation.css);
-@import url(css/font-awesome.min.css);
+@charset "UTF-8";
+
 @import url(css/openlayers.css);
 
-body {
-    background-color: #000;
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+
+	/* dashboard-host.css should not have defined cursor as pointer. */
+	cursor: auto;
 }
-.row {
-    margin-left: 0;
-    margin-right: 0;
+html {
+	background-color: #000;
+	color: #FFF;
+	font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+	line-height: 1.0;
 }
-.hidden {
-  visibility: hidden;
+@media (min-aspect-ratio: 4/3) {
+	html { font-size: 6vh; }
 }
-.visible {
-  visibility: visible;
+@media (max-aspect-ratio: 4/3) {
+	/* This value is the font-size from min-aspect-ratio times 3 divided by 4  */
+	html { font-size: 4.5vw; }
 }
+ul, ol, li, p {
+	margin: 0;
+	padding: 0;
+}
+a {
+	color: inherit;
+}
+
+/* Main layout, divided in 4 regions. */
 .dashboard {
-  position: absolute;
-  left: 0px;
-  top: 1px;
-  width: 2048px;
-  height: 1152px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
 }
-._header > ._row,
-._footer > ._row {
-    color: #FFF;
-    background-color: #000;
+.dashboard > aside,
+.dashboard > nav,
+.dashboard > footer {
+	flex-shrink: 0;
+	flex-grow: 0;
 }
-._headerItem {
-    font-size: 5em;
-}
-._headerEnd {
-    background: #b5bdc8; /* Old browsers */
-    background: -moz-linear-gradient(top,  #b5bdc8 0%, #828c95 36%, #28343b 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b5bdc8), color-stop(36%,#828c95), color-stop(100%,#28343b)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #b5bdc8 0%,#828c95 36%,#28343b 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #b5bdc8 0%,#828c95 36%,#28343b 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
-}
-._headerRow {
-    color: #FFF;
-    background: #888e96; /* Old browsers */
-    background: -moz-linear-gradient(top,  #888e96 0%, #5e656b 36%, #28343b 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#888e96), color-stop(36%,#5e656b), color-stop(100%,#28343b)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #888e96 0%,#5e656b 36%,#28343b 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#888e96', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
-}
-._footerRow {
-    color: #FFF;
-    background: #888e96; /* Old browsers */
-    background: -moz-linear-gradient(top,  #888e96 0%, #5e656b 36%, #28343b 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#888e96), color-stop(36%,#5e656b), color-stop(100%,#28343b)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #888e96 0%,#5e656b 36%,#28343b 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #888e96 0%,#5e656b 36%,#28343b 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#888e96', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
-}
-._container {
-    min-height: 770px;
-    max-height: 770px;
-    background-image: url("img/bg.png");
-}
-._hasJobHeader {
-    background-color: #888;
+.dashboard > div._tabs {
+	flex-shrink: 0;
+	flex-grow: 1;
+	position: relative;
 }
 
-._yellow-color {
-    color: #FB9912;
+/* Top bar shows: speed, gear, fuel, damage, rest, time */
+.dashboard > aside {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+}
+.dashboard > aside > div {
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: 2em;
+
+	text-align: center;
+	white-space: nowrap;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+}
+.dashboard > aside > div._speed {
+	flex-basis: 5em;
+}
+.dashboard > aside > div._time {
+	flex-basis: 9em;
 }
 
-._hasJobHeader p {
-    color: #FB9912;
-    padding-left: 40px;
+/* The main area. */
+.dashboard > ._tabs > article {
+	display: none;
 }
-._font-color-and-size {
-    color: #FFF;
-    font-size: 5em;
+.dashboard > ._tabs > article._active_tab {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
-._cargoInfo {
-    padding-left: 40px;
+
+/* Cargo tab. */
+#_cargo > .noJob,
+#_cargo > .hasJob {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
-._cargoRightSide {
-    text-align: right;
-    padding-right: 125px;
+#_cargo > .noJob > ._row,
+#_cargo > .hasJob > ._row {
+	flex-grow: 1;
+	flex-shrink: 0;
 }
-._footerSelected {
-    border-bottom: solid 4px orange;
-    background-color: #222;
+
+/* Each row from the _cargo tab. */
+._row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
 }
-a, a:hover, a:visited, a:active, a:focus {
-    color: inherit;
-    text-decoration: none;
+._row > * {
+	flex-grow: 1;
+	flex-shrink: 0;
+	max-width: 100%;
 }
-._fuelBar {
-    max-width: 20px;
-    
+._row > *:first-child {
+	text-align: left;
+	padding-left: 1ex;
 }
-._fuelBarColor {
-    background-color: #F3C24C;
+._row > *:last-child {
+	text-align: right;
+	padding-right: 1ex;
 }
-._damageBarColor {
-    background-color: #930002;
+
+/* Damage tab. */
+#_damage._active_tab {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
-._restBarColor {
-    background-color: #1e88e5;
+#_damage > figure {
+	flex-grow: 0;
+	flex-shrink: 0;
+	text-align: center;
+	margin-left: 1em;
+	margin-right: 1em;
 }
+#_damage > figure > figcaption {
+	margin-top: 1em;
+}
+
+/* About tab. */
+#_about._active_tab {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#_about > * {
+	flex-grow: 0;
+	flex-shrink: 0;
+	text-align: center;
+	margin: 0.5em;
+}
+#_about a {
+	text-decoration: none;
+}
+
+
+/* The buttons at the bottom. */
+.dashboard > nav {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: center;
+}
+.dashboard > nav > * {
+	flex-grow: 0;
+	flex-shrink: 0;
+
+	text-align: center;
+	white-space: nowrap;
+	cursor: pointer;
+	font-size: 1.3em;
+	line-height: 1.0;
+
+	padding: 0.2em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+.dashboard > footer {
+	text-align: center;
+	line-height: 1.2;
+}
+
+
+
+
+.fillingIcon {
+	display: inline-block;
+	position: relative;
+}
+.fillingIcon > .top {
+	position: absolute;
+	overflow: hidden;
+}
+.fillingIcon > .top > *,
+.fillingIcon > .bot > * {
+	display: block;
+}
+
 .progress {
-    background-color: #888;
-}
-._max400 {
-    max-height: 400px;
-    overflow: hidden;
-}
-._filler {
-    position: relative;
-    color: #FF0000;
-}
-/* CSS Rule to apply the "damage" effect as seen in ETS2 */
-._filler span {
-    position: absolute;
-    color: #FFF;
-    overflow: hidden;
+	display: none;	/* TODO: re-implement this. */
 }
 
-.alternateRowBackground .row:nth-child(odd) {
-    background-color: rgba(100,100,100,0.5);
-}
 
-._navArrow {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    left: 1008px;
-    top: 335px;
-    z-index: 0;
-}
 
-._overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, .8);
-    min-height: 660px;
-    max-height: 660px;
-    min-width: 2048px;
-    max-width: 2048px;
-    z-index: 1;
+/* Colors */
+.dashboard > aside,
+.dashboard > nav {
+	background: #b5bdc8;
+	background: linear-gradient(to bottom, #b5bdc8 0%, #828c95 36%, #28343b 100%);
 }
-
-._speedHeaderText {
-    color: #000;
+.dashboard > aside > div._middle {
+	background: #888e96;
+	background: linear-gradient(to bottom,	#888e96 0%,#5e656b 36%,#28343b 100%);
 }
-
-._speedLimit {
-    background: transparent url(img/speed-limit-sign.png) no-repeat center center;
-    width: 100px;
-    height: 100px;
-    color: #000;
+.dashboard > ._tabs {
+	background-image: url("img/bg.png");
+	background-size: 0.5em;  /* Single-value means background width. */
 }
-
-.map-container {
-    position: absolute;
-    width: 2048px;
-    height: 770px;
-    overflow: hidden;
+.dashboard > nav > * {
+	border-bottom: solid 0.1em transparent;
+}
+.dashboard > nav > *._active_tab_button {
+	border-bottom-color: orange;
+	background-color: rgba(0, 0, 0, 0.3333);
+}
+._yellow-color {
+	color: #FB9912;
+}
+#_cargo ._row:first-child {
+	background-color: #373737;
+}
+._row:nth-child(even) {
+	background-color: rgba(127,127,127,0.25);
 }
