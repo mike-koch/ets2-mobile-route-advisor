@@ -80,6 +80,27 @@ function buildMap(target_element_id){
         })()
     });
 
+    // The rotation button receives one label.
+    // The label can either be a string (which is then inserted into a <span>
+    // element) or a DOM node.
+    // The code here tries to get a <template> element, clone the contents
+    // (using importNode), and use that as the label. If it fails, a unicode
+    // character (as string) is used as a fallback.
+    var compass_label = '\u2B06';
+    var compass_gfx = document.getElementById('compass-label-template');
+    if (compass_gfx) {
+        // Getting the first (and only) element.
+
+        // The next line requires fairly recent browsers and is somewhat experimental.
+        // https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment
+        // compass_gfx = compass_gfx.content.firstElementChild;
+        // For compatibility reasons, I'm using a different code:
+        compass_gfx = compass_gfx.content.querySelector('svg')
+
+        compass_label = document.importNode(compass_gfx, true);
+        compass_label.style.display = 'inline-block';
+    }
+
     map = new ol.Map({
         target: target_element_id,
         controls: [
@@ -88,8 +109,9 @@ function buildMap(target_element_id){
             // new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
             new ol.control.Rotate({
-                label: '\u2B06'
+                label: compass_label
             })
+            // TODO: Set 'tipLabel' on both zoom and rotate controls to language-specific translations.
         ],
         interactions: ol.interaction.defaults().extend([
             // Rotating by using two fingers is implemented in PinchRotate(), which is enabled by default.
