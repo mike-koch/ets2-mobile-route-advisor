@@ -20,7 +20,6 @@ function calculatePixelCoordinateUk(x, y) {
     return calculatePixelCoordinate(x, y, 9.69522, 10226, 9826);
 }
 
-
 function game_coord_to_pixels(x, y) {
     // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
     var r = null;
@@ -83,7 +82,19 @@ function buildMap(target_element_id){
 
     map = new ol.Map({
         target: target_element_id,
+        controls: [
+            // new ol.control.ZoomSlider(),
+            // new ol.control.OverviewMap(),
+            // new ol.control.MousePosition(),  // DEBUG
+            new ol.control.Zoom(),
+            new ol.control.Rotate({
+                label: '\u2B06'
+            })
+        ],
         interactions: ol.interaction.defaults().extend([
+            // Rotating by using two fingers is implemented in PinchRotate(), which is enabled by default.
+            // With DragRotateAndZoom(), it is possible to use Shift+mouse-drag to rotate the map.
+            // Without it, Shift+mouse-drag creates a rectangle to zoom to an area.
             new ol.interaction.DragRotateAndZoom()
         ]),
         layers: [
@@ -100,10 +111,10 @@ function buildMap(target_element_id){
                     // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
                     tileGrid: custom_tilegrid,
                     // tileGrid: ol.tilegrid.createXYZ({
-                    // 	extent: [0, 0, MAX_X, MAX_Y],
-                    // 	minZoom: 0,
-                    // 	maxZoom: 7,
-                    // 	tileSize: [256, 256]
+                    //     extent: [0, 0, MAX_X, MAX_Y],
+                    //     minZoom: 0,
+                    //     maxZoom: 7,
+                    //     tileSize: [256, 256]
                     // }),
                     wrapX: false,
                     minZoom: 4,
@@ -112,18 +123,18 @@ function buildMap(target_element_id){
             }),
             // Debug layer below.
             // new ol.layer.Tile({
-            // 	extent: [0, 0, MAX_X, MAX_Y],
-            // 	source: new ol.source.TileDebug({
-            // 		projection: projection,
-            // 		tileGrid: custom_tilegrid,
-            // 		// tileGrid: ol.tilegrid.createXYZ({
-            // 		// 	extent: [0, 0, MAX_X, MAX_Y],
-            // 		// 	minZoom: 0,
-            // 		// 	maxZoom: 7,
-            // 		// 	tileSize: [256, 256]
-            // 		// }),
-            // 		wrapX: false
-            // 	})
+            //     extent: [0, 0, MAX_X, MAX_Y],
+            //     source: new ol.source.TileDebug({
+            //         projection: projection,
+            //         tileGrid: custom_tilegrid,
+            //         // tileGrid: ol.tilegrid.createXYZ({
+            //         //  extent: [0, 0, MAX_X, MAX_Y],
+            //         //  minZoom: 0,
+            //         //  maxZoom: 7,
+            //         //  tileSize: [256, 256]
+            //         // }),
+            //         wrapX: false
+            //     })
             // }),
             vectorLayer
         ],
@@ -139,10 +150,17 @@ function buildMap(target_element_id){
     });
 
     // Debugging.
-    map.on('singleclick', function(evt) {
-        var coordinate = evt.coordinate;
-        console.log(coordinate);
-    });
+    // map.on('singleclick', function(evt) {
+    //     var coordinate = evt.coordinate;
+    //     console.log(coordinate);
+    // });
+    // map.getView().on('change:center', function(ev) {
+    //   console.log(ev);
+    // });
+    // map.getView().on('change:rotation', function(ev) {
+    //   console.log(ev);
+    // });
+
 }
 
 var map;

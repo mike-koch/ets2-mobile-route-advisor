@@ -160,7 +160,6 @@ a {
 	text-decoration: none;
 }
 
-
 /* The buttons at the bottom. */
 .dashboard > nav {
 	display: flex;
@@ -182,15 +181,13 @@ a {
 	margin-left: 0.5em;
 	margin-right: 0.5em;
 }
-
 .dashboard > footer {
 	text-align: center;
 	line-height: 1.2;
 }
 
 
-
-
+/* Icons that fill up according to some percentage. */
 .fillingIcon {
 	display: inline-block;
 	position: relative;
@@ -203,12 +200,6 @@ a {
 .fillingIcon > .bot > * {
 	display: block;
 }
-
-.progress {
-	display: none;	/* TODO: re-implement this. */
-}
-
-
 
 /* Colors */
 .dashboard > aside,
@@ -239,4 +230,54 @@ a {
 }
 ._row:nth-child(even) {
 	background-color: rgba(127,127,127,0.25);
+}
+
+/* Map controls, sometimes overriding styles from OpenLayers. */
+#_map .ol-control {
+	background: transparent;
+	padding: 0;
+	border-radius: 0;
+}
+#_map .ol-control button {
+	color: #cecece;
+	background: #6c6c6c;
+	background: linear-gradient(to bottom, #3c3c3c 0%, #6c6c6c 45%, #3c3c3c 100%);
+	box-sizing: content-box;
+	overflow: hidden;
+	width: 1em;
+	height: 1em;
+	font-size: 1em;
+	line-height: 1.0;
+	text-shadow: #000 0 0 0.1em;
+	border-radius: 0.1em;
+	padding: 0.1em;
+	border: 0;
+	margin: 0;
+}
+#_map .ol-control button:active {
+	color: #242424;
+	background: #ffcc2f;
+	background: linear-gradient(to bottom, #ab7d00 0%, #ffcc2f 45%, #ab7d00 100%);
+	text-shadow: none;
+}
+#_map .ol-compass {
+	font-size: inherit;
+}
+#_map .ol-rotate.ol-hidden {
+	/* Never hide it! */
+	opacity: 1;
+	visibility: visible;
+}
+#_map .ol-zoom {
+	top: auto;
+	left: auto;
+	right: 0.5em;
+	bottom: 0.5em;
+	display: flex;
+	flex-direction: row-reverse;
+}
+#_map .ol-zoom > button {
+	flex-grow: 0;
+	flex-shrink: 0;
+	margin-left: 0.2em;
 }

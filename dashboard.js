@@ -152,7 +152,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
         });
     });
 
-	showTab('_cargo');
+    showTab('_cargo');
 }
 
 function getHoursMinutesAndSeconds(time) {
@@ -335,10 +335,10 @@ Date.prototype.addSeconds = function(s) {
 
 function goToMap() {
     showTab('_map');
-	// "map" variable is defined in js/map.js.
-	if (!map) {
-		buildMap('_map');
-	}
+    // "map" variable is defined in js/map.js.
+    if (!map) {
+        buildMap('_map');
+    }
 }
 
 // Gets updated to the actual path in initialize function.
