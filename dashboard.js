@@ -76,7 +76,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     }
 
     // Process map location only if the map has been rendered
-    if (map) {
+    if (g_map) {
         // X is longitude-ish, Y is altitude-ish, Z is latitude-ish.
         // http://forum.scssoft.com/viewtopic.php?p=422083#p422083
         updatePlayerPositionAndRotation(
@@ -95,10 +95,12 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // this function is called before everything else,
     // so you may perform any DOM or resource initializations here
 
+    g_skinConfig = skinConfig;
+
     // Initialize JavaScript
-    gPathPrefix = 'skins/' + skinConfig.name;
-    $.getScript(gPathPrefix + '/js/ol-debug.js');
-    $.getScript(gPathPrefix + '/js/map.js');
+    g_pathPrefix = 'skins/' + skinConfig.name;
+    $.getScript(g_pathPrefix + '/js/ol-debug.js');
+    $.getScript(g_pathPrefix + '/js/map.js');
 
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
@@ -132,11 +134,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
         $('.navigation-estimatedTime').addClass('navigation-estimatedTime12h').removeClass('navigation-estimatedTime');
     }
 
-    // Process currency code
-    $('.currencyCode').text(skinConfig.currencyCode);
-
     // Process language JSON
-    $.getJSON(gPathPrefix+'/language/'+skinConfig.language, function(json) {
+    $.getJSON(g_pathPrefix+'/language/'+skinConfig.language, function(json) {
+        g_translations = json;
         $.each(json, function(key, value) {
             updateLanguage(key, value);
         });
@@ -181,22 +181,22 @@ function processTimeDifferenceArray(hourMinuteArray) {
 
 
     if (hours <= 0 && minutes <= 0) {
-        minutes = $('.lXMinutes').text().replace('{0}', 0);
+        minutes = g_translations.XMinutes.replace('{0}', 0);
         return minutes;
     }
 
     if (hours == 1) {
-        hours = $('.lXHour').text().replace('{0}', hours);
+        hours = g_translations.XHour.replace('{0}', hours);
     } else if (hours == 0) {
         hours = '';
     } else {
-        hours = $('.lXHours').text().replace('{0}', hours);
+        hours = g_translations.XHours.replace('{0}', hours);
     }
 
     if (minutes == 1) {
-        minutes = $('.lXMinute').text().replace('{0}', minutes);
+        minutes = g_translations.XMinute.replace('{0}', minutes);
     } else {
-        minutes = $('.lXMinutes').text().replace('{0}', minutes);
+        minutes = g_translations.XMinutes.replace('{0}', minutes);
     }
     return hours + ' ' + minutes;
 }
@@ -256,7 +256,7 @@ function getJobIncome(income) {
         PLN: 4.2
         HUF: 293
     */
-    var currencyCode = $('.currencyCode').text();
+    var currencyCode = g_skinConfig.currencyCode;
     if (currencyCode == 'EUR') {
         income = '&euro;&nbsp;' + income;
     } else if (currencyCode == 'GBP') {
@@ -298,8 +298,8 @@ function showTab(tabName) {
 // The map is loaded when the user tries to view it for the first time.
 function goToMap() {
     showTab('_map');
-    // "map" variable is defined in js/map.js.
-    if (!map) {
+    // "g_map" variable is defined in js/map.js.
+    if (!g_map) {
         buildMap('_map');
     }
 }
@@ -332,5 +332,13 @@ Date.prototype.addSeconds = function(s) {
     return this;
 }
 
+// Global vars
+
 // Gets updated to the actual path in initialize function.
-var gPathPrefix;
+var g_pathPrefix;
+
+// Loaded with the JSON object for the choosen language.
+var g_translations;
+
+// A copy of the skinConfig object.
+var g_skinConfig;

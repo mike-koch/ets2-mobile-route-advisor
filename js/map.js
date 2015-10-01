@@ -45,28 +45,28 @@ function buildMap(target_element_id){
     ol.proj.addProjection(projection);
 
     // Adding a marker for the player position/rotation.
-    playerIcon = new ol.style.Icon({
+    g_playerIcon = new ol.style.Icon({
         anchor: [0.5, 39],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         rotateWithView: true,
-        src: gPathPrefix + '/img/player.png'
+        src: g_pathPrefix + '/img/player.png'
     });
     var playerIconStyle = new ol.style.Style({
-        image: playerIcon
+        image: g_playerIcon
     });
-    playerFeature = new ol.Feature({
+    g_playerFeature = new ol.Feature({
         geometry: new ol.geom.Point([MAX_X / 2, MAX_Y / 2])
     });
     // For some reason, we cannot pass the style in the constructor.
-    playerFeature.setStyle(playerIconStyle);
+    g_playerFeature.setStyle(playerIconStyle);
 
     // Adding a layer for features overlaid on the map.
     var featureSource = new ol.source.Vector({
-        features: [playerFeature],
+        features: [g_playerFeature],
         wrapX: false
     });
-    vectorLayer = new ol.layer.Vector({
+    var vectorLayer = new ol.layer.Vector({
         source: featureSource
     });
 
@@ -94,7 +94,7 @@ function buildMap(target_element_id){
     });
 
     // Creating the map.
-    map = new ol.Map({
+    g_map = new ol.Map({
         target: target_element_id,
         controls: [
             // new ol.control.ZoomSlider(),
@@ -117,7 +117,7 @@ function buildMap(target_element_id){
                 extent: [0, 0, MAX_X, MAX_Y],
                 source: new ol.source.XYZ({
                     projection: projection,
-                    url: gPathPrefix + '/tiles/{z}/{y}/{x}.png',
+                    url: g_pathPrefix + '/tiles/{z}/{y}/{x}.png',
                     tileSize: [256, 256],
                     // Using createXYZ() makes the vector layer (with the features) unaligned.
                     // It also tries loading non-existent tiles.
@@ -167,28 +167,28 @@ function buildMap(target_element_id){
     // Adding behavior to the custom button.
     var rotate_button = document.getElementById('rotate-button');
     var rotate_arrow = rotate_button.firstElementChild;
-    map.getView().on('change:rotation', function(ev) {
+    g_map.getView().on('change:rotation', function(ev) {
         rotate_arrow.style.transform = 'rotate(' + ev.target.getRotation() + 'rad)';
     });
     rotate_button.addEventListener('click', function(ev) {
-        if (behavior_center_on_player) {
-            behavior_rotate_with_player = ! behavior_rotate_with_player;
+        if (g_behavior_center_on_player) {
+            g_behavior_rotate_with_player = ! g_behavior_rotate_with_player;
         } else {
-            behavior_center_on_player = true;
+            g_behavior_center_on_player = true;
         }
     });
 
     // Detecting when the user interacts with the map.
     // https://stackoverflow.com/q/32868671/
-    map.getView().on(['change:center', 'change:rotation'], function(ev) {
-        if (ignore_view_change_events) {
+    g_map.getView().on(['change:center', 'change:rotation'], function(ev) {
+        if (g_ignore_view_change_events) {
             return;
         }
 
         // The user has moved or rotated the map.
-        behavior_center_on_player = false;
+        g_behavior_center_on_player = false;
         // Not needed:
-        //behavior_rotate_with_player = false;
+        // g_behavior_rotate_with_player = false;
     });
 
     // Debugging.
@@ -205,27 +205,26 @@ function buildMap(target_element_id){
 }
 
 // Global vars.
-var map;
-var vectorLayer;
-var playerFeature;
-var playerIcon;
-var behavior_center_on_player = true;
-var behavior_rotate_with_player = true;
-var ignore_view_change_events = false;
+var g_map;
+var g_playerFeature;
+var g_playerIcon;
+var g_behavior_center_on_player = true;
+var g_behavior_rotate_with_player = true;
+var g_ignore_view_change_events = false;
 
 function updatePlayerPositionAndRotation(lon, lat, rot, speed) {
     var map_coords = game_coord_to_pixels(lon, lat);
     var rad = rot * Math.PI * 2;
 
-    playerFeature.getGeometry().setCoordinates(map_coords);
-    playerIcon.setRotation(-rad);
+    g_playerFeature.getGeometry().setCoordinates(map_coords);
+    g_playerIcon.setRotation(-rad);
 
-    ignore_view_change_events = true;
-    if (behavior_center_on_player) {
+    g_ignore_view_change_events = true;
+    if (g_behavior_center_on_player) {
 
-        if (behavior_rotate_with_player) {
-            var height = map.getSize()[1];
-            var max_ahead_amount = height / 3.0 * map.getView().getResolution();
+        if (g_behavior_rotate_with_player) {
+            var height = g_map.getSize()[1];
+            var max_ahead_amount = height / 3.0 * g_map.getView().getResolution();
 
             var amount_ahead = speed * 0.25;
             amount_ahead = Math.max(-max_ahead_amount, Math.min(amount_ahead, max_ahead_amount));
@@ -234,12 +233,12 @@ function updatePlayerPositionAndRotation(lon, lat, rot, speed) {
                 map_coords[0] + Math.sin(-rad) * amount_ahead,
                 map_coords[1] + Math.cos(-rad) * amount_ahead
             ];
-            map.getView().setCenter(ahead_coords);
-            map.getView().setRotation(rad);
+            g_map.getView().setCenter(ahead_coords);
+            g_map.getView().setRotation(rad);
         } else {
-            map.getView().setCenter(map_coords);
-            map.getView().setRotation(0);
+            g_map.getView().setCenter(map_coords);
+            g_map.getView().setRotation(0);
         }
     }
-    ignore_view_change_events = false;
+    g_ignore_view_change_events = false;
 }
