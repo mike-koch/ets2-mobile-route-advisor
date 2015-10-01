@@ -50,7 +50,7 @@ function buildMap(target_element_id){
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         rotateWithView: true,
-        src: g_pathPrefix + '/img/player.png'
+        src: g_pathPrefix + '/img/player_proportions.png'
     });
     var playerIconStyle = new ol.style.Style({
         image: g_playerIcon
@@ -92,6 +92,9 @@ function buildMap(target_element_id){
     var speed_limit_control = new ol.control.Control({
         element: document.getElementById('speed-limit')
     });
+    var text_control = new ol.control.Control({
+        element: document.getElementById('map-text')
+    });
 
     // Creating the map.
     g_map = new ol.Map({
@@ -103,7 +106,8 @@ function buildMap(target_element_id){
             // new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
             rotate_control,
-            speed_limit_control
+            speed_limit_control,
+            text_control
             // TODO: Set 'tipLabel' on both zoom and rotate controls to language-specific translations.
         ],
         interactions: ol.interaction.defaults().extend([

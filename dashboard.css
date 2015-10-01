@@ -266,6 +266,7 @@ a {
 	left: auto;
 	right: 0.5em;
 	bottom: 0.5em;
+	z-index: 2;
 	display: flex;
 	flex-direction: row-reverse;
 }
@@ -274,23 +275,28 @@ a {
 	flex-shrink: 0;
 	margin-left: 0.2em;
 }
-#rotate-button-div {
-	/* Hiding the button until it gets added to the map. */
+#rotate-button-div,
+#speed-limit,
+#map-text {
+	/* Hiding the custom controls until they are added to the map. */
 	display: none;
 }
 #_map #rotate-button-div {
 	display: block;
 	top: 0.5em;
 	right: 0.5em;
+	z-index: 2;
 }
 #_map #rotate-button > svg {
 	display: inline-block;
 	will-change: transform;
 }
 #_map #speed-limit {
+	display: block;
 	position: absolute;
 	top: 0.5em;
 	left: 0.5em;
+	z-index: 2;
 	border-radius: 100%;
 	border: 0.25em solid red;
 	background: white;
@@ -303,6 +309,18 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+#_map #map-text {
+	display: block;
+	position: absolute;
+	bottom: 0.5em;
+	left: 0.5em;
+	z-index: 1;
+	border-radius: 0.2em;
+	padding: 0.5em;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	text-align: left;
 }
 
 /* Overlay message. */

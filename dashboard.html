@@ -57,8 +57,8 @@
 		<svg width="0.7em" height="0.7em"><use xlink:href="#svg-arrow-up" fill="currentColor"/></svg>
 	</button>
 </div>
-
-<div id="speed-limit"><span class="speedLimitRoundedKmhMph"></span></div>
+<div id="speed-limit" class="ol-unselectable ol-control"><span class="speedLimitRoundedKmhMph"></span></div>
+<div id="map-text" class="hasJob ol-unselectable ol-control"><span class="lETA"></span>: <span class="navigation-estimatedTime"></span>, <span class="navigationEstimatedDistanceKmMi"></span> <span class="distanceUnits"></span>, <span class="navigation-timeToDestination"></span></div>
 
 <div class="dashboard connected">
 	<aside>
@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		<div class="_rest _middle">
-			<div class="fillingIcon bed">
+			<div class="fillingIcon rest">
 				<div class="top"><svg width="1.5em" height="1em"><use xlink:href="#svg-fatigue" fill="#969696"/></svg></div>
 				<div class="bot"><svg width="1.5em" height="1em"><use xlink:href="#svg-fatigue" fill="#1e88e5"/></svg></div>
 			</div>
@@ -140,8 +140,8 @@
 				</div>
 				<div class="_row">
 					<p>Expected</p> <!-- TODO: translations -->
-					<!-- NOTE: The first time here is DIFFERENT than the time shown in-game. They likely represent different concepts. -->
-					<p><span class="navigation-estimatedTime"></span> - <span class="job-deadlineTime"></span></p>
+					<!--p><span class="job-???????"></span> - <span class="job-deadlineTime"></span></p-->
+					<p><span class="job-deadlineTime"></span></p>
 				</div>
 				<!--
 				<div class="_row">
