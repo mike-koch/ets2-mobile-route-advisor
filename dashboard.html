@@ -59,9 +59,11 @@
 	</defs>
 </svg>
 
-<template id="compass-label-template">
-	<svg width="0.7em" height="0.7em"><use xlink:href="#svg-arrow-up" fill="currentColor"/></svg>
-</template>
+<div id="rotate-button-div" class="ol-unselectable ol-control">
+	<button id="rotate-button">
+		<svg width="0.7em" height="0.7em"><use xlink:href="#svg-arrow-up" fill="currentColor"/></svg>
+	</button>
+</div>
 
 <div class="dashboard connected">
 	<aside>
@@ -145,6 +147,7 @@
 				</div>
 				<div class="_row">
 					<p>Expected</p> <!-- TODO: translations -->
+					<!-- NOTE: The first time here is DIFFERENT than the time shown in-game. They likely represent different concepts. -->
 					<p><span class="navigation-estimatedTime"></span> - <span class="job-deadlineTime"></span></p>
 				</div>
 				<!--
@@ -191,8 +194,9 @@
 		</article>
 
 		<article id="_about">
-			<p>Mobile Route Advisor - v2.0.1</p>
-			<p>Developed and designed by @mkoch227</p>
+			<p>Mobile Route Advisor v3.0.0</p>
+			<p>Developed and designed by @mkoch227 and @denilsonsa</p>
+			<p><a href="http://forum.scssoft.com/viewtopic.php?f=41&t=186779" target="_blank">Map</a> and <a href="https://github.com/Funbit/ets2-telemetry-server" target="_blank">telemetry-server</a> by @Funbit</p>
 			<p><a href="https://github.com/mkoch227/ets2-mobile-route-advisor" target="_blank">https://github.com/mkoch227/ets2-mobile-route-advisor</a></p>
 		</article>
 	</div>
@@ -217,12 +221,12 @@
 	</footer>
 </div>
 
-<!-- TODO: Make statusMessage an overlay. -->
-<div class="statusMessage"></div>
+<div id="_overlay">
+	<p class="statusMessage"></p>
+</div>
 
-	<!-- TODO: delete this.
-    <div class="row no-connection _font-color-and-size">
-        <span class="lWaitingForConnection"></span><span>...</span>
-    </div>
-	-->
-
+<!-- TODO: delete this from the language file.
+<div class="row no-connection _font-color-and-size">
+	<span class="lWaitingForConnection"></span><span>...</span>
+</div>
+-->

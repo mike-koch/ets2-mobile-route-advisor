@@ -44,28 +44,33 @@ function buildMap(target_element_id){
     });
     ol.proj.addProjection(projection);
 
-    truckMarker = new ol.Feature({});
+    // Adding a marker for the player position/rotation.
+    playerIcon = new ol.style.Icon({
+        anchor: [0.5, 39],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        rotateWithView: true,
+        src: gPathPrefix + '/img/player.png'
+    });
+    var playerIconStyle = new ol.style.Style({
+        image: playerIcon
+    });
+    playerFeature = new ol.Feature({
+        geometry: new ol.geom.Point([MAX_X / 2, MAX_Y / 2])
+    });
+    // For some reason, we cannot pass the style in the constructor.
+    playerFeature.setStyle(playerIconStyle);
 
+    // Adding a layer for features overlaid on the map.
     var featureSource = new ol.source.Vector({
-        features: [truckMarker],
+        features: [playerFeature],
         wrapX: false
     });
-
-    var iconStyle = new ol.style.Style({
-        image: new ol.style.Icon(({
-            anchor: [0.5, 46],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            opacity: 1,
-            src: gPathPrefix + '/img/marker.png'
-        }))
-    });
-
     vectorLayer = new ol.layer.Vector({
-        source: featureSource,
-        style: iconStyle
+        source: featureSource
     });
 
+    // Configuring the custom map tiles.
     var custom_tilegrid = new ol.tilegrid.TileGrid({
         extent: [0, 0, MAX_X, MAX_Y],
         minZoom: 0,
@@ -80,37 +85,21 @@ function buildMap(target_element_id){
         })()
     });
 
-    // The rotation button receives one label.
-    // The label can either be a string (which is then inserted into a <span>
-    // element) or a DOM node.
-    // The code here tries to get a <template> element, clone the contents
-    // (using importNode), and use that as the label. If it fails, a unicode
-    // character (as string) is used as a fallback.
-    var compass_label = '\u2B06';
-    var compass_gfx = document.getElementById('compass-label-template');
-    if (compass_gfx) {
-        // Getting the first (and only) element.
+    // Creating a custom button.
+    var rotate_control = new ol.control.Control({
+        element: document.getElementById('rotate-button-div')
+    });
 
-        // The next line requires fairly recent browsers and is somewhat experimental.
-        // https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment
-        // compass_gfx = compass_gfx.content.firstElementChild;
-        // For compatibility reasons, I'm using a different code:
-        compass_gfx = compass_gfx.content.querySelector('svg')
-
-        compass_label = document.importNode(compass_gfx, true);
-        compass_label.style.display = 'inline-block';
-    }
-
+    // Creating the map.
     map = new ol.Map({
         target: target_element_id,
         controls: [
             // new ol.control.ZoomSlider(),
             // new ol.control.OverviewMap(),
+            // new ol.control.Rotate(),
             // new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
-            new ol.control.Rotate({
-                label: compass_label
-            })
+            rotate_control
             // TODO: Set 'tipLabel' on both zoom and rotate controls to language-specific translations.
         ],
         interactions: ol.interaction.defaults().extend([
@@ -171,6 +160,33 @@ function buildMap(target_element_id){
         })
     });
 
+    // Adding behavior to the custom button.
+    var rotate_button = document.getElementById('rotate-button');
+    var rotate_arrow = rotate_button.firstElementChild;
+    map.getView().on('change:rotation', function(ev) {
+        rotate_arrow.style.transform = 'rotate(' + ev.target.getRotation() + 'rad)';
+    });
+    rotate_button.addEventListener('click', function(ev) {
+        if (behavior_center_on_player) {
+            behavior_rotate_with_player = ! behavior_rotate_with_player;
+        } else {
+            behavior_center_on_player = true;
+        }
+    });
+
+    // Detecting when the user interacts with the map.
+    // https://stackoverflow.com/q/32868671/
+    map.getView().on(['change:center', 'change:rotation'], function(ev) {
+        if (ignore_view_change_events) {
+            return;
+        }
+
+        // The user has moved or rotated the map.
+        behavior_center_on_player = false;
+        // Not needed:
+        //behavior_rotate_with_player = false;
+    });
+
     // Debugging.
     // map.on('singleclick', function(evt) {
     //     var coordinate = evt.coordinate;
@@ -182,29 +198,44 @@ function buildMap(target_element_id){
     // map.getView().on('change:rotation', function(ev) {
     //   console.log(ev);
     // });
-
 }
 
+// Global vars.
 var map;
 var vectorLayer;
-var truckMarker;
+var playerFeature;
+var playerIcon;
+var behavior_center_on_player = true;
+var behavior_rotate_with_player = true;
+var ignore_view_change_events = false;
 
-function updateMarker(x, y) {
-    // Debugging.
-    var pixels = game_coord_to_pixels(x, y);
-    truckMarker.setGeometry(new ol.geom.Point(pixels));
-}
+function updatePlayerPositionAndRotation(lon, lat, rot, speed) {
+    var map_coords = game_coord_to_pixels(lon, lat);
+    var rad = rot * Math.PI * 2;
 
-function updateCenter(x, y, heading) {
-    var pixels = game_coord_to_pixels(x, y);
-    var view = map.getView();
-    // TODO: Center the view somewhere ahead of the truck marker, maybe based on the speed.
-    // Maybe even zoom in/out based on speed (but I don't think it helps, the map is not high-res enough).
-    view.setCenter(pixels);
-}
+    playerFeature.getGeometry().setCoordinates(map_coords);
+    playerIcon.setRotation(-rad);
 
-function updateRotation(heading) {
-    // document.querySelector('.lMobileRouteAdvisor').textContent = heading.toFixed(8);  // DEBUG
-    var view = map.getView();
-    view.setRotation(heading * Math.PI * 2);
+    ignore_view_change_events = true;
+    if (behavior_center_on_player) {
+
+        if (behavior_rotate_with_player) {
+            var height = map.getSize()[1];
+            var max_ahead_amount = height / 3.0 * map.getView().getResolution();
+
+            var amount_ahead = speed * 0.25;
+            amount_ahead = Math.max(-max_ahead_amount, Math.min(amount_ahead, max_ahead_amount));
+
+            var ahead_coords = [
+                map_coords[0] + Math.sin(-rad) * amount_ahead,
+                map_coords[1] + Math.cos(-rad) * amount_ahead
+            ];
+            map.getView().setCenter(ahead_coords);
+            map.getView().setRotation(rad);
+        } else {
+            map.getView().setCenter(map_coords);
+            map.getView().setRotation(0);
+        }
+    }
+    ignore_view_change_events = false;
 }

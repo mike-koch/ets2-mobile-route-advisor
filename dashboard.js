@@ -59,12 +59,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     $('.fillingIcon.fuel .top').css('height', (100 - data.currentFuelPercentage) + '%');
     $('.fillingIcon.rest .top').css('height', (100 - getFatiguePercentage(data.game.nextRestStopTimeArray[0], data.game.nextRestStopTimeArray[1])) + '%');
 
-
     // Process DOM for connection
     if (data.game.connected) {
-        $('.statusMessage').hide();
+        $('#_overlay').hide();
     } else {
-        $('.statusMessage').show();
+        $('#_overlay').show();
     }
 
     // Process DOM for job
@@ -80,9 +79,12 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     if (map) {
         // X is longitude-ish, Y is altitude-ish, Z is latitude-ish.
         // http://forum.scssoft.com/viewtopic.php?p=422083#p422083
-        updateMarker(data.truck.placement.x, data.truck.placement.z);
-        updateCenter(data.truck.placement.x, data.truck.placement.z, data.truck.placement.heading);
-        updateRotation(data.truck.placement.heading);
+        updatePlayerPositionAndRotation(
+            data.truck.placement.x,
+            data.truck.placement.z,
+            data.truck.placement.heading,
+            data.truck.speed
+        );
     }
 }
 
@@ -97,18 +99,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     gPathPrefix = 'skins/' + skinConfig.name;
     $.getScript(gPathPrefix + '/js/ol-debug.js');
     $.getScript(gPathPrefix + '/js/map.js');
-
-    // Undoing the auto-scaling of the skin. Using CSS transformations mess up
-    // with mouse coordinates and the map drag-and-drop.
-    // TODO: Ask Funbit for way to disable the auto-scaling.
-    // TODO: Rewrite the layout of this skin to be responsive.
-    /*
-    var $body = $('body');
-    $body.css('transform', '');
-    $body.css('-moz-transform', '');
-    $body.css('-ms-transform', '');
-    $body.css('-webkit-transform', '');
-    */
 
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
@@ -305,6 +295,15 @@ function showTab(tabName) {
     $('#' + tabName + '_button').addClass('_active_tab_button');
 }
 
+// The map is loaded when the user tries to view it for the first time.
+function goToMap() {
+    showTab('_map');
+    // "map" variable is defined in js/map.js.
+    if (!map) {
+        buildMap('_map');
+    }
+}
+
 /** Returns the difference between two dates in ISO 8601 format in an [hour, minutes] array */
 function getTimeDifference(begin, end) {
     var beginDate = new Date(begin);
@@ -331,14 +330,6 @@ Date.prototype.addMinutes = function(m) {
 Date.prototype.addSeconds = function(s) {
     this.setTime(this.getTime() + (s*1000));
     return this;
-}
-
-function goToMap() {
-    showTab('_map');
-    // "map" variable is defined in js/map.js.
-    if (!map) {
-        buildMap('_map');
-    }
 }
 
 // Gets updated to the actual path in initialize function.
