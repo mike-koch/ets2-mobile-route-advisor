@@ -85,9 +85,12 @@ function buildMap(target_element_id){
         })()
     });
 
-    // Creating a custom button.
+    // Creating custom controls.
     var rotate_control = new ol.control.Control({
         element: document.getElementById('rotate-button-div')
+    });
+    var speed_limit_control = new ol.control.Control({
+        element: document.getElementById('speed-limit')
     });
 
     // Creating the map.
@@ -99,7 +102,8 @@ function buildMap(target_element_id){
             // new ol.control.Rotate(),
             // new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
-            rotate_control
+            rotate_control,
+            speed_limit_control
             // TODO: Set 'tipLabel' on both zoom and rotate controls to language-specific translations.
         ],
         interactions: ol.interaction.defaults().extend([

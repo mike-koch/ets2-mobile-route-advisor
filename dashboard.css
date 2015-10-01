@@ -249,8 +249,8 @@ a {
 	font-size: 1em;
 	line-height: 1.0;
 	text-shadow: #000 0 0 0.1em;
-	border-radius: 0.1em;
-	padding: 0.1em;
+	border-radius: 0.2em;
+	padding: 0.2em;
 	border: 0;
 	margin: 0;
 	cursor: pointer;
@@ -286,6 +286,23 @@ a {
 #_map #rotate-button > svg {
 	display: inline-block;
 	will-change: transform;
+}
+#_map #speed-limit {
+	position: absolute;
+	top: 0.5em;
+	left: 0.5em;
+	border-radius: 100%;
+	border: 0.25em solid red;
+	background: white;
+	color: black;
+	font-weight: bold;
+	line-height: 1.0;
+	width: 2em;
+	height: 2em;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* Overlay message. */
