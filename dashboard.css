@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import url(css/openlayers.css);
+@import url(css/ol.css);
 
 html, body {
 	margin: 0;
