@@ -21,5 +21,12 @@
     "XMinutes": "{0} minutos",
     "XMinute": "{0} minuto",
     "ETA": "ETA",
-    "TimeToDestination": "Tempo até o destino"
+    "TimeToDestination": "Tempo até o destino",
+    "SundayAbbreviated": "Sun",
+    "MondayAbbreviated": "Mon",
+    "TuesdayAbbreviated": "Tue",
+    "WednesdayAbbreviated": "Wed",
+    "ThursdayAbbreviated": "Thu",
+    "FridayAbbreviated": "Fri",
+    "SaturdayAbbreviated": "Sat"
 }

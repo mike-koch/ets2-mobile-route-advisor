@@ -28,8 +28,10 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.scsTruckDamageRounded = Math.floor(data.scsTruckDamage);
     data.wearTrailerRounded = Math.floor(data.trailer.wear * 100);
 
-    data.gameTime12h = getTime(data.game.time, 12, true);
-    data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12, false);
+    data.gameTime12h = getTime(data.game.time, 12);
+    data.game.time = getTime(data.game.time, 24);
+    data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12);
+    data.job.deadlineTime = getTime(data.job.deadlineTime, 24);
     data.trailerMassTons = data.trailer.attached ? ((data.trailer.mass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.trailer.attached ? data.trailer.mass + ' kg' : '';
     data.jobIncome = getJobIncome(data.job.income);
@@ -44,8 +46,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     var originalEstimatedTime = data.navigation.estimatedTime;
     var timeToDestinationArray = getHoursMinutesAndSeconds(originalEstimatedTime);
     data.navigation.estimatedTime = addTime(data.game.time, timeToDestinationArray[0], timeToDestinationArray[1], timeToDestinationArray[2]);
-    data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24, false);
-    data.navigation.estimatedTime12h = getTime(originalEstimatedTime, 12, false);
+    data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
+    data.navigation.estimatedTime12h = getTime(originalEstimatedTime, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
 
     // return changed data to the core for rendering
@@ -201,7 +203,7 @@ function processTimeDifferenceArray(hourMinuteArray) {
     return hours + ' ' + minutes;
 }
 
-function getTime(gameTime, timeUnits, isHeader) {
+function getTime(gameTime, timeUnits) {
     var currentTime = new Date(gameTime);
     var currentPeriod = timeUnits === 12 ? ' AM' : '';
     var currentHours = currentTime.getUTCHours();
@@ -211,25 +213,25 @@ function getTime(gameTime, timeUnits, isHeader) {
 
     switch (currentTime.getUTCDay()) {
         case 0:
-            currentDay = "Sunday";
+            currentDay = g_translations.SundayAbbreviated;
             break;
         case 1:
-            currentDay = "Monday";
+            currentDay = g_translations.MondayAbbreviated;
             break;
         case 2:
-            currentDay = "Tuesday";
+            currentDay = g_translations.TuesdayAbbreviated;
             break;
         case 3:
-            currentDay = "Wednesday";
+            currentDay = g_translations.WednesdayAbbreviated;
             break;
         case 4:
-            currentDay = "Thursday";
+            currentDay = g_translations.ThursdayAbbreviated;
             break;
         case 5:
-            currentDay = "Friday";
+            currentDay = g_translations.FridayAbbreviated;
             break;
         case 6:
-            currentDay = "Saturday";
+            currentDay = g_translations.SaturdayAbbreviated;
             break;
     }
 
