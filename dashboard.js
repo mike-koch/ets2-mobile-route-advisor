@@ -29,7 +29,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.wearTrailerRounded = Math.floor(data.trailer.wear * 100);
 
     data.gameTime12h = getTime(data.game.time, 12);
+    data.game.time = getTime(data.game.time, 24);
     data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12);
+    data.job.deadlineTime = getTime(data.job.deadlineTime, 24);
     data.trailerMassTons = data.trailer.attached ? ((data.trailer.mass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.trailer.attached ? data.trailer.mass + ' kg' : '';
     data.jobIncome = getJobIncome(data.job.income);
