@@ -20,7 +20,6 @@ function calculatePixelCoordinateUk(x, y) {
     return calculatePixelCoordinate(x, y, 9.69522, 10226, 9826);
 }
 
-
 function game_coord_to_pixels(x, y) {
     // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
     var r = null;
@@ -35,7 +34,7 @@ function game_coord_to_pixels(x, y) {
     return r;
 }
 
-function buildMap(){
+function buildMap(target_element_id){
     var projection = new ol.proj.Projection({
         // Any name here. I chose "Funbit" because we are using funbit's image coordinates.
         code: 'Funbit',
@@ -45,28 +44,33 @@ function buildMap(){
     });
     ol.proj.addProjection(projection);
 
-    truckMarker = new ol.Feature({});
+    // Adding a marker for the player position/rotation.
+    g_playerIcon = new ol.style.Icon({
+        anchor: [0.5, 39],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        rotateWithView: true,
+        src: g_pathPrefix + '/img/player_proportions.png'
+    });
+    var playerIconStyle = new ol.style.Style({
+        image: g_playerIcon
+    });
+    g_playerFeature = new ol.Feature({
+        geometry: new ol.geom.Point([MAX_X / 2, MAX_Y / 2])
+    });
+    // For some reason, we cannot pass the style in the constructor.
+    g_playerFeature.setStyle(playerIconStyle);
 
+    // Adding a layer for features overlaid on the map.
     var featureSource = new ol.source.Vector({
-        features: [truckMarker],
+        features: [g_playerFeature],
         wrapX: false
     });
-
-    var iconStyle = new ol.style.Style({
-        image: new ol.style.Icon(({
-            anchor: [0.5, 46],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            opacity: 1,
-            src: gPathPrefix + '/img/marker.png'
-        }))
+    var vectorLayer = new ol.layer.Vector({
+        source: featureSource
     });
 
-    vectorLayer = new ol.layer.Vector({
-        source: featureSource,
-        style: iconStyle
-    });
-
+    // Configuring the custom map tiles.
     var custom_tilegrid = new ol.tilegrid.TileGrid({
         extent: [0, 0, MAX_X, MAX_Y],
         minZoom: 0,
@@ -81,9 +85,35 @@ function buildMap(){
         })()
     });
 
-    map = new ol.Map({
-        target: 'rendered-map',
+    // Creating custom controls.
+    var rotate_control = new ol.control.Control({
+        element: document.getElementById('rotate-button-div')
+    });
+    var speed_limit_control = new ol.control.Control({
+        element: document.getElementById('speed-limit')
+    });
+    var text_control = new ol.control.Control({
+        element: document.getElementById('map-text')
+    });
+
+    // Creating the map.
+    g_map = new ol.Map({
+        target: target_element_id,
+        controls: [
+            // new ol.control.ZoomSlider(),
+            // new ol.control.OverviewMap(),
+            // new ol.control.Rotate(),
+            // new ol.control.MousePosition(),  // DEBUG
+            new ol.control.Zoom(),
+            rotate_control,
+            speed_limit_control,
+            text_control
+            // TODO: Set 'tipLabel' on both zoom and rotate controls to language-specific translations.
+        ],
         interactions: ol.interaction.defaults().extend([
+            // Rotating by using two fingers is implemented in PinchRotate(), which is enabled by default.
+            // With DragRotateAndZoom(), it is possible to use Shift+mouse-drag to rotate the map.
+            // Without it, Shift+mouse-drag creates a rectangle to zoom to an area.
             new ol.interaction.DragRotateAndZoom()
         ]),
         layers: [
@@ -91,7 +121,7 @@ function buildMap(){
                 extent: [0, 0, MAX_X, MAX_Y],
                 source: new ol.source.XYZ({
                     projection: projection,
-                    url: gPathPrefix + '/tiles/{z}/{y}/{x}.png',
+                    url: g_pathPrefix + '/tiles/{z}/{y}/{x}.png',
                     tileSize: [256, 256],
                     // Using createXYZ() makes the vector layer (with the features) unaligned.
                     // It also tries loading non-existent tiles.
@@ -100,10 +130,10 @@ function buildMap(){
                     // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
                     tileGrid: custom_tilegrid,
                     // tileGrid: ol.tilegrid.createXYZ({
-                    // 	extent: [0, 0, MAX_X, MAX_Y],
-                    // 	minZoom: 0,
-                    // 	maxZoom: 7,
-                    // 	tileSize: [256, 256]
+                    //     extent: [0, 0, MAX_X, MAX_Y],
+                    //     minZoom: 0,
+                    //     maxZoom: 7,
+                    //     tileSize: [256, 256]
                     // }),
                     wrapX: false,
                     minZoom: 4,
@@ -112,18 +142,18 @@ function buildMap(){
             }),
             // Debug layer below.
             // new ol.layer.Tile({
-            // 	extent: [0, 0, MAX_X, MAX_Y],
-            // 	source: new ol.source.TileDebug({
-            // 		projection: projection,
-            // 		tileGrid: custom_tilegrid,
-            // 		// tileGrid: ol.tilegrid.createXYZ({
-            // 		// 	extent: [0, 0, MAX_X, MAX_Y],
-            // 		// 	minZoom: 0,
-            // 		// 	maxZoom: 7,
-            // 		// 	tileSize: [256, 256]
-            // 		// }),
-            // 		wrapX: false
-            // 	})
+            //     extent: [0, 0, MAX_X, MAX_Y],
+            //     source: new ol.source.TileDebug({
+            //         projection: projection,
+            //         tileGrid: custom_tilegrid,
+            //         // tileGrid: ol.tilegrid.createXYZ({
+            //         //  extent: [0, 0, MAX_X, MAX_Y],
+            //         //  minZoom: 0,
+            //         //  maxZoom: 7,
+            //         //  tileSize: [256, 256]
+            //         // }),
+            //         wrapX: false
+            //     })
             // }),
             vectorLayer
         ],
@@ -138,33 +168,81 @@ function buildMap(){
         })
     });
 
-    // Debugging.
-    map.on('singleclick', function(evt) {
-        var coordinate = evt.coordinate;
-        console.log(coordinate);
+    // Adding behavior to the custom button.
+    var rotate_button = document.getElementById('rotate-button');
+    var rotate_arrow = rotate_button.firstElementChild;
+    g_map.getView().on('change:rotation', function(ev) {
+        rotate_arrow.style.transform = 'rotate(' + ev.target.getRotation() + 'rad)';
     });
-}
+    rotate_button.addEventListener('click', function(ev) {
+        if (g_behavior_center_on_player) {
+            g_behavior_rotate_with_player = ! g_behavior_rotate_with_player;
+        } else {
+            g_behavior_center_on_player = true;
+        }
+    });
 
-var map;
-var vectorLayer;
-var truckMarker;
+    // Detecting when the user interacts with the map.
+    // https://stackoverflow.com/q/32868671/
+    g_map.getView().on(['change:center', 'change:rotation'], function(ev) {
+        if (g_ignore_view_change_events) {
+            return;
+        }
 
-function updateMarker(x, y) {
+        // The user has moved or rotated the map.
+        g_behavior_center_on_player = false;
+        // Not needed:
+        // g_behavior_rotate_with_player = false;
+    });
+
     // Debugging.
-    var pixels = game_coord_to_pixels(x, y);
-    truckMarker.setGeometry(new ol.geom.Point(pixels));
+    // map.on('singleclick', function(evt) {
+    //     var coordinate = evt.coordinate;
+    //     console.log(coordinate);
+    // });
+    // map.getView().on('change:center', function(ev) {
+    //   console.log(ev);
+    // });
+    // map.getView().on('change:rotation', function(ev) {
+    //   console.log(ev);
+    // });
 }
 
-function updateCenter(x, y, heading) {
-    var pixels = game_coord_to_pixels(x, y);
-    var view = map.getView();
-    // TODO: Center the view somewhere ahead of the truck marker, maybe based on the speed.
-    // Maybe even zoom in/out based on speed (but I don't think it helps, the map is not high-res enough).
-    view.setCenter(pixels);
-}
+// Global vars.
+var g_map;
+var g_playerFeature;
+var g_playerIcon;
+var g_behavior_center_on_player = true;
+var g_behavior_rotate_with_player = true;
+var g_ignore_view_change_events = false;
 
-function updateRotation(heading) {
-    document.querySelector('._footer .lMobileRouteAdvisor').textContent = heading.toFixed(8);
-    var view = map.getView();
-    view.setRotation(heading * Math.PI * 2);
+function updatePlayerPositionAndRotation(lon, lat, rot, speed) {
+    var map_coords = game_coord_to_pixels(lon, lat);
+    var rad = rot * Math.PI * 2;
+
+    g_playerFeature.getGeometry().setCoordinates(map_coords);
+    g_playerIcon.setRotation(-rad);
+
+    g_ignore_view_change_events = true;
+    if (g_behavior_center_on_player) {
+
+        if (g_behavior_rotate_with_player) {
+            var height = g_map.getSize()[1];
+            var max_ahead_amount = height / 3.0 * g_map.getView().getResolution();
+
+            var amount_ahead = speed * 0.25;
+            amount_ahead = Math.max(-max_ahead_amount, Math.min(amount_ahead, max_ahead_amount));
+
+            var ahead_coords = [
+                map_coords[0] + Math.sin(-rad) * amount_ahead,
+                map_coords[1] + Math.cos(-rad) * amount_ahead
+            ];
+            g_map.getView().setCenter(ahead_coords);
+            g_map.getView().setRotation(rad);
+        } else {
+            g_map.getView().setCenter(map_coords);
+            g_map.getView().setRotation(0);
+        }
+    }
+    g_ignore_view_change_events = false;
 }

@@ -53,22 +53,17 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
 };
 
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
-    //
     // data - same data object as in the filter function
-    //
-    $('#fuelLine').css('width', data.currentFuelPercentage + '%');
-    $('#damageLine').css('width', data.scsTruckDamage + '%');
-    $('#truckDamageIcon').css('height', getDamageFillForTruck(data.scsTruckDamage) + '%');
-    $('#trailerDamageIcon').css('height', getDamageFillForTrailer(data.trailer.wear * 100) + '%');
-    $('#restLine').css('width', getFatiguePercentage(data.game.nextRestStopTimeArray[0], data.game.nextRestStopTimeArray[1]) + '%');
+    $('.fillingIcon.truckDamage .top').css('height', (100 - data.scsTruckDamage) + '%');
+    $('.fillingIcon.trailerDamage .top').css('height', (100 - data.trailer.wear * 100) + '%');
+    $('.fillingIcon.fuel .top').css('height', (100 - data.currentFuelPercentage) + '%');
+    $('.fillingIcon.rest .top').css('height', (100 - getFatiguePercentage(data.game.nextRestStopTimeArray[0], data.game.nextRestStopTimeArray[1])) + '%');
 
     // Process DOM for connection
     if (data.game.connected) {
-        $('.has-connection').show();
-        $('.no-connection').hide();
+        $('#_overlay').hide();
     } else {
-        $('.has-connection').hide();
-        $('.no-connection').show();
+        $('#_overlay').show();
     }
 
     // Process DOM for job
@@ -81,12 +76,15 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     }
 
     // Process map location only if the map has been rendered
-    if (!($('.ol-zoom-in').length === 0)) {
+    if (g_map) {
         // X is longitude-ish, Y is altitude-ish, Z is latitude-ish.
         // http://forum.scssoft.com/viewtopic.php?p=422083#p422083
-        updateMarker(data.truck.placement.x, data.truck.placement.z);
-        updateCenter(data.truck.placement.x, data.truck.placement.z, data.truck.placement.heading);
-        updateRotation(data.truck.placement.heading);
+        updatePlayerPositionAndRotation(
+            data.truck.placement.x,
+            data.truck.placement.z,
+            data.truck.placement.heading,
+            data.truck.speed
+        );
     }
 }
 
@@ -97,22 +95,12 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // this function is called before everything else,
     // so you may perform any DOM or resource initializations here
 
-    // Initialize JavaScript
-    gPathPrefix = 'skins/' + skinConfig.name;
-    $.getScript(gPathPrefix + '/js/ol-debug.js');
-    $.getScript(gPathPrefix + '/js/map.js');
+    g_skinConfig = skinConfig;
 
-    // Undoing the auto-scaling of the skin. Using CSS transformations mess up
-    // with mouse coordinates and the map drag-and-drop.
-    // TODO: Ask Funbit for way to disable the auto-scaling.
-    // TODO: Rewrite the layout of this skin to be responsive.
-    /*
-    var $body = $('body');
-    $body.css('transform', '');
-    $body.css('-moz-transform', '');
-    $body.css('-ms-transform', '');
-    $body.css('-webkit-transform', '');
-    */
+    // Initialize JavaScript
+    g_pathPrefix = 'skins/' + skinConfig.name;
+    $.getScript(g_pathPrefix + '/js/ol.js');
+    $.getScript(g_pathPrefix + '/js/map.js');
 
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
@@ -146,15 +134,15 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
         $('.navigation-estimatedTime').addClass('navigation-estimatedTime12h').removeClass('navigation-estimatedTime');
     }
 
-    // Process currency code
-    $('.currencyCode').text(skinConfig.currencyCode);
-
     // Process language JSON
-    $.getJSON('skins/'+skinConfig.name+'/language/'+skinConfig.language, function(json) {
+    $.getJSON(g_pathPrefix+'/language/'+skinConfig.language, function(json) {
+        g_translations = json;
         $.each(json, function(key, value) {
             updateLanguage(key, value);
         });
     });
+
+    showTab('_cargo');
 }
 
 function getHoursMinutesAndSeconds(time) {
@@ -193,22 +181,22 @@ function processTimeDifferenceArray(hourMinuteArray) {
 
 
     if (hours <= 0 && minutes <= 0) {
-        minutes = $('.lXMinutes').text().replace('{0}', 0);
+        minutes = g_translations.XMinutes.replace('{0}', 0);
         return minutes;
     }
 
     if (hours == 1) {
-        hours = $('.lXHour').text().replace('{0}', hours);
+        hours = g_translations.XHour.replace('{0}', hours);
     } else if (hours == 0) {
         hours = '';
     } else {
-        hours = $('.lXHours').text().replace('{0}', hours);
+        hours = g_translations.XHours.replace('{0}', hours);
     }
 
     if (minutes == 1) {
-        minutes = $('.lXMinute').text().replace('{0}', minutes);
+        minutes = g_translations.XMinute.replace('{0}', minutes);
     } else {
-        minutes = $('.lXMinutes').text().replace('{0}', minutes);
+        minutes = g_translations.XMinutes.replace('{0}', minutes);
     }
     return hours + ' ' + minutes;
 }
@@ -251,12 +239,6 @@ function getTime(gameTime, timeUnits, isHeader) {
     }
     var formattedHours = currentHours < 10 ? '0'+currentHours : currentHours;
 
-    if (currentDay == 'Wednesday' && isHeader) {
-        $('#headerTime').css('font-size','.9em');
-    } else {
-        $('#headerTime').css('font-size','1em');
-    }
-
     return currentDay + ' ' + formattedHours + ':' + formattedMinutes + currentPeriod;
 }
 
@@ -274,7 +256,7 @@ function getJobIncome(income) {
         PLN: 4.2
         HUF: 293
     */
-    var currencyCode = $('.currencyCode').text();
+    var currencyCode = g_skinConfig.currencyCode;
     if (currencyCode == 'EUR') {
         income = '&euro;&nbsp;' + income;
     } else if (currencyCode == 'GBP') {
@@ -305,50 +287,21 @@ function getDamagePercentage(data) {
                     data.truck.wearWheels) * 100;
 }
 
-function getDamageFillForTruck(damagePercentage) {
-    // damagePercentage: The value returned from getDamagePercentage
-    damagePercentage = Math.floor(damagePercentage);
-    if (damagePercentage < 0.5) {
-        return 80;
-    }
-    if (damagePercentage > 99.4) {
-        return 25;
-    }
-
-    // This is the closest linear fit found from 3 eyeballed data points.
-    return (475/6) - (.55 * damagePercentage);
-}
-
-function getDamageFillForTrailer(damagePercentage) {
-    // damagePercentage: the same as data.wearTrailer
-    damagePercentage = Math.floor(damagePercentage);
-    if (damagePercentage < .5) {
-        return 65;
-    }
-    if (damagePercentage > 99.4) {
-        return 34;
-    }
-
-    // This is the closest linear fit found from 3 eyeballed data points.
-    return (389/6) - (0.31 * damagePercentage);
-}
-
 function showTab(tabName) {
-    // Hide all tabs (map, cargo, damage, about)
-    $('#map').hide();
-    $('#cargo').hide();
-    $('#damage').hide();
-    $('#about').hide();
+    $('._active_tab').removeClass('_active_tab');
+    $('#' + tabName).addClass('_active_tab');
 
-    // Remove the "_footerSelected" class from all items.
-    $('#mapFooter').removeClass('_footerSelected');
-    $('#cargoFooter').removeClass('_footerSelected');
-    $('#damageFooter').removeClass('_footerSelected');
-    $('#aboutFooter').removeClass('_footerSelected');
+    $('._active_tab_button').removeClass('_active_tab_button');
+    $('#' + tabName + '_button').addClass('_active_tab_button');
+}
 
-    // Show the ID requested
-    $('#' + tabName).show();
-    $('#' + tabName + 'Footer').addClass('_footerSelected');
+// The map is loaded when the user tries to view it for the first time.
+function goToMap() {
+    showTab('_map');
+    // "g_map" variable is defined in js/map.js.
+    if (!g_map) {
+        buildMap('_map');
+    }
 }
 
 /** Returns the difference between two dates in ISO 8601 format in an [hour, minutes] array */
@@ -379,10 +332,13 @@ Date.prototype.addSeconds = function(s) {
     return this;
 }
 
-function goToMap() {
-    showTab('map');
-    buildMap();
-}
+// Global vars
 
 // Gets updated to the actual path in initialize function.
-var gPathPrefix;
+var g_pathPrefix;
+
+// Loaded with the JSON object for the choosen language.
+var g_translations;
+
+// A copy of the skinConfig object.
+var g_skinConfig;
