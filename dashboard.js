@@ -211,25 +211,25 @@ function getTime(gameTime, timeUnits) {
 
     switch (currentTime.getUTCDay()) {
         case 0:
-            currentDay = "Sunday";
+            currentDay = g_translations.SundayAbbreviated;
             break;
         case 1:
-            currentDay = "Monday";
+            currentDay = g_translations.MondayAbbreviated;
             break;
         case 2:
-            currentDay = "Tuesday";
+            currentDay = g_translations.TuesdayAbbreviated;
             break;
         case 3:
-            currentDay = "Wednesday";
+            currentDay = g_translations.WednesdayAbbreviated;
             break;
         case 4:
-            currentDay = "Thursday";
+            currentDay = g_translations.ThursdayAbbreviated;
             break;
         case 5:
-            currentDay = "Friday";
+            currentDay = g_translations.FridayAbbreviated;
             break;
         case 6:
-            currentDay = "Saturday";
+            currentDay = g_translations.SaturdayAbbreviated;
             break;
     }
 
