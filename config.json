@@ -10,22 +10,24 @@
         "          title: human readable skin title",
         "         author: author name",
         "          width: width of the skin in pixels (same as defined in the CSS)",
-        "         height: height of the skin in pixels (same as defined in the CSS)"
+        "         height: height of the skin in pixels (same as defined in the CSS)",
+
+        "All the properties at the end of this file are skin-specific. See:",
+		"https://github.com/mkoch227/ets2-mobile-route-advisor/wiki",
+		"for descriptions and possible values."
     ],
 
     "config": {
-        "name": "mobile-route-advisor",
+        "name": "ets2-mobile-route-advisor",
         "title": "Mobile Route Advisor",
-        "author": "mkoch227",
-        "width": 2048,
-        "height": 1152,
-        
-        /* Skin-specific settings. See https://github.com/mkoch227/ets2-mobile-route-advisor/wiki for descriptions and possible values */
+        "author": "mkoch227 and denilsonsa",
+        "width": -1,
+        "height": -1,
+
         "language": "en-US.json",
         "timeFormat": "24h",
         "distanceUnits": "km",
         "weightUnits": "kg",
-        "currencyCode": "EUR",
-    }    
-
+        "currencyCode": "EUR"
+    }
 }
