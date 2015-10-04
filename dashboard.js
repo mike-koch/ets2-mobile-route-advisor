@@ -29,6 +29,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.wearTrailerRounded = Math.floor(data.trailer.wear * 100);
 
     data.gameTime12h = getTime(data.game.time, 12);
+    var originalTime = data.game.time;
     data.game.time = getTime(data.game.time, 24);
     data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12);
     data.job.deadlineTime = getTime(data.job.deadlineTime, 24);
@@ -45,7 +46,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedDistanceMiRounded = Math.floor(data.navigation.estimatedDistanceMi);
     var originalEstimatedTime = data.navigation.estimatedTime;
     var timeToDestinationArray = getHoursMinutesAndSeconds(originalEstimatedTime);
-    data.navigation.estimatedTime = addTime(data.game.time, timeToDestinationArray[0], timeToDestinationArray[1], timeToDestinationArray[2]);
+    data.navigation.estimatedTime = addTime(originalTime, timeToDestinationArray[0], timeToDestinationArray[1], timeToDestinationArray[2]).toISOString();
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
     data.navigation.estimatedTime12h = getTime(originalEstimatedTime, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
