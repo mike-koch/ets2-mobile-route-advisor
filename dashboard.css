@@ -108,15 +108,16 @@ a {
     padding-top: 0.2em;
     padding-bottom: 0.2em;
 }
-.dashboard > aside > div._speed {
+.dashboard > aside > div._gear {
+    -webkit-flex-basis: 2.5em;
+    -ms-flex-preferred-size: 2.5em;
+    flex-basis: 2.5em;
+}
+.dashboard > aside > div._speed,
+.dashboard > aside > div._time {
     -webkit-flex-basis: 5em;
     -ms-flex-preferred-size: 5em;
     flex-basis: 5em;
-}
-.dashboard > aside > div._time {
-    -webkit-flex-basis: 9em;
-    -ms-flex-preferred-size: 9em;
-    flex-basis: 9em;
 }
 
 /* The main area. */
