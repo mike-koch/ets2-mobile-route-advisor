@@ -6,7 +6,9 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
 
 - Navigation
     - Mini-map
-        - A basic mini-map is now available as of version 3.0.0. The map cannot provide turn-by-turn navigation at this time; however you can see your current position on the map.
+        - Fixed on truck, up is always north
+        - Fixed on truck, map rotates so up is direction truck is facing
+        - Free view/rotate/zoom
     - Speed limit
     - Distance Remaining
     - Estimated time of arrival (ETA)
