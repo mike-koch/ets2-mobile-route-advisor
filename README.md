@@ -30,7 +30,7 @@ If you require any type of support, please looking at the [contributing guidelin
 A list of supported languages are available on the [repository's wiki](https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters). If you would like to submit a translation, please submit a pull request.
 
 ## Screenshots
-![Navigation Information](screenshots/nav.PNG)
+![Navigation Information](screenshots/nav.png)
 ![Cargo Information](screenshots/cargo.PNG)
 ![Damage Information](screenshots/damage.PNG)
 
