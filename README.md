@@ -4,7 +4,8 @@ Euro Truck Simulator 2's Route Advisor, for mobile devices. This is a skin for f
 ## Features
 The mobile Route Advisor is planned to include all features that Euro Truck Simulator 2's Route Advisor currently has. These features are:
  - Navigation
-    - The mini-map will be the most difficult to create, as the Telemtry SDK does not provide any graphical representation of the truck's current position in-game, except for X, Y, and Z coordinates.  These coordinates, unfortunately, have no relationship to latitude / longitude coordinates, nor is the ETS 2 map 100% accurate with real roadways. An ETS2 map has been created by Funbit, who created the ETS2 Telemetry server; however there is no relationship to pixels vs in-game coordinates at this time.
+    - Mini-map
+        - A basic mini-map is now available as of version 3.0.0. The map cannot provide turn-by-turn navigation at this time; however you can see your current position on the map.
     - Speed limit
     - Distance Remaining
     - Estimated time of arrival (ETA)
@@ -18,7 +19,7 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
  - Truck damage / load damage
  - Localization support
  - [Various configuration options](https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters)
- 
+
 ## Support
 If you require any type of support, please looking at the [contributing guidelines](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/CONTRIBUTING.md) to see where you should post your request. **Please do not contact me directly via e-mail, as your e-mail will be ignored.**
 
@@ -30,4 +31,27 @@ A list of supported languages are available on the [repository's wiki](https://g
 ![Cargo Information](http://i.imgur.com/9Pd6d9Hm.png)
 ![Damage Information](http://i.imgur.com/SFXD4ogm.png)
 
-Some additional features may be added to the mobile Route Advisor. These will be added to the README as they are incorporated into the utility.
+## Contributors
+<table>
+    <tr>
+        <td>
+            <b>Translations</b>
+            <ul>
+                <li><a href="https://github.com/mkoch227">mkoch227</a></li>
+                <li><a href="https://github.com/Phil0499">Phil0499</a></li>
+                <li><a href="https://github.com/raflix261">raflix261</a></li>
+                <li><a href="https://github.com/pedropandolfi">pedropandolfi</a></li>
+                <li><a href="http://forum.scssoft.com/memberlist.php?mode=viewprofile&u=127033">MinecraftMarioGuy53</a></li>
+                <li><a href="http://forum.scssoft.com/memberlist.php?mode=viewprofile&u=3710">SchorschiBW</a></li>
+                <li><a href="https://github.com/denilsonsa">denilsonsa</a></li>
+            </ul>
+        </td>
+        <td style="vertical-align: top">
+            <b>Development</b>
+            <ul>
+                <li><a href="https://github.com/mkoch227">mkoch227</a></li>
+                <li><a href="https://github.com/denilsonsa">denilsonsa</a></li>
+            </ul>
+        </td>
+    </tr>
+</table>
