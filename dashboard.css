@@ -108,15 +108,16 @@ a {
     padding-top: 0.2em;
     padding-bottom: 0.2em;
 }
-.dashboard > aside > div._speed {
+.dashboard > aside > div._gear {
+    -webkit-flex-basis: 2.5em;
+    -ms-flex-preferred-size: 2.5em;
+    flex-basis: 2.5em;
+}
+.dashboard > aside > div._speed,
+.dashboard > aside > div._time {
     -webkit-flex-basis: 5em;
     -ms-flex-preferred-size: 5em;
     flex-basis: 5em;
-}
-.dashboard > aside > div._time {
-    -webkit-flex-basis: 9em;
-    -ms-flex-preferred-size: 9em;
-    flex-basis: 9em;
 }
 
 /* The main area. */
@@ -326,16 +327,20 @@ a {
 }
 
 /* Colors */
-.dashboard > aside,
-.dashboard > nav {
-    background: #b5bdc8;
-    background: -webkit-linear-gradient(top, #b5bdc8 0%, #828c95 36%, #28343b 100%);
-    background: linear-gradient(to bottom, #b5bdc8 0%, #828c95 36%, #28343b 100%);
+.dashboard > aside {
+    background: #1e1e1e;
+    background: -webkit-linear-gradient(top, #1e1e1e 0%, #505050 50%, #1e1e1e 100%);
+    background: linear-gradient(to bottom, #1e1e1e 0%, #505050 50%, #1e1e1e 100%);
 }
 .dashboard > aside > div._middle {
-    background: #888e96;
-    background: -webkit-linear-gradient(top, #888e96 0%, #5e656b 36%, #28343b 100%);
-    background: linear-gradient(to bottom,    #888e96 0%,#5e656b 36%,#28343b 100%);
+    background: #181818;
+    background: -webkit-linear-gradient(top, #181818 0%, #404040 50%, #181818 0%);
+    background: linear-gradient(to bottom, #181818 0%, #404040 50%, #181818 100%);
+}
+.dashboard > nav {
+    background: #2c2c2c;
+    background: -webkit-linear-gradient(top, #2c2c2c 0%, #535353 50%, #2c2c2c 100%);
+    background: linear-gradient(to bottom, #2c2c2c 0%, #535353 50%, #2c2c2c 100%);
 }
 .dashboard > ._tabs {
     background-image: url("img/bg.png");
