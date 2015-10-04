@@ -3,22 +3,23 @@ Euro Truck Simulator 2's Route Advisor, for mobile devices. This is a skin for f
 
 ## Features
 The mobile Route Advisor is planned to include all features that Euro Truck Simulator 2's Route Advisor currently has. These features are:
- - Navigation
+
+- Navigation
     - Mini-map
         - A basic mini-map is now available as of version 3.0.0. The map cannot provide turn-by-turn navigation at this time; however you can see your current position on the map.
     - Speed limit
     - Distance Remaining
     - Estimated time of arrival (ETA)
     - Time to destination
- - Current job information
+- Current job information
     - Current load
     - Destination city
     - Payout
     - Time remaining
     - Time until next rest
- - Truck damage / load damage
- - Localization support
- - [Various configuration options](https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters)
+- Truck damage / load damage
+- Localization support
+- [Various configuration options](https://github.com/mkoch227/ets2-mobile-route-advisor/wiki/config.json-Parameters)
 
 ## Support
 If you require any type of support, please looking at the [contributing guidelines](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/CONTRIBUTING.md) to see where you should post your request. **Please do not contact me directly via e-mail, as your e-mail will be ignored.**
@@ -34,8 +35,18 @@ A list of supported languages are available on the [repository's wiki](https://g
 ## Contributors
 <table>
     <tr>
-        <td>
-            <b>Translations</b>
+        <th>Development</th>
+        <th>Translations</th>
+        <th>Map</th>
+    </tr>
+    <tr>
+        <td valign="top">
+            <ul>
+                <li><a href="https://github.com/mkoch227">mkoch227</a></li>
+                <li><a href="https://github.com/denilsonsa">denilsonsa</a></li>
+            </ul>
+        </td>
+        <td valign="top">
             <ul>
                 <li><a href="https://github.com/mkoch227">mkoch227</a></li>
                 <li><a href="https://github.com/Phil0499">Phil0499</a></li>
@@ -46,11 +57,9 @@ A list of supported languages are available on the [repository's wiki](https://g
                 <li><a href="https://github.com/denilsonsa">denilsonsa</a></li>
             </ul>
         </td>
-        <td style="vertical-align: top">
-            <b>Development</b>
+        <td valign="top">
             <ul>
-                <li><a href="https://github.com/mkoch227">mkoch227</a></li>
-                <li><a href="https://github.com/denilsonsa">denilsonsa</a></li>
+                <li><a href="https://github.com/Funbit">Funbit</a></li>
             </ul>
         </td>
     </tr>
