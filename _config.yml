@@ -2,7 +2,7 @@ name: "ETS2 Mobile Route Advisor"
 description: "A skin for the ETS2 Telemetry Web Server"
 
 url: "http://mikekoch.me/ets2-mobile-route-advisor"
-latest-version: "2.0.1"
+latest-version: "3.0.0"
 
 tabs:
   - title: About
@@ -13,17 +13,17 @@ tabs:
     id: download
 
 features:
+  - title: Mini-Map
+    new: true
+    version: "3.0.0"
   - title: Current Speed (kmh or mph)
     new: false
   - title: Speed Limit
-    new: true
-    version: "2.0.0"
+    new: false
   - title: Remaining Distance
-    new: true
-    version: "2.0.0"
+    new: false
   - title: ETA
-    new: true
-    version: "2.0.0"
+    new: false
   - title: Current gear
     new: false
   - title: In-Game Time
@@ -39,8 +39,7 @@ features:
   - title: Time Remaining
     new: false
   - title: Time Until Next Rest Stop
-    new: true
-    version: "2.0.0"
+    new: false
   - title: Truck Damage
     new: false
   - title: Trailer Damage
@@ -66,6 +65,10 @@ links:
   - title: Follow me on Twitter
     icon: twitter
     link: https://www.twitter.com/mkoch227
+    
+contributors:
+  - mkoch227
+  - denilsonsa
     
 copyright:
   year: 2015
