@@ -4,7 +4,7 @@
     "NoJob": "Vous n'avez pas de livraison en cours.",
     "CargoName": "Cargaison",
     "Destination": "Destination",
-    "Reward": "Salaire",
+    "JobIncome": "Salaire",
     "TimeRemaining": "Temps restant",
     "Damage": "Dommages",
     "Truck": "Camion",

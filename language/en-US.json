@@ -4,7 +4,7 @@
     "NoJob": "Currently you have no delivery job.",
     "CargoName": "Cargo name",
     "Destination": "Destination",
-    "Reward": "Job income",
+    "JobIncome": "Job income",
     "TimeRemaining": "Time remaining",
     "Damage": "Damage",
     "Truck": "Truck",

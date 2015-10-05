@@ -4,7 +4,7 @@
     "NoJob": "Du hast im Moment keinen Auftrag.",
     "CargoName": "Art der Fracht",
     "Destination": "Bestimmungsort",
-    "Reward": "Auftragsvergütung",
+    "JobIncome": "Auftragsvergütung",
     "TimeRemaining": "verbleibende Zeit",
     "Damage": "Schaden",
     "Truck": "Lkw",
