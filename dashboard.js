@@ -47,8 +47,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     var originalEstimatedTime = data.navigation.estimatedTime;
     var timeToDestinationArray = getHoursMinutesAndSeconds(originalEstimatedTime);
     data.navigation.estimatedTime = addTime(originalTime, timeToDestinationArray[0], timeToDestinationArray[1], timeToDestinationArray[2]).toISOString();
+    var estimatedTime24h = data.navigation.estimatedTime
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
-    data.navigation.estimatedTime12h = getTime(originalEstimatedTime, 12);
+    data.navigation.estimatedTime12h = getTime(estimatedTime24h, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
 
     // return changed data to the core for rendering
