@@ -5,8 +5,9 @@
                 <h5 class="white-text">Contributors</h5>
                 <ul>
                     {% for contributor in site.contributors %}
-                    <li>
-                        <a class="grey-text text-lighten-3" href="https://github.com/{{ contributor }}" target="_blank">{{ contributor }}</a>
+                    <li class="grey-text text-lighten-3">
+                        <i class="fa {{ contributor.icon }}"></i>
+                        <a class="grey-text text-lighten-3" href="{{ contributor.link }}" target="_blank">{{ contributor.name }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -25,7 +26,7 @@
     </div>
     <div class="footer-copyright">
         <div class="container">
-            &copy; {{ site.copyright.year }} <a href="{{ site.copyright.url }}" target="_blank">{{ site.copyright.name }}</a>
+            &copy; <script>document.write(new Date().getFullYear())</script> <a href="{{ site.copyright.url }}" target="_blank">{{ site.copyright.name }}</a>
         </div>
     </div>
 </footer>

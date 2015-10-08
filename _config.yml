@@ -46,9 +46,10 @@ features:
     new: false
     
 config-options:
-  - Language (currently 7 languages are supported)
+  - Language
   - Time Format (12-hour vs 24-hour)
-  - Distance Units (km vs mi), which also control km/h vs mph
+  - Distance Units (km vs mi)
+  - Speed Units (km/h vs mph)
   - Weight Units (kilograms vs tons)
   - Currency Code (EUR, CHF, CZK, GBP, PLN, HUF)
   
@@ -67,8 +68,12 @@ links:
     link: https://www.twitter.com/mkoch227
     
 contributors:
-  - mkoch227
-  - denilsonsa
+  - name: mkoch227
+    link: https://twitter.com/mkoch227
+    icon: fa-twitter
+  - name: denilsonsa
+    link: https://github.com/denilsonsa
+    icon: fa-github
     
 copyright:
   year: 2015
