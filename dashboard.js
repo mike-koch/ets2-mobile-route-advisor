@@ -44,13 +44,16 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedDistanceMi = data.navigation.estimatedDistanceKm * .621371;
     data.navigation.estimatedDistanceKmRounded = Math.floor(data.navigation.estimatedDistanceKm);
     data.navigation.estimatedDistanceMiRounded = Math.floor(data.navigation.estimatedDistanceMi);
-    var originalEstimatedTime = data.navigation.estimatedTime;
-    var timeToDestinationArray = getHoursMinutesAndSeconds(originalEstimatedTime);
+    var timeToDestinationArray = getHoursMinutesAndSeconds(data.navigation.estimatedTime);
     data.navigation.estimatedTime = addTime(originalTime, timeToDestinationArray[0], timeToDestinationArray[1], timeToDestinationArray[2]).toISOString();
     var estimatedTime24h = data.navigation.estimatedTime
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
     data.navigation.estimatedTime12h = getTime(estimatedTime24h, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
+
+    // Remaining Time
+    data.job.remainingTimeArray = getHoursMinutesAndSeconds(data.job.remainingTime);
+    data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
 
     // return changed data to the core for rendering
     return data;
@@ -210,7 +213,7 @@ function getTime(gameTime, timeUnits) {
     var currentPeriod = timeUnits === 12 ? ' AM' : '';
     var currentHours = currentTime.getUTCHours();
     var currentMinutes = currentTime.getUTCMinutes();
-    var formattedMinutes = currentMinutes < 10 ? '0'+currentMinutes : currentMinutes;
+    var formattedMinutes = currentMinutes < 10 ? '0' + currentMinutes : currentMinutes;
     var currentDay = '';
 
     switch (currentTime.getUTCDay()) {
@@ -241,7 +244,10 @@ function getTime(gameTime, timeUnits) {
         currentHours -= 12;
         currentPeriod = ' PM';
     }
-    var formattedHours = currentHours < 10 ? '0'+currentHours : currentHours;
+    if (currentHours == 0) {
+        currentHours = 12;
+    }
+    var formattedHours = currentHours < 10 && timeUnits === 24 ? '0' + currentHours : currentHours;
 
     return currentDay + ' ' + formattedHours + ':' + formattedMinutes + currentPeriod;
 }
