@@ -1,4 +1,4 @@
-# Contributing to ETS2 Mobile Route Advisor
+# Contributing to ETS2 Mobile Route Advisor 
 So you want to contribute to ETS2 Mobile Route Advisor? Awesome! However, there are a few guidelines that need to be followed so the project can be as easy to maintain as possible.
 
 ## Submitting an issue
