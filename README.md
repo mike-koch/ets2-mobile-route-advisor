@@ -30,7 +30,6 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
 ## How to Install
 1. Download the latest version of the Mobile Route Advisor from either the [official website](http://www.mikekoch.me/ets2-mobile-route-advisor), or from the [releases page](https://www.github.com/mkoch227/ets2-mobile-route-advisor/releases).
 2. Extract the contents of the zip to the ETS2 Telemetry Server's `/server/Html/skins` directory. You should then have a folder named `ets2-mobile-route-advisor` in the `skins` directory.
-```
 
 ## Support
 If you require any type of support, please looking at the [contributing guidelines](https://github.com/mkoch227/ets2-mobile-route-advisor/blob/master/CONTRIBUTING.md) to see where you should post your request. **Please do not contact me directly via e-mail, as your e-mail will be ignored.**
