@@ -171,7 +171,7 @@ function addTime(time, days, hours, minutes, seconds) {
     return dateTime.addDays(days)
         .addHours(hours)
         .addMinutes(minutes)
-        .addSeconds(seconds);;
+        .addSeconds(seconds);
 }
 
 function getFatiguePercentage(hoursUntilRest, minutesUntilRest) {
