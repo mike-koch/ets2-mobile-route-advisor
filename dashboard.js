@@ -192,9 +192,7 @@ function processTimeDifferenceArray(hourMinuteArray) {
     var hours = hourMinuteArray[1];
     var minutes = hourMinuteArray[2];
 
-    if (day > 1) {
-        hours += day * 24;
-    }
+    hours += (day - 1) * 24;
 
     if (hours <= 0 && minutes <= 0) {
         minutes = g_translations.XMinutes.replace('{0}', 0);
