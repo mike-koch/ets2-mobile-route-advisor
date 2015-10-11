@@ -11,6 +11,10 @@
 // defined in dashboard-core.ts (or see JSON response in the server's API).
 
 Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
+    // If the game isn't connected, don't both calculating anything.
+    if (!data.game.connected) {
+        return data;
+    }
 
     // round truck speed
     data.truckSpeedRounded = Math.abs(data.truck.speed > 0
@@ -64,6 +68,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
 };
 
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
+    // If the game isn't connected, don't both calculating anything.
+    if (!data.game.connected) {
+        return data;
+    }
+
     // data - same data object as in the filter function
     $('.fillingIcon.truckDamage .top').css('height', (100 - data.scsTruckDamage) + '%');
     $('.fillingIcon.trailerDamage .top').css('height', (100 - data.trailer.wear * 100) + '%');
@@ -97,6 +106,15 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
             data.truck.speed
         );
     }
+
+    // If speed limit is "0", hide the speed limit display
+    if (data.navigation.speedLimit === 0) {
+        $('#speed-limit').hide();
+    } else {
+        $('#speed-limit').css('display', 'flex');
+    }
+
+    return data;
 }
 
 Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
@@ -335,7 +353,7 @@ function getTimeDifference(begin, end) {
 }
 
 Date.prototype.addDays = function(d) {
-    this.setUTCDate((this.getUTCDate() + d) % 7);
+    this.setUTCDate(this.getUTCDate() + d);
     return this;
 }
 
