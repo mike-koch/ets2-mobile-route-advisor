@@ -36,7 +36,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.trailerMassTons = data.trailer.attached ? ((data.trailer.mass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.trailer.attached ? data.trailer.mass + ' kg' : '';
     data.jobIncome = getJobIncome(data.job.income);
-    data.game.nextRestStopTimeArray = getHoursMinutesAndSeconds(data.game.nextRestStopTime);
+    data.game.nextRestStopTimeArray = getDaysHoursMinutesAndSeconds(data.game.nextRestStopTime);
     data.game.nextRestStopTime = processTimeDifferenceArray(data.game.nextRestStopTimeArray);
     data.navigation.speedLimitMph = data.navigation.speedLimit * .621371;
     data.navigation.speedLimitMphRounded = Math.round(data.navigation.speedLimitMph);
@@ -44,15 +44,19 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedDistanceMi = data.navigation.estimatedDistanceKm * .621371;
     data.navigation.estimatedDistanceKmRounded = Math.floor(data.navigation.estimatedDistanceKm);
     data.navigation.estimatedDistanceMiRounded = Math.floor(data.navigation.estimatedDistanceMi);
-    var timeToDestinationArray = getHoursMinutesAndSeconds(data.navigation.estimatedTime);
-    data.navigation.estimatedTime = addTime(originalTime, timeToDestinationArray[0], timeToDestinationArray[1], timeToDestinationArray[2]).toISOString();
+    var timeToDestinationArray = getDaysHoursMinutesAndSeconds(data.navigation.estimatedTime);
+    data.navigation.estimatedTime = addTime(originalTime,
+                                            timeToDestinationArray[0],
+                                            timeToDestinationArray[1],
+                                            timeToDestinationArray[2],
+                                            timeToDestinationArray[3]).toISOString();
     var estimatedTime24h = data.navigation.estimatedTime
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
     data.navigation.estimatedTime12h = getTime(estimatedTime24h, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
 
     // Remaining Time
-    data.job.remainingTimeArray = getHoursMinutesAndSeconds(data.job.remainingTime);
+    data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
     data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
 
     // return changed data to the core for rendering
@@ -64,7 +68,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     $('.fillingIcon.truckDamage .top').css('height', (100 - data.scsTruckDamage) + '%');
     $('.fillingIcon.trailerDamage .top').css('height', (100 - data.trailer.wear * 100) + '%');
     $('.fillingIcon.fuel .top').css('height', (100 - data.currentFuelPercentage) + '%');
-    $('.fillingIcon.rest .top').css('height', (100 - getFatiguePercentage(data.game.nextRestStopTimeArray[0], data.game.nextRestStopTimeArray[1])) + '%');
+    $('.fillingIcon.rest .top').css('height', (100 - getFatiguePercentage(data.game.nextRestStopTimeArray[1], data.game.nextRestStopTimeArray[2])) + '%');
 
     // Process DOM for connection
     if (data.game.connected) {
@@ -152,21 +156,22 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     showTab('_cargo');
 }
 
-function getHoursMinutesAndSeconds(time) {
+function getDaysHoursMinutesAndSeconds(time) {
     var dateTime = new Date(time);
+    var days = dateTime.getUTCDay();
     var hour = dateTime.getUTCHours();
     var minute = dateTime.getUTCMinutes();
     var second = dateTime.getUTCSeconds();
-    return [hour, minute, second];
+    return [days, hour, minute, second];
 }
 
-function addTime(time, hours, minutes, seconds) {
+function addTime(time, days, hours, minutes, seconds) {
     var dateTime = new Date(time);
-    dateTime = dateTime.addHours(hours);
-    dateTime = dateTime.addMinutes(minutes);
-    dateTime = dateTime.addSeconds(seconds);
 
-    return dateTime;
+    return dateTime.addDays(days)
+        .addHours(hours)
+        .addMinutes(minutes)
+        .addSeconds(seconds);;
 }
 
 function getFatiguePercentage(hoursUntilRest, minutesUntilRest) {
@@ -183,9 +188,13 @@ function getFatiguePercentage(hoursUntilRest, minutesUntilRest) {
 }
 
 function processTimeDifferenceArray(hourMinuteArray) {
-    var hours = hourMinuteArray[0];
-    var minutes = hourMinuteArray[1];
+    var day = hourMinuteArray[0];
+    var hours = hourMinuteArray[1];
+    var minutes = hourMinuteArray[2];
 
+    if (day > 1) {
+        hours += day * 24;
+    }
 
     if (hours <= 0 && minutes <= 0) {
         minutes = g_translations.XMinutes.replace('{0}', 0);
@@ -325,6 +334,11 @@ function getTimeDifference(begin, end) {
     var hours = Math.floor((endDate - beginDate) % MILLISECONDS_IN_DAY / MILLISECONDS_IN_HOUR) // number of hours
     var minutes = Math.floor((endDate - beginDate) % MILLISECONDS_IN_DAY % MILLISECONDS_IN_HOUR / MILLISECONDS_IN_MINUTE) // number of minutes
     return [hours, minutes];
+}
+
+Date.prototype.addDays = function(d) {
+    this.setUTCDate((this.getUTCDate() + d) % 7);
+    return this;
 }
 
 Date.prototype.addHours = function(h) {
