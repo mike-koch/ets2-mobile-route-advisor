@@ -7,6 +7,9 @@ If all you are doing is submitting an issue, please check if your "issue" qualif
  - **Translations:** Please open a pull request, not an issue for your translation.
  - **Bugs:** Yes, please open these types of issues here. :grinning:
 
+## Submitting a Translation
+Starting with version 3.0.0, translations are now being stored in a separate `i18n` branch.  If you would like to submit a translation, please create (or modify) the translation file in the `i18n` branch with your changes, and submit a pull request there.  Pull requests for translations submitted to the `master` branch will be rejected.  Once the pull request is merged, the translation will be available on the ETS2 Mobile Route Advisor site for download.
+
 ## Getting Started
 If you have already completed any of these steps in the past (such as creating a GitHub account), you can skip the respective step.
  - Make sure you have a [GitHub account](http://github.com/signup/free)
