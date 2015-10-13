@@ -16,15 +16,19 @@ tabs:
     items:
       - title: Navigation
         id: navigation
-        icon: location-arrow
+        font-awesome: false
+        icon: compass
       - title: Current Job
         id: current-job
+        font-awesome: false
         icon: truck
-      - title: Language
+      - title: Multi-language Support
         id: language
+        font-awesome: true
         icon: language
       - title: Other
         id: other
+        font-awesome: true
         icon: tachometer
     
 config-options:

@@ -15,7 +15,11 @@
                 <div class="dropdown-menu">
                     {% for item in tab.items %}
                     <a class="dropdown-item" href="#{{ item.id }}">
+                    {% if item.font-awesome %}
                         <i class="fa fa-{{ item.icon }}"></i>
+                    {% else %}
+                        <svg width="0.9em" height="0.9em"><use xlink:href="#svg-{{ item.icon }}" fill="#000"/></svg>
+                    {% endif %}
                         {{ item.title }}
                     </a>
                     {% endfor %}
