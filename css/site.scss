@@ -1,0 +1,28 @@
+---
+---
+
+.jumbotron {
+    padding: 2rem;
+    margin-bottom: 0;
+}
+
+.navbar-brand {
+    padding-right: 15px;
+}
+
+section,
+footer {
+    padding: 15px;
+}
+
+#navigation,
+#language,
+footer {
+    background: #eee;
+}
+
+#about,
+#current-job,
+#other {
+    background: #ddd;
+}
