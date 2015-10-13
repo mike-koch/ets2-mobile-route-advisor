@@ -2,21 +2,23 @@
     <div class="container">
         <div class="col-sm-6">
             <h1><i class="fa fa-tachometer"></i> Other</h1>
-            <p>Some other information available in the Mobile Route Advisor:</p>
-            <ul>
-                <li>Current speed</li>
-                <li>Current gear</li>
-                <li>Truck damage</li>
-                <li>Trailer damage</li>
-                <li>Remaining fuel</li>
-                <li>Current time</li>
-                <li>Various configuration options</li>
+            <div class="contents">
+                <p>Some other information available in the Mobile Route Advisor:</p>
                 <ul>
-                    {% for option in site.config-options %}
-                    <li>{{ option }}</li>
-                    {% endfor %}
+                    <li>Current speed</li>
+                    <li>Current gear</li>
+                    <li>Truck damage</li>
+                    <li>Trailer damage</li>
+                    <li>Remaining fuel</li>
+                    <li>Current time</li>
+                    <li>Various configuration options</li>
+                    <ul>
+                        {% for option in site.config-options %}
+                        <li>{{ option }}</li>
+                        {% endfor %}
+                    </ul>
                 </ul>
-            </ul>
+            </div>
         </div>
         <div class="col-sm-6">
             <p>Image placeholder</p>

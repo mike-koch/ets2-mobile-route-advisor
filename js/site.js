@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $('#language-list').html('');
+    
     // Get list of languages
     $.ajax({
         accept: 'application/json',
@@ -11,23 +13,24 @@ $(document).ready(function() {
 });
 
 function outputLanguages(files) {
-    /* Don't display the following files:
-        - .travis.yml
-        - README.md
-    */
+    var list = '<ul>';
     for (file in files) {
         var theFile = files[file];
         var fileName = theFile.name;
+
+        /* Don't display the following files:
+            - .travis.yml
+            - README.md
+        */
         if (fileName != '.travis.yml' && fileName != 'README.md') {
-            var listItem = '<li>';
-            listItem += '<a href="' + theFile.download_url + '" download>';
-            listItem += fileName.replace('.json', '');
-            listItem += '</a>';
-            listItem += '</li>';
-            
-            $('#language-list').append(listItem);
+            list += '<li>';
+            list += '<a href="' + theFile.download_url + '" download>';
+            list += fileName.replace('.json', '');
+            list += '</a>';
+            list += '</li>';
         }
     }
+    $('#language-list').append(list + '</ul>');
 }
 
 function outputLanguageError(data) {
