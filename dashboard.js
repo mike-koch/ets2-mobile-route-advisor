@@ -241,6 +241,7 @@ function getTime(gameTime, timeUnits) {
     var formattedMinutes = currentMinutes < 10 ? '0' + currentMinutes : currentMinutes;
     var currentDay = '';
 
+
     switch (currentTime.getUTCDay()) {
         case 0:
             currentDay = g_translations.SundayAbbreviated;
@@ -353,7 +354,7 @@ function getTimeDifference(begin, end) {
 }
 
 Date.prototype.addDays = function(d) {
-    this.setUTCDate(this.getUTCDate() + d);
+    this.setUTCDate(this.getUTCDate() + d - 1);
     return this;
 }
 
