@@ -7,43 +7,25 @@ latest-version: "3.0.0"
 tabs:
   - title: About
     id: about
+    menu: false
+    icon: question-circle
   - title: Features
     id: features
-  - title: Download
-    id: download
-
-features:
-  - title: Mini-Map
-    new: true
-    version: "3.0.0"
-  - title: Current Speed (kmh or mph)
-    new: false
-  - title: Speed Limit
-    new: false
-  - title: Remaining Distance
-    new: false
-  - title: ETA
-    new: false
-  - title: Current gear
-    new: false
-  - title: In-Game Time
-    new: false
-  - title: Cargo Name and Weight (tons or kilograms)
-    new: false
-  - title: Destination
-    new: false
-  - title: Deadline
-    new: false
-  - title: Reward / Job Income
-    new: false
-  - title: Time Remaining
-    new: false
-  - title: Time Until Next Rest Stop
-    new: false
-  - title: Truck Damage
-    new: false
-  - title: Trailer Damage
-    new: false
+    menu: true
+    icon: list
+    items:
+      - title: Navigation
+        id: navigation
+        icon: location-arrow
+      - title: Current Job
+        id: current-job
+        icon: truck
+      - title: Language
+        id: language
+        icon: language
+      - title: Other
+        id: other
+        icon: tachometer
     
 config-options:
   - Language

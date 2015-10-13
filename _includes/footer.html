@@ -1,30 +1,28 @@
-<footer class="page-footer grey darken-2">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Contributors</h5>
-                <ul>
-                    {% for contributor in site.contributors %}
-                    <li class="grey-text text-lighten-3">
-                        <i class="fa {{ contributor.icon }}"></i>
-                        <a class="grey-text text-lighten-3" href="{{ contributor.link }}" target="_blank">{{ contributor.name }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                    {% for link in site.links %}
-                    <li>
-                        <a class="grey-text text-lighten-3" href="{{ link.link }}" target="_blank"><i class="fa fa-{{ link.icon }}"></i> {{ link.title }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+<footer class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h5 class="white-text">Contributors</h5>
+            <ul>
+                {% for contributor in site.contributors %}
+                <li class="grey-text text-lighten-3">
+                    <i class="fa {{ contributor.icon }}"></i>
+                    <a class="grey-text text-lighten-3" href="{{ contributor.link }}" target="_blank">{{ contributor.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <h5 class="white-text">Links</h5>
+            <ul>
+                {% for link in site.links %}
+                <li>
+                    <a class="grey-text text-lighten-3" href="{{ link.link }}" target="_blank"><i class="fa fa-{{ link.icon }}"></i> {{ link.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-    <div class="footer-copyright">
+    <div class="row">
         <div class="container">
             &copy; <script>document.write(new Date().getFullYear())</script> <a href="{{ site.copyright.url }}" target="_blank">{{ site.copyright.name }}</a>
         </div>

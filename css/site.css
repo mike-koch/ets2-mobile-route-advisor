@@ -1,23 +1,7 @@
-section {
-    padding: 5px 0;
+.jumbotron {
+    padding: 2rem;
 }
 
-#top-download-link {
-    margin: 20px 0;
-}
-
-img {
-    padding: 0 0 20px 0;
-}
-
-footer {
-    margin-top: 0 !important;
-}
-
-.no-suffix:after {
-    content: none !important;
-}
-
-.aligned {
-    position: static !important;
+.navbar-brand {
+    padding-right: 15px;
 }
