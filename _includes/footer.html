@@ -1,25 +1,32 @@
-<footer class="page-footer grey darken-2">
+<footer>
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">ETS2 Mobile Route Advisor</h5>
-                <p class="grey-text text-lighten-4">Created and designed by <a href="http://mikekoch.me" target="_blank">Mike Koch</a></p>
+            <div class="col-sm-6">
+                <h5 class="white-text">Contributors</h5>
+                <ul class="list-unstyled">
+                    {% for contributor in site.contributors %}
+                    <li>
+                        <i class="fa {{ contributor.icon }}"></i>
+                        <a class="grey-text text-lighten-3" href="{{ contributor.link }}" target="_blank">{{ contributor.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
-            <div class="col l4 offset-l2 s12">
+            <div class="col-sm-6">
                 <h5 class="white-text">Links</h5>
-                <ul>
+                <ul class="list-unstyled">
                     {% for link in site.links %}
                     <li>
-                        <a class="grey-text text-lighten-3" href="{{ link.link }}" target="_blank"><i class="fa fa-{{ link.icon }}"></i> {{ link.title }}</a>
+                        <i class="fa fa-{{ link.icon }}"></i> <a class="grey-text text-lighten-3" href="{{ link.link }}" target="_blank"> {{ link.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            &copy; {{ site.copyright.year }} <a href="{{ site.copyright.url }}" target="_blank">{{ site.copyright.name }}</a>
+        <div class="row">
+            <div class="container">
+                &copy; <script>document.write(new Date().getFullYear())</script> <a href="{{ site.copyright.url }}" target="_blank">{{ site.copyright.name }}</a>
+            </div>
         </div>
     </div>
 </footer>

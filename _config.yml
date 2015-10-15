@@ -2,54 +2,40 @@ name: "ETS2 Mobile Route Advisor"
 description: "A skin for the ETS2 Telemetry Web Server"
 
 url: "http://mikekoch.me/ets2-mobile-route-advisor"
-latest-version: "2.0.1"
+latest-version: "3.0.0"
 
 tabs:
   - title: About
     id: about
+    menu: false
+    icon: question-circle
   - title: Features
     id: features
-  - title: Download
-    id: download
-
-features:
-  - title: Current Speed (kmh or mph)
-    new: false
-  - title: Speed Limit
-    new: true
-    version: "2.0.0"
-  - title: Remaining Distance
-    new: true
-    version: "2.0.0"
-  - title: ETA
-    new: true
-    version: "2.0.0"
-  - title: Current gear
-    new: false
-  - title: In-Game Time
-    new: false
-  - title: Cargo Name and Weight (tons or kilograms)
-    new: false
-  - title: Destination
-    new: false
-  - title: Deadline
-    new: false
-  - title: Reward / Job Income
-    new: false
-  - title: Time Remaining
-    new: false
-  - title: Time Until Next Rest Stop
-    new: true
-    version: "2.0.0"
-  - title: Truck Damage
-    new: false
-  - title: Trailer Damage
-    new: false
+    menu: true
+    icon: list
+    items:
+      - title: Navigation
+        id: navigation
+        font-awesome: false
+        icon: compass
+      - title: Current Job
+        id: current-job
+        font-awesome: false
+        icon: truck
+      - title: Multi-language Support
+        id: language
+        font-awesome: true
+        icon: language
+      - title: Other
+        id: other
+        font-awesome: true
+        icon: tachometer
     
 config-options:
-  - Language (currently 7 languages are supported)
+  - Language
   - Time Format (12-hour vs 24-hour)
-  - Distance Units (km vs mi), which also control km/h vs mph
+  - Distance Units (km vs mi)
+  - Speed Units (km/h vs mph)
   - Weight Units (kilograms vs tons)
   - Currency Code (EUR, CHF, CZK, GBP, PLN, HUF)
   
@@ -60,12 +46,20 @@ links:
   - title: Official Topic on SCS Software Forums
     icon: globe
     link: http://forum.scssoft.com/viewtopic.php?f=34&t=178742
-  - title: Follow me on GitHub
+  - title: Follow mkoch227 on GitHub
     icon: github
     link: https://www.github.com/mkoch227
-  - title: Follow me on Twitter
+  - title: Follow mkoch227 on Twitter
     icon: twitter
     link: https://www.twitter.com/mkoch227
+    
+contributors:
+  - name: mkoch227
+    link: https://twitter.com/mkoch227
+    icon: fa-twitter
+  - name: denilsonsa
+    link: https://github.com/denilsonsa
+    icon: fa-github
     
 copyright:
   year: 2015

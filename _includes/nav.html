@@ -1,9 +1,38 @@
-<nav class="grey darken-2">
-    <div class="nav-wrapper container">
-        <a href="#page-top" class="brand-logo">{{ site.name }}</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+<nav class="navbar navbar-light bg-faded">
+    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+        &#9776;
+    </button>
+    <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+        <a class="navbar-brand" href="#">{{ site.name }}</a>
+        <ul class="nav navbar-nav">
             {% for tab in site.tabs %}
-            <li><a href="#{{ tab.id }}">{{ tab.title }}</a></li>
+            {% if tab.menu %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-{{ tab.icon }}"></i>
+                    {{ tab.title }}
+                </a>
+                <div class="dropdown-menu">
+                    {% for item in tab.items %}
+                    <a class="dropdown-item" href="#{{ item.id }}">
+                    {% if item.font-awesome %}
+                        <i class="fa fa-{{ item.icon }}"></i>
+                    {% else %}
+                        <svg width="0.9em" height="0.9em"><use xlink:href="#svg-{{ item.icon }}" fill="#000"/></svg>
+                    {% endif %}
+                        {{ item.title }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="#{{ tab.id }}">
+                    <i class="fa fa-{{ tab.icon }}"></i>
+                    {{ tab.title }}
+                </a>
+            </li>
+            {% endif %}
             {% endfor %}
         </ul>
     </div>

@@ -1,0 +1,42 @@
+---
+---
+
+.jumbotron {
+    padding: 2rem;
+    margin-bottom: 0;
+}
+
+.navbar-brand {
+    padding-right: 15px;
+}
+
+section,
+footer {
+    .contents {
+        color: #666;
+    }
+    
+    padding: 15px;
+}
+
+#navigation,
+#language,
+footer {
+    background: #eee;
+}
+
+#about,
+#current-job,
+#other {
+    background: #ddd;
+}
+
+h1 {
+    .label {
+        font-size: .5em;
+    }
+}
+
+.fa-15x {
+    font-size: 15em;
+}
