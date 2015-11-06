@@ -14,12 +14,12 @@
     "XMinutes": "{0} minutes",
     "XMinute": "{0} minute",
     "ETA": "HPA",
-    "Expected": "Expected",
-    "SundayAbbreviated": "Sun",
-    "MondayAbbreviated": "Mon",
-    "TuesdayAbbreviated": "Tue",
-    "WednesdayAbbreviated": "Wed",
-    "ThursdayAbbreviated": "Thu",
-    "FridayAbbreviated": "Fri",
-    "SaturdayAbbreviated": "Sat"
+    "Expected": "Prévue",
+    "SundayAbbreviated": "Dim",
+    "MondayAbbreviated": "Lun",
+    "TuesdayAbbreviated": "Mar",
+    "WednesdayAbbreviated": "Mer",
+    "ThursdayAbbreviated": "Jeu",
+    "FridayAbbreviated": "Ven",
+    "SaturdayAbbreviated": "Sam"
 }
