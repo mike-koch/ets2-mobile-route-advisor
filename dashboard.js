@@ -279,7 +279,7 @@ function getTime(gameTime, timeUnits) {
 }
 
 function updateLanguage(key, value) {
-    $('.l' + key).text(value);
+    $('[data-mra-text="' + key + '"]').text(value);
 }
 
 function getJobIncome(income) {

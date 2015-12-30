@@ -58,7 +58,7 @@
     </button>
 </div>
 <div id="speed-limit" class="ol-unselectable ol-control"><span class="speedLimitRoundedKmhMph"></span></div>
-<div id="map-text" class="hasJob ol-unselectable ol-control"><span class="lETA"></span>: <span class="navigation-estimatedTime"></span>, <span class="navigationEstimatedDistanceKmMi"></span> <span class="distanceUnits"></span>, <span class="navigation-timeToDestination"></span></div>
+<div id="map-text" class="hasJob ol-unselectable ol-control"><span data-mra-text="ETA"></span>: <span class="navigation-estimatedTime"></span>, <span class="navigationEstimatedDistanceKmMi"></span> <span class="distanceUnits"></span>, <span class="navigation-timeToDestination"></span></div>
 
 <div class="dashboard connected">
     <aside>
@@ -101,7 +101,7 @@
         <article id="_cargo">
             <div class="noJob">
                 <div class="_row _yellow-color">
-                    <p class="lCurrentJob"></p>
+                    <p data-mra-text="CurrentJob"></p>
                     <p><!-- There is no way to get the current balance from the telemetry. --></p>
                 </div>
                 <div class="_row">
@@ -113,7 +113,7 @@
                     <p></p>
                 </div>
                 <div class="_row">
-                    <p class="lNoJob"></p>
+                    <p data-mra-text="NoJob"></p>
                     <p></p>
                 </div>
                 <div class="_row">
@@ -121,39 +121,39 @@
                     <p></p>
                 </div>
                 <div class="_row">
-                    <p class="lNextRestStopIn"></p>
+                    <p data-mra-text="NextRestStopIn"></p>
                     <p class="game-nextRestStopTime _yellow-color"></p>
                 </div>
             </div>
             <div class="hasJob">
                 <div class="_row _yellow-color">
-                    <p class="lCurrentJob"></p>
+                    <p data-mra-text="CurrentJob"></p>
                     <p><!-- There is no way to get the current balance from the telemetry. --></p>
                 </div>
                 <div class="_row">
-                    <p class="lCargoName"></p>
+                    <p data-mra-text="CargoName"></p>
                     <p><span class="trailer-name"></span> (<span class="trailerMassKgOrT"></span>)</p>
                 </div>
                 <div class="_row">
-                    <p class="lDestination"></p>
+                    <p data-mra-text="Destination"></p>
                     <p><span class="job-destinationCity"></span> - <span class="job-destinationCompany"></span></p>
                 </div>
                 <div class="_row">
-                    <p class="lExpected"></p>
+                    <p data-mra-text="Expected"></p>
                     <!--p><span class="job-???????"></span> - <span class="job-deadlineTime"></span></p-->
                     <p><span class="job-deadlineTime"></span></p>
                 </div>
                 <div class="_row">
-                    <p class="lJobIncome"></p>
+                    <p data-mra-text="JobIncome"></p>
                     <p class="jobIncome"></p>
                     <!--p><span class="currencyCode"></span> <span class="jobIncome"></span></p-->
                 </div>
                 <div class="_row">
-                    <p class="lTimeRemaining"></p>
+                    <p data-mra-text="TimeRemaining"></p>
                     <p class="job-remainingTime"></p>
                 </div>
                 <div class="_row">
-                    <p class="lNextRestStopIn"></p>
+                    <p data-mra-text="NextRestStopIn"></p>
                     <p class="game-nextRestStopTime _yellow-color"></p>
                 </div>
             </div>
@@ -165,14 +165,14 @@
                     <div class="top"><svg width="6em" height="4em"><use xlink:href="#svg-truck" fill="#969696"/></svg></div>
                     <div class="bot"><svg width="6em" height="4em"><use xlink:href="#svg-truck" fill="#930002"/></svg></div>
                 </div>
-                <figcaption><span class="lTruck"></span>: <span class="scsTruckDamageRounded"></span>%</figcaption>
+                <figcaption><span data-mra-text="Truck"></span>: <span class="scsTruckDamageRounded"></span>%</figcaption>
             </figure>
             <figure>
                 <div class="fillingIcon trailerDamage">
                     <div class="top"><svg width="11em" height="4em"><use xlink:href="#svg-trailer" fill="#969696"/></svg></div>
                     <div class="bot"><svg width="11em" height="4em"><use xlink:href="#svg-trailer" fill="#930002"/></svg></div>
                 </div>
-                <figcaption><span class="lTrailer"></span>: <span class="wearTrailerRounded"></span>%</figcaption>
+                <figcaption><span data-mra-text="Trailer"></span>: <span class="wearTrailerRounded"></span>%</figcaption>
             </figure>
         </article>
 
@@ -200,7 +200,7 @@
     </nav>
 
     <footer>
-        <span class="lMobileRouteAdvisor"></span>
+        <span data-mra-text="MobileRouteAdvisor"></span>
     </footer>
 </div>
 
