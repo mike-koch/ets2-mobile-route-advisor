@@ -16,6 +16,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         return data;
     }
 
+    data.isWorldOfTrucksContract = isWorldOfTrucksContract(data);
+
     // round truck speed
     data.truckSpeedRounded = Math.abs(data.truck.speed > 0
         ? Math.floor(data.truck.speed)
@@ -35,13 +37,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.gameTime12h = getTime(data.game.time, 12);
     var originalTime = data.game.time;
     data.game.time = getTime(data.game.time, 24);
-    data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12);
-    data.job.deadlineTime = getTime(data.job.deadlineTime, 24);
     data.trailerMassTons = data.trailer.attached ? ((data.trailer.mass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.trailer.attached ? data.trailer.mass + ' kg' : '';
-    data.jobIncome = getJobIncome(data.job.income);
     data.game.nextRestStopTimeArray = getDaysHoursMinutesAndSeconds(data.game.nextRestStopTime);
     data.game.nextRestStopTime = processTimeDifferenceArray(data.game.nextRestStopTimeArray);
+    data.jobIncome = getJobIncome(data.job.income);
     data.navigation.speedLimitMph = data.navigation.speedLimit * .621371;
     data.navigation.speedLimitMphRounded = Math.round(data.navigation.speedLimitMph);
     data.navigation.estimatedDistanceKm = data.navigation.estimatedDistance / 1000;
@@ -58,10 +58,14 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
     data.navigation.estimatedTime12h = getTime(estimatedTime24h, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
-
-    // Remaining Time
     data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
     data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
+
+    // TODO Non-WoT stuff here
+    if (!data.isWorldOfTrucksContract) {
+        data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12);
+        data.job.deadlineTime = getTime(data.job.deadlineTime, 24);
+    }
 
     // return changed data to the core for rendering
     return data;
@@ -112,6 +116,19 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
         $('#speed-limit').hide();
     } else {
         $('#speed-limit').css('display', 'flex');
+    }
+
+    // Set skin to World of Trucks mode if this is a World of Trucks contract
+    if (data.isWorldOfTrucksContract) {
+        $('#time-remaining > p[data-mra-text="TimeRemaining"]').css('visibility', 'hidden');
+        $('#time-remaining > p.job-remainingTime').css('visibility', 'hidden');
+        $('#expected > p > span.job-deadlineTime').text(g_translations.WorldOfTrucksContract)
+            .css('color', '#0CAFF0');
+
+    } else {
+        $('#expected > p > span.job-deadlineTime').css('color', '#fff');
+        $('#time-remaining > p[data-mra-text="TimeRemaining"]').css('visibility', '');
+        $('#time-remaining > p.job-remainingTime').css('visibility', '');
     }
 
     return data;
@@ -353,6 +370,14 @@ function getTimeDifference(begin, end) {
     return [hours, minutes];
 }
 
+function isWorldOfTrucksContract(data) {
+    var WORLD_OF_TRUCKS_DEADLINE_TIME = "0001-01-01T00:00:00Z";
+    var WORLD_OF_TRUCKS_REMAINING_TIME = "0001-01-01T00:00:00Z";
+
+    return data.job.deadlineTime === WORLD_OF_TRUCKS_DEADLINE_TIME
+        && data.job.remainingTime === WORLD_OF_TRUCKS_REMAINING_TIME;
+}
+
 Date.prototype.addDays = function(d) {
     this.setUTCDate(this.getUTCDate() + d - 1);
     return this;
@@ -372,6 +397,7 @@ Date.prototype.addSeconds = function(s) {
     this.setTime(this.getTime() + (s*1000));
     return this;
 }
+
 
 // Global vars
 
