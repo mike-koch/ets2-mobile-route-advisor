@@ -188,6 +188,22 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
         });
     });
 
+    // Check for updates
+    if (g_skinConfig.checkForUpdates) {
+        $.get('http://mikekoch.me/ets2-mobile-route-advisor/latest-version.html', function(data) {
+            var latestVersion = data.trim();
+            console.log(latestVersion);
+            console.log(g_currentVersion);
+            if (latestVersion != g_currentVersion) {
+                $('#update-status').show();
+            }
+        });
+    }
+
+    // Set the version number on the about page
+    versionText = $('#version').text();
+    $('#version').text(versionText + g_currentVersion);
+
     showTab('_cargo');
 }
 
@@ -409,3 +425,6 @@ var g_translations;
 
 // A copy of the skinConfig object.
 var g_skinConfig;
+
+// The current version of ets2-mobile-route-advisor
+var g_currentVersion = '3.0.0';
