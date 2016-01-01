@@ -28,6 +28,7 @@
         "timeFormat": "24h",
         "distanceUnits": "km",
         "weightUnits": "kg",
-        "currencyCode": "EUR"
+        "currencyCode": "EUR",
+        "checkForUpdates": true
     }
 }
