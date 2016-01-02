@@ -120,15 +120,15 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
 
     // Set skin to World of Trucks mode if this is a World of Trucks contract
     if (data.isWorldOfTrucksContract) {
-        $('#time-remaining > p[data-mra-text="TimeRemaining"]').css('visibility', 'hidden');
-        $('#time-remaining > p.job-remainingTime').css('visibility', 'hidden');
+        $('#expected > p[data-mra-text="Expected"]').text(g_translations.Remains);
         $('#expected > p > span.job-deadlineTime').text(g_translations.WorldOfTrucksContract)
             .css('color', '#0CAFF0');
+        $('#remains > p').css('visibility', 'hidden');
 
     } else {
+        $('#expected > p[data-mra-text="Expected"]').text(g_translations.Expected);
         $('#expected > p > span.job-deadlineTime').css('color', '#fff');
-        $('#time-remaining > p[data-mra-text="TimeRemaining"]').css('visibility', '');
-        $('#time-remaining > p.job-remainingTime').css('visibility', '');
+        $('#remains > p').css('visibility', '');
     }
 
     return data;
