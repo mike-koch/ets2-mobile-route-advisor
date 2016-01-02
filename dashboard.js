@@ -427,4 +427,4 @@ var g_translations;
 var g_skinConfig;
 
 // The current version of ets2-mobile-route-advisor
-var g_currentVersion = '3.0.0';
+var g_currentVersion = '3.1.0';
