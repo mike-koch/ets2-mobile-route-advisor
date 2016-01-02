@@ -192,8 +192,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     if (g_skinConfig.checkForUpdates) {
         $.get('http://mikekoch.me/ets2-mobile-route-advisor/latest-version.html', function(data) {
             var latestVersion = data.trim();
-            console.log(latestVersion);
-            console.log(g_currentVersion);
             if (latestVersion != g_currentVersion) {
                 $('#update-status').show();
             }
