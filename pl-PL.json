@@ -14,13 +14,12 @@
     "XMinutes": "{0} min.",
     "XMinute": "{0} min.",
     "ETA": "Szacowany czas przybycia",
-    "Remains": "Oczekiwany:",
+    "Expected": "Oczekiwany:",
     "SundayAbbreviated": "Nie",
     "MondayAbbreviated": "Pon",
     "TuesdayAbbreviated": "Wto",
     "WednesdayAbbreviated": "Śro",
     "ThursdayAbbreviated": "Czw",
     "FridayAbbreviated": "Pią",
-    "SaturdayAbbreviated": "Sob",
-    "WorldOfTrucksContract": "World of Trucks Contract"
+    "SaturdayAbbreviated": "Sob"
 }

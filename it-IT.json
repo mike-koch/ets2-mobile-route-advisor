@@ -14,13 +14,12 @@
     "XMinutes": "{0} minutes",
     "XMinute": "{0} minute",
     "ETA": "ETA",
-    "Remains": "Remains",
+    "Expected": "Expected",
     "SundayAbbreviated": "Sun",
     "MondayAbbreviated": "Mon",
     "TuesdayAbbreviated": "Tue",
     "WednesdayAbbreviated": "Wed",
     "ThursdayAbbreviated": "Thu",
     "FridayAbbreviated": "Fri",
-    "SaturdayAbbreviated": "Sat",
-    "WorldOfTrucksContract": "World of Trucks Contract"
+    "SaturdayAbbreviated": "Sat"
 }
