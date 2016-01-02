@@ -4,7 +4,7 @@
     "CargoName": "Tipo di carico",
     "Destination": "Destinazlone",
     "JobIncome": "Guadagno",
-    "TimeRemaining": "Tempo rimanente",
+    "Remains": "Tempo rimanente",
     "Truck": "Camion",
     "Trailer": "Trailer",
     "MobileRouteAdvisor": "Cellulare Route Advisor",
@@ -21,5 +21,6 @@
     "WednesdayAbbreviated": "Wed",
     "ThursdayAbbreviated": "Thu",
     "FridayAbbreviated": "Fri",
-    "SaturdayAbbreviated": "Sat"
+    "SaturdayAbbreviated": "Sat",
+    "WorldOfTrucksContract": "World of Trucks Contract"
 }
