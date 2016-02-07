@@ -464,6 +464,32 @@ a {
     -ms-flex-align: center;
     align-items: center;
 }
+#_map #speed-limit-ats {
+    display: block;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    z-index: 2;
+    background: white;
+    color: black;
+    font-weight: bold;
+    line-height: 1.0;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
 #_map #map-text {
     display: block;
     position: absolute;
@@ -511,4 +537,20 @@ a {
     border-radius: 0.5em;
     background: black;
     color: white;
+}
+
+.isEts2[data-value="false"] {
+    display: none;
+}
+
+.isEts2[data-value="true"] {
+    display: inherit;
+}
+
+.isAts[data-value="false"] {
+    display: none;
+}
+
+.isAts[data-value="true"] {
+    display: inherit;
 }

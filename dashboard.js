@@ -16,32 +16,29 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         return data;
     }
 
-    data.isWorldOfTrucksContract = isWorldOfTrucksContract(data);
+    g_runningGame = data.game.gameName;
+    data.isEts2 = g_runningGame == 'ets2';
+    data.isAts = !data.isEts2;
 
-    // round truck speed
+    // Logic consistent between ETS2 and ATS
     data.truckSpeedRounded = Math.abs(data.truck.speed > 0
         ? Math.floor(data.truck.speed)
         : Math.round(data.truck.speed));
-    // convert kilometers per hour to miles per hour (just an example)
     data.truckSpeedMph = data.truck.speed * 0.621371;
     data.truckSpeedMphRounded = Math.abs(Math.floor(data.truckSpeedMph));
-    // convert gear to readable format
     data.gear = data.truck.gear > 0 ? 'D' + data.truck.gear : (data.truck.gear < 0 ? 'R' : 'N');
     data.currentFuelPercentage = (data.truck.fuel / data.truck.fuelCapacity) * 100;
-
-    // scsTruckDamage is the value SCS uses in the route advisor
     data.scsTruckDamage = getDamagePercentage(data);
     data.scsTruckDamageRounded = Math.floor(data.scsTruckDamage);
     data.wearTrailerRounded = Math.floor(data.trailer.wear * 100);
-
     data.gameTime12h = getTime(data.game.time, 12);
     var originalTime = data.game.time;
     data.game.time = getTime(data.game.time, 24);
     data.trailerMassTons = data.trailer.attached ? ((data.trailer.mass / 1000.0) + ' t') : '';
     data.trailerMassKg = data.trailer.attached ? data.trailer.mass + ' kg' : '';
+    data.trailerMassLbs = data.trailer.attached ? Math.round(data.trailer.mass * 2.20462) + ' lb' : '';
     data.game.nextRestStopTimeArray = getDaysHoursMinutesAndSeconds(data.game.nextRestStopTime);
     data.game.nextRestStopTime = processTimeDifferenceArray(data.game.nextRestStopTimeArray);
-    data.jobIncome = getJobIncome(data.job.income);
     data.navigation.speedLimitMph = data.navigation.speedLimit * .621371;
     data.navigation.speedLimitMphRounded = Math.round(data.navigation.speedLimitMph);
     data.navigation.estimatedDistanceKm = data.navigation.estimatedDistance / 1000;
@@ -61,8 +58,23 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
     data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
 
-    // TODO Non-WoT stuff here
-    if (!data.isWorldOfTrucksContract) {
+    // ETS2-specific logic
+    data.isWorldOfTrucksContract = isWorldOfTrucksContract(data);
+    if (data.isEts2) {
+        data.jobIncome = getEts2JobIncome(data.job.income);
+    }
+
+    // ATS-specific logic
+    if (data.isAts) {
+        data.jobIncome = getAtsJobIncome(data.job.income);
+    }
+
+
+
+
+
+    // Non-WoT stuff here
+    if (!data.isWorldOfTrucksContract || data.isAts) {
         data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12);
         data.job.deadlineTime = getTime(data.job.deadlineTime, 24);
     }
@@ -170,6 +182,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
         $('.trailerMassKgOrT').addClass('trailerMassKg').removeClass('trailerMassKgOrT');
     } else if (weightUnits === 't') {
         $('.trailerMassKgOrT').addClass('trailerMassTons').removeClass('trailerMassKgOrT');
+    } else if (weightUnits === 'lb') {
+        $('.trailerMassKgOrT').addClass('trailerMassLbs').removeClass('trailerMassKgOrT');
     }
 
     // Process 12 vs 24 hr time
@@ -313,7 +327,7 @@ function updateLanguage(key, value) {
     $('[data-mra-text="' + key + '"]').text(value);
 }
 
-function getJobIncome(income) {
+function getEts2JobIncome(income) {
     /*
         Looking at an economy_data.sii file found, the conversion rates are:
         EUR: 1
@@ -341,6 +355,22 @@ function getJobIncome(income) {
     } else if (currencyCode == 'HUF') {
         income *= 293;
         income += '.&nbsp;-&nbsp;Ft';
+    }
+    return income;
+}
+
+function getAtsJobIncome(income) {
+    /*
+        Looking at an economy_data.sii file found, the conversion rates are:
+        USD: 1
+        EUR: 0.75
+    */
+    var currencyCode = g_skinConfig.currencyCode;
+    if (currencyCode == 'USD') {
+        income = '&#36;&nbsp;' + income + '.-';
+    } else {
+        income *= 0.75;
+        income = '&euro;&nbsp;' + income + '.-';
     }
     return income;
 }
@@ -426,3 +456,6 @@ var g_skinConfig;
 
 // The current version of ets2-mobile-route-advisor
 var g_currentVersion = '3.1.0';
+
+// The currently running game
+var g_runningGame;
