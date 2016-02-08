@@ -90,7 +90,7 @@ function buildMap(target_element_id){
         element: document.getElementById('rotate-button-div')
     });
     var speed_limit_control = new ol.control.Control({
-        element: g_runningGame == 'ets2' ? document.getElementById('speed-limit') : document.getElementById('speed-limit-ats')
+        element: document.getElementById('speed-limit')
     });
     var text_control = new ol.control.Control({
         element: document.getElementById('map-text')
