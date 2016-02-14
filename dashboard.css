@@ -522,7 +522,7 @@ a {
 }
 
 .isEts2[data-value="true"] {
-    display: inherit;
+    display: block;
 }
 
 .isAts[data-value="false"] {
@@ -530,5 +530,5 @@ a {
 }
 
 .isAts[data-value="true"] {
-    display: inherit;
+    display: block;
 }
