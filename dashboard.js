@@ -143,8 +143,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
         $('#remains > p').css('visibility', '');
     }
 
-    // Replace game-name with the actual game name
-    $('.game-name').addClass(data.game.gameName).removeClass('game-name');
+    // Set the current game attribute for any properties that are game-specific
+    $('.game-specific').attr('data-game-name', data.game.gameName);
 
     return data;
 }
