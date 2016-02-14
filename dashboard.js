@@ -340,7 +340,7 @@ function getEts2JobIncome(income) {
         PLN: 4.2
         HUF: 293
     */
-    var currencyCode = g_skinConfig.currencyCode;
+    var currencyCode = g_skinConfig.currencyCodeEts2;
     if (currencyCode == 'EUR') {
         income = '&euro;&nbsp;' + income;
     } else if (currencyCode == 'GBP') {
@@ -368,7 +368,7 @@ function getAtsJobIncome(income) {
         USD: 1
         EUR: 0.75
     */
-    var currencyCode = g_skinConfig.currencyCode;
+    var currencyCode = g_skinConfig.currencyCodeAts;
     if (currencyCode == 'USD') {
         income = '&#36;&nbsp;' + income + '.-';
     } else {
