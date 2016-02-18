@@ -13,7 +13,7 @@
         "         height: height of the skin in pixels (same as defined in the CSS)",
 
         "All the properties at the end of this file are skin-specific. See:",
-        "https://github.com/mkoch227/ets2-mobile-route-advisor/wiki",
+        "https://github.com/mike-koch/ets2-mobile-route-advisor/wiki",
         "for descriptions and possible values."
     ],
 
@@ -28,7 +28,8 @@
         "timeFormat": "24h",
         "distanceUnits": "km",
         "weightUnits": "kg",
-        "currencyCode": "EUR",
+        "currencyCodeEts2": "EUR",
+        "currencyCodeAts": "USD",
         "checkForUpdates": true
     }
 }

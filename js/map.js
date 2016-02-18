@@ -45,13 +45,13 @@ function buildMap(target_element_id){
     ol.proj.addProjection(projection);
 
     // Adding a marker for the player position/rotation.
-    g_playerIcon = new ol.style.Icon({
+    g_playerIcon = g_runningGame === 'ets2' ? new ol.style.Icon({
         anchor: [0.5, 39],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         rotateWithView: true,
         src: g_pathPrefix + '/img/player_proportions.png'
-    });
+    }) : new ol.style.Icon();
     var playerIconStyle = new ol.style.Style({
         image: g_playerIcon
     });
@@ -117,29 +117,7 @@ function buildMap(target_element_id){
             new ol.interaction.DragRotateAndZoom()
         ]),
         layers: [
-            new ol.layer.Tile({
-                extent: [0, 0, MAX_X, MAX_Y],
-                source: new ol.source.XYZ({
-                    projection: projection,
-                    url: g_pathPrefix + '/tiles/{z}/{y}/{x}.png',
-                    tileSize: [256, 256],
-                    // Using createXYZ() makes the vector layer (with the features) unaligned.
-                    // It also tries loading non-existent tiles.
-                    //
-                    // Using custom_tilegrid causes rescaling of all image tiles before drawing
-                    // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
-                    tileGrid: custom_tilegrid,
-                    // tileGrid: ol.tilegrid.createXYZ({
-                    //     extent: [0, 0, MAX_X, MAX_Y],
-                    //     minZoom: 0,
-                    //     maxZoom: 7,
-                    //     tileSize: [256, 256]
-                    // }),
-                    wrapX: false,
-                    minZoom: 4,
-                    maxZoom: 7
-                })
-            }),
+            getMapTilesLayer(projection, custom_tilegrid),
             // Debug layer below.
             // new ol.layer.Tile({
             //     extent: [0, 0, MAX_X, MAX_Y],
@@ -206,6 +184,36 @@ function buildMap(target_element_id){
     // map.getView().on('change:rotation', function(ev) {
     //   console.log(ev);
     // });
+}
+
+function getMapTilesLayer(projection, tileGrid) {
+    if (g_runningGame === 'ets2') {
+        return new ol.layer.Tile({
+            extent: [0, 0, MAX_X, MAX_Y],
+            source: new ol.source.XYZ({
+                projection: projection,
+                url: g_pathPrefix + '/tiles/{z}/{y}/{x}.png',
+                tileSize: [256, 256],
+                // Using createXYZ() makes the vector layer (with the features) unaligned.
+                // It also tries loading non-existent tiles.
+                //
+                // Using custom_tilegrid causes rescaling of all image tiles before drawing
+                // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
+                tileGrid: tileGrid,
+                // tileGrid: ol.tilegrid.createXYZ({
+                //     extent: [0, 0, MAX_X, MAX_Y],
+                //     minZoom: 0,
+                //     maxZoom: 7,
+                //     tileSize: [256, 256]
+                // }),
+                wrapX: false,
+                minZoom: 4,
+                maxZoom: 7
+            })
+        });
+    }
+
+    return new ol.layer.Tile();
 }
 
 // Global vars.

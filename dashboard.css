@@ -442,8 +442,6 @@ a {
     top: 0.5em;
     left: 0.5em;
     z-index: 2;
-    border-radius: 100%;
-    border: 0.25em solid red;
     background: white;
     color: black;
     font-weight: bold;
@@ -464,6 +462,12 @@ a {
     -ms-flex-align: center;
     align-items: center;
 }
+
+#speed-limit[data-game-name="ets2"] {
+    border-radius: 100%;
+    border: 0.25em solid red;
+}
+
 #_map #map-text {
     display: block;
     position: absolute;
@@ -511,4 +515,20 @@ a {
     border-radius: 0.5em;
     background: black;
     color: white;
+}
+
+.isEts2[data-value="false"] {
+    display: none;
+}
+
+.isEts2[data-value="true"] {
+    display: block;
+}
+
+.isAts[data-value="false"] {
+    display: none;
+}
+
+.isAts[data-value="true"] {
+    display: block;
 }
