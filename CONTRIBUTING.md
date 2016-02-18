@@ -1,5 +1,5 @@
-# Contributing to ETS2 Mobile Route Advisor
-So you want to contribute to ETS2 Mobile Route Advisor? Awesome! However, there are a few guidelines that need to be followed so the project can be as easy to maintain as possible.
+# Contributing to ETS2 / ATS Mobile Route Advisor
+So you want to contribute to ETS2 / ATS Mobile Route Advisor? Awesome! However, there are a few guidelines that need to be followed so the project can be as easy to maintain as possible.
 
 ## Submitting an issue
 If all you are doing is submitting an issue, please check if your "issue" qualifies as a GitHub issue:
@@ -8,7 +8,7 @@ If all you are doing is submitting an issue, please check if your "issue" qualif
  - **Bugs:** Yes, please open these types of issues here. :grinning:
 
 ## Submitting a Translation
-Starting with version 3.0.0, translations are now being stored in a separate `i18n` branch.  If you would like to submit a translation, please create (or modify) the translation file in the `i18n` branch with your changes, and submit a pull request there.  Pull requests for translations submitted to the `master` branch will be rejected.  Once the pull request is merged, the translation will be available on the ETS2 Mobile Route Advisor site for download.
+Starting with version 3.0.0, translations are now being stored in a separate `i18n` branch.  If you would like to submit a translation, please create (or modify) the translation file in the `i18n` branch with your changes, and submit a pull request there.  Pull requests for translations submitted to the `master` branch will be rejected.  Once the pull request is merged, the translation will be available on the ETS2 / ATS Mobile Route Advisor site for download.
 
 ## Getting Started
 If you have already completed any of these steps in the past (such as creating a GitHub account), you can skip the respective step.
@@ -24,8 +24,8 @@ If you have already completed any of these steps in the past (such as creating a
  - Check for unnecessary whitespace using the `git diff --check` command. If there is trailing whitespace, your pull request will be denied.
 
 ## Submitting Changes
- - Sign the [Contributor License Agreement](https://www.clahub.com/agreements/mkoch227/ets2-mobile-route-advisor)
+ - Sign the [Contributor License Agreement](https://cla-assistant.io/mike-koch/ets2-mobile-route-advisor)
  - Push your changes to a topic branch in your fork of the repository
- - Submit a pull request to the official ETS2 Mobile Route Advisor repository (mkoch227/ets2-mobile-route-advisor)
- - The owner of ETS2 Mobile Route Advisor will then inspect and test the code in the pull request.  Feedback will be given via GitHub comments.
- - The owner of ETS2 Mobile Route Advisor expects responses within two weeks of the original comment. If there is no feedback within that time range, the pull request will be considered abandoned and subsequently will be closed.
+ - Submit a pull request to the official ETS2 / ATS Mobile Route Advisor repository (mike-koch/ets2-mobile-route-advisor)
+ - The owner of ETS2 / ATS Mobile Route Advisor will then inspect and test the code in the pull request.  Feedback will be given via GitHub comments.
+ - The owner of ETS2 / ATS Mobile Route Advisor expects responses within two weeks of the original comment. If there is no feedback within that time range, the pull request will be considered abandoned and subsequently will be closed.
