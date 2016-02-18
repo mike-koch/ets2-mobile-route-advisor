@@ -1,8 +1,8 @@
-name: "ETS2 Mobile Route Advisor"
+name: "ETS2 / ATS Mobile Route Advisor"
 description: "A skin for the ETS2 Telemetry Web Server"
 
 url: "http://mikekoch.me/ets2-mobile-route-advisor"
-latest-version: "3.1.0"
+latest-version: "3.2.0"
 
 tabs:
   - title: About
@@ -14,7 +14,7 @@ tabs:
     menu: true
     icon: list
     items:
-      - title: Navigation
+      - title: Navigation (ETS2 Only)
         id: navigation
         font-awesome: false
         icon: compass
@@ -30,7 +30,7 @@ tabs:
         id: other
         font-awesome: true
         icon: tachometer
-    
+
 config-options:
   - Language
   - Time Format (12-hour vs 24-hour)
@@ -39,7 +39,7 @@ config-options:
   - Weight Units (kilograms vs tons)
   - Currency Code (EUR, CHF, CZK, GBP, PLN, HUF)
   - Automatic Update Checking
-  
+
 links:
   - title: GitHub Repository
     icon: github
@@ -47,13 +47,13 @@ links:
   - title: Official Topic on SCS Software Forums
     icon: globe
     link: http://forum.scssoft.com/viewtopic.php?f=34&t=178742
-  - title: Follow mkoch227 on GitHub
+  - title: Follow mike-koch on GitHub
     icon: github
-    link: https://www.github.com/mkoch227
+    link: https://www.github.com/mike-koch
   - title: Follow mkoch227 on Twitter
     icon: twitter
     link: https://www.twitter.com/mkoch227
-    
+
 contributors:
   - name: mkoch227
     link: https://twitter.com/mkoch227
@@ -61,7 +61,7 @@ contributors:
   - name: denilsonsa
     link: https://github.com/denilsonsa
     icon: fa-github
-    
+
 copyright:
   year: 2016
   name: Mike Koch
