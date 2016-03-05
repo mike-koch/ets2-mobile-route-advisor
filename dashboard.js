@@ -17,7 +17,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     }
 
     g_runningGame = data.game.gameName;
-    data.isEts2 = g_runningGame == 'ets2';
+    data.isEts2 = g_runningGame == 'ETS2';
     data.isAts = !data.isEts2;
 
     // Logic consistent between ETS2 and ATS
@@ -458,7 +458,7 @@ var g_translations;
 var g_skinConfig;
 
 // The current version of ets2-mobile-route-advisor
-var g_currentVersion = '3.2.0';
+var g_currentVersion = '3.2.1';
 
 // The currently running game
 var g_runningGame;

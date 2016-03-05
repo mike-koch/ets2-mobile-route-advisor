@@ -45,7 +45,7 @@ function buildMap(target_element_id){
     ol.proj.addProjection(projection);
 
     // Adding a marker for the player position/rotation.
-    g_playerIcon = g_runningGame === 'ets2' ? new ol.style.Icon({
+    g_playerIcon = g_runningGame === 'ETS2' ? new ol.style.Icon({
         anchor: [0.5, 39],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
@@ -187,7 +187,7 @@ function buildMap(target_element_id){
 }
 
 function getMapTilesLayer(projection, tileGrid) {
-    if (g_runningGame === 'ets2') {
+    if (g_runningGame === 'ETS2') {
         return new ol.layer.Tile({
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
