@@ -463,7 +463,7 @@ a {
     align-items: center;
 }
 
-#speed-limit[data-game-name="ets2"] {
+#speed-limit[data-game-name="ETS2"] {
     border-radius: 100%;
     border: 0.25em solid red;
 }
