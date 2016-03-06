@@ -1,34 +1,27 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 19200;
-var MAX_Y = 18688;
+var MAX_X = 28314;
+var MAX_Y = 23560;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
-// Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
 function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     return [
         (x / pointsPerPixel + x0) | 0,
         (y / pointsPerPixel + y0) | 0
     ];
 }
-function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 7.278, 11367, 9962);
-}
-function calculatePixelCoordinateUk(x, y) {
-    return calculatePixelCoordinate(x, y, 9.69522, 10226, 9826);
+function calculatePixelCoordinate(x, y) {
+    return calculatePixelCoordinate(x, y, 7.278, 13162, 16260); 
+	//Both the EU and UK map are the same scale as in game, therefore only one function is required.
 }
 
 function game_coord_to_pixels(x, y) {
     // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
     var r = null;
-    if (x < -31812 && y < -5618) {
-        r = calculatePixelCoordinateUk(x, y);
-    } else {
-        r = calculatePixelCoordinateEu(x, y);
-    }
-
+    r = calculatePixelCoordinate(x, y);
+	//No distinction needs to be made between the EU and the UK.
     // Inverting Y axis, because of OpenLayers coordinates.
     r[1] = MAX_Y - r[1];
     return r;
@@ -192,7 +185,8 @@ function getMapTilesLayer(projection, tileGrid) {
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
                 projection: projection,
-                url: g_pathPrefix + '/tiles/{z}/{y}/{x}.png',
+				//The tiles, generated with gdal2tiles-leaflet with -l switch are in /z/x/y.png order instead of /z/y/x.png.
+                url: g_pathPrefix + '/tiles/{z}/{x}/{y}.png',
                 tileSize: [256, 256],
                 // Using createXYZ() makes the vector layer (with the features) unaligned.
                 // It also tries loading non-existent tiles.
