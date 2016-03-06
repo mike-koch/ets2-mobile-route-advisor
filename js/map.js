@@ -6,22 +6,30 @@ var MAX_Y = 23560;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
+// Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
 function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     return [
         (x / pointsPerPixel + x0) | 0,
         (y / pointsPerPixel + y0) | 0
     ];
 }
-function calculatePixelCoordinate(x, y) {
-    return calculatePixelCoordinate(x, y, 7.278, 13162, 16260); 
-	//Both the EU and UK map are the same scale as in game, therefore only one function is required.
+function calculatePixelCoordinateEu(x, y) {
+    return calculatePixelCoordinate(x, y, 7.278, 13164, 16260); //x+16, y+4
+}
+function calculatePixelCoordinateUk(x, y) {
+	//return calculatePixelCoordinate(x, y, 9.69522, 11446, 14422);
+    return calculatePixelCoordinate(x, y, 7.278, 13164, 16260); //x-550, y-1540 //Original pointsPerPixel: 9.69522, own calculated: 8.62552985346, x0: 12093, y0: 15148
 }
 
 function game_coord_to_pixels(x, y) {
     // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
     var r = null;
-    r = calculatePixelCoordinate(x, y);
-	//No distinction needs to be made between the EU and the UK.
+    //if (x < -31812 && y < -5618 && x > -61000 && y > -67000) {
+    //    r = calculatePixelCoordinateUk(x, y);
+    //} else {
+        r = calculatePixelCoordinateEu(x, y);
+    //}
+
     // Inverting Y axis, because of OpenLayers coordinates.
     r[1] = MAX_Y - r[1];
     return r;
@@ -185,7 +193,6 @@ function getMapTilesLayer(projection, tileGrid) {
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
                 projection: projection,
-				//The tiles, generated with gdal2tiles-leaflet with -l switch are in /z/x/y.png order instead of /z/y/x.png.
                 url: g_pathPrefix + '/tiles/{z}/{x}/{y}.png',
                 tileSize: [256, 256],
                 // Using createXYZ() makes the vector layer (with the features) unaligned.
