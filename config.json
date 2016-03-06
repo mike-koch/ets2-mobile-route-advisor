@@ -18,9 +18,9 @@
     ],
 
     "config": {
-        "name": "ets2-mobile-route-advisor",
-        "title": "Mobile Route Advisor",
-        "author": "mkoch227 and denilsonsa",
+        "name": "ets2-mobile-route-advisor-promods",
+        "title": "Mobile Route Advisor (ProMods and RusMap edition)",
+        "author": "mkoch227, denilsonsa and Koenvh",
         "width": -1,
         "height": -1,
 
