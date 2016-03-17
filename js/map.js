@@ -1,8 +1,8 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 19200;
-var MAX_Y = 18688;
+var MAX_X = 28314;
+var MAX_Y = 23560;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
@@ -14,20 +14,21 @@ function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     ];
 }
 function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 7.278, 11367, 9962);
+    return calculatePixelCoordinate(x, y, 7.278, 13164, 16260); //x+16, y+4
 }
 function calculatePixelCoordinateUk(x, y) {
-    return calculatePixelCoordinate(x, y, 9.69522, 10226, 9826);
+	//return calculatePixelCoordinate(x, y, 9.69522, 11446, 14422);
+    return calculatePixelCoordinate(x, y, 7.278, 13164, 16260); //x-550, y-1540 //Original pointsPerPixel: 9.69522, own calculated: 8.62552985346, x0: 12093, y0: 15148
 }
 
 function game_coord_to_pixels(x, y) {
     // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
     var r = null;
-    if (x < -31812 && y < -5618) {
-        r = calculatePixelCoordinateUk(x, y);
-    } else {
+    //if (x < -31812 && y < -5618 && x > -61000 && y > -67000) {
+    //    r = calculatePixelCoordinateUk(x, y);
+    //} else {
         r = calculatePixelCoordinateEu(x, y);
-    }
+    //}
 
     // Inverting Y axis, because of OpenLayers coordinates.
     r[1] = MAX_Y - r[1];
@@ -192,7 +193,7 @@ function getMapTilesLayer(projection, tileGrid) {
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
                 projection: projection,
-                url: g_pathPrefix + '/tiles/{z}/{y}/{x}.png',
+                url: g_pathPrefix + '/tiles/{z}/{x}/{y}.png',
                 tileSize: [256, 256],
                 // Using createXYZ() makes the vector layer (with the features) unaligned.
                 // It also tries loading non-existent tiles.
