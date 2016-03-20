@@ -31,6 +31,6 @@
         "currencyCodeEts2": "EUR",
         "currencyCodeAts": "USD",
         "checkForUpdates": true,
-        "mapPackEts2": "vanilla-ets2"
+        "mapPackEts2": "ets2"
     }
 }
