@@ -30,6 +30,7 @@
         "weightUnits": "kg",
         "currencyCodeEts2": "EUR",
         "currencyCodeAts": "USD",
-        "checkForUpdates": true
+        "checkForUpdates": true,
+        "mapPackEts2": "vanilla-ets2"
     }
 }
