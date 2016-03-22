@@ -87,6 +87,8 @@ function country_code_to_unicode(cc) {
 // https://github.com/mike-koch/ets2-mobile-route-advisor/compare/promods-support
 // See also:
 // https://github.com/mike-koch/ets2-mobile-route-advisor/issues/90
+
+// Copied from: https://github.com/denilsonsa/ets2-stuff/blob/master/openlayers-koenvh1.html
 function getTextFeatures() {
 	var fill = new ol.style.Fill();
 	fill.setColor('#fff');
@@ -101,17 +103,24 @@ function getTextFeatures() {
 		// console.log(this.get('realName'), this.get('country'));
 		return [new ol.style.Style({
 			//Creating a new image layer
+			
 			image: new ol.style.Icon(({
-							//By default, the images are too large. Depends on the flag set.
-                            scale: scale / 15,
-                            //rotateWithView: true,
-                            anchor: [0.5, 1],
-                            anchorXUnits: 'fraction',
-                            anchorYUnits: 'fraction',
-							//Get flag image
-							//images from: http://lipis.github.io/flag-icon-css/
-                            src: 'flags/' + this.get('cc') + '.svg'
-                        })),
+				rotateWithView: false,
+				anchor: [0.5, 1],
+				anchorXUnits: 'fraction',
+				anchorYUnits: 'fraction',
+				snapToPixel: false,
+				// Flag images from: http://lipis.github.io/flag-icon-css/
+				// Flag PNG from: http://365icon.com/icon-styles/ethnic/classic2/
+				src: g_pathPrefix + '/flags_png/' + this.get('cc') + '.png',
+				// All those flags have size=640x480.
+				// The exected height is 32px, the same as the text.
+				//scale: 32 / 480 * scale
+				
+				// Flags PNG are 48 pixels high
+				scale: 32 / 48 * scale
+			})),
+			
 			text: new ol.style.Text({
 				text: text,
 				font: '32px "Helvetica Neue", "Helvetica", "Arial", sans-serif',
