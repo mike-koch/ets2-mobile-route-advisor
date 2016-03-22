@@ -23,9 +23,9 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
 - Localization support
 - [Various configuration options](https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/config.json-Parameters)
 
-## Requirements
+## Requirementss
 - Euro Truck Simulator 2 and/or American Truck Simulator
-- [ETS2 Telemetry Server](https://github.com/Funbit/ets2-telemetry-server/releases/tag/3.2.0) 3.2.0 or later
+- [ETS2 Telemetry Server](https://github.com/Funbit/ets2-telemetry-server/releases/tag/3.2.3) 3.2.3 or later
 
 ## How to Install
 1. Download the latest version of the Mobile Route Advisor from either the [official website](http://www.mikekoch.me/ets2-mobile-route-advisor), or from the [releases page](https://www.github.com/mike-koch/ets2-mobile-route-advisor/releases).
