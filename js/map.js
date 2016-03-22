@@ -33,6 +33,122 @@ function game_coord_to_pixels(x, y) {
     r[1] = MAX_Y - r[1];
     return r;
 }
+var COUNTRY_NAME_TO_CODE = {
+	"andorra": "ad",
+	"austria": "at",
+	"belarus": "by",
+	"belgium": "be",
+	"bulgaria": "bg",
+	"czech": "cz",
+	"denmark": "dk",
+	"estonia": "ee",
+	"faroe": "fo",
+	"finland": "fi",
+	"france": "fr",
+	"germany": "de",
+	"hungary": "hu",
+	"iceland": "is",
+	"iom": "im",
+	"isle of man": "im",
+	"italy": "it",
+	"latvia": "lv",
+	"liecht": "li",
+	"liechtenstein": "li",
+	"lithuania": "lt",
+	"luxembourg": "lu",
+	"moldova": "md",
+	"netherlands": "nl",
+	"norway": "no",
+	"poland": "pl",
+	"romania": "ro",
+	"russia": "ru",
+	"slovakia": "sk",
+	"slovenia": "si",
+	"spain": "es",
+	"sweden": "se",
+	"switzerland": "ch",
+	"uk": "gb",
+	"united kingdom": "gb",
+	"ukraine": "ua"
+};
+
+// http://codepen.io/denilsonsa/pen/BKWNgB
+function country_code_to_unicode(cc) {
+	cc = cc.toLowerCase();
+	var flagA = 0x1F1E6;
+	var letter_a = 0x61;
+	var a = cc.charCodeAt(0) - letter_a;
+	var b = cc.charCodeAt(1) - letter_a;
+	return String.fromCodePoint(flagA + a, flagA + b);
+}
+
+// Copied from:
+// https://github.com/mike-koch/ets2-mobile-route-advisor/blob/5bde032121cbabac3bfd98f156a1e376d9903fd8/js/map.js
+// https://github.com/mike-koch/ets2-mobile-route-advisor/compare/promods-support
+// See also:
+// https://github.com/mike-koch/ets2-mobile-route-advisor/issues/90
+function getTextFeatures() {
+	var fill = new ol.style.Fill();
+	fill.setColor('#fff');
+	var stroke = new ol.style.Stroke();
+	stroke.setColor('#000');
+	stroke.setWidth(2);
+
+	var createTextStyle = function(resolution) {
+		var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.125));
+		var text = this.get('realName'); //Removed country_code_to_unicode(this.get('cc')) + ' ' + 
+		// console.log(scale, resolution);
+		// console.log(this.get('realName'), this.get('country'));
+		return [new ol.style.Style({
+			//Creating a new image layer
+			image: new ol.style.Icon(({
+							//By default, the images are too large. Depends on the flag set.
+                            scale: scale / 15,
+                            //rotateWithView: true,
+                            anchor: [0.5, 1],
+                            anchorXUnits: 'fraction',
+                            anchorYUnits: 'fraction',
+							//Get flag image
+							//images from: http://lipis.github.io/flag-icon-css/
+                            src: 'flags/' + this.get('cc') + '.svg'
+                        })),
+			text: new ol.style.Text({
+				text: text,
+				font: '32px "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+				textAlign: 'center',
+				fill: fill,
+				stroke: stroke,
+				scale: scale,
+				//Move the text down, otherwise the flag and text will overlap. 
+				offsetY: 14 * scale
+			})
+		})];
+	};
+
+	var features = g_cities_json.map(function(city) {
+		var map_coords = game_coord_to_pixels(city.x, city.z);
+		// cc = Country Code
+		city.cc = COUNTRY_NAME_TO_CODE[city.country.toLowerCase()];
+		var feature = new ol.Feature(city);
+		feature.setGeometry(new ol.geom.Point(map_coords));
+		feature.setStyle(createTextStyle);
+		return feature;
+	});
+
+	return features;
+}
+function getTextLayer() {
+	var textSource = new ol.source.Vector({
+		features: getTextFeatures(),
+		wrapX: false
+	});
+	var vectorLayer = new ol.layer.Vector({
+		source: textSource
+	});
+
+	return vectorLayer;
+}
+
 
 function buildMap(target_element_id){
     var projection = new ol.proj.Projection({
@@ -118,6 +234,7 @@ function buildMap(target_element_id){
         ]),
         layers: [
             getMapTilesLayer(projection, custom_tilegrid),
+			getTextLayer(),
             // Debug layer below.
             // new ol.layer.Tile({
             //     extent: [0, 0, MAX_X, MAX_Y],
