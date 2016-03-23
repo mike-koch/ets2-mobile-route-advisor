@@ -162,6 +162,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     g_pathPrefix = 'skins/' + skinConfig.name;
     $.getScript(g_pathPrefix + '/js/ol.js');
     $.getScript(g_pathPrefix + '/js/map.js');
+    $.getScript(g_pathPrefix + '/js/cities.js');
 
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
