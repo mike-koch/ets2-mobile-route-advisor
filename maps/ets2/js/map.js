@@ -318,7 +318,7 @@ function getMapTilesLayer(projection, tileGrid) {
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
                 projection: projection,
-                url: g_pathPrefix + '/tiles/{z}/{x}/{y}.png',
+                url: g_pathPrefix + '/maps/ets2/tiles/{z}/{x}/{y}.png',
                 tileSize: [256, 256],
                 // Using createXYZ() makes the vector layer (with the features) unaligned.
                 // It also tries loading non-existent tiles.
