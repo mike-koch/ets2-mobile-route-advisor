@@ -23,7 +23,7 @@ function calculatePixelCoordinateUk(x, y) {
 function game_coord_to_pixels(x, y) {
     // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
     var r = null;
-    if (x < -31812 && y < -5618) {
+    if (x < -31663 && y < -5618) {
         r = calculatePixelCoordinateUk(x, y);
     } else {
         r = calculatePixelCoordinateEu(x, y);
@@ -34,52 +34,52 @@ function game_coord_to_pixels(x, y) {
     return r;
 }
 var COUNTRY_NAME_TO_CODE = {
-	"andorra": "ad",
-	"austria": "at",
-	"belarus": "by",
-	"belgium": "be",
-	"bulgaria": "bg",
-	"czech": "cz",
-	"denmark": "dk",
-	"estonia": "ee",
-	"faroe": "fo",
-	"finland": "fi",
-	"france": "fr",
-	"germany": "de",
-	"hungary": "hu",
-	"iceland": "is",
-	"iom": "im",
-	"isle of man": "im",
-	"italy": "it",
-	"latvia": "lv",
-	"liecht": "li",
-	"liechtenstein": "li",
-	"lithuania": "lt",
-	"luxembourg": "lu",
-	"moldova": "md",
-	"netherlands": "nl",
-	"norway": "no",
-	"poland": "pl",
-	"romania": "ro",
-	"russia": "ru",
-	"slovakia": "sk",
-	"slovenia": "si",
-	"spain": "es",
-	"sweden": "se",
-	"switzerland": "ch",
-	"uk": "gb",
-	"united kingdom": "gb",
-	"ukraine": "ua"
+    "andorra": "ad",
+    "austria": "at",
+    "belarus": "by",
+    "belgium": "be",
+    "bulgaria": "bg",
+    "czech": "cz",
+    "denmark": "dk",
+    "estonia": "ee",
+    "faroe": "fo",
+    "finland": "fi",
+    "france": "fr",
+    "germany": "de",
+    "hungary": "hu",
+    "iceland": "is",
+    "iom": "im",
+    "isle of man": "im",
+    "italy": "it",
+    "latvia": "lv",
+    "liecht": "li",
+    "liechtenstein": "li",
+    "lithuania": "lt",
+    "luxembourg": "lu",
+    "moldova": "md",
+    "netherlands": "nl",
+    "norway": "no",
+    "poland": "pl",
+    "romania": "ro",
+    "russia": "ru",
+    "slovakia": "sk",
+    "slovenia": "si",
+    "spain": "es",
+    "sweden": "se",
+    "switzerland": "ch",
+    "uk": "gb",
+    "united kingdom": "gb",
+    "ukraine": "ua"
 };
 
 // http://codepen.io/denilsonsa/pen/BKWNgB
 function country_code_to_unicode(cc) {
-	cc = cc.toLowerCase();
-	var flagA = 0x1F1E6;
-	var letter_a = 0x61;
-	var a = cc.charCodeAt(0) - letter_a;
-	var b = cc.charCodeAt(1) - letter_a;
-	return String.fromCodePoint(flagA + a, flagA + b);
+    cc = cc.toLowerCase();
+    var flagA = 0x1F1E6;
+    var letter_a = 0x61;
+    var a = cc.charCodeAt(0) - letter_a;
+    var b = cc.charCodeAt(1) - letter_a;
+    return String.fromCodePoint(flagA + a, flagA + b);
 }
 
 // Copied from:
@@ -90,72 +90,72 @@ function country_code_to_unicode(cc) {
 
 // Copied from: https://github.com/denilsonsa/ets2-stuff/blob/master/openlayers-koenvh1.html
 function getTextFeatures() {
-	var fill = new ol.style.Fill();
-	fill.setColor('#fff');
-	var stroke = new ol.style.Stroke();
-	stroke.setColor('#000');
-	stroke.setWidth(2);
+    var fill = new ol.style.Fill();
+    fill.setColor('#fff');
+    var stroke = new ol.style.Stroke();
+    stroke.setColor('#000');
+    stroke.setWidth(2);
 
-	var createTextStyle = function(resolution) {
-		var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.125));
-		var text = this.get('realName'); //Removed country_code_to_unicode(this.get('cc')) + ' ' + 
-		// console.log(scale, resolution);
-		// console.log(this.get('realName'), this.get('country'));
-		return [new ol.style.Style({
-			//Creating a new image layer
-			
-			image: new ol.style.Icon(({
-				rotateWithView: false,
-				anchor: [0.5, 1],
-				anchorXUnits: 'fraction',
-				anchorYUnits: 'fraction',
-				snapToPixel: false,
-				// Flag images from: http://lipis.github.io/flag-icon-css/
-				// Flag PNG from: http://365icon.com/icon-styles/ethnic/classic2/
-				src: g_pathPrefix + '/flags_png/' + this.get('cc') + '.png',
-				// All those flags have size=640x480.
-				// The exected height is 32px, the same as the text.
-				//scale: 32 / 480 * scale
-				
-				// Flags PNG are 48 pixels high
-				scale: 32 / 48 * scale
-			})),
-			
-			text: new ol.style.Text({
-				text: text,
-				font: '32px "Helvetica Neue", "Helvetica", "Arial", sans-serif',
-				textAlign: 'center',
-				fill: fill,
-				stroke: stroke,
-				scale: scale,
-				//Move the text down, otherwise the flag and text will overlap. 
-				offsetY: 14 * scale
-			})
-		})];
-	};
+    var createTextStyle = function(resolution) {
+        var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.125));
+        var text = this.get('realName'); //Removed country_code_to_unicode(this.get('cc')) + ' ' +
+        // console.log(scale, resolution);
+        // console.log(this.get('realName'), this.get('country'));
+        return [new ol.style.Style({
+            //Creating a new image layer
 
-	var features = g_cities_json.map(function(city) {
-		var map_coords = game_coord_to_pixels(city.x, city.z);
-		// cc = Country Code
-		city.cc = COUNTRY_NAME_TO_CODE[city.country.toLowerCase()];
-		var feature = new ol.Feature(city);
-		feature.setGeometry(new ol.geom.Point(map_coords));
-		feature.setStyle(createTextStyle);
-		return feature;
-	});
+            image: new ol.style.Icon(({
+                rotateWithView: false,
+                anchor: [0.5, 1],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'fraction',
+                snapToPixel: false,
+                // Flag images from: http://lipis.github.io/flag-icon-css/
+                // Flag PNG from: http://365icon.com/icon-styles/ethnic/classic2/
+                src: g_pathPrefix + '/flags_png/' + this.get('cc') + '.png',
+                // All those flags have size=640x480.
+                // The exected height is 32px, the same as the text.
+                //scale: 32 / 480 * scale
 
-	return features;
+                // Flags PNG are 48 pixels high
+                scale: 32 / 48 * scale
+            })),
+
+            text: new ol.style.Text({
+                text: text,
+                font: '32px "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+                textAlign: 'center',
+                fill: fill,
+                stroke: stroke,
+                scale: scale,
+                //Move the text down, otherwise the flag and text will overlap.
+                offsetY: 14 * scale
+            })
+        })];
+    };
+
+    var features = g_cities_json.map(function(city) {
+        var map_coords = game_coord_to_pixels(city.x, city.z);
+        // cc = Country Code
+        city.cc = COUNTRY_NAME_TO_CODE[city.country.toLowerCase()];
+        var feature = new ol.Feature(city);
+        feature.setGeometry(new ol.geom.Point(map_coords));
+        feature.setStyle(createTextStyle);
+        return feature;
+    });
+
+    return features;
 }
 function getTextLayer() {
-	var textSource = new ol.source.Vector({
-		features: getTextFeatures(),
-		wrapX: false
-	});
-	var vectorLayer = new ol.layer.Vector({
-		source: textSource
-	});
+    var textSource = new ol.source.Vector({
+        features: getTextFeatures(),
+        wrapX: false
+    });
+    var vectorLayer = new ol.layer.Vector({
+        source: textSource
+    });
 
-	return vectorLayer;
+    return vectorLayer;
 }
 
 
@@ -243,7 +243,7 @@ function buildMap(target_element_id){
         ]),
         layers: [
             getMapTilesLayer(projection, custom_tilegrid),
-			getTextLayer(),
+            getTextLayer(),
             // Debug layer below.
             // new ol.layer.Tile({
             //     extent: [0, 0, MAX_X, MAX_Y],
