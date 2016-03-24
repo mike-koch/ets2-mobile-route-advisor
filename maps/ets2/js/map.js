@@ -111,13 +111,7 @@ function getTextFeatures() {
                 anchorYUnits: 'fraction',
                 snapToPixel: false,
                 // Flag images from: http://lipis.github.io/flag-icon-css/
-                // Flag PNG from: http://365icon.com/icon-styles/ethnic/classic2/
                 src: g_pathPrefix + '/flags/' + this.get('cc') + '.svg',
-                // All those flags have size=640x480.
-                // The exected height is 32px, the same as the text.
-                //scale: 32 / 480 * scale
-
-                // Flags PNG are 48 pixels high
                 scale: 4 / 48 * scale
             })),
 
