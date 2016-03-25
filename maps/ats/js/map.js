@@ -1,8 +1,8 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 10840;
-var MAX_Y = 7600;
+var MAX_X = 10840 * 2;
+var MAX_Y = 7600 * 2;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
@@ -15,7 +15,7 @@ function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
 }
 function calculatePixelCoordinateEu(x, y) {
     //return calculatePixelCoordinate(x, y, 4.6300921273, 16075, 2170); //x+16, y+4
-	return calculatePixelCoordinate(x, y, 2.31504606365, 30920, 1540); //x+16, y+4
+	return calculatePixelCoordinate(x, y, 2.31504606365, 30929, 1547); //x+16, y+4
 }
 function calculatePixelCoordinateUk(x, y) {
     //return calculatePixelCoordinate(x, y, 9.69522, 11446, 14422);
@@ -105,7 +105,7 @@ function buildMap(target_element_id){
             // new ol.control.ZoomSlider(),
             // new ol.control.OverviewMap(),
             // new ol.control.Rotate(),
-            new ol.control.MousePosition(),  // DEBUG
+            // new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
             rotate_control,
             speed_limit_control,
@@ -122,20 +122,20 @@ function buildMap(target_element_id){
             getMapTilesLayer(projection, custom_tilegrid),
             getTextLayer(),
             // Debug layer below.
-             new ol.layer.Tile({
-                 extent: [0, 0, MAX_X, MAX_Y],
-                 source: new ol.source.TileDebug({
-                     projection: projection,
-                     tileGrid: custom_tilegrid,
+            // new ol.layer.Tile({
+            //     extent: [0, 0, MAX_X, MAX_Y],
+            //     source: new ol.source.TileDebug({
+            //         projection: projection,
+            //         tileGrid: custom_tilegrid,
             //         // tileGrid: ol.tilegrid.createXYZ({
             //         //  extent: [0, 0, MAX_X, MAX_Y],
             //         //  minZoom: 0,
             //         //  maxZoom: 7,
             //         //  tileSize: [256, 256]
             //         // }),
-                     wrapX: false
-                 })
-             }),
+            //         wrapX: false
+            //     })
+            // }),
             vectorLayer
         ],
         view: new ol.View({
