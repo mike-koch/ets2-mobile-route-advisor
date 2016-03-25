@@ -14,7 +14,8 @@ function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     ];
 }
 function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 5.264, 22300, 1900); //x+16, y+4
+    //return calculatePixelCoordinate(x, y, 4.6300921273, 16075, 2170); //x+16, y+4
+	return calculatePixelCoordinate(x, y, 2.31504606365, 30920, 1540); //x+16, y+4
 }
 function calculatePixelCoordinateUk(x, y) {
     //return calculatePixelCoordinate(x, y, 9.69522, 11446, 14422);
@@ -250,9 +251,9 @@ function getTextFeatures() {
                 anchorXUnits: 'fraction',
                 anchorYUnits: 'fraction',
                 snapToPixel: false,
-                // Flag images from: http://lipis.github.io/flag-icon-css/
+                // Flag images from: http://usa.flagpedia.net/
                 src: g_pathPrefix + '/flags-usa/' + this.get('cc') + '.png',
-                scale: 4 / 550 * scale
+                scale: 4 / 40 * scale
             })),
             text: new ol.style.Text({
                 text: this.get('realName'),
@@ -266,6 +267,7 @@ function getTextFeatures() {
     };
     var features = g_cities_json.map(function(city) {
         var map_coords = game_coord_to_pixels(city.x, city.z);
+		city.cc = COUNTRY_NAME_TO_CODE[city.country.toLowerCase()];
         var feature = new ol.Feature(city);
         feature.setGeometry(new ol.geom.Point(map_coords));
         feature.setStyle(createTextStyle);
