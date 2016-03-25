@@ -160,8 +160,16 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
 
     // Initialize JavaScript
     g_pathPrefix = 'skins/' + skinConfig.name;
-    $.getScript(g_pathPrefix + '/js/ol.js');
-    $.getScript(g_pathPrefix + '/js/map.js');
+    var ets2MapPack = skinConfig.mapPackEts2;
+
+    // Process language JSON
+    $.getJSON(g_pathPrefix + '/maps/' + skinConfig.mapPackEts2 + '/config.json', function(json) {
+        g_ets2MapPackConfig = json;
+        var scriptsToLoad = json['scripts'];
+        $.each(scriptsToLoad, function() {
+            $.getScript(g_pathPrefix + '/maps/' + skinConfig.mapPackEts2 + '/' + this);
+        });
+    });
 
     // Process Speed Units
     var distanceUnits = skinConfig.distanceUnits;
@@ -462,3 +470,6 @@ var g_currentVersion = '3.2.1';
 
 // The currently running game
 var g_runningGame;
+
+// The map pack configuration for the ets2 map pack
+var g_ets2MapPackConfig;
