@@ -9,6 +9,7 @@
     ],
     "scripts": [
         "js/map.js",
-        "js/ol.js"
+        "js/ol.js",
+		"js/cities.js"
     ]
 }
