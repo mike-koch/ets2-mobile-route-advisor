@@ -14,7 +14,7 @@ function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     ];
 }
 function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 7.278, 13164, 16260); //x+16, y+4
+    return calculatePixelCoordinate(x, y, 5.264, 22300, 1900); //x+16, y+4
 }
 function calculatePixelCoordinateUk(x, y) {
     //return calculatePixelCoordinate(x, y, 9.69522, 11446, 14422);
@@ -104,7 +104,7 @@ function buildMap(target_element_id){
             // new ol.control.ZoomSlider(),
             // new ol.control.OverviewMap(),
             // new ol.control.Rotate(),
-            // new ol.control.MousePosition(),  // DEBUG
+            new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
             rotate_control,
             speed_limit_control,
@@ -121,20 +121,20 @@ function buildMap(target_element_id){
             getMapTilesLayer(projection, custom_tilegrid),
             getTextLayer(),
             // Debug layer below.
-            // new ol.layer.Tile({
-            //     extent: [0, 0, MAX_X, MAX_Y],
-            //     source: new ol.source.TileDebug({
-            //         projection: projection,
-            //         tileGrid: custom_tilegrid,
+             new ol.layer.Tile({
+                 extent: [0, 0, MAX_X, MAX_Y],
+                 source: new ol.source.TileDebug({
+                     projection: projection,
+                     tileGrid: custom_tilegrid,
             //         // tileGrid: ol.tilegrid.createXYZ({
             //         //  extent: [0, 0, MAX_X, MAX_Y],
             //         //  minZoom: 0,
             //         //  maxZoom: 7,
             //         //  tileSize: [256, 256]
             //         // }),
-            //         wrapX: false
-            //     })
-            // }),
+                     wrapX: false
+                 })
+             }),
             vectorLayer
         ],
         view: new ol.View({
@@ -194,7 +194,7 @@ function getMapTilesLayer(projection, tileGrid) {
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
                 projection: projection,
-                url: g_pathPrefix + '/tiles/{z}/{x}/{y}.png',
+                url:  '/skins/ets2-mobile-route-advisor/maps/ats/tiles/{z}/{x}/{y}.png',
                 tileSize: [256, 256],
                 // Using createXYZ() makes the vector layer (with the features) unaligned.
                 // It also tries loading non-existent tiles.
@@ -252,7 +252,7 @@ function getTextFeatures() {
                 snapToPixel: false,
                 // Flag images from: http://lipis.github.io/flag-icon-css/
                 src: g_pathPrefix + '/flags-usa/' + this.get('cc') + '.png',
-                scale: 4 / 55 * scale
+                scale: 4 / 550 * scale
             })),
             text: new ol.style.Text({
                 text: this.get('realName'),
