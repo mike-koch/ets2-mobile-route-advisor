@@ -292,12 +292,14 @@ function getTextFeatures() {
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
-                scale: scale
+                scale: scale,
+				offsetY: 14 * scale
             })
         })];
     };
     var features = g_cities_json.map(function(city) {
         var map_coords = game_coord_to_pixels(city.x, city.z);
+		city.cc = COUNTRY_NAME_TO_CODE[city.country.toLowerCase()];
         var feature = new ol.Feature(city);
         feature.setGeometry(new ol.geom.Point(map_coords));
         feature.setStyle(createTextStyle);
