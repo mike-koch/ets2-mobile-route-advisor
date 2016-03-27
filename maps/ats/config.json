@@ -1,0 +1,15 @@
+{
+    "comments": [
+        "Here you will define the necessary properties for your map pack. Below are the required parameters:",
+        "-------",
+        "scripts: An array of required JavaScript files needed to load the map, relative to this config's location.",
+        "-------",
+        "For more information on how to build your map pack, check out the Mobile Route Advisor wiki at:",
+        "   https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Creating-a-Map-Pack"
+    ],
+    "scripts": [
+		"js/cities.js",
+        "js/map.js",
+        "js/ol.js"
+    ]
+}
