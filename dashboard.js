@@ -161,13 +161,21 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // Initialize JavaScript
     g_pathPrefix = 'skins/' + skinConfig.name;
     var ets2MapPack = skinConfig.mapPackEts2;
+    var atsMapPack = skinConfig.mapPackAts;
 
-    // Process language JSON
-    $.getJSON(g_pathPrefix + '/maps/' + skinConfig.mapPackEts2 + '/config.json', function(json) {
+    // Process map JSON
+    $.getJSON(g_pathPrefix + '/maps/' + skinConfig.ets2MapPack + '/config.json', function(json) {
         g_ets2MapPackConfig = json;
         var scriptsToLoad = json['scripts'];
         $.each(scriptsToLoad, function() {
-            $.getScript(g_pathPrefix + '/maps/' + skinConfig.mapPackEts2 + '/' + this);
+            $.getScript(g_pathPrefix + '/maps/' + skinConfig.ets2MapPack + '/' + this);
+        });
+    });
+    $.getJSON(g_pathPrefix + '/maps/' + skinConfig.atsMapPack + '/config.json', function(json) {
+        g_atsMapPackConfig = json;
+        var scriptsToLoad = json['scripts'];
+        $.each(scriptsToLoad, function() {
+            $.getScript(g_pathPrefix + '/maps/' + skinConfig.atsMapPack + '/' + this);
         });
     });
 
@@ -497,5 +505,6 @@ var g_currentVersion = '3.2.1';
 // The currently running game
 var g_runningGame;
 
-// The map pack configuration for the ets2 map pack
+// The map pack configuration for the ets2 and ats map packs
 var g_ets2MapPackConfig;
+var g_atsMapPackConfig;
