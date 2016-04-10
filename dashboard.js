@@ -194,7 +194,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     $('#version').text(versionText + g_currentVersion);
 
     var tabToShow = getLocalStorageItem('currentTab', '_cargo');
-    if (tabToShow == null || tabToShow == '_map') {
+    if (tabToShow == null) {
         tabToShow = '_cargo';
     }
     removeLocalStorageItem('currentTab');
@@ -400,16 +400,6 @@ function showTab(tabName) {
     $('#' + tabName + '_button').addClass('_active_tab_button');
 }
 
-// The map is loaded when the user tries to view it for the first time.
-function goToMap() {
-    showTab('_map');
-
-    // "g_map" variable is defined in js/map.js.
-    if (!g_map) {
-        buildMap('_map');
-    }
-}
-
 /** Returns the difference between two dates in ISO 8601 format in an [hour, minutes] array */
 function getTimeDifference(begin, end) {
     var beginDate = new Date(begin);
@@ -468,7 +458,10 @@ function processDomChanges(data) {
         g_mapPackConfig = json;
         var scriptsToLoad = json['scripts'];
         $.each(scriptsToLoad, function() {
-            $.getScript(g_pathPrefix + '/maps/' + mapPack + '/' + this);
+            $.getScript(g_pathPrefix + '/maps/' + mapPack + '/' + this, function() {
+                // There will be 2 errors in the dev console when trying to build the map. This is normal, albeit not ideal.
+                buildMap('_map');
+            });
         });
     });
 
@@ -528,7 +521,6 @@ Date.prototype.addSeconds = function(s) {
     this.setTime(this.getTime() + (s*1000));
     return this;
 }
-
 
 // Global vars
 
