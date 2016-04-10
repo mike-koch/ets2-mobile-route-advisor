@@ -92,7 +92,7 @@ function buildMap(target_element_id){
     g_map = new ol.Map({
         target: target_element_id,
         controls: [
-            new ol.control.MousePosition(),  // DEBUG
+            //new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
             rotate_control,
             speed_limit_control,
@@ -198,7 +198,8 @@ function getTextFeatures() {
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
-                scale: scale
+                scale: scale,
+                offsetY: 15 * scale
             })
         })];
     };
