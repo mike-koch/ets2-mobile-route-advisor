@@ -538,3 +538,5 @@ var g_lastRunningGame;
 
 // The map pack configuration for the ets2 and ats map packs
 var g_mapPackConfig;
+
+var g_map;

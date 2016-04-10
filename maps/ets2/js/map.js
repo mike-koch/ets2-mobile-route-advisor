@@ -337,7 +337,6 @@ function getMapTilesLayer(projection, tileGrid) {
 }
 
 // Global vars.
-var g_map;
 var g_playerFeature;
 var g_playerIcon;
 var g_behavior_center_on_player = true;
