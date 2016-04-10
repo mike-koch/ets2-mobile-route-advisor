@@ -16,7 +16,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         return data;
     }
 
-    g_runningGame = data.game.gameName;
     data.isEts2 = g_runningGame == 'ETS2';
     data.isAts = !data.isEts2;
 
@@ -87,6 +86,16 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     // If the game isn't connected, don't both calculating anything.
     if (!data.game.connected) {
         return data;
+    }
+
+    if (data.game.gameName != null) {
+        g_runningGame = data.game.gameName;
+
+        if (g_runningGame != g_lastRunningGame)
+            window.reload();
+        }
+
+        g_runningGame = data.game.gameName;
     }
 
     // data - same data object as in the filter function
@@ -164,7 +173,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
 
     // Process language JSON
     $.getJSON(g_pathPrefix + '/maps/' + skinConfig.mapPackEts2 + '/config.json', function(json) {
-        g_ets2MapPackConfig = json;
+        g_mapPackConfig = json;
         var scriptsToLoad = json['scripts'];
         $.each(scriptsToLoad, function() {
             $.getScript(g_pathPrefix + '/maps/' + skinConfig.mapPackEts2 + '/' + this);
@@ -227,7 +236,8 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     versionText = $('#version').text();
     $('#version').text(versionText + g_currentVersion);
 
-    showTab('_cargo');
+    var tabToShow = getLocalStorageItem('currentTab', '_cargo');
+    showTab(tabToShow);
 }
 
 function getDaysHoursMinutesAndSeconds(time) {
@@ -401,6 +411,8 @@ function showTab(tabName) {
 
     $('._active_tab_button').removeClass('_active_tab_button');
     $('#' + tabName + '_button').addClass('_active_tab_button');
+
+    setLocalStorageItem('currentTab', tabName);
 }
 
 // The map is loaded when the user tries to view it for the first time.
@@ -431,6 +443,22 @@ function isWorldOfTrucksContract(data) {
 
     return data.job.deadlineTime === WORLD_OF_TRUCKS_DEADLINE_TIME
         && data.job.remainingTime === WORLD_OF_TRUCKS_REMAINING_TIME;
+}
+
+// Wrapper function to set an item to local storage.
+function setLocalStorageItem(key, value) {
+    if (typeof(Storage) !== "undefined") {
+        localStorage.setItem(key, value);
+    }
+}
+
+// Wrapper function to get an item from local storage, or default if local storage is not supported.
+function getLocalStorageItem(key, defaultValue) {
+    if (typeof(Storage) !== "undefined") {
+        return localStorage.getItem(key);
+    }
+
+    return defaultValue;
 }
 
 Date.prototype.addDays = function(d) {
@@ -471,5 +499,8 @@ var g_currentVersion = '3.2.1';
 // The currently running game
 var g_runningGame;
 
-// The map pack configuration for the ets2 map pack
-var g_ets2MapPackConfig;
+// The running game the last time we checked
+var g_lastRunningGame;
+
+// The map pack configuration for the ets2 and ats map packs
+var g_mapPackConfig;
