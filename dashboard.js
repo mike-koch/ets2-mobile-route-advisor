@@ -68,10 +68,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         data.jobIncome = getAtsJobIncome(data.job.income);
     }
 
-
-
-
-
     // Non-WoT stuff here
     if (!data.isWorldOfTrucksContract || data.isAts) {
         data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12);
@@ -89,13 +85,15 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     }
 
     if (data.game.gameName != null) {
+        g_lastRunningGame = g_runningGame;
         g_runningGame = data.game.gameName;
 
-        if (g_runningGame != g_lastRunningGame)
-            window.reload();
+
+        if (g_runningGame != g_lastRunningGame
+            && g_lastRunningGame !== undefined) {
+            setLocalStorageItem('currentTab', $('._tabs').find('article:visible:first').attr('id'));
+            location.reload();
         }
-
-        g_runningGame = data.game.gameName;
     }
 
     // data - same data object as in the filter function
@@ -169,19 +167,19 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
 
     // Initialize JavaScript
     g_pathPrefix = 'skins/' + skinConfig.name;
-    var ets2MapPack = skinConfig.mapPackEts2;
+    var ets2MapPack = skinConfig.ets2.mapPack;
 
     // Process language JSON
-    $.getJSON(g_pathPrefix + '/maps/' + skinConfig.mapPackEts2 + '/config.json', function(json) {
+    $.getJSON(g_pathPrefix + '/maps/' + ets2MapPack + '/config.json', function(json) {
         g_mapPackConfig = json;
         var scriptsToLoad = json['scripts'];
         $.each(scriptsToLoad, function() {
-            $.getScript(g_pathPrefix + '/maps/' + skinConfig.mapPackEts2 + '/' + this);
+            $.getScript(g_pathPrefix + '/maps/' + ets2MapPack + '/' + this);
         });
     });
 
     // Process Speed Units
-    var distanceUnits = skinConfig.distanceUnits;
+    var distanceUnits = skinConfig.ets2.distanceUnits;
     if (distanceUnits === 'km') {
         $('.speedUnits').text('km/h');
         $('.distanceUnits').text('km');
@@ -197,7 +195,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     }
 
     // Process kg vs tons
-    var weightUnits = skinConfig.weightUnits;
+    var weightUnits = skinConfig.ets2.weightUnits;
     if (weightUnits === 'kg') {
         $('.trailerMassKgOrT').addClass('trailerMassKg').removeClass('trailerMassKgOrT');
     } else if (weightUnits === 't') {
@@ -207,7 +205,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     }
 
     // Process 12 vs 24 hr time
-    var timeFormat = skinConfig.timeFormat;
+    var timeFormat = skinConfig.ets2.timeFormat;
     if (timeFormat === '12h') {
         $('.game-time').addClass('gameTime12h').removeClass('game-time');
         $('.job-deadlineTime').addClass('jobDeadlineTime12h').removeClass('job-deadlineTime');
@@ -237,6 +235,10 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     $('#version').text(versionText + g_currentVersion);
 
     var tabToShow = getLocalStorageItem('currentTab', '_cargo');
+    if (tabToShow == null || tabToShow == '_map') {
+        tabToShow = '_cargo';
+    }
+    removeLocalStorageItem('currentTab');
     showTab(tabToShow);
 }
 
@@ -358,7 +360,7 @@ function getEts2JobIncome(income) {
         PLN: 4.2
         HUF: 293
     */
-    var currencyCode = g_skinConfig.currencyCodeEts2;
+    var currencyCode = g_skinConfig.ets2.currencyCode;
     if (currencyCode == 'EUR') {
         income = '&euro;&nbsp;' + income;
     } else if (currencyCode == 'GBP') {
@@ -386,7 +388,7 @@ function getAtsJobIncome(income) {
         USD: 1
         EUR: 0.75
     */
-    var currencyCode = g_skinConfig.currencyCodeAts;
+    var currencyCode = g_skinConfig.ats.currencyCode;
     if (currencyCode == 'USD') {
         income = '&#36;&nbsp;' + income + '.-';
     } else {
@@ -411,13 +413,12 @@ function showTab(tabName) {
 
     $('._active_tab_button').removeClass('_active_tab_button');
     $('#' + tabName + '_button').addClass('_active_tab_button');
-
-    setLocalStorageItem('currentTab', tabName);
 }
 
 // The map is loaded when the user tries to view it for the first time.
 function goToMap() {
     showTab('_map');
+
     // "g_map" variable is defined in js/map.js.
     if (!g_map) {
         buildMap('_map');
@@ -459,6 +460,13 @@ function getLocalStorageItem(key, defaultValue) {
     }
 
     return defaultValue;
+}
+
+// Wrapper function to remove an item from local storage
+function removeLocalStorageItem(key) {
+    if (typeof(Storage) !== "undefined") {
+        return localStorage.removeItem(key);
+    }
 }
 
 Date.prototype.addDays = function(d) {
