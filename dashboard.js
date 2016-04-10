@@ -16,6 +16,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         return data;
     }
 
+    // Process DOM changes here now that we have data. We should only do this once.
+    if (!g_processedDomChanges) {
+        processDomChanges(data);
+    }
+
     data.isEts2 = g_runningGame == 'ETS2';
     data.isAts = !data.isEts2;
 
@@ -164,56 +169,10 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // so you may perform any DOM or resource initializations here
 
     g_skinConfig = skinConfig;
-
-    // Initialize JavaScript
-    g_pathPrefix = 'skins/' + skinConfig.name;
-    var ets2MapPack = skinConfig.ets2.mapPack;
+    g_pathPrefix = 'skins/' + g_skinConfig.name;
 
     // Process language JSON
-    $.getJSON(g_pathPrefix + '/maps/' + ets2MapPack + '/config.json', function(json) {
-        g_mapPackConfig = json;
-        var scriptsToLoad = json['scripts'];
-        $.each(scriptsToLoad, function() {
-            $.getScript(g_pathPrefix + '/maps/' + ets2MapPack + '/' + this);
-        });
-    });
-
-    // Process Speed Units
-    var distanceUnits = skinConfig.ets2.distanceUnits;
-    if (distanceUnits === 'km') {
-        $('.speedUnits').text('km/h');
-        $('.distanceUnits').text('km');
-        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedRounded').removeClass('truckSpeedRoundedKmhMph');
-        $('.speedLimitRoundedKmhMph').addClass('navigation-speedLimit').removeClass('speedLimitRoundedKmhMph');
-        $('.navigationEstimatedDistanceKmMi').addClass('navigation-estimatedDistanceKmRounded').removeClass('navigationEstimatedDistanceKmMi');
-    } else if (distanceUnits === 'mi') {
-        $('.speedUnits').text('mph');
-        $('.distanceUnits').text('mi');
-        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedMphRounded').removeClass('truckSpeedRoundedKmhMph');
-        $('.speedLimitRoundedKmhMph').addClass('navigation-speedLimitMphRounded').removeClass('speedLimitRoundedKmhMph');
-        $('.navigationEstimatedDistanceKmMi').addClass('navigation-estimatedDistanceMiRounded').removeClass('navigationEstimatedDistanceKmMi');
-    }
-
-    // Process kg vs tons
-    var weightUnits = skinConfig.ets2.weightUnits;
-    if (weightUnits === 'kg') {
-        $('.trailerMassKgOrT').addClass('trailerMassKg').removeClass('trailerMassKgOrT');
-    } else if (weightUnits === 't') {
-        $('.trailerMassKgOrT').addClass('trailerMassTons').removeClass('trailerMassKgOrT');
-    } else if (weightUnits === 'lb') {
-        $('.trailerMassKgOrT').addClass('trailerMassLbs').removeClass('trailerMassKgOrT');
-    }
-
-    // Process 12 vs 24 hr time
-    var timeFormat = skinConfig.ets2.timeFormat;
-    if (timeFormat === '12h') {
-        $('.game-time').addClass('gameTime12h').removeClass('game-time');
-        $('.job-deadlineTime').addClass('jobDeadlineTime12h').removeClass('job-deadlineTime');
-        $('.navigation-estimatedTime').addClass('navigation-estimatedTime12h').removeClass('navigation-estimatedTime');
-    }
-
-    // Process language JSON
-    $.getJSON(g_pathPrefix+'/language/'+skinConfig.language, function(json) {
+    $.getJSON(g_pathPrefix + '/language/' + g_skinConfig.language, function(json) {
         g_translations = json;
         $.each(json, function(key, value) {
             updateLanguage(key, value);
@@ -355,7 +314,7 @@ function getEts2JobIncome(income) {
         See https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Side-Notes#currency-code-multipliers
         for more information.
     */
-    var currencyCode = g_skinConfig.currencyCodeEts2;
+    var currencyCode = g_skinConfig[g_configPrefix].currencyCode;
     var currencyCodes = [];
     currencyCodes['EUR'] = buildCurrencyCode(1, '', '&euro;', '');
     currencyCodes['GBP'] = buildCurrencyCode(0.8, '', '&pound;', '');
@@ -408,7 +367,7 @@ function getAtsJobIncome(income) {
         See https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Side-Notes#currency-code-multipliers
         for more information.
     */
-    var currencyCode = g_skinConfig.currencyCodeAts;
+    var currencyCode = g_skinConfig[g_configPrefix].currencyCode;
     var currencyCodes = [];
     currencyCodes['USD'] = buildCurrencyCode(1, '', '&#36;', '');
     currencyCodes['EUR'] = buildCurrencyCode(.75, '', '&euro;', '');
@@ -495,6 +454,61 @@ function removeLocalStorageItem(key) {
     }
 }
 
+function processDomChanges(data) {
+    g_configPrefix = 'ets2';
+    if (data.game.gameName != null) {
+        g_configPrefix = data.game.gameName.toLowerCase();
+    }
+
+    // Initialize JavaScript
+    var mapPack = g_skinConfig[g_configPrefix].mapPack;
+
+    // Process map pack JSON
+    $.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
+        g_mapPackConfig = json;
+        var scriptsToLoad = json['scripts'];
+        $.each(scriptsToLoad, function() {
+            $.getScript(g_pathPrefix + '/maps/' + mapPack + '/' + this);
+        });
+    });
+
+    // Process Speed Units
+    var distanceUnits = g_skinConfig[g_configPrefix].distanceUnits;
+    if (distanceUnits === 'km') {
+        $('.speedUnits').text('km/h');
+        $('.distanceUnits').text('km');
+        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedRounded').removeClass('truckSpeedRoundedKmhMph');
+        $('.speedLimitRoundedKmhMph').addClass('navigation-speedLimit').removeClass('speedLimitRoundedKmhMph');
+        $('.navigationEstimatedDistanceKmMi').addClass('navigation-estimatedDistanceKmRounded').removeClass('navigationEstimatedDistanceKmMi');
+    } else if (distanceUnits === 'mi') {
+        $('.speedUnits').text('mph');
+        $('.distanceUnits').text('mi');
+        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedMphRounded').removeClass('truckSpeedRoundedKmhMph');
+        $('.speedLimitRoundedKmhMph').addClass('navigation-speedLimitMphRounded').removeClass('speedLimitRoundedKmhMph');
+        $('.navigationEstimatedDistanceKmMi').addClass('navigation-estimatedDistanceMiRounded').removeClass('navigationEstimatedDistanceKmMi');
+    }
+
+    // Process kg vs tons
+    var weightUnits = g_skinConfig[g_configPrefix].weightUnits;
+    if (weightUnits === 'kg') {
+        $('.trailerMassKgOrT').addClass('trailerMassKg').removeClass('trailerMassKgOrT');
+    } else if (weightUnits === 't') {
+        $('.trailerMassKgOrT').addClass('trailerMassTons').removeClass('trailerMassKgOrT');
+    } else if (weightUnits === 'lb') {
+        $('.trailerMassKgOrT').addClass('trailerMassLbs').removeClass('trailerMassKgOrT');
+    }
+
+    // Process 12 vs 24 hr time
+    var timeFormat = g_skinConfig[g_configPrefix].timeFormat;
+    if (timeFormat === '12h') {
+        $('.game-time').addClass('gameTime12h').removeClass('game-time');
+        $('.job-deadlineTime').addClass('jobDeadlineTime12h').removeClass('job-deadlineTime');
+        $('.navigation-estimatedTime').addClass('navigation-estimatedTime12h').removeClass('navigation-estimatedTime');
+    }
+
+    g_processedDomChanges = true;
+}
+
 Date.prototype.addDays = function(d) {
     this.setUTCDate(this.getUTCDate() + d - 1);
     return this;
@@ -533,10 +547,16 @@ var g_currentVersion = '3.2.1';
 // The currently running game
 var g_runningGame;
 
+// The prefix for game-specific settings (either "ets2" or "ats")
+var g_configPrefix;
+
 // The running game the last time we checked
 var g_lastRunningGame;
 
 // The map pack configuration for the ets2 and ats map packs
 var g_mapPackConfig;
+
+// Checked if we have processed the DOM changes already.
+var g_processedDomChanges;
 
 var g_map;
