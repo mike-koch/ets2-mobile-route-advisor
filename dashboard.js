@@ -352,50 +352,76 @@ function updateLanguage(key, value) {
 
 function getEts2JobIncome(income) {
     /*
-        Looking at an economy_data.sii file found, the conversion rates are:
-        EUR: 1
-        CHF: 1.2
-        CZK: 25
-        GBP: 0.8
-        PLN: 4.2
-        HUF: 293
+        See https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Side-Notes#currency-code-multipliers
+        for more information.
     */
-    var currencyCode = g_skinConfig.ets2.currencyCode;
-    if (currencyCode == 'EUR') {
-        income = '&euro;&nbsp;' + income;
-    } else if (currencyCode == 'GBP') {
-        income *= 0.8;
-        income = '&pound;&nbsp;' + income;
-    } else if (currencyCode == 'CHF') {
-        income *= 1.2;
-        income += '.&nbsp;-&nbsp;CHF';
-    } else if (currencyCode == 'CZK') {
-        income *= 25;
-        income += '.&nbsp;-&nbsp;K&#x10D;';
-    } else if (currencyCode == 'PLN') {
-        income *= 4.2;
-        income += '.&nbsp;-&nbsp;z&#0322;';
-    } else if (currencyCode == 'HUF') {
-        income *= 293;
-        income += '.&nbsp;-&nbsp;Ft';
+    var currencyCode = g_skinConfig.currencyCodeEts2;
+    var currencyCodes = [];
+    currencyCodes['EUR'] = buildCurrencyCode(1, '', '&euro;', '');
+    currencyCodes['GBP'] = buildCurrencyCode(0.8, '', '&pound;', '');
+    currencyCodes['CHF'] = buildCurrencyCode(1.2, '', '', ' CHF');
+    currencyCodes['CZK'] = buildCurrencyCode(25, '', '', ' K&#x10D;');
+    currencyCodes['PLN'] = buildCurrencyCode(4.2, '', '', ' z&#0322;');
+    currencyCodes['HUF'] = buildCurrencyCode(293, '', '', ' Ft');
+    currencyCodes['DKK'] = buildCurrencyCode(7.5, '', '', ' kr');
+    currencyCodes['SEK'] = buildCurrencyCode(9.4, '', '', ' kr');
+    currencyCodes['NOK'] = buildCurrencyCode(8.6, '', '', ' kr');
+
+    var code = currencyCodes[currencyCode];
+
+    if (code === undefined) {
+        var errorText = "Configuration Issue: The currency code '" + currencyCode + "' is invalid. Reverted to 'EUR'.";
+        code = currencyCodes['EUR'];
+        console.error(errorText);
     }
-    return income;
+
+    return formatIncome(income, code);
+}
+
+function buildCurrencyCode(multiplier, symbolOne, symbolTwo, symbolThree) {
+    return {
+        "multiplier": multiplier,
+        "symbolOne": symbolOne,
+        "symbolTwo": symbolTwo,
+        "symbolThree": symbolThree
+    };
+}
+
+function formatIncome(income, currencyCode) {
+    /* Taken directly from economy_data.sii:
+          - {0} First prefix (no currency codes currently use this)
+          - {1} Second prefix (such as euro, pound, dollar, etc)
+          - {2} The actual income, already converted into the proper currency
+          - {3} Third prefix (such as CHF, Ft, or kr)
+    */
+    var incomeFormat = "{0}{1} {2}.- {3}";
+    income *= currencyCode.multiplier;
+
+    return incomeFormat.replace('{0}', currencyCode.symbolOne)
+        .replace('{1}', currencyCode.symbolTwo)
+        .replace('{2}', income)
+        .replace('{3}', currencyCode.symbolThree);
 }
 
 function getAtsJobIncome(income) {
     /*
-        Looking at an economy_data.sii file found, the conversion rates are:
-        USD: 1
-        EUR: 0.75
+        See https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Side-Notes#currency-code-multipliers
+        for more information.
     */
-    var currencyCode = g_skinConfig.ats.currencyCode;
-    if (currencyCode == 'USD') {
-        income = '&#36;&nbsp;' + income + '.-';
-    } else {
-        income *= 0.75;
-        income = '&euro;&nbsp;' + income + '.-';
+    var currencyCode = g_skinConfig.currencyCodeAts;
+    var currencyCodes = [];
+    currencyCodes['USD'] = buildCurrencyCode(1, '', '&#36;', '');
+    currencyCodes['EUR'] = buildCurrencyCode(.75, '', '&euro;', '');
+
+    var code = currencyCodes[currencyCode];
+
+    if (code === undefined) {
+        var errorText = "Configuration Issue: The currency code '" + currencyCode + "' is invalid. Reverted to 'USD'.";
+        code = currencyCodes['USD'];
+        console.error(errorText);
     }
-    return income;
+
+    return formatIncome(income, code);
 }
 
 function getDamagePercentage(data) {
