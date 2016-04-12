@@ -88,9 +88,6 @@ function buildMap(target_element_id){
         element: document.getElementById('map-text')
     });
 
-    // Remove the loading text
-    $('article#_map').html('');
-
     // Creating the map.
     g_map = new ol.Map({
         target: target_element_id,
@@ -147,6 +144,8 @@ function buildMap(target_element_id){
         // The user has moved or rotated the map.
         g_behavior_center_on_player = false;
     });
+
+    return true;
 }
 
 function getMapTilesLayer(projection, tileGrid) {

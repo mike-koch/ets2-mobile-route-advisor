@@ -503,7 +503,9 @@ function loadScripts(mapPack, index, array) {
         if (nextIndex != array.length) {
             loadScripts(mapPack, nextIndex, array);
         } else {
-            buildMap('_map');
+            if (buildMap('_map')) {
+                $('article > p.loading-text').hide();
+            }
         }
     });
 }
