@@ -215,6 +215,9 @@ function buildMap(target_element_id){
         element: document.getElementById('map-text')
     });
 
+    // Remove the loading text.
+    $('article#_map').html('');
+
     // Creating the map.
     g_map = new ol.Map({
         target: target_element_id,

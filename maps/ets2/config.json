@@ -8,8 +8,8 @@
         "   https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Creating-a-Map-Pack"
     ],
     "scripts": [
-        "js/map.js",
         "js/ol.js",
-        "js/cities.js"
+        "js/cities.js",
+        "js/map.js"
     ]
 }

@@ -456,13 +456,8 @@ function processDomChanges(data) {
     // Process map pack JSON
     $.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
         g_mapPackConfig = json;
-        var scriptsToLoad = json['scripts'];
-        $.each(scriptsToLoad, function() {
-            $.getScript(g_pathPrefix + '/maps/' + mapPack + '/' + this, function() {
-                // There will be 2 errors in the dev console when trying to build the map. This is normal, albeit not ideal.
-                buildMap('_map');
-            });
-        });
+
+        loadScripts(mapPack, 0, g_mapPackConfig.scripts);
     });
 
     // Process Speed Units
@@ -500,6 +495,22 @@ function processDomChanges(data) {
     }
 
     g_processedDomChanges = true;
+}
+
+function loadScripts(mapPack, index, array) {
+    $.getScript(g_pathPrefix + '/maps/' + mapPack + '/' + array[index], function() {
+        var nextIndex = index + 1;
+        if (nextIndex != array.length) {
+            loadScripts(mapPack, nextIndex, array);
+        } else {
+            buildMap('_map');
+        }
+    });
+}
+
+function goToMap() {
+    showTab('_map');
+    g_map.updateSize();
 }
 
 Date.prototype.addDays = function(d) {
