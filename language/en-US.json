@@ -22,5 +22,6 @@
     "ThursdayAbbreviated": "Thu",
     "FridayAbbreviated": "Fri",
     "SaturdayAbbreviated": "Sat",
-    "WorldOfTrucksContract": "World of Trucks Contract"
+    "WorldOfTrucksContract": "World of Trucks Contract",
+    "LoadingMapPleaseWait": "Loading map, please wait..."
 }

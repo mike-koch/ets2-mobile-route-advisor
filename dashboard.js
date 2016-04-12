@@ -16,7 +16,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         return data;
     }
 
-    g_runningGame = data.game.gameName;
+    // Process DOM changes here now that we have data. We should only do this once.
+    if (!g_processedDomChanges) {
+        processDomChanges(data);
+    }
+
     data.isEts2 = g_runningGame == 'ETS2';
     data.isAts = !data.isEts2;
 
@@ -69,10 +73,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         data.jobIncome = getAtsJobIncome(data.job.income);
     }
 
-
-
-
-
     // Non-WoT stuff here
     if (!data.isWorldOfTrucksContract || data.isAts) {
         data.jobDeadlineTime12h = getTime(data.job.deadlineTime, 12);
@@ -87,6 +87,18 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     // If the game isn't connected, don't both calculating anything.
     if (!data.game.connected) {
         return data;
+    }
+
+    if (data.game.gameName != null) {
+        g_lastRunningGame = g_runningGame;
+        g_runningGame = data.game.gameName;
+
+
+        if (g_runningGame != g_lastRunningGame
+            && g_lastRunningGame !== undefined) {
+            setLocalStorageItem('currentTab', $('._tabs').find('article:visible:first').attr('id'));
+            location.reload();
+        }
     }
 
     // data - same data object as in the filter function
@@ -157,64 +169,10 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     // so you may perform any DOM or resource initializations here
 
     g_skinConfig = skinConfig;
-
-    // Initialize JavaScript
-    g_pathPrefix = 'skins/' + skinConfig.name;
-    var ets2MapPack = skinConfig.mapPackEts2;
-    var atsMapPack = skinConfig.mapPackAts;
-
-    // Process map JSON
-    $.getJSON(g_pathPrefix + '/maps/' + skinConfig.ets2MapPack + '/config.json', function(json) {
-        g_ets2MapPackConfig = json;
-        var scriptsToLoad = json['scripts'];
-        $.each(scriptsToLoad, function() {
-            $.getScript(g_pathPrefix + '/maps/' + skinConfig.ets2MapPack + '/' + this);
-        });
-    });
-    $.getJSON(g_pathPrefix + '/maps/' + skinConfig.atsMapPack + '/config.json', function(json) {
-        g_atsMapPackConfig = json;
-        var scriptsToLoad = json['scripts'];
-        $.each(scriptsToLoad, function() {
-            $.getScript(g_pathPrefix + '/maps/' + skinConfig.atsMapPack + '/' + this);
-        });
-    });
-
-    // Process Speed Units
-    var distanceUnits = skinConfig.distanceUnits;
-    if (distanceUnits === 'km') {
-        $('.speedUnits').text('km/h');
-        $('.distanceUnits').text('km');
-        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedRounded').removeClass('truckSpeedRoundedKmhMph');
-        $('.speedLimitRoundedKmhMph').addClass('navigation-speedLimit').removeClass('speedLimitRoundedKmhMph');
-        $('.navigationEstimatedDistanceKmMi').addClass('navigation-estimatedDistanceKmRounded').removeClass('navigationEstimatedDistanceKmMi');
-    } else if (distanceUnits === 'mi') {
-        $('.speedUnits').text('mph');
-        $('.distanceUnits').text('mi');
-        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedMphRounded').removeClass('truckSpeedRoundedKmhMph');
-        $('.speedLimitRoundedKmhMph').addClass('navigation-speedLimitMphRounded').removeClass('speedLimitRoundedKmhMph');
-        $('.navigationEstimatedDistanceKmMi').addClass('navigation-estimatedDistanceMiRounded').removeClass('navigationEstimatedDistanceKmMi');
-    }
-
-    // Process kg vs tons
-    var weightUnits = skinConfig.weightUnits;
-    if (weightUnits === 'kg') {
-        $('.trailerMassKgOrT').addClass('trailerMassKg').removeClass('trailerMassKgOrT');
-    } else if (weightUnits === 't') {
-        $('.trailerMassKgOrT').addClass('trailerMassTons').removeClass('trailerMassKgOrT');
-    } else if (weightUnits === 'lb') {
-        $('.trailerMassKgOrT').addClass('trailerMassLbs').removeClass('trailerMassKgOrT');
-    }
-
-    // Process 12 vs 24 hr time
-    var timeFormat = skinConfig.timeFormat;
-    if (timeFormat === '12h') {
-        $('.game-time').addClass('gameTime12h').removeClass('game-time');
-        $('.job-deadlineTime').addClass('jobDeadlineTime12h').removeClass('job-deadlineTime');
-        $('.navigation-estimatedTime').addClass('navigation-estimatedTime12h').removeClass('navigation-estimatedTime');
-    }
+    g_pathPrefix = 'skins/' + g_skinConfig.name;
 
     // Process language JSON
-    $.getJSON(g_pathPrefix+'/language/'+skinConfig.language, function(json) {
+    $.getJSON(g_pathPrefix + '/language/' + g_skinConfig.language, function(json) {
         g_translations = json;
         $.each(json, function(key, value) {
             updateLanguage(key, value);
@@ -235,7 +193,12 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
     versionText = $('#version').text();
     $('#version').text(versionText + g_currentVersion);
 
-    showTab('_cargo');
+    var tabToShow = getLocalStorageItem('currentTab', '_cargo');
+    if (tabToShow == null) {
+        tabToShow = '_cargo';
+    }
+    removeLocalStorageItem('currentTab');
+    showTab(tabToShow);
 }
 
 function getDaysHoursMinutesAndSeconds(time) {
@@ -351,7 +314,7 @@ function getEts2JobIncome(income) {
         See https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Side-Notes#currency-code-multipliers
         for more information.
     */
-    var currencyCode = g_skinConfig.currencyCodeEts2;
+    var currencyCode = g_skinConfig[g_configPrefix].currencyCode;
     var currencyCodes = [];
     currencyCodes['EUR'] = buildCurrencyCode(1, '', '&euro;', '');
     currencyCodes['GBP'] = buildCurrencyCode(0.8, '', '&pound;', '');
@@ -404,7 +367,7 @@ function getAtsJobIncome(income) {
         See https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Side-Notes#currency-code-multipliers
         for more information.
     */
-    var currencyCode = g_skinConfig.currencyCodeAts;
+    var currencyCode = g_skinConfig[g_configPrefix].currencyCode;
     var currencyCodes = [];
     currencyCodes['USD'] = buildCurrencyCode(1, '', '&#36;', '');
     currencyCodes['EUR'] = buildCurrencyCode(.75, '', '&euro;', '');
@@ -437,15 +400,6 @@ function showTab(tabName) {
     $('#' + tabName + '_button').addClass('_active_tab_button');
 }
 
-// The map is loaded when the user tries to view it for the first time.
-function goToMap() {
-    showTab('_map');
-    // "g_map" variable is defined in js/map.js.
-    if (!g_map) {
-        buildMap('_map');
-    }
-}
-
 /** Returns the difference between two dates in ISO 8601 format in an [hour, minutes] array */
 function getTimeDifference(begin, end) {
     var beginDate = new Date(begin);
@@ -465,6 +419,100 @@ function isWorldOfTrucksContract(data) {
 
     return data.job.deadlineTime === WORLD_OF_TRUCKS_DEADLINE_TIME
         && data.job.remainingTime === WORLD_OF_TRUCKS_REMAINING_TIME;
+}
+
+// Wrapper function to set an item to local storage.
+function setLocalStorageItem(key, value) {
+    if (typeof(Storage) !== "undefined") {
+        localStorage.setItem(key, value);
+    }
+}
+
+// Wrapper function to get an item from local storage, or default if local storage is not supported.
+function getLocalStorageItem(key, defaultValue) {
+    if (typeof(Storage) !== "undefined") {
+        return localStorage.getItem(key);
+    }
+
+    return defaultValue;
+}
+
+// Wrapper function to remove an item from local storage
+function removeLocalStorageItem(key) {
+    if (typeof(Storage) !== "undefined") {
+        return localStorage.removeItem(key);
+    }
+}
+
+function processDomChanges(data) {
+    g_configPrefix = 'ets2';
+    if (data.game.gameName != null) {
+        g_configPrefix = data.game.gameName.toLowerCase();
+    }
+
+    // Initialize JavaScript
+    var mapPack = g_skinConfig[g_configPrefix].mapPack;
+
+    // Process map pack JSON
+    $.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
+        g_mapPackConfig = json;
+
+        loadScripts(mapPack, 0, g_mapPackConfig.scripts);
+    });
+
+    // Process Speed Units
+    var distanceUnits = g_skinConfig[g_configPrefix].distanceUnits;
+    if (distanceUnits === 'km') {
+        $('.speedUnits').text('km/h');
+        $('.distanceUnits').text('km');
+        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedRounded').removeClass('truckSpeedRoundedKmhMph');
+        $('.speedLimitRoundedKmhMph').addClass('navigation-speedLimit').removeClass('speedLimitRoundedKmhMph');
+        $('.navigationEstimatedDistanceKmMi').addClass('navigation-estimatedDistanceKmRounded').removeClass('navigationEstimatedDistanceKmMi');
+    } else if (distanceUnits === 'mi') {
+        $('.speedUnits').text('mph');
+        $('.distanceUnits').text('mi');
+        $('.truckSpeedRoundedKmhMph').addClass('truckSpeedMphRounded').removeClass('truckSpeedRoundedKmhMph');
+        $('.speedLimitRoundedKmhMph').addClass('navigation-speedLimitMphRounded').removeClass('speedLimitRoundedKmhMph');
+        $('.navigationEstimatedDistanceKmMi').addClass('navigation-estimatedDistanceMiRounded').removeClass('navigationEstimatedDistanceKmMi');
+    }
+
+    // Process kg vs tons
+    var weightUnits = g_skinConfig[g_configPrefix].weightUnits;
+    if (weightUnits === 'kg') {
+        $('.trailerMassKgOrT').addClass('trailerMassKg').removeClass('trailerMassKgOrT');
+    } else if (weightUnits === 't') {
+        $('.trailerMassKgOrT').addClass('trailerMassTons').removeClass('trailerMassKgOrT');
+    } else if (weightUnits === 'lb') {
+        $('.trailerMassKgOrT').addClass('trailerMassLbs').removeClass('trailerMassKgOrT');
+    }
+
+    // Process 12 vs 24 hr time
+    var timeFormat = g_skinConfig[g_configPrefix].timeFormat;
+    if (timeFormat === '12h') {
+        $('.game-time').addClass('gameTime12h').removeClass('game-time');
+        $('.job-deadlineTime').addClass('jobDeadlineTime12h').removeClass('job-deadlineTime');
+        $('.navigation-estimatedTime').addClass('navigation-estimatedTime12h').removeClass('navigation-estimatedTime');
+    }
+
+    g_processedDomChanges = true;
+}
+
+function loadScripts(mapPack, index, array) {
+    $.getScript(g_pathPrefix + '/maps/' + mapPack + '/' + array[index], function() {
+        var nextIndex = index + 1;
+        if (nextIndex != array.length) {
+            loadScripts(mapPack, nextIndex, array);
+        } else {
+            if (buildMap('_map')) {
+                $('article > p.loading-text').hide();
+            }
+        }
+    });
+}
+
+function goToMap() {
+    showTab('_map');
+    g_map.updateSize();
 }
 
 Date.prototype.addDays = function(d) {
@@ -487,7 +535,6 @@ Date.prototype.addSeconds = function(s) {
     return this;
 }
 
-
 // Global vars
 
 // Gets updated to the actual path in initialize function.
@@ -505,6 +552,16 @@ var g_currentVersion = '3.2.1';
 // The currently running game
 var g_runningGame;
 
+// The prefix for game-specific settings (either "ets2" or "ats")
+var g_configPrefix;
+
+// The running game the last time we checked
+var g_lastRunningGame;
+
 // The map pack configuration for the ets2 and ats map packs
-var g_ets2MapPackConfig;
-var g_atsMapPackConfig;
+var g_mapPackConfig;
+
+// Checked if we have processed the DOM changes already.
+var g_processedDomChanges;
+
+var g_map;
