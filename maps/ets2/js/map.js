@@ -304,6 +304,8 @@ function buildMap(target_element_id){
     // map.getView().on('change:rotation', function(ev) {
     //   console.log(ev);
     // });
+
+    return true;
 }
 
 function getMapTilesLayer(projection, tileGrid) {
@@ -337,7 +339,6 @@ function getMapTilesLayer(projection, tileGrid) {
 }
 
 // Global vars.
-var g_map;
 var g_playerFeature;
 var g_playerIcon;
 var g_behavior_center_on_player = true;

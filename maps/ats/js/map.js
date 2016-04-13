@@ -92,7 +92,7 @@ function buildMap(target_element_id){
     g_map = new ol.Map({
         target: target_element_id,
         controls: [
-            new ol.control.MousePosition(),  // DEBUG
+            //new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
             rotate_control,
             speed_limit_control,
@@ -144,6 +144,8 @@ function buildMap(target_element_id){
         // The user has moved or rotated the map.
         g_behavior_center_on_player = false;
     });
+
+    return true;
 }
 
 function getMapTilesLayer(projection, tileGrid) {
@@ -198,7 +200,8 @@ function getTextFeatures() {
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
-                scale: scale
+                scale: scale,
+                offsetY: 15 * scale
             })
         })];
     };
@@ -226,7 +229,6 @@ function getTextLayer() {
 }
 
 // Global vars.
-var g_map;
 var g_playerFeature;
 var g_playerIcon;
 var g_behavior_center_on_player = true;
