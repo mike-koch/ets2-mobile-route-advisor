@@ -1,7 +1,0 @@
-{
-    "jscodehints.detectedExclusions": [
-        "C:/Users/Mike/Documents/ETS2 Telemetry Server/server/Html/skins/ets2-mobile-route-advisor/maps/ets2/js/ol.js",
-        "C:/Users/Mike/Documents/ETS2 Telemetry Server/server/Html/skins/ets2-mobile-route-advisor/maps/ets2/js/map.js",
-        "C:/Users/Mike/Documents/ETS2 Telemetry Server/server/Html/skins/ets2-mobile-route-advisor/maps/ats/js/ol.js"
-    ]
-}
