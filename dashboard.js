@@ -423,14 +423,14 @@ function isWorldOfTrucksContract(data) {
 
 // Wrapper function to set an item to local storage.
 function setLocalStorageItem(key, value) {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof(Storage) !== "undefined" && localStorage != null) {
         localStorage.setItem(key, value);
     }
 }
 
 // Wrapper function to get an item from local storage, or default if local storage is not supported.
 function getLocalStorageItem(key, defaultValue) {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof(Storage) !== "undefined" && localStorage != null) {
         return localStorage.getItem(key);
     }
 
@@ -439,7 +439,7 @@ function getLocalStorageItem(key, defaultValue) {
 
 // Wrapper function to remove an item from local storage
 function removeLocalStorageItem(key) {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof(Storage) !== "undefined" && localStorage != null) {
         return localStorage.removeItem(key);
     }
 }
