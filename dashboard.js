@@ -158,6 +158,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     // Set the current game attribute for any properties that are game-specific
     $('.game-specific').attr('data-game-name', data.game.gameName);
 
+    // Update red bar if speeding
+    updateSpeedIndicator(data.navigation.speedLimit, data.truck.speed);
+
     return data;
 }
 
@@ -513,6 +516,24 @@ function loadScripts(mapPack, index, array) {
 function goToMap() {
     showTab('_map');
     g_map.updateSize();
+}
+
+function updateSpeedIndicator(speedLimit, currentSpeed) {
+    /*
+     The game starts the red indication at 1 km/h over, and stays a solid red at 8 km/h over (...I think).
+    */
+    var MAX_SPEED_FOR_FULL_RED = 8;
+    var difference = parseInt(currentSpeed) - speedLimit;
+    var opacity = 0;
+
+    if (difference > 0 && speedLimit != 0) {
+        var opacity = difference / MAX_SPEED_FOR_FULL_RED;
+    }
+
+    //.dashboard > aside > div._speed
+    var style = '{1}linear-gradient(top, rgba(127,0,0,{0}) 0%, rgba(255,0,0,{0}) 50%, rgba(127,0,0,{0}) 100%)';
+    style = style.split('{0}').join(opacity);
+    $('.dashboard').find('aside').find('div._speed').css('background', style.replace('{1}', '')).css('background', style.replace('{1}', '-webkit-'));
 }
 
 Date.prototype.addDays = function(d) {
