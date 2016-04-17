@@ -530,10 +530,9 @@ function updateSpeedIndicator(speedLimit, currentSpeed) {
         var opacity = difference / MAX_SPEED_FOR_FULL_RED;
     }
 
-    //.dashboard > aside > div._speed
-    var style = '{1}linear-gradient(top, rgba(127,0,0,{0}) 0%, rgba(255,0,0,{0}) 50%, rgba(127,0,0,{0}) 100%)';
+    var style = 'linear-gradient(to bottom, rgba(127,0,0,{0}) 0%, rgba(255,0,0,{0}) 50%, rgba(127,0,0,{0}) 100%)';
     style = style.split('{0}').join(opacity);
-    $('.dashboard').find('aside').find('div._speed').css('background', style.replace('{1}', '')).css('background', style.replace('{1}', '-webkit-'));
+    $('.dashboard').find('aside').find('div._speed').css('background', style);
 }
 
 Date.prototype.addDays = function(d) {
