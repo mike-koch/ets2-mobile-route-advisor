@@ -38,7 +38,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.gameTime12h = getTime(data.game.time, 12);
     var originalTime = data.game.time;
     data.game.time = getTime(data.game.time, 24);
-    data.trailerMassTons = data.trailer.attached ? ((data.trailer.mass / 1000.0) + ' t') : '';
+    var tons = (data.trailer.mass / 1000.0).toFixed(2);
+    if (tons.substr(tons.length - 2) === "00") {
+        tons = parseInt(tons);
+    }
+    data.trailerMassTons = data.trailer.attached ? (tons + ' t') : '';
     data.trailerMassKg = data.trailer.attached ? data.trailer.mass + ' kg' : '';
     data.trailerMassLbs = data.trailer.attached ? Math.round(data.trailer.mass * 2.20462) + ' lb' : '';
     data.game.nextRestStopTimeArray = getDaysHoursMinutesAndSeconds(data.game.nextRestStopTime);
