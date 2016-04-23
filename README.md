@@ -1,6 +1,6 @@
 # Map Packs
 
-Here you can download various map packs for the `ets2-mobile-route-advisor`.  For instructions on how to create a map, visit [Creating a Map Pack](https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/Creating-a-Map-Pack) at the repository wiki.
+Here you can download various map packs for the `ets2-mobile-route-advisor`.  We will soon include instructions how to generate your own map packs which you can share with the community.
 
 ## Installing a Map Pack
 Download the map pack via http://www.mikekoch.me/ets2-mobile-route-advisor. Once you have the zip downloaded, extract the folder inside the .zip into your /maps folder. You should have a directory listing similar to the one below:
