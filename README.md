@@ -5,7 +5,7 @@ Euro Truck Simulator 2 / American Truck Simulator's Route Advisor, for mobile de
 The mobile Route Advisor is planned to include all features that Euro Truck Simulator 2 / American Truck Simulator's Route Advisor currently has. These features are:
 
 - Navigation
-    - Mini-map (ETS2 only)
+    - Mini-map
         - Fixed on truck, up is always north
         - Fixed on truck, map rotates so up is direction truck is facing
         - Free view/rotate/zoom
@@ -25,7 +25,7 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
 
 ## Requirements
 - Euro Truck Simulator 2 and/or American Truck Simulator
-- [ETS2 Telemetry Server](https://github.com/Funbit/ets2-telemetry-server/releases/tag/3.2.3) 3.2.3 or later
+- [ETS2 Telemetry Server](https://github.com/Funbit/ets2-telemetry-server) 3.2.3 or later
 
 ## How to Install
 1. Download the latest version of the Mobile Route Advisor from either the [official website](http://www.mikekoch.me/ets2-mobile-route-advisor), or from the [releases page](https://www.github.com/mike-koch/ets2-mobile-route-advisor/releases).
@@ -35,7 +35,7 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
 If you require any type of support, please looking at the [contributing guidelines](https://github.com/mike-koch/ets2-mobile-route-advisor/blob/master/CONTRIBUTING.md) to see where you should post your request. **Please do not contact me directly via e-mail, as your e-mail will be ignored.**
 
 ## Languages
-A list of supported languages are available on the [repository's wiki](https://github.com/mike-koch/ets2-mobile-route-advisor/wiki/config.json-Parameters). If you would like to submit a translation, please submit a pull request.
+A list of supported languages are available on the [ets2-mobile-route-advisor website](http://mikekoch.me/ets2-mobile-route-advisor). If you would like to submit a translation, please submit a pull request.
 
 ## Screenshots
 ![Navigation Information](screenshots/nav.png)
@@ -54,6 +54,7 @@ A list of supported languages are available on the [repository's wiki](https://g
             <ul>
                 <li><a href="https://github.com/mike-koch">mike-koch</a></li>
                 <li><a href="https://github.com/denilsonsa">denilsonsa</a></li>
+                <li><a href="https://github.com/Koenvh1">Koen</a></li>
             </ul>
         </td>
         <td valign="top">
@@ -65,11 +66,13 @@ A list of supported languages are available on the [repository's wiki](https://g
                 <li><a href="http://forum.scssoft.com/memberlist.php?mode=viewprofile&u=127033">MinecraftMarioGuy53</a></li>
                 <li><a href="http://forum.scssoft.com/memberlist.php?mode=viewprofile&u=3710">SchorschiBW</a></li>
                 <li><a href="https://github.com/denilsonsa">denilsonsa</a></li>
+                <li>Frank Kristensen</li>
             </ul>
         </td>
         <td valign="top">
             <ul>
                 <li><a href="https://github.com/Funbit">Funbit</a></li>
+                <li><a href="https://github.com/Koenvh1">Koen</a></li>
             </ul>
         </td>
     </tr>
