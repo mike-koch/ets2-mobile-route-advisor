@@ -6,7 +6,7 @@ $(document).ready(function() {
         accept: 'application/json',
         dataType: 'json',
         method: 'GET',
-        url: 'https://api.github.com/repos/mkoch227/ets2-mobile-route-advisor/contents?ref=i18n',
+        url: 'https://api.github.com/repos/mike-koch/ets2-mobile-route-advisor/contents?ref=i18n',
         success: outputLanguages,
         error: outputLanguageError
     });

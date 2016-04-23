@@ -2,7 +2,7 @@ name: "ETS2 / ATS Mobile Route Advisor"
 description: "A skin for the ETS2 Telemetry Web Server"
 
 url: "http://mikekoch.me/ets2-mobile-route-advisor"
-latest-version: "3.2.1"
+latest-version: "3.3.0"
 
 tabs:
   - title: About
@@ -14,7 +14,7 @@ tabs:
     menu: true
     icon: list
     items:
-      - title: Navigation (ETS2 Only)
+      - title: Navigation
         id: navigation
         font-awesome: false
         icon: compass
@@ -30,6 +30,10 @@ tabs:
         id: other
         font-awesome: true
         icon: tachometer
+      - title: Map Packs
+        id: map-packs
+        font-awesome: true
+        icon: map-o
 
 config-options:
   - Language
@@ -37,7 +41,7 @@ config-options:
   - Distance Units (km vs mi)
   - Speed Units (km/h vs mph)
   - Weight Units (kilograms vs tons)
-  - Currency Code (EUR, CHF, CZK, GBP, PLN, HUF)
+  - Currency Code (EUR, CHF, CZK, GBP, PLN, HUF, DKK, SEK, NOK)
   - Automatic Update Checking
 
 links:
@@ -61,8 +65,16 @@ contributors:
   - name: denilsonsa
     link: https://github.com/denilsonsa
     icon: fa-github
+  - name: Koenvh1
+    link: https://github.com/koenvh1
+    icon: fa-github
+    
+map-packs:
+  - name: ProMods / RusMap
+    author: Koen
+    file-name: promods+rusmap.7z
+    image: promods+rusmap.png
 
 copyright:
-  year: 2016
   name: Mike Koch
   url: http://mikekoch.me
