@@ -1,4 +1,4 @@
-﻿{
+{
     "CurrentJob": "Nuværende job",
     "NoJob": "Du har ingen job i øjeblikket.",
     "CargoName": "Fragttype",
@@ -22,5 +22,6 @@
     "ThursdayAbbreviated": "Tors",
     "FridayAbbreviated": "Fre",
     "SaturdayAbbreviated": "Lør",
-    "WorldOfTrucksContract": "World of Trucks Contract"
+    "WorldOfTrucksContract": "World of Trucks Contract",
+    "LoadingMapPleaseWait": "Loading map, please wait..."
 }
