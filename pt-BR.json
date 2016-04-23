@@ -22,5 +22,6 @@
     "ThursdayAbbreviated": "Qui",
     "FridayAbbreviated": "Sex",
     "SaturdayAbbreviated": "Sáb",
-    "WorldOfTrucksContract": "World of Trucks Contract"
+    "WorldOfTrucksContract": "World of Trucks Contract",
+    "LoadingMapPleaseWait": "Loading map, please wait..."
 }
