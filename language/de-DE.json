@@ -1,10 +1,10 @@
 {
     "CurrentJob": "Aktueller Auftrag",
     "NoJob": "Du hast im Moment keinen Auftrag.",
-    "CargoName": "Art der Fracht:",
+    "CargoName": "Fracht:",
     "Destination": "Bestimmungsort:",
     "JobIncome": "Auftragsvergütung:",
-    "Remains": "erbleibende Zeit:",
+    "Remains": "Verbleibende Zeit:",
     "Truck": "LKW",
     "Trailer": "Auflieger",
     "MobileRouteAdvisor": "Navigationssystem",
