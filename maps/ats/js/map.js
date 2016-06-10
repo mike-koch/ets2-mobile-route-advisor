@@ -1,8 +1,13 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
+<<<<<<< HEAD
 var MAX_X = 10840 * 2;
 var MAX_Y = 7600 * 2;
+=======
+var MAX_X = 10840*2;
+var MAX_Y = 7600*2;
+>>>>>>> refs/remotes/mike-koch/master
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
@@ -14,22 +19,21 @@ function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     ];
 }
 function calculatePixelCoordinateEu(x, y) {
+<<<<<<< HEAD
     //return calculatePixelCoordinate(x, y, 4.6300921273, 16075, 2170); //x+16, y+4
 	return calculatePixelCoordinate(x, y, 2.31504606365, 30929, 1547); //x+16, y+4
 }
 function calculatePixelCoordinateUk(x, y) {
     //return calculatePixelCoordinate(x, y, 9.69522, 11446, 14422);
     return calculatePixelCoordinate(x, y, 7.278, 13164, 16260); //x-550, y-1540 //Original pointsPerPixel: 9.69522, own calculated: 8.62552985346, x0: 12093, y0: 15148
+=======
+    return calculatePixelCoordinate(x, y, 2.31504606365, 30929, 1547); //x+16, y+4
+>>>>>>> refs/remotes/mike-koch/master
 }
 
 function game_coord_to_pixels(x, y) {
     // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
-    var r = null;
-    //if (x < -31812 && y < -5618 && x > -61000 && y > -67000) {
-    //    r = calculatePixelCoordinateUk(x, y);
-    //} else {
-        r = calculatePixelCoordinateEu(x, y);
-    //}
+    var r = calculatePixelCoordinateEu(x, y);
 
     // Inverting Y axis, because of OpenLayers coordinates.
     r[1] = MAX_Y - r[1];
@@ -47,13 +51,13 @@ function buildMap(target_element_id){
     ol.proj.addProjection(projection);
 
     // Adding a marker for the player position/rotation.
-    g_playerIcon = g_runningGame === 'ATS' ? new ol.style.Icon({
+    g_playerIcon = new ol.style.Icon({
         anchor: [0.5, 39],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         rotateWithView: true,
         src: g_pathPrefix + '/img/player_proportions.png'
-    }) : new ol.style.Icon();
+    });
     var playerIconStyle = new ol.style.Style({
         image: g_playerIcon
     });
@@ -102,10 +106,14 @@ function buildMap(target_element_id){
     g_map = new ol.Map({
         target: target_element_id,
         controls: [
+<<<<<<< HEAD
             // new ol.control.ZoomSlider(),
             // new ol.control.OverviewMap(),
             // new ol.control.Rotate(),
             // new ol.control.MousePosition(),  // DEBUG
+=======
+            //new ol.control.MousePosition(),  // DEBUG
+>>>>>>> refs/remotes/mike-koch/master
             new ol.control.Zoom(),
             rotate_control,
             speed_limit_control,
@@ -121,6 +129,7 @@ function buildMap(target_element_id){
         layers: [
             getMapTilesLayer(projection, custom_tilegrid),
             getTextLayer(),
+<<<<<<< HEAD
             // Debug layer below.
             // new ol.layer.Tile({
             //     extent: [0, 0, MAX_X, MAX_Y],
@@ -136,12 +145,13 @@ function buildMap(target_element_id){
             //         wrapX: false
             //     })
             // }),
+=======
+>>>>>>> refs/remotes/mike-koch/master
             vectorLayer
         ],
         view: new ol.View({
             projection: projection,
             extent: [0, 0, MAX_X, MAX_Y],
-            //center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
             center: [MAX_X/2, MAX_Y/2],
             minZoom: 0,
             maxZoom: 9,
@@ -172,68 +182,36 @@ function buildMap(target_element_id){
 
         // The user has moved or rotated the map.
         g_behavior_center_on_player = false;
-        // Not needed:
-        // g_behavior_rotate_with_player = false;
     });
 
-    // Debugging.
-    // map.on('singleclick', function(evt) {
-    //     var coordinate = evt.coordinate;
-    //     console.log(coordinate);
-    // });
-    // map.getView().on('change:center', function(ev) {
-    //   console.log(ev);
-    // });
-    // map.getView().on('change:rotation', function(ev) {
-    //   console.log(ev);
-    // });
+    return true;
 }
 
 function getMapTilesLayer(projection, tileGrid) {
-    if (g_runningGame === 'ATS') {
-        return new ol.layer.Tile({
-            extent: [0, 0, MAX_X, MAX_Y],
-            source: new ol.source.XYZ({
-                projection: projection,
-                url:  g_pathPrefix + '/maps/ats/tiles/{z}/{x}/{y}.png',
-                tileSize: [256, 256],
-                // Using createXYZ() makes the vector layer (with the features) unaligned.
-                // It also tries loading non-existent tiles.
-                //
-                // Using custom_tilegrid causes rescaling of all image tiles before drawing
-                // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
-                tileGrid: tileGrid,
-                // tileGrid: ol.tilegrid.createXYZ({
-                //     extent: [0, 0, MAX_X, MAX_Y],
-                //     minZoom: 0,
-                //     maxZoom: 7,
-                //     tileSize: [256, 256]
-                // }),
-                wrapX: false,
-                minZoom: 4,
-                maxZoom: 7
-            })
-        });
-    }
-
-    return new ol.layer.Tile();
+    return new ol.layer.Tile({
+        extent: [0, 0, MAX_X, MAX_Y],
+        source: new ol.source.XYZ({
+            projection: projection,
+            url:  g_pathPrefix + '/maps/ats/tiles/{z}/{x}/{y}.png',
+            tileSize: [256, 256],
+            // Using createXYZ() makes the vector layer (with the features) unaligned.
+            // It also tries loading non-existent tiles.
+            //
+            // Using custom_tilegrid causes rescaling of all image tiles before drawing
+            // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
+            tileGrid: tileGrid,
+            wrapX: false,
+            minZoom: 4,
+            maxZoom: 7
+        })
+    });
 }
 
-var COUNTRY_NAME_TO_CODE = {
+var STATE_NAME_TO_CODE = {
     "california": "ca",
-	"nevada": "nv",
-	"arizona": "az"
+    "nevada": "nv",
+    "arizona": "az"
 };
-
-// http://codepen.io/denilsonsa/pen/BKWNgB
-function country_code_to_unicode(cc) {
-    cc = cc.toLowerCase();
-    var flagA = 0x1F1E6;
-    var letter_a = 0x61;
-    var a = cc.charCodeAt(0) - letter_a;
-    var b = cc.charCodeAt(1) - letter_a;
-    return String.fromCodePoint(flagA + a, flagA + b);
-}
 
 function getTextFeatures() {
     var fill = new ol.style.Fill();
@@ -244,7 +222,7 @@ function getTextFeatures() {
     var createTextStyle = function(resolution) {
         var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.125));
         return [new ol.style.Style({
-			//Creating a new image layer
+            //Creating a new image layer
             image: new ol.style.Icon(({
                 rotateWithView: false,
                 anchor: [0.5, 1],
@@ -261,13 +239,18 @@ function getTextFeatures() {
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
-                scale: scale
+                scale: scale,
+                offsetY: 15 * scale
             })
         })];
     };
     var features = g_cities_json.map(function(city) {
         var map_coords = game_coord_to_pixels(city.x, city.z);
+<<<<<<< HEAD
 		city.cc = COUNTRY_NAME_TO_CODE[city.country.toLowerCase()];
+=======
+        city.cc = STATE_NAME_TO_CODE[city.country.toLowerCase()];
+>>>>>>> refs/remotes/mike-koch/master
         var feature = new ol.Feature(city);
         feature.setGeometry(new ol.geom.Point(map_coords));
         feature.setStyle(createTextStyle);
@@ -289,7 +272,6 @@ function getTextLayer() {
 }
 
 // Global vars.
-var g_map;
 var g_playerFeature;
 var g_playerIcon;
 var g_behavior_center_on_player = true;

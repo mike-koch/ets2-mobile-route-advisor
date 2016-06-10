@@ -26,12 +26,18 @@
 
         "language": "en-US.json",
         "timeFormat": "24h",
-        "distanceUnits": "km",
-        "weightUnits": "kg",
-        "currencyCodeEts2": "EUR",
-        "currencyCodeAts": "USD",
         "checkForUpdates": true,
-        "mapPackEts2": "ets2",
-        "mapPackAts": "ats"
+        "ats": {
+            "distanceUnits": "mi",
+            "weightUnits": "lb",
+            "currencyCode": "USD",
+            "mapPack": "ats"
+        },
+        "ets2": {
+            "distanceUnits": "km",
+            "weightUnits": "kg",
+            "currencyCode": "EUR",
+            "mapPack": "ets2"
+        }
     }
 }

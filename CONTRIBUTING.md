@@ -22,6 +22,7 @@ If you have already completed any of these steps in the past (such as creating a
  - Make commits of logical units.
    - For example, if you add 10 new features, please make at least 10 commits (1 per feature). This way, if a feature needs to be removed, it will be as easy as reverting a commit, rather than removing all 10.
  - Check for unnecessary whitespace using the `git diff --check` command. If there is trailing whitespace, your pull request will be denied.
+ - Use 4 spaces for indentation. Please do not use the tab character.
 
 ## Submitting Changes
  - Sign the [Contributor License Agreement](https://cla-assistant.io/mike-koch/ets2-mobile-route-advisor)
