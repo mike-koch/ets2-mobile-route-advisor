@@ -16,6 +16,14 @@ var g_cities_json = [
       "z": "21963.2"
     },
     {
+      "gameName": "camp_verde",
+      "realName": "Camp Verde",
+      "country": "arizona",
+      "x": "-33629.5",
+      "y": "80.8555",
+      "z": "24333.2"
+    },
+    {
       "gameName": "carlsbad",
       "realName": "Carlsbad",
       "country": "california",
@@ -30,6 +38,14 @@ var g_cities_json = [
       "x": "-51957.3",
       "y": "127.836",
       "z": "8904.93"
+    },
+    {
+      "gameName": "ehrenberg",
+      "realName": "Ehrenberg",
+      "country": "arizona",
+      "x": "-39775.6",
+      "y": "41.9961",
+      "z": "25641.3"
     },
     {
       "gameName": "elko",
@@ -61,7 +77,15 @@ var g_cities_json = [
       "country": "california",
       "x": "-68616.5",
       "y": "87.7422",
-      "z": "3021.09"
+      "z": "3140.69"
+    },
+    {
+      "gameName": "flagstaff",
+      "realName": "Flagstaff",
+      "country": "arizona",
+      "x": "-32217.3",
+      "y": "68.0352",
+      "z": "20628.5"
     },
     {
       "gameName": "fresno",
@@ -70,6 +94,22 @@ var g_cities_json = [
       "x": "-54802.6",
       "y": "72.7031",
       "z": "16248.6"
+    },
+    {
+      "gameName": "g_canyon_vlg",
+      "realName": "Grand Canyon Village",
+      "country": "arizona",
+      "x": "-34858.1",
+      "y": "68.0352",
+      "z": "17678.5"
+    },
+    {
+      "gameName": "holbrook",
+      "realName": "Holbrook",
+      "country": "arizona",
+      "x": "-28652.1",
+      "y": "49.6406",
+      "z": "22607.4"
     },
     {
       "gameName": "hornbrook",
@@ -96,6 +136,22 @@ var g_cities_json = [
       "z": "-1865.5"
     },
     {
+      "gameName": "kayenta",
+      "realName": "Kayenta",
+      "country": "arizona",
+      "x": "-27266",
+      "y": "70.0508",
+      "z": "16366"
+    },
+    {
+      "gameName": "kingman",
+      "realName": "Kingman",
+      "country": "arizona",
+      "x": "-38210.2",
+      "y": "143.563",
+      "z": "20919.9"
+    },
+    {
       "gameName": "las_vegas",
       "realName": "Las Vegas",
       "country": "nevada",
@@ -110,6 +166,14 @@ var g_cities_json = [
       "x": "-52693.3",
       "y": "87.7422",
       "z": "24704.3"
+    },
+    {
+      "gameName": "nogales",
+      "realName": "Nogales",
+      "country": "arizona",
+      "x": "-31347.3",
+      "y": "70",
+      "z": "33621.1"
     },
     {
       "gameName": "oakdale",
@@ -134,6 +198,22 @@ var g_cities_json = [
       "x": "-56628.7",
       "y": "87.7422",
       "z": "21492.7"
+    },
+    {
+      "gameName": "page",
+      "realName": "Page",
+      "country": "arizona",
+      "x": "-31973.2",
+      "y": "118.699",
+      "z": "15909.3"
+    },
+    {
+      "gameName": "phoenix",
+      "realName": "Phoenix",
+      "country": "arizona",
+      "x": "-35803.2",
+      "y": "41.9961",
+      "z": "27274.2"
     },
     {
       "gameName": "pioche",
@@ -208,6 +288,30 @@ var g_cities_json = [
       "z": "10079.6"
     },
     {
+      "gameName": "san_simon",
+      "realName": "San Simon",
+      "country": "arizona",
+      "x": "-26847.4",
+      "y": "60",
+      "z": "30618.6"
+    },
+    {
+      "gameName": "show_low",
+      "realName": "Show Low",
+      "country": "arizona",
+      "x": "-29201.1",
+      "y": "46.4805",
+      "z": "24820.8"
+    },
+    {
+      "gameName": "sierra_vista",
+      "realName": "Sierra Vista",
+      "country": "arizona",
+      "x": "-28898",
+      "y": "55",
+      "z": "33499.8"
+    },
+    {
       "gameName": "stockton",
       "realName": "Stockton",
       "country": "california",
@@ -232,11 +336,35 @@ var g_cities_json = [
       "z": "8566.73"
     },
     {
+      "gameName": "tucson",
+      "realName": "Tucson",
+      "country": "arizona",
+      "x": "-31249.8",
+      "y": "70",
+      "z": "30690.9"
+    },
+    {
+      "gameName": "ukiah",
+      "realName": "Ukiah",
+      "country": "california",
+      "x": "-64396.1",
+      "y": "109.465",
+      "z": "7578.33"
+    },
+    {
       "gameName": "winnemucca",
       "realName": "Winnemucca",
       "country": "nevada",
       "x": "-50540.7",
       "y": "94.7539",
       "z": "1847.23"
+    },
+    {
+      "gameName": "yuma",
+      "realName": "Yuma",
+      "country": "arizona",
+      "x": "-39644",
+      "y": "41.9961",
+      "z": "29858.5"
     }
 ]

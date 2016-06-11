@@ -1,8 +1,8 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 10840*2;
-var MAX_Y = 7600*2;
+var MAX_X = 12360*2;
+var MAX_Y = 10640*2;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
@@ -14,7 +14,7 @@ function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     ];
 }
 function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 2.31504606365, 30929, 1547); //x+16, y+4
+    return calculatePixelCoordinate(x, y, 2.31504606365, 30943, 1749); //x+16, y+4
 }
 
 function game_coord_to_pixels(x, y) {
