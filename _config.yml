@@ -74,6 +74,10 @@ map-packs:
     author: Koen
     file-name: promods+rusmap.7z
     image: promods+rusmap.png
+  - name: ProMods 2.11
+    author: Koen
+    file-name: promods.7z
+    image: ""
 
 copyright:
   name: Mike Koch
