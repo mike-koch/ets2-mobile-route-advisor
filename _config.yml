@@ -2,7 +2,7 @@ name: "ETS2 / ATS Mobile Route Advisor"
 description: "A skin for the ETS2 Telemetry Web Server"
 
 url: "http://mikekoch.me/ets2-mobile-route-advisor"
-latest-version: "3.3.1"
+latest-version: "3.3.2"
 
 tabs:
   - title: About
@@ -77,7 +77,7 @@ map-packs:
   - name: ProMods 2.11
     author: Koen
     file-name: promods.7z
-    image: ""
+    image: promods_21.jpg
 
 copyright:
   name: Mike Koch
