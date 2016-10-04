@@ -11,7 +11,7 @@
                     {% for mappack in site.map-packs %}
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card" style="width: 318px">
-                            <img class="card-img-top" src="img/promods+rusmap.png" alt="Card image cap">
+                            <img class="card-img-top" src="img/{{ mappack.image }}" alt="{{ mappack.name }}">
                             <div class="card-block">
                                 <h4 class="card-title">{{ mappack.name }}</h4>
                                 <p class="card-text">{{ mappack.author }}</p>
