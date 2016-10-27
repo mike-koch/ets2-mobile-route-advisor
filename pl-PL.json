@@ -22,10 +22,6 @@
     "ThursdayAbbreviated": "Czw",
     "FridayAbbreviated": "Pią",
     "SaturdayAbbreviated": "Sob",
-<<<<<<< HEAD
-    "WorldOfTrucksContract": "Kontrakt World of Trucks"
-=======
-    "WorldOfTrucksContract": "World of Trucks Contract",
+    "WorldOfTrucksContract": "Kontrakt World of Trucks",
     "LoadingMapPleaseWait": "Loading map, please wait..."
->>>>>>> Add new language key to all translations
 }
