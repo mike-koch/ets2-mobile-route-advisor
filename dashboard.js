@@ -63,11 +63,13 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
     data.navigation.estimatedTime12h = getTime(estimatedTime24h, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
-    data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
-    data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
 
     // ETS2-specific logic
     data.isWorldOfTrucksContract = isWorldOfTrucksContract(data);
+
+    data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
+    data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
+
     if (data.isEts2) {
         data.jobIncome = getEts2JobIncome(data.job.income);
     }
