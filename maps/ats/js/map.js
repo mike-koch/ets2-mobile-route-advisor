@@ -1,20 +1,20 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 12360*2;
-var MAX_Y = 10640*2;
+var MAX_X = 11768*2;
+var MAX_Y = 9496*2;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
 // Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
-function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
+function calculatePixelCoordinate(x, y, pointsPerPixelX, pointsPerPixelY, x0, y0) {
     return [
-        (x / pointsPerPixel + x0) | 0,
-        (y / pointsPerPixel + y0) | 0
+        (x / pointsPerPixelX + x0) | 0,
+        (y / pointsPerPixelY + y0) | 0
     ];
 }
 function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 2.31504606365, 30953, 1749); //x+16, y+4
+    return calculatePixelCoordinate(x, y, 2.263462683, 4.10529965, 52003, 9175); //x+16, y+4 //30953,1749
 }
 
 function game_coord_to_pixels(x, y) {
@@ -70,7 +70,7 @@ function buildMap(target_element_id){
         tileSize: [256, 256],
         resolutions: (function(){
             var r = [];
-            for (var z = 0; z <= 7; ++z) {
+            for (var z = 0; z <= 6; ++z) {
                 r[z] = Math.pow(2, 7 - z);
             }
             return r;
@@ -153,7 +153,7 @@ function getMapTilesLayer(projection, tileGrid) {
         extent: [0, 0, MAX_X, MAX_Y],
         source: new ol.source.XYZ({
             projection: projection,
-            url:  g_pathPrefix + '/maps/ats/tiles/{z}/{x}/{y}.png',
+            url:  g_pathPrefix + '/maps/ats/tiles/{z}/{y}/{x}.png',
             tileSize: [256, 256],
             // Using createXYZ() makes the vector layer (with the features) unaligned.
             // It also tries loading non-existent tiles.
@@ -163,7 +163,7 @@ function getMapTilesLayer(projection, tileGrid) {
             tileGrid: tileGrid,
             wrapX: false,
             minZoom: 4,
-            maxZoom: 7
+            maxZoom: 6
         })
     });
 }
