@@ -14,7 +14,7 @@ function calculatePixelCoordinate(x, y, pointsPerPixelX, pointsPerPixelY, x0, y0
     ];
 }
 function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 2.763462683, 2.763462683, 43195, 12810); //ppx: 2.263462683, ppy: 4.10529965 //x+16, y+4 //30953,1749 // +x0 goes to left
+    return calculatePixelCoordinate(x, y, 2.495109988, 4.425063173, 48505, 9408); //ppx: 2.263462683, ppy: 4.10529965 //x+16, y+4 //30953,1749 // +x0 goes to left
 }
 
 function game_coord_to_pixels(x, y) {
