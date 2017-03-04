@@ -63,11 +63,13 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
     data.navigation.estimatedTime12h = getTime(estimatedTime24h, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
-    data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
-    data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
 
     // ETS2-specific logic
     data.isWorldOfTrucksContract = isWorldOfTrucksContract(data);
+
+    data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
+    data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
+
     if (data.isEts2) {
         data.jobIncome = getEts2JobIncome(data.job.income);
     }
@@ -571,7 +573,7 @@ var g_translations;
 var g_skinConfig;
 
 // The current version of ets2-mobile-route-advisor
-var g_currentVersion = '3.3.2';
+var g_currentVersion = '3.3.3';
 
 // The currently running game
 var g_runningGame;
