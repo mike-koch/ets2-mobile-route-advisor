@@ -101,6 +101,9 @@ a {
     flex-shrink: 0;
     -webkit-flex-basis: 2em;
     -ms-flex-preferred-size: 2em;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
     flex-basis: 2em;
 
     text-align: center;
@@ -291,6 +294,9 @@ a {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 .dashboard > nav > * {
     -webkit-box-flex: 0;
