@@ -23,5 +23,6 @@
     "FridayAbbreviated": "周五",
     "SaturdayAbbreviated": "周六",
     "WorldOfTrucksContract": "World of Trucks任务",
-    "LoadingMapPleaseWait": "地图加载中，请稍后....."
+    "LoadingMapPleaseWait": "地图加载中，请稍后.....",
+    "NoMapAvailable": "No map available"
 }
