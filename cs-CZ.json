@@ -23,5 +23,6 @@
     "FridayAbbreviated": "Pá",
     "SaturdayAbbreviated": "So",
     "WorldOfTrucksContract": "Zakázka z World of Trucks",
-    "LoadingMapPleaseWait": "Mapa se načítá, čekejte prosím..."
+    "LoadingMapPleaseWait": "Mapa se načítá, čekejte prosím...",
+    "NoMapAvailable": "No map available"
 }
