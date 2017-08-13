@@ -23,5 +23,6 @@
     "FridayAbbreviated": "Пт",
     "SaturdayAbbreviated": "Сб",
     "WorldOfTrucksContract": "Контракт World of Trucks",
-    "LoadingMapPleaseWait": "Загрузка карты, ожидайте..."
+    "LoadingMapPleaseWait": "Загрузка карты, ожидайте...",
+    "NoMapAvailable": "No map available"
 }
