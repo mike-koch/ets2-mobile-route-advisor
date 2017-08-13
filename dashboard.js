@@ -63,11 +63,13 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     data.navigation.estimatedTime = getTime(data.navigation.estimatedTime, 24);
     data.navigation.estimatedTime12h = getTime(estimatedTime24h, 12);
     data.navigation.timeToDestination = processTimeDifferenceArray(timeToDestinationArray);
-    data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
-    data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
 
     // ETS2-specific logic
     data.isWorldOfTrucksContract = isWorldOfTrucksContract(data);
+
+    data.job.remainingTimeArray = getDaysHoursMinutesAndSeconds(data.job.remainingTime);
+    data.job.remainingTime = processTimeDifferenceArray(data.job.remainingTimeArray);
+
     if (data.isEts2) {
         data.jobIncome = getEts2JobIncome(data.job.income);
     }
@@ -75,7 +77,11 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     // ATS-specific logic
     if (data.isAts) {
         data.jobIncome = getAtsJobIncome(data.job.income);
-    }
+		$('#_map').find('._no-map').show();
+		$('#_map').find('.loading-text').hide();
+    } else {
+		$('#_map').find('._no-map').hide();
+	}
 
     // Non-WoT stuff here
     if (!data.isWorldOfTrucksContract || data.isAts) {
@@ -457,15 +463,18 @@ function processDomChanges(data) {
         g_configPrefix = data.game.gameName.toLowerCase();
     }
 
-    // Initialize JavaScript
-    var mapPack = g_skinConfig[g_configPrefix].mapPack;
+    // Initialize JavaScript if ETS2
+	if (g_configPrefix === 'ets2') {
+		var mapPack = g_skinConfig[g_configPrefix].mapPack;
 
-    // Process map pack JSON
-    $.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
-        g_mapPackConfig = json;
+		// Process map pack JSON
+		$.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
+			g_mapPackConfig = json;
 
-        loadScripts(mapPack, 0, g_mapPackConfig.scripts);
-    });
+			loadScripts(mapPack, 0, g_mapPackConfig.scripts);
+		});
+	}
+    
 
     // Process Speed Units
     var distanceUnits = g_skinConfig[g_configPrefix].distanceUnits;
@@ -519,7 +528,10 @@ function loadScripts(mapPack, index, array) {
 
 function goToMap() {
     showTab('_map');
-    g_map.updateSize();
+	
+	if (g_configPrefix === 'ets2') {
+		g_map.updateSize();
+	}
 }
 
 function updateSpeedIndicator(speedLimit, currentSpeed) {
@@ -571,7 +583,7 @@ var g_translations;
 var g_skinConfig;
 
 // The current version of ets2-mobile-route-advisor
-var g_currentVersion = '3.3.2';
+var g_currentVersion = '3.3.3';
 
 // The currently running game
 var g_runningGame;

@@ -1,6 +1,166 @@
 
 var g_cities_json = [
     {
+        "gameName": "alban",
+        "realName": "Saint-Alban-du-Rhône",
+        "country": "france",
+        "x": "-25953.6",
+        "y": "93.6523",
+        "z": "28986.3"
+    },
+    {
+        "gameName": "bordeaux",
+        "realName": "Bordeaux",
+        "country": "france",
+        "x": "-46138.6",
+        "y": "95.8906",
+        "z": "27274.4"
+    },
+    {
+        "gameName": "bourges",
+        "realName": "Bourges",
+        "country": "france",
+        "x": "-31951.8",
+        "y": "81.1758",
+        "z": "16275.5"
+    },
+    {
+        "gameName": "brest",
+        "realName": "Brest",
+        "country": "france",
+        "x": "-56771.4",
+        "y": "92.043",
+        "z": "3869.3"
+    },
+    {
+        "gameName": "civaux",
+        "realName": "Civaux",
+        "country": "france",
+        "x": "-39029.7",
+        "y": "87.707",
+        "z": "18292"
+    },
+    {
+        "gameName": "clermont",
+        "realName": "Clermont-Ferrand",
+        "country": "france",
+        "x": "-30447.4",
+        "y": "92",
+        "z": "24698.4"
+    },
+    {
+        "gameName": "golfech",
+        "realName": "Golfech",
+        "country": "france",
+        "x": "-40395.4",
+        "y": "91.4844",
+        "z": "31472.6"
+    },
+    {
+        "gameName": "larochelle",
+        "realName": "La Rochelle",
+        "country": "france",
+        "x": "-46575.7",
+        "y": "54.0742",
+        "z": "19532.5"
+    },
+    {
+        "gameName": "laurent",
+        "realName": "Saint-Laurent",
+        "country": "france",
+        "x": "-35649.6",
+        "y": "55",
+        "z": "13817.4"
+    },
+    {
+        "gameName": "lehavre",
+        "realName": "Le Havre",
+        "country": "france",
+        "x": "-37894.2",
+        "y": "92.043",
+        "z": "1515.48"
+    },
+    {
+        "gameName": "lemans",
+        "realName": "Le Mans",
+        "country": "france",
+        "x": "-39749.7",
+        "y": "95.043",
+        "z": "9718.43"
+    },
+    {
+        "gameName": "limoges",
+        "realName": "Limoges",
+        "country": "france",
+        "x": "-37417.3",
+        "y": "80.8711",
+        "z": "23632"
+    },
+    {
+        "gameName": "marseille",
+        "realName": "Marseille",
+        "country": "france",
+        "x": "-23472.4",
+        "y": "53.9063",
+        "z": "39210.8"
+    },
+    {
+        "gameName": "montpellier",
+        "realName": "Montpellier",
+        "country": "france",
+        "x": "-30052.4",
+        "y": "105.059",
+        "z": "36127.6"
+    },
+    {
+        "gameName": "nantes",
+        "realName": "Nantes",
+        "country": "france",
+        "x": "-47170.9",
+        "y": "54.7813",
+        "z": "13162"
+    },
+    {
+        "gameName": "nice",
+        "realName": "Nice",
+        "country": "france",
+        "x": "-15520.4",
+        "y": "110.969",
+        "z": "38206.2"
+    },
+    {
+        "gameName": "paluel",
+        "realName": "Paluel",
+        "country": "france",
+        "x": "-33608.1",
+        "y": "72.0117",
+        "z": "224.902"
+    },
+    {
+        "gameName": "rennes",
+        "realName": "Rennes",
+        "country": "france",
+        "x": "-46539.8",
+        "y": "108.043",
+        "z": "8064.61"
+    },
+    {
+        "gameName": "roscoff",
+        "realName": "Roscoff",
+        "country": "france",
+        "x": "-53697.9",
+        "y": "69.5",
+        "z": "3120.41"
+    },
+    {
+        "gameName": "toulouse",
+        "realName": "Toulouse",
+        "country": "france",
+        "x": "-39213.8",
+        "y": "82.1875",
+        "z": "35665.6"
+	},
+    {
       "gameName": "aalborg",
       "realName": "Aalborg",
       "country": "denmark",
@@ -668,9 +828,9 @@ var g_cities_json = [
       "gameName": "paris",
       "realName": "Paris",
       "country": "france",
-      "x": "-30494.9",
+      "x": "-29514.9",
       "y": "92.6211",
-      "z": "6998.41"
+      "z": "4971.41"
     },
     {
       "gameName": "pecs",
