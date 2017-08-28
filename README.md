@@ -5,7 +5,7 @@ Euro Truck Simulator 2 / American Truck Simulator's Route Advisor, for mobile de
 The mobile Route Advisor is planned to include all features that Euro Truck Simulator 2 / American Truck Simulator's Route Advisor currently has. These features are:
 
 - Navigation
-    - Mini-map
+    - Mini-map (ETS2 **only**)
         - Fixed on truck, up is always north
         - Fixed on truck, map rotates so up is direction truck is facing
         - Free view/rotate/zoom
