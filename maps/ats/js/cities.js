@@ -1,370 +1,474 @@
 var g_cities_json = [
     {
+      "gameName": "alamogordo",
+      "realName": "Alamogordo",
+      "country": "new_mexico",
+      "x": "-46944.1",
+      "y": "127.48",
+      "z": "31604"
+    },
+    {
+      "gameName": "artesia",
+      "realName": "Artesia",
+      "country": "new_mexico",
+      "x": "-39437.2",
+      "y": "106.828",
+      "z": "33191.9"
+    },
+    {
       "gameName": "bakersfield",
       "realName": "Bakersfield",
       "country": "california",
-      "x": "-52261.9",
+      "x": "-104383",
       "y": "61.457",
-      "z": "20598.8"
+      "z": "6944.04"
     },
     {
       "gameName": "barstow",
       "realName": "Barstow",
       "country": "california",
-      "x": "-47300.4",
-      "y": "100.59",
-      "z": "21963.2"
+      "x": "-96833.3",
+      "y": "90.5898",
+      "z": "12105.3"
     },
     {
       "gameName": "camp_verde",
       "realName": "Camp Verde",
       "country": "arizona",
-      "x": "-33629.5",
-      "y": "80.8555",
-      "z": "24333.2"
+      "x": "-73776.6",
+      "y": "127.855",
+      "z": "19211.8"
     },
     {
       "gameName": "carlsbad",
       "realName": "Carlsbad",
       "country": "california",
-      "x": "-49106.5",
-      "y": "61.4336",
-      "z": "27008"
+      "x": "-38330.6",
+      "y": "102.016",
+      "z": "35353.5"
     },
     {
       "gameName": "carson_city",
       "realName": "Carson City",
       "country": "nevada",
-      "x": "-51957.3",
-      "y": "127.836",
-      "z": "8904.93"
+      "x": "-101961",
+      "y": "134.836",
+      "z": "-11300.8"
+    },
+    {
+      "gameName": "clovis",
+      "realName": "Clovis",
+      "country": "new_mexico",
+      "x": "-33411.9",
+      "y": "138.973",
+      "z": "24758.7"
     },
     {
       "gameName": "ehrenberg",
       "realName": "Ehrenberg",
       "country": "arizona",
-      "x": "-39775.6",
-      "y": "41.9961",
-      "z": "25641.3"
+      "x": "-85758.9",
+      "y": "66.1992",
+      "z": "21364.7"
     },
     {
       "gameName": "elko",
       "realName": "Elko",
       "country": "nevada",
-      "x": "-45027.1",
-      "y": "82.2227",
-      "z": "2043.13"
+      "x": "-83038.2",
+      "y": "112.223",
+      "z": "-19609.2"
     },
     {
       "gameName": "ely",
       "realName": "Ely",
       "country": "nevada",
-      "x": "-43077.7",
-      "y": "122.629",
-      "z": "7074.14"
+      "x": "-81817",
+      "y": "172.629",
+      "z": "-10079.4"
     },
     {
       "gameName": "el_centro",
       "realName": "El Centro",
       "country": "california",
-      "x": "-41183.4",
-      "y": "41.6445",
-      "z": "29223.9"
+      "x": "-92073.9",
+      "y": "64.6445",
+      "z": "24709.8"
     },
     {
       "gameName": "eureka",
       "realName": "Eureka",
       "country": "california",
-      "x": "-68616.5",
-      "y": "87.7422",
-      "z": "3140.69"
+      "x": "-118391",
+      "y": "90.7422",
+      "z": "-27408.9"
+    },
+    {
+      "gameName": "farmington",
+      "realName": "Farmington",
+      "country": "new_mexico",
+      "x": "-54704.5",
+      "y": "135",
+      "z": "8813.18"
     },
     {
       "gameName": "flagstaff",
       "realName": "Flagstaff",
       "country": "arizona",
-      "x": "-32217.3",
-      "y": "68.0352",
-      "z": "20628.5"
+      "x": "-71524.6",
+      "y": "162.035",
+      "z": "14406.3"
     },
     {
       "gameName": "fresno",
       "realName": "Fresno",
       "country": "california",
-      "x": "-54802.6",
-      "y": "72.7031",
-      "z": "16248.6"
+      "x": "-105164",
+      "y": "75.7031",
+      "z": "-144.297"
+    },
+    {
+      "gameName": "gallup",
+      "realName": "Gallup",
+      "country": "new_mexico",
+      "x": "-58246.5",
+      "y": "166.41",
+      "z": "15448.3"
     },
     {
       "gameName": "g_canyon_vlg",
       "realName": "Grand Canyon Village",
       "country": "arizona",
-      "x": "-34858.1",
-      "y": "68.0352",
-      "z": "17678.5"
+      "x": "-73445",
+      "y": "173.035",
+      "z": "10298.5"
+    },
+    {
+      "gameName": "hobbs",
+      "realName": "Hobbs",
+      "country": "new_mexico",
+      "x": "-33734.9",
+      "y": "64.0195",
+      "z": "33858.8"
     },
     {
       "gameName": "holbrook",
       "realName": "Holbrook",
       "country": "arizona",
-      "x": "-28652.1",
-      "y": "49.6406",
-      "z": "22607.4"
+      "x": "-64899.9",
+      "y": "130.641",
+      "z": "18031.3"
     },
     {
       "gameName": "hornbrook",
       "realName": "Hornbrook",
       "country": "california",
-      "x": "-63040.5",
-      "y": "134.578",
-      "z": "-2368.46"
+      "x": "-110260",
+      "y": "129.477",
+      "z": "-31052.7"
     },
     {
       "gameName": "huron",
       "realName": "Huron",
       "country": "california",
-      "x": "-56245.7",
-      "y": "105.332",
-      "z": "18908.2"
+      "x": "-109205",
+      "y": "108.332",
+      "z": "1883.56"
     },
     {
       "gameName": "jackpot",
       "realName": "Jackpot",
       "country": "nevada",
-      "x": "-41684.1",
-      "y": "130.223",
-      "z": "-1865.5"
+      "x": "-77998.7",
+      "y": "180.223",
+      "z": "-24885.2"
     },
     {
       "gameName": "kayenta",
       "realName": "Kayenta",
       "country": "arizona",
-      "x": "-27266",
-      "y": "70.0508",
-      "z": "16366"
+      "x": "-64177",
+      "y": "145.051",
+      "z": "7337.55"
     },
     {
       "gameName": "kingman",
       "realName": "Kingman",
       "country": "arizona",
-      "x": "-38210.2",
-      "y": "143.563",
-      "z": "20919.9"
+      "x": "-82132.6",
+      "y": "175.563",
+      "z": "13052.4"
+    },
+    {
+      "gameName": "las_cruces",
+      "realName": "Las Cruces",
+      "country": "new_mexico",
+      "x": "-51595.3",
+      "y": "110",
+      "z": "34674.6"
     },
     {
       "gameName": "las_vegas",
       "realName": "Las Vegas",
       "country": "nevada",
-      "x": "-41596.9",
-      "y": "209.461",
-      "z": "17626.8"
+      "x": "-84856.9",
+      "y": "199.461",
+      "z": "6994.32"
     },
     {
       "gameName": "los_angeles",
       "realName": "Los Angeles",
       "country": "california",
-      "x": "-52693.3",
-      "y": "87.7422",
-      "z": "24704.3"
+      "x": "-103989",
+      "y": "90.7422",
+      "z": "16444.4"
     },
     {
       "gameName": "nogales",
       "realName": "Nogales",
       "country": "arizona",
-      "x": "-31347.3",
-      "y": "70",
-      "z": "33621.1"
+      "x": "-72018.8",
+      "y": "115",
+      "z": "36925.1"
     },
     {
       "gameName": "oakdale",
       "realName": "Oakdale",
       "country": "california",
-      "x": "-56869.8",
-      "y": "87.7422",
-      "z": "14073.5"
+      "x": "-109113",
+      "y": "74.7422",
+      "z": "-7004.69"
     },
     {
       "gameName": "oakland",
       "realName": "Oakland",
       "country": "california",
-      "x": "-58786.3",
-      "y": "87.7422",
-      "z": "14301.8"
+      "x": "-113452",
+      "y": "90.7422",
+      "z": "-8458.5"
     },
     {
       "gameName": "oxnard",
       "realName": "Oxnard",
       "country": "california",
-      "x": "-56628.7",
-      "y": "87.7422",
-      "z": "21492.7"
+      "x": "-107309",
+      "y": "52",
+      "z": "13456.6"
     },
     {
       "gameName": "page",
       "realName": "Page",
       "country": "arizona",
-      "x": "-31973.2",
-      "y": "118.699",
-      "z": "15909.3"
+      "x": "-69111.3",
+      "y": "124.344",
+      "z": "5521.9"
     },
     {
       "gameName": "phoenix",
       "realName": "Phoenix",
       "country": "arizona",
-      "x": "-35803.2",
-      "y": "41.9961",
-      "z": "27274.2"
+      "x": "-76543.6",
+      "y": "66.9961",
+      "z": "24448.1"
     },
     {
       "gameName": "pioche",
       "realName": "Pioche",
       "country": "nevada",
-      "x": "-40938.4",
-      "y": "137.867",
-      "z": "10214.7"
+      "x": "-80956.8",
+      "y": "177.867",
+      "z": "-4638.39"
     },
     {
       "gameName": "primm",
       "realName": "Primm",
       "country": "nevada",
-      "x": "-43011.8",
-      "y": "94.3945",
-      "z": "20256.2"
+      "x": "-86787.6",
+      "y": "84.3945",
+      "z": "9272.02"
+    },
+    {
+      "gameName": "raton",
+      "realName": "Raton",
+      "country": "new_mexico",
+      "x": "-38146.3",
+      "y": "154.02",
+      "z": "10209.8"
     },
     {
       "gameName": "redding",
       "realName": "Redding",
       "country": "california",
-      "x": "-61340",
-      "y": "87.7422",
-      "z": "2201.14"
+      "x": "-110650",
+      "y": "93.7422",
+      "z": "-24844.6"
     },
     {
       "gameName": "reno",
       "realName": "Reno",
       "country": "nevada",
-      "x": "-55425.1",
-      "y": "55.7656",
-      "z": "5836.53"
+      "x": "-102745",
+      "y": "105.766",
+      "z": "-16298"
+    },
+    {
+      "gameName": "roswell",
+      "realName": "Roswell",
+      "country": "new_mexico",
+      "x": "-39713.4",
+      "y": "106.012",
+      "z": "29859.5"
     },
     {
       "gameName": "sacramento",
       "realName": "Sacramento",
       "country": "california",
-      "x": "-59012.1",
-      "y": "87.7422",
-      "z": "10440.7"
+      "x": "-111350",
+      "y": "90.7422",
+      "z": "-12283.6"
     },
     {
       "gameName": "santa_cruz",
       "realName": "Santa Cruz",
       "country": "california",
-      "x": "-58791.1",
-      "y": "87.7422",
-      "z": "18772.1"
+      "x": "-114925",
+      "y": "90.7422",
+      "z": "-4429.37"
+    },
+    {
+      "gameName": "santa_fe",
+      "realName": "Santa Fe",
+      "country": "new_mexico",
+      "x": "-44752.1",
+      "y": "149.02",
+      "z": "16062.1"
+    },
+    {
+      "gameName": "santa_maria",
+      "realName": "Santa Maria",
+      "country": "california",
+      "x": "-111657",
+      "y": "60",
+      "z": "8655.99"
     },
     {
       "gameName": "san_diego",
       "realName": "San Diego",
       "country": "california",
-      "x": "-46897.8",
-      "y": "87.7422",
-      "z": "29857.3"
+      "x": "-98862.2",
+      "y": "90.8438",
+      "z": "24029.7"
     },
     {
       "gameName": "san_francisc",
       "realName": "San Francisco",
       "country": "california",
-      "x": "-60374.2",
-      "y": "87.7422",
-      "z": "13271"
+      "x": "-114531",
+      "y": "90.7422",
+      "z": "-10140.2"
     },
     {
       "gameName": "san_rafael",
       "realName": "San Rafael",
       "country": "california",
-      "x": "-61918.1",
-      "y": "87.7422",
-      "z": "10079.6"
+      "x": "-114891",
+      "y": "90.7422",
+      "z": "-13667.2"
     },
     {
       "gameName": "san_simon",
       "realName": "San Simon",
       "country": "arizona",
-      "x": "-26847.4",
-      "y": "60",
-      "z": "30618.6"
+      "x": "-62858.7",
+      "y": "111.145",
+      "z": "33093"
     },
     {
       "gameName": "show_low",
       "realName": "Show Low",
       "country": "arizona",
-      "x": "-29201.1",
-      "y": "46.4805",
-      "z": "24820.8"
+      "x": "-65590.3",
+      "y": "146.48",
+      "z": "21658.3"
     },
     {
       "gameName": "sierra_vista",
       "realName": "Sierra Vista",
       "country": "arizona",
-      "x": "-28898",
-      "y": "55",
-      "z": "33499.8"
+      "x": "-68525.5",
+      "y": "125",
+      "z": "36654"
+    },
+    {
+      "gameName": "socorro",
+      "realName": "Socorro",
+      "country": "new_mexico",
+      "x": "-50697.3",
+      "y": "123.242",
+      "z": "24592.9"
     },
     {
       "gameName": "stockton",
       "realName": "Stockton",
       "country": "california",
-      "x": "-57824.6",
+      "x": "-110864",
       "y": "87.7422",
-      "z": "12037.9"
+      "z": "-9926.91"
     },
     {
       "gameName": "tonopah",
       "realName": "Tonopah",
       "country": "nevada",
-      "x": "-48104.3",
-      "y": "100.676",
-      "z": "12496.8"
+      "x": "-93600.9",
+      "y": "150.676",
+      "z": "-5250.63"
     },
     {
       "gameName": "truckee",
       "realName": "Truckee",
       "country": "california",
-      "x": "-56640.5",
-      "y": "101.926",
-      "z": "8566.73"
+      "x": "-106289",
+      "y": "146.277",
+      "z": "-15493.7"
     },
     {
       "gameName": "tucson",
       "realName": "Tucson",
       "country": "arizona",
-      "x": "-31249.8",
-      "y": "70",
-      "z": "30690.9"
+      "x": "-71475.1",
+      "y": "97",
+      "z": "31556.9"
+    },
+    {
+      "gameName": "tucumcari",
+      "realName": "Tucumcari",
+      "country": "new_mexico",
+      "x": "-35286.4",
+      "y": "142.113",
+      "z": "20109.9"
     },
     {
       "gameName": "ukiah",
       "realName": "Ukiah",
       "country": "california",
-      "x": "-64396.1",
-      "y": "109.465",
-      "z": "7578.33"
+      "x": "-116865",
+      "y": "95.4648",
+      "z": "-19252.1"
     },
     {
       "gameName": "winnemucca",
       "realName": "Winnemucca",
       "country": "nevada",
-      "x": "-50540.7",
-      "y": "94.7539",
-      "z": "1847.23"
+      "x": "-91334.8",
+      "y": "144.754",
+      "z": "-22075.4"
     },
     {
       "gameName": "yuma",
       "realName": "Yuma",
       "country": "arizona",
-      "x": "-39644",
-      "y": "41.9961",
-      "z": "29858.5"
+      "x": "-88849.8",
+      "y": "64.9961",
+      "z": "26463.2"
     }
-]
+  ]

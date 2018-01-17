@@ -1,8 +1,8 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 12360*2;
-var MAX_Y = 10640*2;
+var MAX_X = 11776 * 2;
+var MAX_Y = 9984 * 2;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
@@ -14,7 +14,8 @@ function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
     ];
 }
 function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 2.31504606365, 30953, 1749); //x+16, y+4
+    //return calculatePixelCoordinate(x, y, 9.69522, 10226, 9826); //x+16, y+4
+	return calculatePixelCoordinate(x, y, 3.89195, 30903, 9433); //x+16, y+4
 }
 
 function game_coord_to_pixels(x, y) {
@@ -115,8 +116,8 @@ function buildMap(target_element_id){
             extent: [0, 0, MAX_X, MAX_Y],
             center: [MAX_X/2, MAX_Y/2],
             minZoom: 0,
-            maxZoom: 9,
-            zoom: 7
+            maxZoom: 6,
+            zoom: 4
         })
     });
 
@@ -162,8 +163,8 @@ function getMapTilesLayer(projection, tileGrid) {
             // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
             tileGrid: tileGrid,
             wrapX: false,
-            minZoom: 4,
-            maxZoom: 7
+            minZoom: 2,
+            maxZoom: 6
         })
     });
 }
@@ -171,7 +172,8 @@ function getMapTilesLayer(projection, tileGrid) {
 var STATE_NAME_TO_CODE = {
     "california": "ca",
     "nevada": "nv",
-    "arizona": "az"
+    "arizona": "az",
+	"new_mexico": "nm"
 };
 
 function getTextFeatures() {
@@ -181,7 +183,7 @@ function getTextFeatures() {
     stroke.setColor('#000');
     stroke.setWidth(2);
     var createTextStyle = function(resolution) {
-        var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.125));
+        var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.055));
         return [new ol.style.Style({
             //Creating a new image layer
             image: new ol.style.Icon(({
@@ -196,7 +198,7 @@ function getTextFeatures() {
             })),
             text: new ol.style.Text({
                 text: this.get('realName'),
-                font: '32px "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+                font: '48px "Helvetica Neue", "Helvetica", "Arial", sans-serif',
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
