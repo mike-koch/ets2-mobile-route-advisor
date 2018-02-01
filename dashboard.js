@@ -30,7 +30,13 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         : Math.round(data.truck.speed));
     data.truckSpeedMph = data.truck.speed * 0.621371;
     data.truckSpeedMphRounded = Math.abs(Math.floor(data.truckSpeedMph));
-    data.gear = data.truck.gear > 0 ? 'D' + data.truck.gear : (data.truck.gear < 0 ? 'R' : 'N');
+	
+	if (data.truck.shifterType === "automatic" || data.truck.shifterType === "arcade") {
+		data.gear = data.truck.displayedGear > 0 ? 'A' + data.truck.displayedGear : (data.truck.displayedGear < 0 ? 'R' + Math.abs(data.truck.displayedGear) : 'N');
+	} else {
+		data.gear = data.truck.displayedGear > 0 ? data.truck.displayedGear : (data.truck.displayedGear < 0 ? 'R' + Math.abs(data.truck.displayedGear) : 'N');
+	}
+	
     data.currentFuelPercentage = (data.truck.fuel / data.truck.fuelCapacity) * 100;
     data.scsTruckDamage = getDamagePercentage(data);
     data.scsTruckDamageRounded = Math.floor(data.scsTruckDamage);
