@@ -2,7 +2,7 @@
 
 // Image size used in the map.
 var MAX_X = 19200;
-var MAX_Y = 18688;
+var MAX_Y = 23200;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 

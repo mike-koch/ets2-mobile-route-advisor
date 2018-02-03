@@ -30,7 +30,18 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
         : Math.round(data.truck.speed));
     data.truckSpeedMph = data.truck.speed * 0.621371;
     data.truckSpeedMphRounded = Math.abs(Math.floor(data.truckSpeedMph));
-    data.gear = data.truck.gear > 0 ? 'D' + data.truck.gear : (data.truck.gear < 0 ? 'R' : 'N');
+	
+	var distanceUnits = g_skinConfig[g_configPrefix].distanceUnits;
+	if (data.truck.cruiseControlOn && distanceUnits === 'mi') {
+		data.truck.cruiseControlSpeed = Math.round(data.truck.cruiseControlSpeed * .621371);
+	}
+	
+	if (data.truck.shifterType === "automatic" || data.truck.shifterType === "arcade") {
+		data.gear = data.truck.displayedGear > 0 ? 'A' + data.truck.displayedGear : (data.truck.displayedGear < 0 ? 'R' + Math.abs(data.truck.displayedGear) : 'N');
+	} else {
+		data.gear = data.truck.displayedGear > 0 ? data.truck.displayedGear : (data.truck.displayedGear < 0 ? 'R' + Math.abs(data.truck.displayedGear) : 'N');
+	}
+	
     data.currentFuelPercentage = (data.truck.fuel / data.truck.fuelCapacity) * 100;
     data.scsTruckDamage = getDamagePercentage(data);
     data.scsTruckDamageRounded = Math.floor(data.scsTruckDamage);
@@ -123,6 +134,16 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
     } else {
         $('#_overlay').show();
     }
+	
+	if (data.truck.cruiseControlOn) {
+		$('.cruiseControl').show();
+		$('.noCruiseControl').hide();
+		$('._speed').css('color', 'lime');
+	} else {
+		$('.cruiseControl').hide();
+		$('.noCruiseControl').show();
+		$('._speed').css('color', 'white');
+	}
 
     // Process DOM for job
     if (data.trailer.attached) {
@@ -549,6 +570,10 @@ function updateSpeedIndicator(speedLimit, currentSpeed) {
     var style = 'linear-gradient(to bottom, rgba(127,0,0,{0}) 0%, rgba(255,0,0,{0}) 50%, rgba(127,0,0,{0}) 100%)';
     style = style.split('{0}').join(opacity);
     $('.dashboard').find('aside').find('div._speed').css('background', style);
+}
+
+function updateCruiseControlDisplay(isCruiseControlEnabled) {
+	
 }
 
 Date.prototype.addDays = function(d) {

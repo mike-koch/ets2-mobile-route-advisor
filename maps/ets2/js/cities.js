@@ -1,165 +1,4 @@
-
 var g_cities_json = [
-    {
-        "gameName": "alban",
-        "realName": "Saint-Alban-du-Rhône",
-        "country": "france",
-        "x": "-25953.6",
-        "y": "93.6523",
-        "z": "28986.3"
-    },
-    {
-        "gameName": "bordeaux",
-        "realName": "Bordeaux",
-        "country": "france",
-        "x": "-46138.6",
-        "y": "95.8906",
-        "z": "27274.4"
-    },
-    {
-        "gameName": "bourges",
-        "realName": "Bourges",
-        "country": "france",
-        "x": "-31951.8",
-        "y": "81.1758",
-        "z": "16275.5"
-    },
-    {
-        "gameName": "brest",
-        "realName": "Brest",
-        "country": "france",
-        "x": "-56771.4",
-        "y": "92.043",
-        "z": "3869.3"
-    },
-    {
-        "gameName": "civaux",
-        "realName": "Civaux",
-        "country": "france",
-        "x": "-39029.7",
-        "y": "87.707",
-        "z": "18292"
-    },
-    {
-        "gameName": "clermont",
-        "realName": "Clermont-Ferrand",
-        "country": "france",
-        "x": "-30447.4",
-        "y": "92",
-        "z": "24698.4"
-    },
-    {
-        "gameName": "golfech",
-        "realName": "Golfech",
-        "country": "france",
-        "x": "-40395.4",
-        "y": "91.4844",
-        "z": "31472.6"
-    },
-    {
-        "gameName": "larochelle",
-        "realName": "La Rochelle",
-        "country": "france",
-        "x": "-46575.7",
-        "y": "54.0742",
-        "z": "19532.5"
-    },
-    {
-        "gameName": "laurent",
-        "realName": "Saint-Laurent",
-        "country": "france",
-        "x": "-35649.6",
-        "y": "55",
-        "z": "13817.4"
-    },
-    {
-        "gameName": "lehavre",
-        "realName": "Le Havre",
-        "country": "france",
-        "x": "-37894.2",
-        "y": "92.043",
-        "z": "1515.48"
-    },
-    {
-        "gameName": "lemans",
-        "realName": "Le Mans",
-        "country": "france",
-        "x": "-39749.7",
-        "y": "95.043",
-        "z": "9718.43"
-    },
-    {
-        "gameName": "limoges",
-        "realName": "Limoges",
-        "country": "france",
-        "x": "-37417.3",
-        "y": "80.8711",
-        "z": "23632"
-    },
-    {
-        "gameName": "marseille",
-        "realName": "Marseille",
-        "country": "france",
-        "x": "-23472.4",
-        "y": "53.9063",
-        "z": "39210.8"
-    },
-    {
-        "gameName": "montpellier",
-        "realName": "Montpellier",
-        "country": "france",
-        "x": "-30052.4",
-        "y": "105.059",
-        "z": "36127.6"
-    },
-    {
-        "gameName": "nantes",
-        "realName": "Nantes",
-        "country": "france",
-        "x": "-47170.9",
-        "y": "54.7813",
-        "z": "13162"
-    },
-    {
-        "gameName": "nice",
-        "realName": "Nice",
-        "country": "france",
-        "x": "-15520.4",
-        "y": "110.969",
-        "z": "38206.2"
-    },
-    {
-        "gameName": "paluel",
-        "realName": "Paluel",
-        "country": "france",
-        "x": "-33608.1",
-        "y": "72.0117",
-        "z": "224.902"
-    },
-    {
-        "gameName": "rennes",
-        "realName": "Rennes",
-        "country": "france",
-        "x": "-46539.8",
-        "y": "108.043",
-        "z": "8064.61"
-    },
-    {
-        "gameName": "roscoff",
-        "realName": "Roscoff",
-        "country": "france",
-        "x": "-53697.9",
-        "y": "69.5",
-        "z": "3120.41"
-    },
-    {
-        "gameName": "toulouse",
-        "realName": "Toulouse",
-        "country": "france",
-        "x": "-39213.8",
-        "y": "82.1875",
-        "z": "35665.6"
-	},
     {
       "gameName": "aalborg",
       "realName": "Aalborg",
@@ -177,12 +16,36 @@ var g_cities_json = [
       "z": "-55270.3"
     },
     {
+      "gameName": "alban",
+      "realName": "Saint-Alban-du-Rhône",
+      "country": "france",
+      "x": "-25953.6",
+      "y": "93.6523",
+      "z": "28986.3"
+    },
+    {
       "gameName": "amsterdam",
       "realName": "Amsterdam",
       "country": "netherlands",
       "x": "-18562",
       "y": "105.766",
       "z": "-11736.2"
+    },
+    {
+      "gameName": "ancona",
+      "realName": "Ancona",
+      "country": "italy",
+      "x": "10481.3",
+      "y": "54.4766",
+      "z": "39958.3"
+    },
+    {
+      "gameName": "bari",
+      "realName": "Bari",
+      "country": "italy",
+      "x": "24031.2",
+      "y": "64.9688",
+      "z": "54351.4"
     },
     {
       "gameName": "bergen",
@@ -225,6 +88,30 @@ var g_cities_json = [
       "z": "-20423"
     },
     {
+      "gameName": "bologna",
+      "realName": "Bologna",
+      "country": "italy",
+      "x": "1120.11",
+      "y": "50",
+      "z": "33802.9"
+    },
+    {
+      "gameName": "bordeaux",
+      "realName": "Bordeaux",
+      "country": "france",
+      "x": "-46138.6",
+      "y": "95.8906",
+      "z": "27274.4"
+    },
+    {
+      "gameName": "bourges",
+      "realName": "Bourges",
+      "country": "france",
+      "x": "-31951.8",
+      "y": "81.1758",
+      "z": "16275.5"
+    },
+    {
       "gameName": "bratislava",
       "realName": "Bratislava",
       "country": "slovakia",
@@ -239,6 +126,14 @@ var g_cities_json = [
       "x": "-4545.41",
       "y": "54.4922",
       "z": "-14326.1"
+    },
+    {
+      "gameName": "brest",
+      "realName": "Brest",
+      "country": "france",
+      "x": "-56771.4",
+      "y": "92.043",
+      "z": "3869.3"
     },
     {
       "gameName": "brno",
@@ -303,6 +198,46 @@ var g_cities_json = [
       "x": "-45889.2",
       "y": "153",
       "z": "-39573.5"
+    },
+    {
+      "gameName": "cassino",
+      "realName": "Cassino",
+      "country": "italy",
+      "x": "12294",
+      "y": "72",
+      "z": "52235"
+    },
+    {
+      "gameName": "catania",
+      "realName": "Catania",
+      "country": "italy",
+      "x": "16470.8",
+      "y": "57.4258",
+      "z": "75052.5"
+    },
+    {
+      "gameName": "catanzaro",
+      "realName": "Catanzaro",
+      "country": "italy",
+      "x": "23791.8",
+      "y": "50",
+      "z": "66945.9"
+    },
+    {
+      "gameName": "civaux",
+      "realName": "Civaux",
+      "country": "france",
+      "x": "-39029.7",
+      "y": "87.707",
+      "z": "18292"
+    },
+    {
+      "gameName": "clermont",
+      "realName": "Clermont-Ferrand",
+      "country": "france",
+      "x": "-30447.4",
+      "y": "92",
+      "z": "24698.4"
     },
     {
       "gameName": "debrecen",
@@ -393,6 +328,14 @@ var g_cities_json = [
       "z": "-13837.2"
     },
     {
+      "gameName": "firenze",
+      "realName": "Firenze",
+      "country": "italy",
+      "x": "1081.75",
+      "y": "49.9844",
+      "z": "38862.9"
+    },
+    {
       "gameName": "frankfurt",
       "realName": "Frankfurt am Main",
       "country": "germany",
@@ -433,12 +376,28 @@ var g_cities_json = [
       "z": "23717"
     },
     {
+      "gameName": "genova",
+      "realName": "Genova",
+      "country": "italy",
+      "x": "-8032.25",
+      "y": "62.4766",
+      "z": "35396.1"
+    },
+    {
       "gameName": "glasgow",
       "realName": "Glasgow",
       "country": "uk",
       "x": "-50384.7",
       "y": "139",
       "z": "-48471.6"
+    },
+    {
+      "gameName": "golfech",
+      "realName": "Golfech",
+      "country": "france",
+      "x": "-40395.4",
+      "y": "91.4844",
+      "z": "31472.6"
     },
     {
       "gameName": "goteborg",
@@ -609,12 +568,44 @@ var g_cities_json = [
       "z": "-42891.5"
     },
     {
+      "gameName": "larochelle",
+      "realName": "La Rochelle",
+      "country": "france",
+      "x": "-46575.7",
+      "y": "54.0742",
+      "z": "19532.5"
+    },
+    {
+      "gameName": "laurent",
+      "realName": "Saint-Laurent",
+      "country": "france",
+      "x": "-35649.6",
+      "y": "55",
+      "z": "13817.4"
+    },
+    {
+      "gameName": "lehavre",
+      "realName": "Le Havre",
+      "country": "france",
+      "x": "-37894.2",
+      "y": "92.043",
+      "z": "1515.48"
+    },
+    {
       "gameName": "leipzig",
       "realName": "Leipzig",
       "country": "germany",
       "x": "7042.06",
       "y": "101.914",
       "z": "-3160.18"
+    },
+    {
+      "gameName": "lemans",
+      "realName": "Le Mans",
+      "country": "france",
+      "x": "-39749.7",
+      "y": "95.043",
+      "z": "9718.43"
     },
     {
       "gameName": "liege",
@@ -631,6 +622,14 @@ var g_cities_json = [
       "x": "-26495.9",
       "y": "92.6211",
       "z": "-2483.4"
+    },
+    {
+      "gameName": "limoges",
+      "realName": "Limoges",
+      "country": "france",
+      "x": "-37417.3",
+      "y": "80.8711",
+      "z": "23632"
     },
     {
       "gameName": "linkoping",
@@ -655,6 +654,14 @@ var g_cities_json = [
       "x": "-48871.7",
       "y": "146.066",
       "z": "-29091.8"
+    },
+    {
+      "gameName": "livorno",
+      "realName": "Livorno",
+      "country": "italy",
+      "x": "-2468.3",
+      "y": "50",
+      "z": "40201.8"
     },
     {
       "gameName": "lodz",
@@ -729,6 +736,22 @@ var g_cities_json = [
       "z": "6165.95"
     },
     {
+      "gameName": "marseille",
+      "realName": "Marseille",
+      "country": "france",
+      "x": "-23472.4",
+      "y": "53.9063",
+      "z": "39210.8"
+    },
+    {
+      "gameName": "messina",
+      "realName": "Messina",
+      "country": "italy",
+      "x": "18375.9",
+      "y": "50",
+      "z": "70984.3"
+    },
+    {
       "gameName": "metz",
       "realName": "Metz",
       "country": "france",
@@ -740,9 +763,17 @@ var g_cities_json = [
       "gameName": "milano",
       "realName": "Milano",
       "country": "italy",
-      "x": "-6616.31",
+      "x": "-6816.45",
       "y": "100.25",
-      "z": "28982.8"
+      "z": "29438.7"
+    },
+    {
+      "gameName": "montpellier",
+      "realName": "Montpellier",
+      "country": "france",
+      "x": "-30052.4",
+      "y": "105.059",
+      "z": "36127.6"
     },
     {
       "gameName": "munchen",
@@ -753,12 +784,36 @@ var g_cities_json = [
       "z": "14470"
     },
     {
+      "gameName": "nantes",
+      "realName": "Nantes",
+      "country": "france",
+      "x": "-47170.9",
+      "y": "54.7813",
+      "z": "13162"
+    },
+    {
+      "gameName": "napoli",
+      "realName": "Napoli",
+      "country": "italy",
+      "x": "13318.2",
+      "y": "50",
+      "z": "56090.3"
+    },
+    {
       "gameName": "newcastle",
       "realName": "Newcastle-upon-Tyne",
       "country": "uk",
       "x": "-39778",
       "y": "139",
       "z": "-38787.7"
+    },
+    {
+      "gameName": "nice",
+      "realName": "Nice",
+      "country": "france",
+      "x": "-15520.4",
+      "y": "110.969",
+      "z": "38206.2"
     },
     {
       "gameName": "nurnberg",
@@ -825,12 +880,36 @@ var g_cities_json = [
       "z": "5136.1"
     },
     {
+      "gameName": "palermo",
+      "realName": "Palermo",
+      "country": "italy",
+      "x": "8976.02",
+      "y": "49.2656",
+      "z": "71132.3"
+    },
+    {
+      "gameName": "paluel",
+      "realName": "Paluel",
+      "country": "france",
+      "x": "-33608.1",
+      "y": "72.0117",
+      "z": "224.902"
+    },
+    {
       "gameName": "paris",
       "realName": "Paris",
       "country": "france",
-      "x": "-29514.9",
-      "y": "92.6211",
-      "z": "4971.41"
+      "x": "-30427.3",
+      "y": "68.5",
+      "z": "6886.2"
+    },
+    {
+      "gameName": "parma",
+      "realName": "Parma",
+      "country": "italy",
+      "x": "-2906.44",
+      "y": "84.5234",
+      "z": "33954.3"
     },
     {
       "gameName": "pecs",
@@ -839,6 +918,14 @@ var g_cities_json = [
       "x": "29039.9",
       "y": "74.6836",
       "z": "26311.6"
+    },
+    {
+      "gameName": "pescara",
+      "realName": "Pescara",
+      "country": "italy",
+      "x": "12898.1",
+      "y": "69.1953",
+      "z": "46848.1"
     },
     {
       "gameName": "plymouth",
@@ -868,9 +955,33 @@ var g_cities_json = [
       "gameName": "reims",
       "realName": "Reims",
       "country": "france",
-      "x": "-24021.9",
+      "x": "-24054.8",
       "y": "96.3086",
-      "z": "5799.34"
+      "z": "5680.14"
+    },
+    {
+      "gameName": "rennes",
+      "realName": "Rennes",
+      "country": "france",
+      "x": "-46539.8",
+      "y": "108.043",
+      "z": "8064.61"
+    },
+    {
+      "gameName": "roma",
+      "realName": "Roma",
+      "country": "italy",
+      "x": "6261.25",
+      "y": "50",
+      "z": "49499.3"
+    },
+    {
+      "gameName": "roscoff",
+      "realName": "Roscoff",
+      "country": "france",
+      "x": "-53697.9",
+      "y": "69.5",
+      "z": "3120.41"
     },
     {
       "gameName": "rostock",
@@ -884,9 +995,9 @@ var g_cities_json = [
       "gameName": "rotterdam",
       "realName": "Rotterdam",
       "country": "netherlands",
-      "x": "-20156",
+      "x": "-20006",
       "y": "104.746",
-      "z": "-9135.8"
+      "z": "-8985.8"
     },
     {
       "gameName": "salzburg",
@@ -895,6 +1006,14 @@ var g_cities_json = [
       "x": "9075.84",
       "y": "110.809",
       "z": "16564.5"
+    },
+    {
+      "gameName": "sangiovanni",
+      "realName": "Villa San Giovanni",
+      "country": "italy",
+      "x": "19265.8",
+      "y": "56",
+      "z": "70689.2"
     },
     {
       "gameName": "sheffield",
@@ -953,6 +1072,14 @@ var g_cities_json = [
       "z": "10047"
     },
     {
+      "gameName": "suzzara",
+      "realName": "Suzzara",
+      "country": "italy",
+      "x": "-780.824",
+      "y": "90",
+      "z": "32296.8"
+    },
+    {
       "gameName": "swansea",
       "realName": "Swansea",
       "country": "uk",
@@ -977,12 +1104,36 @@ var g_cities_json = [
       "z": "24565.7"
     },
     {
+      "gameName": "taranto",
+      "realName": "Taranto",
+      "country": "italy",
+      "x": "25990.6",
+      "y": "70",
+      "z": "58091.4"
+    },
+    {
+      "gameName": "terni",
+      "realName": "Terni",
+      "country": "italy",
+      "x": "6716.62",
+      "y": "74.3906",
+      "z": "46211.8"
+    },
+    {
       "gameName": "torino",
       "realName": "Torino",
       "country": "italy",
       "x": "-12697.3",
       "y": "89.9023",
       "z": "30932"
+    },
+    {
+      "gameName": "toulouse",
+      "realName": "Toulouse",
+      "country": "france",
+      "x": "-39213.8",
+      "y": "82.1875",
+      "z": "35665.6"
     },
     {
       "gameName": "trelleborg",
