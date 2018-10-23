@@ -88,11 +88,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     // ATS-specific logic
     if (data.isAts) {
         data.jobIncome = getAtsJobIncome(data.job.income);
-		$('#_map').find('._no-map').show();
-		$('#_map').find('.loading-text').hide();
-    } else {
-		$('#_map').find('._no-map').hide();
-	}
+    }
+	
+	$('#_map').find('._no-map').hide();
 
     // Non-WoT stuff here
     if (!data.isWorldOfTrucksContract || data.isAts) {
@@ -485,16 +483,14 @@ function processDomChanges(data) {
     }
 
     // Initialize JavaScript if ETS2
-	if (g_configPrefix === 'ets2') {
-		var mapPack = g_skinConfig[g_configPrefix].mapPack;
+    var mapPack = g_skinConfig[g_configPrefix].mapPack;
 
-		// Process map pack JSON
-		$.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
-			g_mapPackConfig = json;
+    // Process map pack JSON
+    $.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
+        g_mapPackConfig = json;
 
-			loadScripts(mapPack, 0, g_mapPackConfig.scripts);
-		});
-	}
+        loadScripts(mapPack, 0, g_mapPackConfig.scripts);
+    });
     
 
     // Process Speed Units
