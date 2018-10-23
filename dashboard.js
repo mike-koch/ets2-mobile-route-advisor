@@ -235,7 +235,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
 
 function getDaysHoursMinutesAndSeconds(time) {
     var dateTime = new Date(time);
-    var days = dateTime.getUTCDay();
+    var days = dateTime.getUTCDate();
     var hour = dateTime.getUTCHours();
     var minute = dateTime.getUTCMinutes();
     var second = dateTime.getUTCSeconds();
@@ -276,15 +276,15 @@ function processTimeDifferenceArray(hourMinuteArray) {
         return minutes;
     }
 
-    if (hours == 1) {
+    if (hours === 1) {
         hours = g_translations.XHour.replace('{0}', hours);
-    } else if (hours == 0) {
+    } else if (hours === 0) {
         hours = '';
     } else {
         hours = g_translations.XHours.replace('{0}', hours);
     }
 
-    if (minutes == 1) {
+    if (minutes === 1) {
         minutes = g_translations.XMinute.replace('{0}', minutes);
     } else {
         minutes = g_translations.XMinutes.replace('{0}', minutes);
@@ -329,7 +329,7 @@ function getTime(gameTime, timeUnits) {
         currentHours -= 12;
         currentPeriod = ' PM';
     }
-    if (currentHours == 0) {
+    if (currentHours === 0 && timeUnits === 12) {
         currentHours = 12;
     }
     var formattedHours = currentHours < 10 && timeUnits === 24 ? '0' + currentHours : currentHours;
