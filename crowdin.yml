@@ -1,0 +1,3 @@
+files:
+  - source: template-en-US.json
+    translation: /%locale%.json
