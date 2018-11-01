@@ -191,6 +191,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
 
     // Update red bar if speeding
     updateSpeedIndicator(data.navigation.speedLimit, data.truck.speed);
+	
+	// Update UI if in special transport mission
+	updateDisplayForSpecialTransport(data.trailer.id);
 
     return data;
 }
@@ -572,9 +575,18 @@ function updateSpeedIndicator(speedLimit, currentSpeed) {
     $('.dashboard').find('aside').find('div._speed').css('background', style);
 }
 
-function updateCruiseControlDisplay(isCruiseControlEnabled) {
+function updateDisplayForSpecialTransport(trailerId) {
+	var specialTransportCargos = ['boiler_parts', 'cat_785c', 'condensator', 'ex_bucket', 'heat_exch', 'lattice', 'm_59_80_r63', 'mystery_box', 'mystery_cyl', 'pilot_boat', 'silo'];
 	
+	if (specialTransportCargos.indexOf(trailerId) === -1) {
+		$('.dashboard').find('aside').removeClass('special-transport').end()
+			.find('nav').removeClass('special-transport');
+	} else {
+		$('.dashboard').find('aside').addClass('special-transport').end()
+			.find('nav').addClass('special-transport');
+	}
 }
+
 
 Date.prototype.addDays = function(d) {
     this.setUTCDate(this.getUTCDate() + d - 1);

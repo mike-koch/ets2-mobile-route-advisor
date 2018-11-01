@@ -343,6 +343,11 @@ a {
     background: -webkit-linear-gradient(top, #1e1e1e 0%, #505050 50%, #1e1e1e 100%);
     background: linear-gradient(to bottom, #1e1e1e 0%, #505050 50%, #1e1e1e 100%);
 }
+
+.dashboard > aside.special-transport {
+	background: repeating-linear-gradient(-65deg, rgba(17,17,17,.6), rgba(44,44,44,.6) 35px, rgba(219,169,1,.6) 35px, rgba(219,169,1,.6) 70px);
+}
+
 .dashboard > aside > div._middle {
     background: #181818;
     background: -webkit-linear-gradient(top, #181818 0%, #404040 50%, #181818 0%);
@@ -353,6 +358,11 @@ a {
     background: -webkit-linear-gradient(top, #2c2c2c 0%, #535353 50%, #2c2c2c 100%);
     background: linear-gradient(to bottom, #2c2c2c 0%, #535353 50%, #2c2c2c 100%);
 }
+
+.dashboard > nav.special-transport {
+	background: repeating-linear-gradient(-65deg, rgba(44,44,44,.6), rgba(44,44,44,.6) 35px, rgba(219,169,1,.6) 35px, rgba(219,169,1,.6) 70px);
+}
+
 .dashboard > ._tabs {
     background-image: url("img/bg.png");
     background-size: 0.5em;  /* Single-value means background width. */
