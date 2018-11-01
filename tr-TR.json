@@ -22,5 +22,7 @@
     "ThursdayAbbreviated": "Per",
     "FridayAbbreviated": "Cum",
     "SaturdayAbbreviated": "Cts",
+    "WorldOfTrucksContract": "World of Trucks Contract",
+    "LoadingMapPleaseWait": "Loading map, please wait...",
     "NoMapAvailable": "No map available"
 }
