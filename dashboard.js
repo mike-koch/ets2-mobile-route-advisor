@@ -88,11 +88,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data) {
     // ATS-specific logic
     if (data.isAts) {
         data.jobIncome = getAtsJobIncome(data.job.income);
-		$('#_map').find('._no-map').show();
-		$('#_map').find('.loading-text').hide();
-    } else {
-		$('#_map').find('._no-map').hide();
-	}
+    }
+	
+	$('#_map').find('._no-map').hide();
 
     // Non-WoT stuff here
     if (!data.isWorldOfTrucksContract || data.isAts) {
@@ -191,6 +189,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data) {
 
     // Update red bar if speeding
     updateSpeedIndicator(data.navigation.speedLimit, data.truck.speed);
+	
+	// Update UI if in special transport mission
+	updateDisplayForSpecialTransport(data.trailer.id);
 
     return data;
 }
@@ -237,7 +238,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
 
 function getDaysHoursMinutesAndSeconds(time) {
     var dateTime = new Date(time);
-    var days = dateTime.getUTCDay();
+    var days = dateTime.getUTCDate();
     var hour = dateTime.getUTCHours();
     var minute = dateTime.getUTCMinutes();
     var second = dateTime.getUTCSeconds();
@@ -278,15 +279,15 @@ function processTimeDifferenceArray(hourMinuteArray) {
         return minutes;
     }
 
-    if (hours == 1) {
+    if (hours === 1) {
         hours = g_translations.XHour.replace('{0}', hours);
-    } else if (hours == 0) {
+    } else if (hours === 0) {
         hours = '';
     } else {
         hours = g_translations.XHours.replace('{0}', hours);
     }
 
-    if (minutes == 1) {
+    if (minutes === 1) {
         minutes = g_translations.XMinute.replace('{0}', minutes);
     } else {
         minutes = g_translations.XMinutes.replace('{0}', minutes);
@@ -331,7 +332,7 @@ function getTime(gameTime, timeUnits) {
         currentHours -= 12;
         currentPeriod = ' PM';
     }
-    if (currentHours == 0) {
+    if (currentHours === 0 && timeUnits === 12) {
         currentHours = 12;
     }
     var formattedHours = currentHours < 10 && timeUnits === 24 ? '0' + currentHours : currentHours;
@@ -485,16 +486,14 @@ function processDomChanges(data) {
     }
 
     // Initialize JavaScript if ETS2
-	if (g_configPrefix === 'ets2') {
-		var mapPack = g_skinConfig[g_configPrefix].mapPack;
+    var mapPack = g_skinConfig[g_configPrefix].mapPack;
 
-		// Process map pack JSON
-		$.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
-			g_mapPackConfig = json;
+    // Process map pack JSON
+    $.getJSON(g_pathPrefix + '/maps/' + mapPack + '/config.json', function(json) {
+        g_mapPackConfig = json;
 
-			loadScripts(mapPack, 0, g_mapPackConfig.scripts);
-		});
-	}
+        loadScripts(mapPack, 0, g_mapPackConfig.scripts);
+    });
     
 
     // Process Speed Units
@@ -572,9 +571,18 @@ function updateSpeedIndicator(speedLimit, currentSpeed) {
     $('.dashboard').find('aside').find('div._speed').css('background', style);
 }
 
-function updateCruiseControlDisplay(isCruiseControlEnabled) {
+function updateDisplayForSpecialTransport(trailerId) {
+	var specialTransportCargos = ['boiler_parts', 'cat_785c', 'condensator', 'ex_bucket', 'heat_exch', 'lattice', 'm_59_80_r63', 'mystery_box', 'mystery_cyl', 'pilot_boat', 'silo'];
 	
+	if (specialTransportCargos.indexOf(trailerId) === -1) {
+		$('.dashboard').find('aside').removeClass('special-transport').end()
+			.find('nav').removeClass('special-transport');
+	} else {
+		$('.dashboard').find('aside').addClass('special-transport').end()
+			.find('nav').addClass('special-transport');
+	}
 }
+
 
 Date.prototype.addDays = function(d) {
     this.setUTCDate(this.getUTCDate() + d - 1);
@@ -608,7 +616,7 @@ var g_translations;
 var g_skinConfig;
 
 // The current version of ets2-mobile-route-advisor
-var g_currentVersion = '3.4.0';
+var g_currentVersion = '3.5.0';
 
 // The currently running game
 var g_runningGame;
