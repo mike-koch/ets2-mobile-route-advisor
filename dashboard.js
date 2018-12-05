@@ -552,6 +552,9 @@ function goToMap() {
 	if (g_configPrefix === 'ets2') {
 		g_map.updateSize();
 	}
+	else if (g_configPrefix === 'ats') {
+		g_map.updateSize();
+	}
 }
 
 function updateSpeedIndicator(speedLimit, currentSpeed) {
@@ -616,7 +619,7 @@ var g_translations;
 var g_skinConfig;
 
 // The current version of ets2-mobile-route-advisor
-var g_currentVersion = '3.5.0';
+var g_currentVersion = '3.5.1';
 
 // The currently running game
 var g_runningGame;

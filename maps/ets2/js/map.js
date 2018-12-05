@@ -1,37 +1,19 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 19200;
-var MAX_Y = 23200;
+var MAX_X = 173568;
+var MAX_Y = 192512;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
 // Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
-function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
-    return [
-        (x / pointsPerPixel + x0) | 0,
-        (y / pointsPerPixel + y0) | 0
-    ];
-}
-function calculatePixelCoordinateEu(x, y) {
-    return calculatePixelCoordinate(x, y, 7.278, 11367, 9962);
-}
-function calculatePixelCoordinateUk(x, y) {
-    return calculatePixelCoordinate(x, y, 9.69522, 10226, 9826);
-}
-
 function game_coord_to_pixels(x, y) {
-    // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
-    var r = null;
-    if (x < -31663 && y < -5618) {
-        r = calculatePixelCoordinateUk(x, y);
-    } else {
-        r = calculatePixelCoordinateEu(x, y);
-    }
-
-    // Inverting Y axis, because of OpenLayers coordinates.
-    r[1] = MAX_Y - r[1];
-    return r;
+	var r = [x / 0.78125 + 89600 , y / 0.78125 + 89600];
+	if (x < -31056.8 && y < -5832.867) {
+		r = [r[0] / 1.3333333 + 10750, r[1] / 1.3333333 + 21410];
+	}
+	r[1] = MAX_Y - r[1];
+	return r;
 }
 var COUNTRY_NAME_TO_CODE = {
     "andorra": "ad",
@@ -95,9 +77,8 @@ function getTextFeatures() {
     var stroke = new ol.style.Stroke();
     stroke.setColor('#000');
     stroke.setWidth(2);
-
     var createTextStyle = function(resolution) {
-        var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.125));
+        var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.015));
         var text = this.get('realName'); //Removed country_code_to_unicode(this.get('cc')) + ' ' +
         // console.log(scale, resolution);
         // console.log(this.get('realName'), this.get('country'));
@@ -112,18 +93,18 @@ function getTextFeatures() {
                 snapToPixel: false,
                 // Flag images from: http://lipis.github.io/flag-icon-css/
                 src: g_pathPrefix + '/flags/' + this.get('cc') + '.svg',
-                scale: 4 / 48 * scale
+                scale: 4 / 24 * scale
             })),
 
             text: new ol.style.Text({
                 text: text,
-                font: '32px "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+                font: '1.1em "Helvetica Neue", "Helvetica", "Arial", sans-serif',
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
                 scale: scale,
                 //Move the text down, otherwise the flag and text will overlap.
-                offsetY: 14 * scale
+                offsetY: 48 * scale
             })
         })];
     };
@@ -194,11 +175,11 @@ function buildMap(target_element_id){
         extent: [0, 0, MAX_X, MAX_Y],
         minZoom: 0,
         origin: [0, MAX_Y],
-        tileSize: [256, 256],
+        tileSize: [512, 512],
         resolutions: (function(){
             var r = [];
-            for (var z = 0; z <= 7; ++z) {
-                r[z] = Math.pow(2, 7 - z);
+            for (var z = 0; z <= 8; ++z) {
+                r[z] = Math.pow(2, 8 - z);
             }
             return r;
         })()
@@ -260,9 +241,9 @@ function buildMap(target_element_id){
             extent: [0, 0, MAX_X, MAX_Y],
             //center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
             center: [MAX_X/2, MAX_Y/2],
-            minZoom: 0,
-            maxZoom: 9,
-            zoom: 7
+            minZoom: 2,
+            maxZoom: 8,
+            zoom: 5
         })
     });
 
@@ -314,8 +295,8 @@ function getMapTilesLayer(projection, tileGrid) {
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
                 projection: projection,
-                url: g_pathPrefix + '/maps/ets2/tiles/{z}/{x}/{y}.png',
-                tileSize: [256, 256],
+                url: g_pathPrefix + '/maps/ets2/tiles/{z}/{x}_{y}.png',
+                tileSize: [512, 512],
                 // Using createXYZ() makes the vector layer (with the features) unaligned.
                 // It also tries loading non-existent tiles.
                 //
@@ -329,7 +310,7 @@ function getMapTilesLayer(projection, tileGrid) {
                 //     tileSize: [256, 256]
                 // }),
                 wrapX: false,
-                minZoom: 4,
+                minZoom: 2,
                 maxZoom: 7
             })
         });
