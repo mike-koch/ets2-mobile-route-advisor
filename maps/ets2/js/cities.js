@@ -1214,5 +1214,285 @@ var g_cities_json = [
       "x": "-8473.81",
       "y": "101.953",
       "z": "17968.5"
+    },
+    {
+      "gameName": "daugavpils",
+      "realName": "Daugavpils",
+      "country": "latvia",
+      "x": "53075.4",
+      "y": "66.3984",
+      "z": "-31905.7"
+    },
+    {
+      "gameName": "helsinki",
+      "realName": "Helsinki",
+      "country": "finland",
+      "x": "44945.4",
+      "y": "66.3984",
+      "z": "-55691.5"
+    },
+    {
+      "gameName": "kaliningrad",
+      "realName": "Калининград",
+      "country": "russia",
+      "x": "34365.2",
+      "y": "53.0039",
+      "z": "-23181.4"
+    },
+    {
+      "gameName": "kaunas",
+      "realName": "Kaunas",
+      "country": "lithuania",
+      "x": "45564",
+      "y": "66.3984",
+      "z": "-25347.7"
+    },
+    {
+      "gameName": "klaipeda",
+      "realName": "Klaipeda",
+      "country": "lithuania",
+      "x": "36342.8",
+      "y": "46.5234",
+      "z": "-28719.6"
+    },
+    {
+      "gameName": "kotka",
+      "realName": "Kotka",
+      "country": "finland",
+      "x": "50245.1",
+      "y": "61.7344",
+      "z": "-58045.7"
+    },
+    {
+      "gameName": "kouvola",
+      "realName": "Kouvola",
+      "country": "finland",
+      "x": "48776.3",
+      "y": "66.3984",
+      "z": "-60408.9"
+    },
+    {
+      "gameName": "kunda",
+      "realName": "Kunda",
+      "country": "estonia",
+      "x": "49785.3",
+      "y": "68.418",
+      "z": "-52304.7"
+    },
+    {
+      "gameName": "lahti",
+      "realName": "Lahti",
+      "country": "finland",
+      "x": "45529.8",
+      "y": "56.832",
+      "z": "-60557"
+    },
+    {
+      "gameName": "liepaja",
+      "realName": "Liepaja",
+      "country": "latvia",
+      "x": "35329.5",
+      "y": "66.3984",
+      "z": "-33299.9"
+    },
+    {
+      "gameName": "loviisa",
+      "realName": "Loviisa",
+      "country": "finland",
+      "x": "47717.4",
+      "y": "59.6953",
+      "z": "-57187.8"
+    },
+    {
+      "gameName": "luga",
+      "realName": "Луга",
+      "country": "russia",
+      "x": "60046.5",
+      "y": "69.3398",
+      "z": "-50045.2"
+    },
+    {
+      "gameName": "mazeikiai",
+      "realName": "Mazeikiai",
+      "country": "lithuania",
+      "x": "39434.4",
+      "y": "61.9336",
+      "z": "-32809.6"
+    },
+    {
+      "gameName": "naantali",
+      "realName": "Naantali",
+      "country": "finland",
+      "x": "35110.2",
+      "y": "60.5313",
+      "z": "-56362.4"
+    },
+    {
+      "gameName": "narva",
+      "realName": "Narva",
+      "country": "estonia",
+      "x": "54382.2",
+      "y": "66.3984",
+      "z": "-52462.3"
+    },
+    {
+      "gameName": "olkiluoto",
+      "realName": "Olkiluoto",
+      "country": "finland",
+      "x": "34255.3",
+      "y": "56.6211",
+      "z": "-60008.2"
+    },
+    {
+      "gameName": "paldiski",
+      "realName": "Paldiski",
+      "country": "estonia",
+      "x": "42570",
+      "y": "55.0625",
+      "z": "-50011.9"
+    },
+    {
+      "gameName": "panevezys",
+      "realName": "Panevezys",
+      "country": "lithuania",
+      "x": "46202.3",
+      "y": "62.4883",
+      "z": "-29962.8"
+    },
+    {
+      "gameName": "parnu",
+      "realName": "Parnu",
+      "country": "estonia",
+      "x": "44626.8",
+      "y": "66.3984",
+      "z": "-45237.7"
+    },
+    {
+      "gameName": "petersburg",
+      "realName": "Санкт-Петербург",
+      "country": "russia",
+      "x": "59773.8",
+      "y": "66.3984",
+      "z": "-57040.6"
+    },
+    {
+      "gameName": "pori",
+      "realName": "Pori",
+      "country": "finland",
+      "x": "34862.3",
+      "y": "50.6602",
+      "z": "-61707.6"
+    },
+    {
+      "gameName": "pskov",
+      "realName": "Псков",
+      "country": "russia",
+      "x": "56968.3",
+      "y": "66.3984",
+      "z": "-44002.4"
+    },
+    {
+      "gameName": "rezekne",
+      "realName": "Rezekne",
+      "country": "latvia",
+      "x": "54953.4",
+      "y": "64",
+      "z": "-36075.6"
+    },
+    {
+      "gameName": "riga",
+      "realName": "Riga",
+      "country": "latvia",
+      "x": "44678",
+      "y": "66.3984",
+      "z": "-37089.7"
+    },
+    {
+      "gameName": "siauliai",
+      "realName": "Siauliai",
+      "country": "lithuania",
+      "x": "43188.8",
+      "y": "68.3125",
+      "z": "-30503.8"
+    },
+    {
+      "gameName": "sosnovy_bor",
+      "realName": "Сосновый Бор",
+      "country": "russia",
+      "x": "54949.1",
+      "y": "70.8008",
+      "z": "-54394.3"
+    },
+    {
+      "gameName": "tallinn",
+      "realName": "Tallinn",
+      "country": "estonia",
+      "x": "44388.5",
+      "y": "65.8672",
+      "z": "-50868.6"
+    },
+    {
+      "gameName": "tampere",
+      "realName": "Tampere",
+      "country": "finland",
+      "x": "40238.8",
+      "y": "66.2383",
+      "z": "-62490.7"
+    },
+    {
+      "gameName": "tartu",
+      "realName": "Tartu",
+      "country": "estonia",
+      "x": "50958",
+      "y": "66.3984",
+      "z": "-46408"
+    },
+    {
+      "gameName": "turku",
+      "realName": "Turku",
+      "country": "finland",
+      "x": "36697.8",
+      "y": "66.3984",
+      "z": "-56006"
+    },
+    {
+      "gameName": "utena",
+      "realName": "Utena",
+      "country": "lithuania",
+      "x": "50778.2",
+      "y": "56.9609",
+      "z": "-29540.4"
+    },
+    {
+      "gameName": "valmiera",
+      "realName": "Valmiera",
+      "country": "latvia",
+      "x": "47973.1",
+      "y": "61.4141",
+      "z": "-40783.7"
+    },
+    {
+      "gameName": "ventspils",
+      "realName": "Ventspils",
+      "country": "latvia",
+      "x": "36679.7",
+      "y": "57.4102",
+      "z": "-38562"
+    },
+    {
+      "gameName": "vilnius",
+      "realName": "Vilnius",
+      "country": "lithuania",
+      "x": "50562.6",
+      "y": "71.3984",
+      "z": "-24885.7"
+    },
+    {
+      "gameName": "vyborg",
+      "realName": "Выборг",
+      "country": "russia",
+      "x": "54465.3",
+      "y": "55.4805",
+      "z": "-60221.8"
     }
   ]
