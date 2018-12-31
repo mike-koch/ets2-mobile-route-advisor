@@ -1,8 +1,8 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 11776 * 2;
-var MAX_Y = 9984 * 2;
+var MAX_X = 135168;
+var MAX_Y = 128512;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
@@ -15,7 +15,7 @@ function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
 }
 function calculatePixelCoordinateEu(x, y) {
     //return calculatePixelCoordinate(x, y, 9.69522, 10226, 9826); //x+16, y+4
-	return calculatePixelCoordinate(x, y, 3.89195, 30903, 9433); //x+16, y+4
+	return calculatePixelCoordinate(x, y, 0.78125, 166400, 76800); //x+16, y+4
 }
 
 function game_coord_to_pixels(x, y) {
@@ -68,11 +68,11 @@ function buildMap(target_element_id){
         extent: [0, 0, MAX_X, MAX_Y],
         minZoom: 0,
         origin: [0, MAX_Y],
-        tileSize: [256, 256],
+        tileSize: [512, 512],
         resolutions: (function(){
             var r = [];
-            for (var z = 0; z <= 7; ++z) {
-                r[z] = Math.pow(2, 7 - z);
+            for (var z = 0; z <= 8; ++z) {
+                r[z] = Math.pow(2, 8 - z);
             }
             return r;
         })()
@@ -93,7 +93,10 @@ function buildMap(target_element_id){
     g_map = new ol.Map({
         target: target_element_id,
         controls: [
-            //new ol.control.MousePosition(),  // DEBUG
+            // new ol.control.ZoomSlider(),
+            // new ol.control.OverviewMap(),
+            // new ol.control.Rotate(),
+            // new ol.control.MousePosition(),  // DEBUG
             new ol.control.Zoom(),
             rotate_control,
             speed_limit_control,
@@ -109,15 +112,31 @@ function buildMap(target_element_id){
         layers: [
             getMapTilesLayer(projection, custom_tilegrid),
             getTextLayer(),
+            // Debug layer below.
+            // new ol.layer.Tile({
+            //     extent: [0, 0, MAX_X, MAX_Y],
+            //     source: new ol.source.TileDebug({
+            //         projection: projection,
+            //         tileGrid: custom_tilegrid,
+            //         // tileGrid: ol.tilegrid.createXYZ({
+            //         //  extent: [0, 0, MAX_X, MAX_Y],
+            //         //  minZoom: 0,
+            //         //  maxZoom: 7,
+            //         //  tileSize: [256, 256]
+            //         // }),
+            //         wrapX: false
+            //     })
+            // }),
             vectorLayer
         ],
         view: new ol.View({
             projection: projection,
             extent: [0, 0, MAX_X, MAX_Y],
+            //center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
             center: [MAX_X/2, MAX_Y/2],
-            minZoom: 0,
-            maxZoom: 6,
-            zoom: 4
+            minZoom: 2,
+            maxZoom: 8,
+            zoom: 5
         })
     });
 
@@ -150,30 +169,41 @@ function buildMap(target_element_id){
 }
 
 function getMapTilesLayer(projection, tileGrid) {
-    return new ol.layer.Tile({
-        extent: [0, 0, MAX_X, MAX_Y],
-        source: new ol.source.XYZ({
-            projection: projection,
-            url:  g_pathPrefix + '/maps/ats/tiles/{z}/{x}/{y}.png',
-            tileSize: [256, 256],
-            // Using createXYZ() makes the vector layer (with the features) unaligned.
-            // It also tries loading non-existent tiles.
-            //
-            // Using custom_tilegrid causes rescaling of all image tiles before drawing
-            // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
-            tileGrid: tileGrid,
-            wrapX: false,
-            minZoom: 2,
-            maxZoom: 6
-        })
-    });
+    if (g_runningGame === 'ATS') {
+        return new ol.layer.Tile({
+            extent: [0, 0, MAX_X, MAX_Y],
+            source: new ol.source.XYZ({
+                projection: projection,
+                url: g_pathPrefix + '/maps/ats/tiles/{z}/{x}_{y}.png',
+                tileSize: [512, 512],
+                // Using createXYZ() makes the vector layer (with the features) unaligned.
+                // It also tries loading non-existent tiles.
+                //
+                // Using custom_tilegrid causes rescaling of all image tiles before drawing
+                // (i.e. no image will be rendered at 1:1 pixels), But fixes all other issues.
+                tileGrid: tileGrid,
+                // tileGrid: ol.tilegrid.createXYZ({
+                //     extent: [0, 0, MAX_X, MAX_Y],
+                //     minZoom: 0,
+                //     maxZoom: 7,
+                //     tileSize: [256, 256]
+                // }),
+                wrapX: false,
+                minZoom: 2,
+                maxZoom: 7
+            })
+        });
+    }
+
+    return new ol.layer.Tile();
 }
 
 var STATE_NAME_TO_CODE = {
     "california": "ca",
     "nevada": "nv",
     "arizona": "az",
-	"new_mexico": "nm"
+	"new_mexico": "nm",
+	"oregon": "or"
 };
 
 function getTextFeatures() {
@@ -183,7 +213,7 @@ function getTextFeatures() {
     stroke.setColor('#000');
     stroke.setWidth(2);
     var createTextStyle = function(resolution) {
-        var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.055));
+        var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.015));
         return [new ol.style.Style({
             //Creating a new image layer
             image: new ol.style.Icon(({
@@ -194,16 +224,16 @@ function getTextFeatures() {
                 snapToPixel: false,
                 // Flag images from: http://usa.flagpedia.net/
                 src: g_pathPrefix + '/flags-usa/' + this.get('cc') + '.png',
-                scale: 4 / 40 * scale
+                scale: 4 / 24 * scale
             })),
             text: new ol.style.Text({
                 text: this.get('realName'),
-                font: '48px "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+                font: '1.1em "Helvetica Neue", "Helvetica", "Arial", sans-serif',
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
                 scale: scale,
-                offsetY: 15 * scale
+                offsetY: 34 * scale
             })
         })];
     };
