@@ -216,7 +216,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
 
     // Check for updates
     if (g_skinConfig.checkForUpdates) {
-        $.get('http://mikekoch.me/ets2-mobile-route-advisor/latest-version.html', function(data) {
+        $.get('https://meatlayer.github.io/ets2-mobile-route-advisor/latest-version.html, function(data) {
             var latestVersion = data.trim();
             if (latestVersion != g_currentVersion) {
                 $('#update-status').show();
@@ -619,7 +619,7 @@ var g_translations;
 var g_skinConfig;
 
 // The current version of ets2-mobile-route-advisor
-var g_currentVersion = '3.5.1';
+var g_currentVersion = '3.6.1';
 
 // The currently running game
 var g_runningGame;

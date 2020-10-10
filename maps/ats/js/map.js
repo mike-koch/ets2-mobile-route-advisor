@@ -1,31 +1,30 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 135168;
-var MAX_Y = 128512;
+var MAX_X = 131072;
+var MAX_Y = 131072; 
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
 // Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
-function calculatePixelCoordinate(x, y, pointsPerPixel, x0, y0) {
-    return [
-        (x / pointsPerPixel + x0) | 0,
-        (y / pointsPerPixel + y0) | 0
-    ];
-}
-function calculatePixelCoordinateEu(x, y) {
-    //return calculatePixelCoordinate(x, y, 9.69522, 10226, 9826); //x+16, y+4
-	return calculatePixelCoordinate(x, y, 0.78125, 166400, 76800); //x+16, y+4
-}
 
 function game_coord_to_pixels(x, y) {
-    // http://forum.scssoft.com/viewtopic.php?p=402836#p402836
-    var r = calculatePixelCoordinateEu(x, y);
-
-    // Inverting Y axis, because of OpenLayers coordinates.
-    r[1] = MAX_Y - r[1];
-    return r;
+	var r = [x / 0.846756+ 154735 , y / 0.846756 + 85128];
+	r[1] = MAX_Y - r[1];
+	return r;
 }
+
+// https://github.com/richtr/NoSleep.js
+// Disabling screen lock on mobile devices
+var noSleep = new NoSleep();
+function enableNoSleep() {
+  noSleep.enable();
+  document.removeEventListener('touchstart', enableNoSleep, false);
+}
+
+// Enable wake lock.
+// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+document.addEventListener('touchstart', enableNoSleep, false);
 
 function buildMap(target_element_id){
     var projection = new ol.proj.Projection({
@@ -135,7 +134,7 @@ function buildMap(target_element_id){
             //center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
             center: [MAX_X/2, MAX_Y/2],
             minZoom: 2,
-            maxZoom: 8,
+            maxZoom: 9,
             zoom: 5
         })
     });
@@ -174,7 +173,7 @@ function getMapTilesLayer(projection, tileGrid) {
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
                 projection: projection,
-                url: g_pathPrefix + '/maps/ats/tiles/{z}/{x}_{y}.png',
+                url: g_pathPrefix + '/maps/ats/tiles/{z}/{x}/{y}.png',
                 tileSize: [512, 512],
                 // Using createXYZ() makes the vector layer (with the features) unaligned.
                 // It also tries loading non-existent tiles.
@@ -190,7 +189,7 @@ function getMapTilesLayer(projection, tileGrid) {
                 // }),
                 wrapX: false,
                 minZoom: 2,
-                maxZoom: 7
+                maxZoom: 9
             })
         });
     }
@@ -199,10 +198,14 @@ function getMapTilesLayer(projection, tileGrid) {
 }
 
 var STATE_NAME_TO_CODE = {
+	"arizona": "az",
+	"new_mexico": "nm",
+	"oregon": "or",
+	"washington": "wa",
+	"utah": "ut",
+	"idaho": "nm",
     "california": "ca",
     "nevada": "nv",
-    "arizona": "az",
-	"new_mexico": "nm",
 	"oregon": "or"
 };
 
@@ -224,22 +227,22 @@ function getTextFeatures() {
                 snapToPixel: false,
                 // Flag images from: http://usa.flagpedia.net/
                 src: g_pathPrefix + '/flags-usa/' + this.get('cc') + '.png',
-                scale: 4 / 24 * scale
+                scale: 4 / 16 * scale
             })),
             text: new ol.style.Text({
-                text: this.get('realName'),
-                font: '1.1em "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+                text: this.get('Name'),
+                font: '1.5em "Helvetica Neue", "Helvetica", "Arial", sans-serif',
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
                 scale: scale,
-                offsetY: 34 * scale
+                offsetY: 64 * scale
             })
         })];
     };
     var features = g_cities_json.map(function(city) {
-        var map_coords = game_coord_to_pixels(city.x, city.z);
-        city.cc = STATE_NAME_TO_CODE[city.country.toLowerCase()];
+        var map_coords = game_coord_to_pixels(city.X, city.Y);
+        city.cc = STATE_NAME_TO_CODE[city.Country.toLowerCase()];
         var feature = new ol.Feature(city);
         feature.setGeometry(new ol.geom.Point(map_coords));
         feature.setStyle(createTextStyle);
@@ -280,6 +283,13 @@ function updatePlayerPositionAndRotation(lon, lat, rot, speed) {
         if (g_behavior_rotate_with_player) {
             var height = g_map.getSize()[1];
             var max_ahead_amount = height / 3.0 * g_map.getView().getResolution();
+
+			//console.log(parseFloat((speed).toFixed(0)));
+			//auto-zoom map by speed
+			if(parseFloat((speed).toFixed(0)) >= 15 && parseFloat((speed).toFixed(0))  <= 35) {  g_map.getView().getZoom(g_map.getView().setZoom(9) ); }
+			else if(parseFloat((speed).toFixed(0)) >= 51 && parseFloat((speed).toFixed(0)) <= 55) {  g_map.getView().getZoom(g_map.getView().setZoom(8) ); }
+			else if(parseFloat((speed).toFixed(0)) >= 61 && parseFloat((speed).toFixed(0)) <= 65) {  g_map.getView().getZoom(g_map.getView().setZoom(7) ); }
+			else if(parseFloat((speed).toFixed(0)) >= 81 && parseFloat((speed).toFixed(0)) <= 88) {  g_map.getView().getZoom(g_map.getView().setZoom(6) ); }
 
             var amount_ahead = speed * 0.25;
             amount_ahead = Math.max(-max_ahead_amount, Math.min(amount_ahead, max_ahead_amount));

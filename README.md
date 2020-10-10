@@ -9,6 +9,7 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
         - Fixed on truck, up is always north
         - Fixed on truck, map rotates so up is direction truck is facing
         - Free view/rotate/zoom
+		- Auto zoom map depending on speed
     - Speed limit
     - Distance Remaining
     - Estimated time of arrival (ETA)
@@ -73,6 +74,7 @@ A list of supported languages are available on the [ets2-mobile-route-advisor we
             <ul>
                 <li><a href="https://github.com/Funbit">Funbit</a></li>
                 <li><a href="https://github.com/Koenvh1">Koen</a></li>
+				<li><a href="https://github.com/meatlayer">meatlayer</a></li>
             </ul>
         </td>
     </tr>

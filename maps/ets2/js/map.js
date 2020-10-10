@@ -1,16 +1,18 @@
 // All of this should be executed after the DOM is ready and the entire skin has been loaded.
 
 // Image size used in the map.
-var MAX_X = 173568;
-var MAX_Y = 192512;
+var MAX_X = 131072;
+var MAX_Y = 131072;
 // How the image was extracted from the game:
 // http://forum.scssoft.com/viewtopic.php?p=405122#p405122
 
 // Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
 function game_coord_to_pixels(x, y) {
-	var r = [x / 0.78125 + 89600 , y / 0.78125 + 89600];
+	var r = [x / 1.087326 + 57157 , y / 1.087326 + 59287];
+	
+	// The United Kingdom of Great Britain and Northern Ireland
 	if (x < -31056.8 && y < -5832.867) {
-		r = [r[0] / 1.3333333 + 10750, r[1] / 1.3333333 + 21410];
+		var r = [x / 1.087326 + 57157 , y / 1.087326 + 59287];
 	}
 	r[1] = MAX_Y - r[1];
 	return r;
@@ -42,11 +44,13 @@ var COUNTRY_NAME_TO_CODE = {
     "netherlands": "nl",
     "norway": "no",
     "poland": "pl",
+	"portugal": "pt",
     "romania": "ro",
     "russia": "ru",
     "slovakia": "sk",
     "slovenia": "si",
     "spain": "es",
+	"turkey": "tr",
     "sweden": "se",
     "switzerland": "ch",
     "uk": "gb",
@@ -70,6 +74,18 @@ function country_code_to_unicode(cc) {
 // See also:
 // https://github.com/mike-koch/ets2-mobile-route-advisor/issues/90
 
+// https://github.com/richtr/NoSleep.js
+// Disabling screen lock on mobile devices
+var noSleep = new NoSleep();
+function enableNoSleep() {
+  noSleep.enable();
+  document.removeEventListener('touchstart', enableNoSleep, false);
+}
+
+// Enable wake lock.
+// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+document.addEventListener('touchstart', enableNoSleep, false);
+
 // Copied from: https://github.com/denilsonsa/ets2-stuff/blob/master/openlayers-koenvh1.html
 function getTextFeatures() {
     var fill = new ol.style.Fill();
@@ -79,7 +95,7 @@ function getTextFeatures() {
     stroke.setWidth(2);
     var createTextStyle = function(resolution) {
         var scale = Math.min(1, Math.max(0, 1.0 / Math.log2(resolution + 1) - 0.015));
-        var text = this.get('realName'); //Removed country_code_to_unicode(this.get('cc')) + ' ' +
+        var text = this.get('Name'); //Removed country_code_to_unicode(this.get('cc')) + ' ' +
         // console.log(scale, resolution);
         // console.log(this.get('realName'), this.get('country'));
         return [new ol.style.Style({
@@ -93,26 +109,25 @@ function getTextFeatures() {
                 snapToPixel: false,
                 // Flag images from: http://lipis.github.io/flag-icon-css/
                 src: g_pathPrefix + '/flags/' + this.get('cc') + '.svg',
-                scale: 4 / 24 * scale
+                scale: 4 / 16 * scale
             })),
-
             text: new ol.style.Text({
                 text: text,
-                font: '1.1em "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+                font: '1.5em "Helvetica Neue", "Helvetica", "Arial", sans-serif',
                 textAlign: 'center',
                 fill: fill,
                 stroke: stroke,
                 scale: scale,
                 //Move the text down, otherwise the flag and text will overlap.
-                offsetY: 48 * scale
+                offsetY: 64 * scale
             })
         })];
     };
 
     var features = g_cities_json.map(function(city) {
-        var map_coords = game_coord_to_pixels(city.x, city.z);
+        var map_coords = game_coord_to_pixels(city.X, city.Y);
         // cc = Country Code
-        city.cc = COUNTRY_NAME_TO_CODE[city.country.toLowerCase()];
+        city.cc = COUNTRY_NAME_TO_CODE[city.Country.toLowerCase()];
         var feature = new ol.Feature(city);
         feature.setGeometry(new ol.geom.Point(map_coords));
         feature.setStyle(createTextStyle);
@@ -242,7 +257,7 @@ function buildMap(target_element_id){
             //center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
             center: [MAX_X/2, MAX_Y/2],
             minZoom: 2,
-            maxZoom: 8,
+            maxZoom: 9,
             zoom: 5
         })
     });
@@ -260,14 +275,13 @@ function buildMap(target_element_id){
             g_behavior_center_on_player = true;
         }
     });
-
+	
     // Detecting when the user interacts with the map.
     // https://stackoverflow.com/q/32868671/
     g_map.getView().on(['change:center', 'change:rotation'], function(ev) {
         if (g_ignore_view_change_events) {
             return;
         }
-
         // The user has moved or rotated the map.
         g_behavior_center_on_player = false;
         // Not needed:
@@ -295,7 +309,7 @@ function getMapTilesLayer(projection, tileGrid) {
             extent: [0, 0, MAX_X, MAX_Y],
             source: new ol.source.XYZ({
                 projection: projection,
-                url: g_pathPrefix + '/maps/ets2/tiles/{z}/{x}_{y}.png',
+                url: g_pathPrefix + '/maps/ets2/tiles/{z}/{x}/{y}.png',
                 tileSize: [512, 512],
                 // Using createXYZ() makes the vector layer (with the features) unaligned.
                 // It also tries loading non-existent tiles.
@@ -311,7 +325,7 @@ function getMapTilesLayer(projection, tileGrid) {
                 // }),
                 wrapX: false,
                 minZoom: 2,
-                maxZoom: 7
+                maxZoom: 9
             })
         });
     }
@@ -335,10 +349,17 @@ function updatePlayerPositionAndRotation(lon, lat, rot, speed) {
 
     g_ignore_view_change_events = true;
     if (g_behavior_center_on_player) {
-
+		
         if (g_behavior_rotate_with_player) {
             var height = g_map.getSize()[1];
             var max_ahead_amount = height / 3.0 * g_map.getView().getResolution();
+
+			//console.log(parseFloat((speed).toFixed(0)));
+			//auto-zoom map by speed
+			if(parseFloat((speed).toFixed(0)) >= 15 && parseFloat((speed).toFixed(0))  <= 35) {  g_map.getView().getZoom(g_map.getView().setZoom(9) ); }
+			else if(parseFloat((speed).toFixed(0)) >= 51 && parseFloat((speed).toFixed(0)) <= 55) {  g_map.getView().getZoom(g_map.getView().setZoom(8) ); }
+			else if(parseFloat((speed).toFixed(0)) >= 61 && parseFloat((speed).toFixed(0)) <= 65) {  g_map.getView().getZoom(g_map.getView().setZoom(7) ); }
+			else if(parseFloat((speed).toFixed(0)) >= 81 && parseFloat((speed).toFixed(0)) <= 88) {  g_map.getView().getZoom(g_map.getView().setZoom(6) ); }
 
             var amount_ahead = speed * 0.25;
             amount_ahead = Math.max(-max_ahead_amount, Math.min(amount_ahead, max_ahead_amount));
