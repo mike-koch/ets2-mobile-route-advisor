@@ -216,7 +216,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.initialize = function (skinConfig) {
 
     // Check for updates
     if (g_skinConfig.checkForUpdates) {
-        $.get('https://meatlayer.github.io/ets2-mobile-route-advisor/latest-version.html, function(data) {
+        $.get('https://meatlayer.github.io/ets2-mobile-route-advisor/latest-version.html', function(data) {
             var latestVersion = data.trim();
             if (latestVersion != g_currentVersion) {
                 $('#update-status').show();
