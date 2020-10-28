@@ -13,7 +13,7 @@
     "XHour": "{0} saat",
     "XMinutes": "{0} dakika",
     "XMinute": "{0} dakika",
-    "ETA": "ETA",
+    "ETA": "ETA, Hesaplanan Varış Zamanı",
     "Expected": "Beklenen",
     "SundayAbbreviated": "Paz",
     "MondayAbbreviated": "Pzt",
@@ -23,6 +23,6 @@
     "FridayAbbreviated": "Cum",
     "SaturdayAbbreviated": "Cts",
     "WorldOfTrucksContract": "World of Trucks Contract",
-    "LoadingMapPleaseWait": "Loading map, please wait...",
-    "NoMapAvailable": "No map available"
+    "LoadingMapPleaseWait": "Yükleniyor, Lütfen bekleyin...",
+    "NoMapAvailable": "Hiç veri yok"
 }
