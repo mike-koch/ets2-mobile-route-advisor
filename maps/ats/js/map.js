@@ -9,7 +9,7 @@ var MAX_Y = 131072;
 // Based on http://forum.scssoft.com/viewtopic.php?f=41&t=186779
 
 function game_coord_to_pixels(x, y) {
-	var r = [x / 0.846756+ 154735 , y / 0.846756 + 85128];
+	var r = [x / 0.846756+ 150932 , y / 0.846756 + 85128];
 	r[1] = MAX_Y - r[1];
 	return r;
 }
@@ -206,7 +206,8 @@ var STATE_NAME_TO_CODE = {
 	"idaho": "nm",
     "california": "ca",
     "nevada": "nv",
-	"oregon": "or"
+	"oregon": "or",
+	"colorado": "co"
 };
 
 function getTextFeatures() {

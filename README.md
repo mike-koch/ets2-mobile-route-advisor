@@ -1,5 +1,6 @@
 # ETS2 / ATS Mobile Route Advisor [![Downloads](https://img.shields.io/github/downloads/mike-koch/ets2-mobile-route-advisor/total.svg)](https://github.com/mike-koch/ets2-mobile-route-advisor/releases) [![Current Release](https://img.shields.io/github/release/mike-koch/ets2-mobile-route-advisor.svg)](https://github.com/mike-koch/ets2-mobile-route-advisor/releases) [![Licensed under the MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mike-koch/ets2-mobile-route-advisor/blob/master/LICENSE) [![Join the chat at https://gitter.im/mike-koch/ets2-mobile-route-advisor](https://badges.gitter.im/mike-koch/ets2-mobile-route-advisor.svg)](https://gitter.im/mike-koch/ets2-mobile-route-advisor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-Euro Truck Simulator 2 / American Truck Simulator's Route Advisor, for mobile devices. This is a skin for funbit's [ETS2 Telemetry Server](https://github.com/Funbit/ets2-telemetry-server).
+Euro Truck Simulator 2 / American Truck Simulator's Route Advisor, for mobile devices. 
+This is a skin for funbit's [ETS2 Telemetry Server](https://github.com/Funbit/ets2-telemetry-server).
 
 ## Features
 The mobile Route Advisor is planned to include all features that Euro Truck Simulator 2 / American Truck Simulator's Route Advisor currently has. These features are:
@@ -26,7 +27,7 @@ The mobile Route Advisor is planned to include all features that Euro Truck Simu
 
 ## Requirements
 - Euro Truck Simulator 2 and/or American Truck Simulator
-- [ETS2 Telemetry Server](https://github.com/Funbit/ets2-telemetry-server) 3.2.3 or later
+- [ETS2 Telemetry Server](https://github.com/Funbit/ets2-telemetry-server) 3.2.5 or later
 
 ## How to Install
 1. Download the latest version of the Mobile Route Advisor from either the [official website](http://www.mikekoch.me/ets2-mobile-route-advisor), or from the [releases page](https://www.github.com/mike-koch/ets2-mobile-route-advisor/releases).
@@ -39,9 +40,10 @@ If you require any type of support, please looking at the [contributing guidelin
 A list of supported languages are available on the [ets2-mobile-route-advisor website](http://mikekoch.me/ets2-mobile-route-advisor). If you would like to submit a translation, please submit a pull request.
 
 ## Screenshots
-![Navigation Information](screenshots/nav.png)
-![Cargo Information](screenshots/cargo.PNG)
-![Damage Information](screenshots/damage.PNG)
+![Navigation Information](screenshots/nav.jpg)
+![Navigation Information2](screenshots/nav2.jpg)
+![Cargo Information](screenshots/cargo.jpg)
+![Damage Information](screenshots/damage.jpg)
 
 ## Contributors
 <table>
