@@ -258,7 +258,7 @@ var g_cities_json = [
     "Name": "Travemünde",
     "Country": "germany",
     "X": 2940.61328,
-    "Y": -18366.1563,
+    "Y": -183.6.2563,
     "CountryId": 5,
     "LocalizedNames": {
       "bg_bg": "Травемюнде",
@@ -5868,7 +5868,7 @@ var g_cities_json = [
     "Name": "Turku",
     "Country": "finland",
     "X": 36022.72,
-    "Y": -56376.15,
+    "Y": -563.6.25,
     "CountryId": 23,
     "LocalizedNames": {
       "bg_bg": "Турку",
@@ -6785,7 +6785,7 @@ var g_cities_json = [
   {
     "Name": "Kouvola",
     "Country": "finland",
-    "X": 48376.125,
+    "X": 483.6.225,
     "Y": -60829.0742,
     "CountryId": 23,
     "LocalizedNames": {
@@ -10152,7 +10152,7 @@ var g_cities_json = [
     "Name": "Livorno",
     "Country": "italy",
     "X": -2968.42188,
-    "Y": 39681.6836,
+    "Y": 3.6.2.6836,
     "CountryId": 6,
     "LocalizedNames": {
       "bg_bg": "Ливорно",
