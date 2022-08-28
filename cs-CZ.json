@@ -5,7 +5,7 @@
     "Destination": "Cíl",
     "JobIncome": "Příjem ze zakázky",
     "Remains": "Zbývá",
-    "Truck": "Truck",
+    "Truck": "Tahač",
     "Trailer": "Přívěs",
     "MobileRouteAdvisor": "Mobile Route Advisor",
     "NextRestStopIn": "Příští zastávka na odpočinek za",
@@ -13,7 +13,7 @@
     "XHour": "{0} hodina",
     "XMinutes": "{0} minut",
     "XMinute": "{0} minuta",
-    "ETA": "ETA",
+    "ETA": "Předpokládáný čas příjezdu",
     "Expected": "Očekáváno",
     "SundayAbbreviated": "Ne",
     "MondayAbbreviated": "Po",
@@ -24,5 +24,5 @@
     "SaturdayAbbreviated": "So",
     "WorldOfTrucksContract": "Zakázka z World of Trucks",
     "LoadingMapPleaseWait": "Mapa se načítá, čekejte prosím...",
-    "NoMapAvailable": "No map available"
+    "NoMapAvailable": "Žádná dostupná mapa"
 }
