@@ -2,7 +2,7 @@
     "CurrentJob": "Livraison actuelle",
     "NoJob": "Vous n'avez pas de livraison en cours.",
     "CargoName": "Cargaison",
-    "Destination": "Français",
+    "Destination": "Destination",
     "JobIncome": "Salaire",
     "Remains": "Temps restant",
     "Truck": "Camion",
@@ -22,7 +22,7 @@
     "ThursdayAbbreviated": "Jeu",
     "FridayAbbreviated": "Ven",
     "SaturdayAbbreviated": "Sam",
-    "WorldOfTrucksContract": "World of Trucks Contract",
-    "LoadingMapPleaseWait": "Loading map, please wait...",
-    "NoMapAvailable": "No map available"
+    "WorldOfTrucksContract": "Contrat World of Trucks",
+    "LoadingMapPleaseWait": "Chargement de la carte en cours, veuillez patienter...",
+    "NoMapAvailable": "Aucune carte disponible"
 }
