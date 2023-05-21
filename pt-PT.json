@@ -7,13 +7,13 @@
     "Remains": "Tempo Restante",
     "Truck": "Caminhão",
     "Trailer": "Atrelado",
-    "MobileRouteAdvisor": "dizemos não haver os",
+    "MobileRouteAdvisor": "Dizemos não haver os",
     "NextRestStopIn": "Próxima paragem para dormir em",
     "XHours": "{0} horas",
     "XHour": "{0} hora",
     "XMinutes": "{0} minutos",
     "XMinute": "{0} minuto",
-    "ETA": "Tempo Estimado",
+    "ETA": "tem",
     "Expected": "Esperado",
     "SundayAbbreviated": "Dom",
     "MondayAbbreviated": "Seg",
@@ -23,6 +23,6 @@
     "FridayAbbreviated": "Sex",
     "SaturdayAbbreviated": "Sáb",
     "WorldOfTrucksContract": "Contracto World of Trucks",
-    "LoadingMapPleaseWait": "Loading map, please wait...",
-    "NoMapAvailable": "No map available"
+    "LoadingMapPleaseWait": "seguimos e comprimos a sede",
+    "NoMapAvailable": "disponivel agrad"
 }
