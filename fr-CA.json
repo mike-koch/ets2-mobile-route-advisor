@@ -7,7 +7,7 @@
     "Remains": "Temps restant",
     "Truck": "Camion",
     "Trailer": "Remorque",
-    "MobileRouteAdvisor": "Mobile Route Advisor",
+    "MobileRouteAdvisor": "Navigateur GPS",
     "NextRestStopIn": "Prochain arrêt dans",
     "XHours": "{0} heures",
     "XHour": "{0} heure",
@@ -22,7 +22,7 @@
     "ThursdayAbbreviated": "Jeu",
     "FridayAbbreviated": "Ven",
     "SaturdayAbbreviated": "Sam",
-    "WorldOfTrucksContract": "World of Trucks Contract",
-    "LoadingMapPleaseWait": "Loading map, please wait...",
-    "NoMapAvailable": "No map available"
+    "WorldOfTrucksContract": "Contrat World of Trucks",
+    "LoadingMapPleaseWait": "Chargement de la carte en cours, veuillez patienter...",
+    "NoMapAvailable": "Aucune carte disponible"
 }
